@@ -1,0 +1,106 @@
+{
+  "name": "Contact",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "forceId": false,
+  "properties": {
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "othernames": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "picture": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "town": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "chat_headline": {
+      "type": "string"
+    },
+    "postal_code": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "created_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "string",
+      "required": true
+    },
+    "created_by": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "calendarEvents": {
+      "type": "hasMany",
+      "model": "CalendarEvent",
+      "foreignKey": ""
+    },
+    "friends": {
+      "type": "hasMany",
+      "model": "Friend",
+      "foreignKey": "contactId"
+    },
+    "feed": {
+      "type": "hasMany",
+      "model": "Feed",
+      "foreignKey": ""
+    },
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": ""
+    },
+    "preference": {
+      "type": "hasOne",
+      "model": "Preference",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

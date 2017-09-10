@@ -1,0 +1,16 @@
+<ion-content padding>
+  <ion-slides pager #slider [options]="slideOptions">
+    <ion-slide *ngFor="let slide of slides">
+      <div class="boxes">
+        <div class="image-box" [ngStyle]="{'background-image': 'url('+ slide.image +')'}">
+        </div>
+        <div class="footer-box">
+          <h1 ion-text color="primary" [innerHTML]="slide.title"></h1>
+          <p [innerHTML]="slide.paragraph"></p>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <button ion-button block (click)="openLogin()">Login</button>
+  <button ion-button block outline (click)="openSignUp()">Register</button>
+</ion-content>

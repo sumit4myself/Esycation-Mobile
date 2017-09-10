@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Conversations</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="searchToggle = !searchToggle">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-searchbar *ngIf="searchToggle" placeholder="Search Conversation" (ionInput)="searchItems($event)" [showCancelButton]="true"
+    (ionCancel)="searchToggle = !searchToggle"></ion-searchbar>
+  <!--No Items to display-->
+  <div class="card-background-page" *ngIf="!conversations || conversations.length === 0">
+    <ion-card>
+      <div class="image-container">
+        <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/sad.gif" />
+        <div class="after">
+          <div class="card-title">No Conversations,</div>
+          <div class="card-subtitle">Sad times but do not dispare! Start a Conversation with a contact from contact tab</div>
+        </div>
+      </div>
+      <button ion-button color="stable" (click)="pushContact()">Open Contact</button>
+    </ion-card>
+  </div>
+  <ion-list *ngIf="conversations && conversations.length > 0">
+    <ion-item-sliding *ngFor="let item of conversations; let i= index">
+    <ion-item item-text-wrap [navPush]="pushPage" [navParams]="item">
+      <ion-avatar item-left *ngIf="item.recipientId === user.id">
+        <img [src]="item.sender.picture | sanitize:'url'">
+      </ion-avatar>
+      <ion-avatar item-left *ngIf="item.recipientId !== user.id">
+        <img [src]="item.recipient.picture | sanitize:'url'">
+      </ion-avatar>
+      <h2 *ngIf="item.recipientId === user.id">{{item.sender.firstname + " "+ item.sender.lastname}}</h2>
+      <h2 *ngIf="item.recipientId !== user.id">{{item.recipient.firstname + " "+ item.recipient.lastname}}</h2>
+      <p>Last Message: {{item.messages[item.messages.length-1]?.text | slice: 0 :30}}...</p>
+      <ion-note item-right *ngIf="item.messages[item.messages.length-1]?.read_at">
+        <ion-icon color="secondary" name="done-all"></ion-icon>
+      </ion-note>
+      <ion-note item-right *ngIf="item.messages[item.messages.length-1]?.sent_at">
+        <ion-icon name="check"></ion-icon>
+      </ion-note>
+    </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="secondary" (click)="archiveConvo(item)">
+        <ion-icon name="archive"></ion-icon>
+        Archive
+      </button>
+      <button ion-button color="danger" (click)="deleteConvo(item)">
+        <ion-icon name="trash"></ion-icon>
+        Delete
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>
+</ion-content>

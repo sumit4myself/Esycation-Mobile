@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Account": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Contact": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Preference": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Feed": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Friend": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Comment": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Like": {
+    "dataSource": "db",
+    "public": true
+  },
+  "CalendarEvent": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Conversation": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Message": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Product": {
+    "dataSource": "db",
+    "public": true
+  }
+}

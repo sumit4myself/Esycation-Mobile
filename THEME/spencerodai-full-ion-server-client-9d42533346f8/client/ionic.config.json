@@ -1,0 +1,12 @@
+{
+  "name": "full-ionic-starter-2",
+  "app_id": "302c5cf3",
+  "v2": true,
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://full-starter-app-2.herokuapp.com"
+    }
+  ]
+}

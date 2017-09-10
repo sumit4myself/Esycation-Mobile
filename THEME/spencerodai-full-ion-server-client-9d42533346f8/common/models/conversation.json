@@ -1,0 +1,65 @@
+{
+  "name": "Conversation",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+   "mixins": {
+    "Extraprop": true
+  },
+  "forceId": false,
+  "properties": {
+     "is_archived": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "created_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "string",
+      "required": true
+    },
+    "created_by": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "messages": {
+      "type": "hasMany",
+      "model": "Message",
+      "foreignKey": ""
+    },
+    "sender": {
+      "type": "belongsTo",
+      "model": "Contact",
+      "foreignKey": "senderId"
+    },
+    "recipient": {
+      "type": "belongsTo",
+      "model": "Contact",
+      "foreignKey": "recipientId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

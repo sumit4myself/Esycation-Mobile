@@ -1,0 +1,58 @@
+{
+  "name": "Comment",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Extraprop": true
+  },
+  "forceId": false,
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "created_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "string",
+      "required": true
+    },
+    "created_by": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "feed": {
+      "type": "belongsTo",
+      "model": "Feed",
+      "foreignKey": ""
+    },
+    "contact": {
+      "type": "belongsTo",
+      "model": "Contact",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

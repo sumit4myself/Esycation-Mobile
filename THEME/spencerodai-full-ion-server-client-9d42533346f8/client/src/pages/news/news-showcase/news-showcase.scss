@@ -1,0 +1,71 @@
+news-showcase {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  ion-scroll {
+    position: relative;
+    height: 100%;
+  }
+  ion-content {
+    background: color($colors, light) !important;
+  }
+  .card-showcase {
+    ion-card {
+      position: relative;
+      text-align: center;
+      ion-col {
+        padding: 0;
+      }
+      .background-image {
+        height: 230px;
+        background-position: center;
+        background-size: cover;
+        background-color: rgba(90, 89, 89, 0.55);
+        background-blend-mode: overlay;
+      }
+    }
+    .time {
+      position: absolute;
+      top: 10px;
+      padding: 5px 10px;
+      font-size: 1.1rem;
+      background: rgba(121, 128, 125, 0.81);
+      padding: 7px 10px 7px 15px;
+      color: #fff;
+      text-transform: capitalize;
+    }
+    .badge {
+      color: color($colors, light);
+      font-size: 0.975rem;
+    }
+    .badge:first-of-type {
+      margin-right: 10px;
+    }
+    ion-icon {
+      font-size: 2rem;
+      padding-right: 5px;
+    }
+    .card-content {
+      font-size: 1.0em;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.58);
+      ion-item {
+        background: transparent !important;
+        ion-avatar img {
+          border: 2px solid color($colors, light) !important;
+        }
+        h2 {
+          color: color($colors, light) !important;
+          font-size: 1.7rem !important;
+        }
+        p {
+          color: color($colors, light) !important;
+          font-size: 1.3rem !important;
+        }
+      }
+    }
+  }
+}

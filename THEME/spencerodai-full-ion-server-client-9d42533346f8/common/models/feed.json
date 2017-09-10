@@ -1,0 +1,82 @@
+{
+  "name": "Feed",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "forceId": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "required": true,
+      "default": "news"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "images": {
+      "type": [
+        "string"
+      ]
+    },
+    "location": {
+      "type": "object"
+    },
+    "url": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "created_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "string",
+      "required": true
+    },
+    "created_by": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "comments": {
+      "type": "hasMany",
+      "model": "Comment",
+      "foreignKey": ""
+    },
+    "likes": {
+      "type": "hasMany",
+      "model": "Like",
+      "foreignKey": ""
+    },
+    "contact": {
+      "type": "belongsTo",
+      "model": "Contact",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

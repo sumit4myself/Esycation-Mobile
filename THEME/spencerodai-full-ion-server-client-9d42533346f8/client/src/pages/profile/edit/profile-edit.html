@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>edit {{contact.firstname + " " + contact.lastname}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="viewCtrl.dismiss();"><ion-icon name="md-close"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="profileForm" novalidate *ngIf="contact">
+    <div class="profile-header" [style.background-image]="'url(' + contact?.picture + ')' | sanitize: 'style'">
+      <div class="profile-image">
+        <img [src]="contact?.picture | sanitize:'url'" *ngIf="contact.picture">
+        <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/placeholder.png" *ngIf="!contact?.picture">
+        <div class="buttons">
+          <button ion-button small color="light" *ngIf="!contact.picture" (click)="addPicture()">Add Picture</button>
+          <button ion-button small color="light" *ngIf="contact.picture" (click)="addPicture()">Change Picture</button>
+        </div>
+      </div>
+    </div>
+    <ion-list class="padding">
+      <ion-row>
+        <ion-col no-padding>
+          <ion-item>
+            <ion-label color="secondary" floating>Firstname</ion-label>
+            <ion-input type="text" formControlName="firstname"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col no-padding>
+          <ion-item>
+            <ion-label color="secondary" floating>Lastname</ion-label>
+            <ion-input type="text" formControlName="lastname"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col no-padding>
+          <ion-item>
+            <ion-label color="secondary" floating>title</ion-label>
+            <ion-select type="text" name="title" formControlName="title">
+              <ion-option [value]="item" *ngFor="let item of titles">{{item}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col no-padding>
+          <ion-item>
+            <ion-label color="secondary" floating>Othernames</ion-label>
+            <ion-input type="text" formControlName="othernames"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-label color="secondary" floating>gender</ion-label>
+        <ion-select formControlName="gender">
+          <ion-option value="Female">Female</ion-option>
+          <ion-option value="Male">Male</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="secondary" floating>address</ion-label>
+        <ion-textarea type="text" formControlName="address"></ion-textarea>
+      </ion-item>
+      <ion-row>
+        <ion-col no-padding>
+          <ion-item>
+            <ion-label color="secondary" floating>Town</ion-label>
+            <ion-input type="text" formControlName="town"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col no-padding>
+          <ion-item>
+            <ion-label color="secondary" floating>Postal Code</ion-label>
+            <ion-input type="text" formControlName="postal_code"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-label color="secondary" floating>Country</ion-label>
+        <ion-textarea type="text" formControlName="country"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="secondary" floating>Email</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="secondary" floating>Phone</ion-label>
+        <ion-input type="text" formControlName="phone"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <button ion-button color="primary" full (click)="saveContact(profileForm);">Save Contact</button>
+</ion-footer>

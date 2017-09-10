@@ -1,0 +1,24 @@
+shop-store-basket {
+  .header-md::after {
+    background-image: none !important;
+  }
+  .header-content {
+    height: 120px;
+    background: #fafafa;
+    border-bottom: 1px solid color($colors, stable);
+  }
+  .item-md {
+    background: transparent;
+  }
+  .item-md.item-block .item-inner {
+    border-bottom: none;
+  }
+  .grand-total {
+    padding: 0 20px;
+    font-size: 1.6rem;
+    b {
+      font-size: 2.2rem;
+      font-weight: 400;
+    }
+  }
+}

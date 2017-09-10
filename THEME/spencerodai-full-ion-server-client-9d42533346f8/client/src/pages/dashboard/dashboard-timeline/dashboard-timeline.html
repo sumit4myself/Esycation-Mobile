@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Timeline</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-scroll scrollY="true">
+    <div id="timeline">
+      <div class="timeline-item" *ngFor="let item of feed | async">
+        <div class="timeline-icon">
+          <img [src]="item.contact.picture | image"/>
+          <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/placeholder.png"/>
+        </div>
+        <div class="timeline-content">
+          <h2 [innerText]="item.title"></h2>
+          <ion-row class="content">
+            <ion-col width-30 *ngIf="item.images[0]">
+              <img [src]="item.images[0] | image" />
+            </ion-col>
+            <ion-col>
+              <p>{{item.content | slice: 0: 60}} [+]</p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="social">
+            <ion-col text-right>
+              <span [innerText]="item.likes.length"></span>
+              <ion-icon name="heart"></ion-icon>
+              <span [innerText]="item.comments.length"></span>
+              <ion-icon name="chatboxes"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+  </ion-scroll>
+</ion-content>

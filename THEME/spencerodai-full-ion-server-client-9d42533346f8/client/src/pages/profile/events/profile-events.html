@@ -1,0 +1,26 @@
+<div class="loading" *ngIf="!calendarEvents">
+  <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/progress.gif">
+</div>
+<div *ngIf="calendarEvents">
+  <div *ngIf="calendarEvents?.length === 0">
+    <ion-card>
+      <ion-card-content>
+        No data to display
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-scroll scrollY="true" *ngIf="calendarEvents?.length > 0">
+    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let item of calendarEvents">
+        <ion-icon item-left name="calendar" [ngStyle]="{'color': item.color}">
+        </ion-icon>
+        <h2>{{item.title}}</h2>
+        <p *ngIf="item.description">{{item?.description}}</p>
+        <p class="date">{{item?.created_at | amTimeAgo}}</p>
+
+        <button ion-button clear item-right color="danger" (click)="deleteEvent(item)"><ion-icon name="trash"></ion-icon></button>
+      </ion-item>
+    </ion-list>
+  </ion-scroll>
+</div>

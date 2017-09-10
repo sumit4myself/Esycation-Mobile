@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title *ngIf="!feed?.id">
+      Add Post
+    </ion-title>
+    <ion-title *ngIf="feed?.id">
+      Edit Post
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="this.viewCtrl.dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="feedForm" class="content">
+    <div class="content-header">
+      <ion-item>
+        <ion-label floating>Say whats on your mind...</ion-label>
+        <ion-textarea elastic row="4" formControlName="title"></ion-textarea>
+      </ion-item>
+    </div>
+    <ion-list padding>
+      <ion-item>
+        <ion-label floating>Anything more to add?..</ion-label>
+        <ion-textarea elastic row="6" formControlName="content"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Location</ion-label>
+        <ion-input type="text" formControlName="location"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-slides pager [options]="slideOptions" *ngIf="images.length > 0">
+      <ion-slide *ngFor="let item of images">
+        <img [src]="item | sanitize: 'url'">
+      </ion-slide>
+    </ion-slides>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col (click)="saveFeed(feedForm)">
+      <p>
+        <ion-icon name="send" color="secondary"></ion-icon> Save Post</p>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+
+<ion-fab top right>
+  <button ion-fab><ion-icon name="add"></ion-icon></button>
+  <ion-fab-list>
+    <button ion-fab color="secondary" (click)="addImages()"><ion-icon name="images"></ion-icon></button>
+    <button ion-fab color="secondary" (click)="addLocation()"><ion-icon name="navigate"></ion-icon></button>
+  </ion-fab-list>
+</ion-fab>

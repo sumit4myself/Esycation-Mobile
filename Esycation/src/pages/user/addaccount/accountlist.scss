@@ -1,0 +1,25 @@
+page-account{
+    ion-label {
+    color: #009688;
+    .small{
+        font-size: 1rem;
+    }
+  }
+  .item-divider {
+    ion-label {
+      font-weight: 500;
+    }
+  }
+  ion-card,ion-row ,ion-col{
+    background: #dff0d8 !important;
+  }
+  .active_user{
+    background: #dff0d8 !important;
+  }
+  .list-md>.item-block:last-child .item-inner {
+    border-bottom: 1px solid #dedede !important;
+  }
+  ion-icon {
+    font-size: 1.6em;
+  }
+}

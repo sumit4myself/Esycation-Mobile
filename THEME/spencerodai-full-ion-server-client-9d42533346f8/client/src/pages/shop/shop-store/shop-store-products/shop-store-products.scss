@@ -1,0 +1,215 @@
+shop-store-products {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  ion-scroll {
+    position: relative;
+    height: 100%;
+  }
+  ion-content {
+    background: darken(color($colors, light),5%) !important;
+  }
+  .badge-md {
+    border-radius: 50px;
+    background-color: color($colors, light);
+    color: color($colors, dark);
+    font-size: 1rem;
+    border: 1px solid color($colors, primary);
+  }
+  ion-badge {
+    margin-top: -25px;
+  }
+  .button-inner {
+    text-transform: none;
+  }
+  // begin grid styles
+  .grid {
+    .card-md {
+      margin: 10px 2px 10px 2px;
+      width: calc(100% - 4px);
+    }
+    ion-card {
+      .background {
+        height: 150px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    .footer {
+      padding: 0 5px;
+      border-top: 1px solid color($colors, stable);
+      ;
+      h2 {
+        font-size: 1.6rem;
+        color: color($colors, dark);
+        margin-top: 6px;
+      }
+      h3 {
+        text-transform: capitalize;
+        font-size: 1.4rem;
+        color: color($colors, primary);
+      }
+    }
+  }
+  // end grid styles
+  // begin slide styles
+  ion-slides {
+    width: 90%;
+    height: 80%;
+    margin: 10px auto;
+    display: block;
+    border: 1px solid color($colors, light);
+    border-radius: 4px;
+    ion-slide {
+      background: #fff;
+      border-radius: 4px;
+      img {
+        margin-top: -30%;
+      }
+      .content {
+        padding: 10px;
+        text-align: left;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        h2 {
+          font-size: 1.4rem;
+          text-transform: capitalize;
+          color: color($colors, light);
+          text-align: justify;
+        }
+        h3 {
+          font-size: 1.6rem;
+          text-transform: capitalize;
+          color: color($colors, light);
+          text-align: justify;
+        }
+      }
+    }
+    .swiper-container-horizontal>.swiper-pagination {
+      bottom: 30px !important;
+    }
+    .swiper-pagination {
+      position: fixed!important;
+    }
+    ion-label {
+      color: color($colors, primary) !important;
+    }
+  }
+  // end slide styles
+  // begin showcase styles
+  .showcase:first-of-type {
+    margin-top: 0;
+  }
+  .showcase {
+    margin: 10px 0;
+    position: relative;
+    ion-col {
+      background: white;
+      .content {
+        .like-button {
+          position: absolute;
+          top: 20px;
+          right: 10px;
+          padding: 8px 10px;
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          background: color($colors, primary);
+        }
+        padding: 10px 10px 20px 10px;
+        h2 {
+          margin: 0;
+          font-size: 1.2rem;
+          text-transform: capitalize;
+          color: color($colors, stable);
+        }
+        h3 {
+          margin: 0;
+          font-size: 1.8rem;
+          text-transform: capitalize;
+          color: color($colors, dark);
+          font-weight: 400 !important;
+        }
+      }
+    }
+    .background {
+      height: 220px;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+  // end showcase styles
+  // begin list styles
+  .lists {
+    margin: 20px 0;
+    // border-top: 1px solid #ccc;
+    // border-bottom: 1px solid #ccc;
+    .background {
+      height: 160px;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    ion-col[width-40] {
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
+    ion-col {
+      background: white;
+      padding: 20px 10px;
+      h2 {
+        margin: 0;
+        font-size: 1.7rem;
+        text-transform: capitalize;
+        color: color($colors, stable);
+        display: flex;
+      }
+      h3 {
+        margin: 0;
+        font-size: 1.8rem;
+        text-transform: capitalize;
+        color: color($colors, dark);
+        font-weight: 400 !important;
+      }
+      p {
+        margin: 5px 0;
+        font-size: 1rem;
+        color: color($colors, stable);
+      }
+      .like-button {
+        bottom: -20px;
+        position: relative;
+        padding: 8px 10px;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        background: color($colors, primary);
+      }
+    }
+    .footer {
+      padding-top: 10px;
+      ion-col {
+        padding: 0;
+      }
+      .clickable {
+        ion-icon {
+          font-size: 2.1rem !important;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  .sale-on {
+    text-decoration: line-through;
+    margin-right: 10px;
+  }
+  .sale {
+    color: color($colors, danger);
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}

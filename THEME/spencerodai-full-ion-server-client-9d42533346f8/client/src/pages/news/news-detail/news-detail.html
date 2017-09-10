@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Post</ion-title>
+    <ion-buttons end>
+      <button ion-button *ngIf="post.created_by === user.id" (click)="editPost()"><ion-icon name="md-create"></ion-icon></button>
+      <button ion-button *ngIf="post.created_by === user.id" (click)="deleteFeed()"><ion-icon name="trash"></ion-icon></button>
+      <button ion-button (click)="openPrefs($event)"><ion-icon name="md-more"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-scroll scrollY="true">
+    <ion-card class="showcase" *ngIf="prefs.view !== 'classic'">
+      <ion-card-content>
+        <ion-slides pager>
+          <ion-slide *ngFor="let item of post?.images">
+            <img [src]="item| sanitize: 'url'" *ngIf="item?.length > 0">
+          </ion-slide>
+        </ion-slides>
+        <ion-item>
+          <ion-avatar item-left>
+            <img [src]="post.contact.picture | sanitize: 'url'" *ngIf="post?.contact?.picture">
+          </ion-avatar>
+          <h2 color="primary">{{post?.contact?.firstname + " " + post.contact?.lastname}}</h2>
+          <p color="stable">{{post?.created_at | amTimeAgo}}</p>
+        </ion-item>
+        <div class="content-inner">
+          <h3>{{post.title}}</h3>
+          <p class="subtitle" *ngIf="post.subtitle">{{post?.subtitle}}</p>
+          <p class="content" *ngIf="post.content">{{post?.content}}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="prefs.view === 'classic'">
+      <ion-card-header>
+        <ion-item>
+          <ion-avatar item-left>
+            <img [src]="post?.contact?.picture | sanitize: 'url'" *ngIf="post?.contact?.picture">
+          </ion-avatar>
+          <h2 color="primary">{{post?.contact?.firstname + " " + post?.contact?.lastname}}</h2>
+          <p color="stable">{{post?.created_at | amTimeAgo}}</p>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-slides pager>
+          <ion-slide *ngFor="let item of post?.images">
+            <img [src]="item | sanitize: 'url'" *ngIf="item?.length > 0">
+          </ion-slide>
+        </ion-slides>
+        <h3>{{post?.title}}</h3>
+        <p class="subtitle" *ngIf="post?.location">{{location}}</p>
+        <p class="content-text" *ngIf="post?.content">{{post?.content}}</p>
+      </ion-card-content>
+    </div>
+  </ion-scroll>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col>
+      <button ion-button block icon-only clear color="tertiary" (click)="likeNow()" (press)="likePost()"><ion-icon name="heart"></ion-icon>
+      <div><small>{{post?.likes?.length}}</small>Like</div></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button block icon-only clear color="tertiary" (click)="commentPost()"><ion-icon name="chatboxes"></ion-icon>
+      <div><small>{{post?.comments?.length}}</small>Comment</div></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button block icon-only clear color="tertiary" (click)="sharePost()"><ion-icon name="md-share"></ion-icon>
+      <div>Share</div></button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,21 @@
+<div class="loading" *ngIf="!feed">
+  <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/progress.gif">
+</div>
+<div *ngIf="feed">
+  <div *ngIf="feed?.length === 0">
+    <ion-card>
+      <ion-card-content>
+        No data to display
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-scroll scrollY="true" *ngIf="feed?.length > 0">
+    <ion-row *ngFor="let i of rows;" class="card-background-page">
+      <ion-col *ngFor="let item of feed | slice:(i*2):(i+1)*2">
+        <ion-card [navPush]="pushPage" [navParams]="item">
+          <img [src]="item?.images[0] | sanitize:'url'" *ngIf="item?.images?.length > 0" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-scroll>
+</div>

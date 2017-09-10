@@ -1,0 +1,17 @@
+<ion-menu [content]="content" *ngIf='userId!=null'>
+  <ion-header >
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content  [ngStyle]="{'background': colorLuminance(color, pages.indexOf(pages[pages.length -1])*3, true)}">
+    <ion-list class="menu">
+      <div class="item" menuClose *ngFor="let page of pages; let i= index;" (click)="openPage(page)" [ngStyle]="{'background': colorLuminance(color, i*3, true), 'height': ((100/pages.length) - .2) + '%'}">
+          <ion-icon *ngIf="!page.image" [name]="page.icon" 
+          [ngStyle]="{'font-size': (35/pages.length) + 'rem'}"></ion-icon>
+       <img [src]="page.icon" *ngIf="page.image" />
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

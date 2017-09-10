@@ -1,0 +1,38 @@
+<ion-content>
+  <div class="control">
+    <ion-row class="content">
+      <ion-col>
+        <form [formGroup]="signupForm">
+          <ion-list>
+            <ion-item>
+              <ion-label floating>
+                <ion-icon name="person" item-left></ion-icon>Fullname</ion-label>
+              <ion-input type="text" formControlName="fullname"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>
+                <ion-icon name="at" item-left></ion-icon>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>
+                <ion-icon name="lock" item-left></ion-icon>Password</ion-label>
+              <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>
+                <ion-icon name="lock" item-left></ion-icon>Confirm Password</ion-label>
+              <ion-input type="password" formControlName="rpassword"></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+        <button ion-button block (click)="signUp(signupForm)" [disabled]="!signupForm.valid">Register</button>
+        <ion-row class="footer">
+          <ion-col text-right (click)="viewCtrl.dismiss()" no-padding>
+            <p>close</p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="conversation.recipientId === user.id" class="chat"><img [src]="conversation.sender.picture | sanitize: 'url'"> <span>{{conversation.sender.firstname + " " + conversation.sender.lastname}}</span></ion-title>
+    <ion-title *ngIf="conversation.recipientId !== user.id" class="chat"><img [src]="conversation.recipient.picture | sanitize: 'url'"> <span>{{conversation.recipient.firstname + " " + conversation.recipient.lastname}}</span></ion-title>
+    <ion-buttons end>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content #content class="chat" padding [style.background-image]="'url('+ user.preference.chatWallpaper +')'| sanitize: 'style'">
+  <div *ngFor="let chat of messages; let i = index">
+    <ion-item text-wrap [ngClass]="chat.contactId === user.id ? 'out' : 'in'" (press)="onMessageHold($event, i, chat)">
+      <ion-avatar on-hold="onMessageHold($event, $index, chat)">
+        <img *ngIf="chat.contactId !== user.id && chat.contactId ===conversation.senderId" [src]="conversation.sender.picture  | sanitize: 'url'">
+        <img *ngIf="chat.contactId !== user.id && chat.contactId ===conversation.recipientId" [src]="conversation.recipient.picture  | sanitize: 'url'">
+        <img *ngIf="chat.contactId === user.id" [src]="user.picture | sanitize: 'url'">
+        <ion-card>
+          <p class="message-text" [innerHTML]="chat.text | sanitize:'html'"></p>
+          <span>{{chat.sent_at | amTimeAgo}} <ion-icon  *ngIf="chat.contactId !== userId" name="done-all" [ngClass]="chat.read_at ? 'read': ''" ></ion-icon></span>
+        </ion-card>
+      </ion-avatar>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-buttons start>
+      <button ion-button color="primary" (click)="sendPhoto()">
+        <ion-icon name="camera" color="primary" item-left></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-item>
+      <ion-textarea elastic name="message" placeholder="Type message here..." [formControl]="message"></ion-textarea>
+    </ion-item>
+    <ion-buttons end>
+      <button ion-button color="primary" (click)="sendMessage(message.value)">
+        Send
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

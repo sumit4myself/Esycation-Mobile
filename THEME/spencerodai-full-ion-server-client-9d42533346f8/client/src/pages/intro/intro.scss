@@ -1,0 +1,45 @@
+intro-page {
+  ion-slides {
+    height: 80%;
+  }
+  .swiper-container-horizontal>.swiper-pagination-bullets {
+    bottom: 45%;
+    left: 0;
+    width: 100%;
+    .swiper-pagination-bullet {
+      width: 12px;
+      border: 1px solid white !important;
+      border-radius: 0 !important;
+      height: 6px;
+    }
+  }
+  .boxes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    .image-box {
+      position: relative;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 13em;
+      height: 60%;
+      background-position: center;
+      background-size: 200px;
+      background-repeat: no-repeat
+    }
+    .footer-box {
+      position: relative;
+      text-align: center;
+      vertical-align: middle;
+      padding: 0 15px;
+      h1 {
+        font-weight: 400!important;
+        font-size: 3rem;
+      }
+      button {
+        width: 130px !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+shop-store-detail {
+  .header-md::after {
+    background-image: none !important;
+  }
+  // .scroll-content {
+  //   overflow-y: hidden;
+  // }
+  .badge-md {
+    border-radius: 50px;
+    // border: 1px solid color($colors, primary);
+    background-color: color($colors, light);
+    color: color($colors, dark);
+    font-size: 1rem;
+  }
+  ion-badge {
+    margin-top: -25px;
+  }
+  ion-fab[right] {
+    right: 10px;
+    margin-top: 27px;
+  }
+  .swiper-slide img {
+    height: 260px;
+  }
+  ion-slides {
+    .content {
+      padding: 20px;
+      text-align: left;
+      h2 {
+        margin: 5px 0 0 0;
+        font-size: 1.4rem;
+        text-transform: capitalize;
+        color: color($colors, stable);
+        display: flex;
+      }
+      h3 {
+        margin: 0;
+        font-size: 2.3rem;
+        text-transform: capitalize;
+        color: color($colors, dark);
+        font-weight: 400 !important;
+      }
+      p {
+        margin: 5px 0;
+        font-size: 1rem;
+        color: color($colors, stable);
+      }
+      .sale-on {
+        text-decoration: line-through;
+        margin-right: 10px;
+      }
+      .sale {
+        color: color($colors, danger);
+        font-weight: 500;
+      }
+    }
+    .footer {
+      padding: 20px;
+    }
+    .sizes {
+      margin-right: 10px;
+    }
+  }
+}

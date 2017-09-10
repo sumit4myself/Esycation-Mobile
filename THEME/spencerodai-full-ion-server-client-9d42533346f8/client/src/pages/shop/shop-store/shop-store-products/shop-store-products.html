@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{productFilter}} Products</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="showSearch = !showSearch"><ion-icon name="search"></ion-icon></button>
+      <button ion-button (click)="showFilter = !showFilter"><ion-icon name="md-funnel"></ion-icon></button>
+      <button ion-button (click)="goToCart()"><ion-icon name="cart"></ion-icon><ion-badge ><span *ngIf="cart.length > 0">{{cart.length}}</span></ion-badge></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar *ngIf="showSearch && !showFilter" (ionInput)="searchItems($event)"></ion-searchbar>
+  <ion-scroll scrollY="true">
+  <ion-list>
+    <ion-item *ngIf="!showSearch && showFilter">
+      <ion-label>Filter</ion-label>
+      <ion-select [(ngModel)]="productsView">
+        <ion-option value="grid">Grid</ion-option>
+        <ion-option value="showcase">Showcase</ion-option>
+        <ion-option value="list">List</ion-option>
+        <ion-option value="slide">Slides</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <!--Begin Grid View-->
+  <div *ngIf="productsView === 'grid'" class="grid">
+    <ion-row *ngFor="let i of rows;">
+      <ion-col *ngFor="let product of products| slice:(i*2):(i+1)*2">
+        <ion-card>
+          <ion-row class="content" [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">
+            <ion-col [style.background-image]="'url(' + product.images[0]+ ')' | sanitize:'style'" class="background"></ion-col>
+          </ion-row>
+          <ion-row class="footer">
+            <ion-col>
+              <h3 [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">{{product.name | slice: 0: 20}}</h3>
+              <ion-row>
+                <ion-col text-left no-padding>
+                  <button ion-button color="primary" small (click)="addToCart(product)"><ion-icon name="cart"></ion-icon></button>
+                </ion-col>
+                <ion-col no-padding text-center [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">
+                  <h2>{{product.price | currency: 'USD':true:'1.2-2' }}</h2>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--End Grid View-->
+  <!--Begin Slider View-->
+  <ion-slides #mySlider [options]="mySlideOptions" *ngIf="productsView === 'slide'">
+    <ion-slide *ngFor="let product of products">
+      <img [src]="commonServices.safeURL(product.images[0])"  [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">
+      <div class="content">
+        <h2 [innerText]="product.name"  [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}"></h2>
+        <h3  [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">{{product.price | currency: 'USD':true:'1.2-2' }}</h3>
+        <ion-row>
+          <ion-col no-padding><button ion-button color="primary" small (click)="addToCart(product)"><ion-icon name="cart"></ion-icon> Add to Cart</button></ion-col>
+          <ion-col text-right no-padding>
+            <ion-row>
+              <ion-col no-padding>
+                <ion-icon name="heart" color="tertiary" *ngIf="product.alreadyLiked" (click)="like(product)"></ion-icon>
+                <ion-icon name="heart" color="light" *ngIf="!product.alreadyLiked" (click)="like(product)"></ion-icon>&nbsp;&nbsp;&nbsp;
+              <!--</ion-col>
+              <ion-col no-padding>
+                <ion-icon name="bookmark" color="light"></ion-icon>
+              </ion-col>
+              <ion-col no-padding>-->
+                <ion-icon name="md-share" color="light" (click)="share(product)"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <!--End Slider View-->
+  <!--Begin Showcase View-->
+  <div *ngIf="productsView === 'showcase'">
+    <ion-row *ngFor="let product of products" class="showcase">
+      <ion-col no-padding>
+        <ion-row  [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">
+          <ion-col no-padding [ngStyle]="{ 'background-image': 'url(' + product.images[0]+ ')'}" class="background">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col no-padding>
+            <div class="content">
+              <div class="like-button" (click)="like(product)">
+                <ion-icon name="heart" color="tertiary" *ngIf="product.alreadyLiked"></ion-icon>
+                <ion-icon name="heart" color="light" *ngIf="!product.alreadyLiked"></ion-icon>
+              </div>
+              <ion-row>
+                <ion-col no-padding  [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">
+                  <h3>{{product.price | currency: 'USD':true:'1.2-2' }}</h3>
+                  <h2>{{product.name | slice: 0:20}}</h2>
+                </ion-col>
+                <ion-col text-right no-padding>
+                  <button ion-button color="primary" round small (click)="addToCart(product)"><ion-icon name="cart"></ion-icon> Add to cart</button>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--End Showcase View-->
+  <!--Begin List View-->
+  <div *ngIf="productsView === 'list'">
+    <ion-row *ngFor="let product of products" class="lists">
+      <ion-col width-40 no-padding [ngStyle]="{ 'background-image': 'url(' + product.images[0]+ ')'}" class="background" [navPush]="productDetailPage"
+        [navParams]="{product: product, cart: cart}">
+      </ion-col>
+      <ion-col>
+        <h3 [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">{{product.name | slice: 0:20}}</h3>
+        <p [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">{{product.description | slice: 0: 60}}</p>
+        <h2 [navPush]="productDetailPage" [navParams]="{product: product, cart: cart}">
+          <span [ngClass]="{'sale-on': product.sale}">{{product.price | currency: 'USD':true:'1.2-2' }}</span>
+          <span class="sale" *ngIf="product.sale_price">{{product.sale_price | currency: 'USD':true:'1.2-2' }}</span>
+        </h2>
+        <ion-row class="footer">
+          <ion-col>
+            <rating [rate]="product.rating" (updateRate)="onUpdateRate($event)"></rating>
+          </ion-col>
+          <ion-col text-right class="clickable">
+            <ion-icon name="heart" color="tertiary" *ngIf="product.alreadyLiked" (click)="like(product)"></ion-icon>
+            <ion-icon name="heart" color="dark" *ngIf="!product.alreadyLiked" (click)="like(product)"></ion-icon>
+            <ion-icon name="md-share" color="dark" (click)="share(product)"></ion-icon>
+            <span>+<ion-icon name="cart" color="dark" (click)="addToCart(product)"></ion-icon></span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--End List View-->
+  </ion-scroll>
+</ion-content>

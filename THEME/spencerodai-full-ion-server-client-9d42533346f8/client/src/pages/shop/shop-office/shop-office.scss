@@ -1,0 +1,39 @@
+shop-office {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  ion-scroll {
+    position: relative;
+    height: 100%;
+  }
+  .item-md ion-thumbnail ion-img,
+  .item-md ion-thumbnail img {
+    width: 80px;
+    height: auto;
+  }
+  .item-md p {
+    font-size: 1rem;
+    color: color($colors, stable);
+  }
+  .item-md h2 {
+    font-size: 1.6rem;
+    font-weight: 400!important;
+    color: color($colors, dark);
+    text-transform: capitalize;
+  }
+  .item-md h3 {
+    margin: 2px 0;
+    font-size: 1.3rem;
+    color: color($colors, primary);
+    font-weight: 400!important;
+  }
+  .sale-on {
+    text-decoration: line-through;
+    margin-right: 10px;
+  }
+  .sale {
+    color: color($colors, danger);
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}

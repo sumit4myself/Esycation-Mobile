@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>basket</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="header-content">
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="user.picture | sanitize:'url'">
+      </ion-avatar>
+      <h2>{{user.firstname+" " + user.lastname}}</h2>
+      <p>You have <b>{{cartProducts.length}}</b> item <span *ngIf="cartProducts.length > 1">s</span> in your shopping cart</p>
+    </ion-item>
+    <h3 class="grand-total">Grand Total: <b>{{grandTotal  | currency: 'USD':true:'1.2-2'}}</b></h3>
+  </div>
+
+  <div class="card-background-page" *ngIf="cartProducts.length === 0">
+    <ion-card>
+      <div class="image-container">
+        <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/sad.gif" />
+        <div class="after">
+          <div class="card-title">Basket is Empty</div>
+          <!--<div class="card-subtitle"></div>-->
+        </div>
+      </div>
+      <button ion-button color="stable" navPop>Open Shops</button>
+    </ion-card>
+  </div>
+
+<ion-list>
+  <ion-item *ngFor="let item of cartProducts; let i = index">
+      <ion-thumbnail item-left>
+        <img [src]="item.images[0] | sanitize:'url'">
+      </ion-thumbnail>
+      <h2 color="primary">{{item.name}}</h2>
+      <p color="stable">{{item.description}}</p>
+      <h3 color="dark">{{item.price | currency: 'USD':true:'1.2-2'}}</h3>
+      <button ion-button item-right color="danger" (click)="removeItem(i);"><ion-icon name="remove"></ion-icon></button>
+    </ion-item>
+</ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button full (click)="goToCheckout(grandTotal)" [disabled]="cartProducts.length === 0">Chekout</button>
+</ion-footer>

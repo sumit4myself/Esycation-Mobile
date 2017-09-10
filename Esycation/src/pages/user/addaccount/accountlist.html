@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar> 
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add Acount</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card class="active_user">
+        <ion-row >
+          <ion-col>
+            <div class="active_user">
+              <ion-item text-wrap class="active_user">
+                <ion-avatar item-left>
+                    <img class="profile-image" src="assets/img/default.png">
+                </ion-avatar>
+                <div>
+                    <ion-row>
+                        <ion-col >
+                            <h2>{{activeUserDetail.user.fullName}}</h2>
+                            <p>
+                                <ion-icon name="mail" color="primary">
+                                    </ion-icon>&nbsp;
+                                <span >{{activeUserDetail.user.email}}</span>
+                              </p>
+                              <p>
+                                  <span class="small" ><ion-icon name="key"></ion-icon>&nbsp;
+                                    {{activeUserDetail.user.usersServiceMap.module}}
+                                 </span>
+                                 <span >&nbsp;| &nbsp;</span>
+                                 <span class="small" >
+                                     &nbsp; Since :  {{activeUserDetail.user.createdOn}}
+                                 </span>
+                                 </p>
+                        </ion-col>
+                    </ion-row>      
+                </div>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+    </ion-card> 
+  
+  <ion-list >
+      <ion-item-sliding *ngFor="let userdetail of users" >
+        <ion-item (click)="onSwitchAccount(userdetail.id)" *ngIf="userdetail.id!=activeUserDetail.userId">
+            <ion-avatar item-left >
+            <img class="profile-image" src="assets/img/default.png">
+            </ion-avatar>
+            <h2 >{{userdetail.fullName}}</h2>
+            <p>
+              <ion-icon name="mail" color="primary">
+                  </ion-icon>&nbsp;
+              <span >{{userdetail.email}}</span>
+            </p>
+            <p>
+            <span class="small" ><ion-icon name="key"></ion-icon>&nbsp;
+                {{userdetail.usersServiceMap.module}}
+            </span>
+            <span >&nbsp;| &nbsp;</span>
+            <span class="small" >
+                &nbsp; Since : {{userdetail.createdOn}}
+            </span>
+            </p>
+          </ion-item>
+          <ion-item-options side="right" *ngIf="userdetail.id!=activeUserDetail.userId">
+              <button ion-button color="secondary" (click)="onViewProfile(userdetail.id)">
+                <ion-icon name="person"></ion-icon>
+                Profile
+              </button>
+              <button ion-button color="danger" (click)="onlogOut(userdetail.id)">
+                <ion-icon name="ios-log-in-outline"></ion-icon>
+                LogOut
+              </button>
+          </ion-item-options>
+      </ion-item-sliding>     
+  </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-list>
+        <ion-item >
+            <button ion-button block (click)="onAddAcount()">Add Acount</button>
+       </ion-item> 
+    </ion-list>
+</ion-footer>

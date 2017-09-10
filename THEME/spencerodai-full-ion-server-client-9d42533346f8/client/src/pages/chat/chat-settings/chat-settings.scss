@@ -1,0 +1,35 @@
+chat-settings {
+  .list-md>.item-block:last-child .item-inner {
+    border-bottom: 1px solid lighten(color($colors, stable), 30%) !important;
+  }
+}
+
+chat-user-edit {
+  ion-label {
+    text-transform: capitalize;
+  }
+  .profile-header {
+    height: 220px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: hue;
+    background-color: rgba(0, 0, 0, 0.5);
+    .profile-image {
+      margin: 0 auto;
+      text-align: center;
+      img {
+        width: 30%;
+        margin-top: 5%;
+        border-radius: 50%;
+        border: 2px solid color($colors, light);
+      }
+      .buttons {
+        display: block;
+      }
+    }
+  }
+  ion-list {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "name": "Product",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Extraprop": true
+  },
+  "forceId": false,
+  "properties": {
+     "name": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "images": {
+      "type": [
+        "string"
+      ]
+    },
+    "size": {
+      "type": [
+        "string"
+      ]
+    },
+    "rating": {
+      "type": "number"
+    },
+    "dimensions": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "number"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "sale": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "sale_price": {
+      "type": "number"
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "created_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "string",
+      "required": true
+    },
+    "created_by": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "likes": {
+      "type": "hasMany",
+      "model": "Like",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

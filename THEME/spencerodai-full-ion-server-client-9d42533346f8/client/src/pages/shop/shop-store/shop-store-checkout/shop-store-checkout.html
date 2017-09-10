@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>checkout</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list *ngIf="payment">
+    <ion-card>
+      <ion-card-content>
+      <ion-item-group>
+        <ion-item-divider color="light">Payment Details</ion-item-divider>
+        <ion-item>
+          <ion-label>Payment Type</ion-label>
+          <ion-select [(ngModel)]="payment.type">
+            <ion-option [value]="item" *ngFor="let item of payment_type">{{item}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="payment.type === 'Card'">
+          <ion-label>Card Type</ion-label>
+          <ion-select [(ngModel)]="payment.card.type">
+            <ion-option [value]="item" *ngFor="let item of card_type">{{item}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <div *ngIf="payment.card.type">
+          <ion-item>
+            <ion-label fixed>Card Number</ion-label>
+            <ion-input type="text" name="number" [(ngModel)]="payment.card.number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>Expiry Date</ion-label>
+            <ion-datetime displayFormat="MM YYYY" pickerFormat="MM YYYY" [(ngModel)]="payment.card.expiry"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>CSV</ion-label>
+            <ion-input type="text" name="csv" [(ngModel)]="payment.card.csv"></ion-input>
+          </ion-item>
+        </div>
+      </ion-item-group>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="payment.card.type !== null">
+      <ion-card-content>
+      <ion-item-group>
+        <ion-item-divider color="light">Billing Address Details</ion-item-divider>
+        <ion-item>
+          <ion-label fixed>Your Name</ion-label>
+          <ion-input type="text" name="name" [(ngModel)]="payment.card.billing_address.name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Street</ion-label>
+          <ion-input type="text" name="street" [(ngModel)]="payment.card.billing_address.street"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>City</ion-label>
+          <ion-input type="text" name="city" [(ngModel)]="payment.card.billing_address.city"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Country</ion-label>
+          <ion-input type="text" name="country" [(ngModel)]="payment.card.billing_address.country"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Post Code</ion-label>
+          <ion-input type="text" name="post_code" [(ngModel)]="payment.card.billing_address.post_code"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Same Delivery Address?</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="payment.card.is_same_address"></ion-checkbox>
+        </ion-item>
+      </ion-item-group>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="!payment.card.is_same_address">
+      <ion-card-content>
+      <div>
+        <ion-item-group>
+          <ion-item-divider color="light">Delivery Address Details</ion-item-divider>
+          <ion-item>
+            <ion-label fixed>Your Name</ion-label>
+            <ion-input type="text" name="name" [(ngModel)]="payment.card.delivery_address.name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>Street</ion-label>
+            <ion-input type="text" name="street" [(ngModel)]="payment.card.delivery_address.street"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>City</ion-label>
+            <ion-input type="text" name="city" [(ngModel)]="payment.card.delivery_address.city"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>Country</ion-label>
+            <ion-input type="text" name="country" [(ngModel)]="payment.card.delivery_address.country"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>Post Code</ion-label>
+            <ion-input type="text" name="post_code" [(ngModel)]="payment.card.delivery_address.post_code"></ion-input>
+          </ion-item>
+        </ion-item-group>
+      </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="payment.type === 'Paypal'">
+      <ion-item (click)="payPal()" text-wrap>
+        <ion-thumbnail item-right>
+          <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/PayPal.jpg" alt="">
+        </ion-thumbnail>
+        <h2>Pay with paypal</h2>
+        <p>Pay quickly and securely with paypal</p>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="payment.type === 'Cheque'">
+      <ion-card-content>
+        <h2>How to pay by Cheque</h2>
+        <p>Bacon ipsum dolor amet drumstick ground round pig bresaola tail corned beef t-bone. Ham jowl picanha ham hock tongue
+          boudin hamburger beef ribs doner. Ground round venison chicken jowl, sirloin sausage tri-tip. Pancetta chuck short
+          loin pastrami corned beef pork belly. Pork belly bresaola alcatra turducken.</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button ion-button full (click)="confirmPay()" [disabled]="payment.type ==='Paypal' || (payment.type==='card' && payment.card.csv) ">Confirm & Pay</button>
+</ion-footer>

@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Store</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row *ngFor="let item of types" text-center [navPush]="pushStore" [navParams]="item"
+   [ngStyle]="{'height': (100/types.length) + '%'}">
+    <ion-col [ngStyle]="{ 'background-image': 'url(' + item.image + ')'}" class="background">
+      <h1>{{item.title}}</h1>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,69 @@
+news-card {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  ion-scroll {
+    position: relative;
+    height: 100%;
+  }
+  ion-content {
+    background: color($colors, light) !important;
+  }
+  .background-image {
+    background-position: center;
+    background-size: cover;
+    height: 170px;
+  }
+  ion-col[width-40] {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+  ion-col:last-of-type {
+    padding: 0;
+    position: relative;
+  }
+  .social {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    width: 100%;
+    margin-right: 10px;
+    text-align: right;
+    .badge {
+      color: color($colors, secondary);
+      font-size: 0.975rem;
+    }
+    ion-icon {
+      font-size: 2rem;
+      padding-right: 5px;
+    }
+  }
+  .content-inner {
+    position: absolute;
+    bottom: 10px;
+    padding: 0 10px;
+    h2 {
+      font-size: 1.4rem !important;
+      font-weight: 500!important;
+      color: color($colors, primary) !important;
+      margin-bottom: 10px !important;
+    }
+    p {
+      font-size: 1.32rem !important;
+      font-weight: 300!important;
+      color: darken(color($colors, dark), 40%) !important;
+      margin-bottom:10px;
+    }
+    a {
+      font-size: 1.357rem !important;
+      font-weight: 300!important;
+      color: color($colors, secondary) !important;
+      text-transform: capitalize;
+    }
+    .time {
+      font-size: 1rem!important;
+      color: lighten(color($colors, stable), 0%);
+      text-transform: capitalize;
+    }
+  }
+}

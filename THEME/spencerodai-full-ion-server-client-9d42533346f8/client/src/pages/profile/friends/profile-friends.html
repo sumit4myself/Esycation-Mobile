@@ -1,0 +1,25 @@
+<div class="loading" *ngIf="!friends">
+  <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/progress.gif">
+</div>
+<div *ngIf="friends">
+  <div *ngIf="friends?.length === 0">
+    <ion-card>
+      <ion-card-content>
+        No data to display
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-scroll scrollY="true" *ngIf="friends?.length > 0">
+    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let item of friends">
+        <ion-avatar item-left [navPush]="contactProfilepage" [navParams]="item.contact">
+          <img [src]="item?.contact?.picture | sanitize:'url'">
+        </ion-avatar>
+        <h2 [navPush]="contactProfilepage" [navParams]="item?.contact">{{item?.contact?.firstname + " " + item?.contact?.lastname}}</h2>
+        <p [navPush]="contactProfilepage" [navParams]="item?.contact">Friends Since: {{item?.created_at | amTimeAgo}}</p>
+        <button ion-button outline item-right (click)="unfriend(item);">Unfollow</button>
+      </ion-item>
+    </ion-list>
+  </ion-scroll>
+</div>

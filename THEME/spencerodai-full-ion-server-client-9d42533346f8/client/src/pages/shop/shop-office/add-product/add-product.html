@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>add product</ion-title>
+    <ion-buttons end>
+      <!--<button ion-button clear>
+        <ion-icon name="more"></ion-icon>
+      </button>-->
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form novalidate>
+    <ion-list>
+      <ion-row *ngIf="product.images.length > 1">
+        <ion-col class="product-images">
+          <ion-scroll scrollX="true">
+            <ion-row>
+              <ion-col *ngFor="let item of product.images">
+                <img [src]="item | sanitize:'url'">
+              </ion-col>
+            </ion-row>
+          </ion-scroll>
+        </ion-col>
+        <ion-col width-20>
+          <button type="button" small ion-button item-right outline (click)="getPictures()">
+            <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+      <ion-item *ngIf="product.images.length === 1">
+        <ion-thumbnail item-left>
+          <img [src]="product.images[0] | sanitize: 'url'">
+        </ion-thumbnail>
+        <h2>Add Images</h2>
+        <button type="button" ion-button item-right outline (click)="getPictures()">Add Images</button>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="product.name" name="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Description</ion-label>
+        <ion-textarea [(ngModel)]="product.description" name="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Department</ion-label>
+        <ion-select [(ngModel)]="product.department" name="department">
+          <ion-option *ngFor="let department of departments" [value]="department">{{department}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Price</ion-label>
+        <ion-input type="number" [(ngModel)]="product.price" name="price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Size</ion-label>
+        <ion-input type="text" [(ngModel)]="product.size" name="size"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Sale</ion-label>
+        <ion-checkbox [(ngModel)]="product.sale" name="sale"></ion-checkbox>
+      </ion-item>
+      <ion-item *ngIf="product.sale">
+        <ion-label fixed>Sale Price</ion-label>
+        <ion-input type="number" [(ngModel)]="product.sale_price" name="sale_price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Weight</ion-label>
+        <ion-input type="number" [(ngModel)]="product.weight" name="weight"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Quantity</ion-label>
+        <ion-input type="number" [(ngModel)]="product.quantity" name="quantity"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <button ion-button full (click)="saveProduct(product)">Save</button>
+</ion-footer>

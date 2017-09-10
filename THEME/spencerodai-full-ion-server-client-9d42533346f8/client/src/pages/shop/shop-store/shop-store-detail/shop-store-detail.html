@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar color="light">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <!--<ion-title>shop-store-detail</ion-title>-->
+    <ion-buttons end>
+      <button ion-button color="tertiary" *ngIf="alreadyLiked" (click)="like()"><ion-icon name="heart"></ion-icon></button>
+      <button ion-button color="dark" *ngIf="!alreadyLiked" (click)="like()"><ion-icon name="heart"></ion-icon></button>
+      <button ion-button (click)="share()"><ion-icon name="md-share"></ion-icon></button>
+      <button ion-button (click)="goToCart()"><ion-icon name="cart"></ion-icon><ion-badge ><span *ngIf="cart.length > 0">{{cart.length}}</span></ion-badge></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col no-padding>
+      <ion-row class="card-2">
+        <ion-col no-padding>
+          <ion-slides #mySlider [options]="mySlideOptions">
+            <ion-slide *ngFor="let item of product.images">
+              <img [src]="item | sanitize:'url'">
+              <div class="content">
+                <h3>
+                  <span [ngClass]="{'sale-on': product.sale}">{{product.price | currency: 'USD':true:'1.2-2' }}</span>
+                  <span class="sale" *ngIf="product.sale_price">{{product.sale_price | currency: 'USD':true:'1.2-2' }}</span>
+                </h3>
+                <h2 [innerText]="product.name"></h2>
+              </div>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="footer">
+          <h4>Description</h4>
+          <p>{{product.description}}</p>
+          <ion-row>
+            <ion-col no-padding>
+              <h4>Size</h4>
+              <p><span class="sizes" *ngFor="let item of product.size">{{item}} &nbsp;&nbsp;&nbsp;</span></p>
+            </ion-col>
+            <ion-col no-padding>
+              <h4>Rating</h4>
+              <rating [rate]="product.rating" (updateRate)="onUpdateRate($event)"></rating>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-fab right middle>
+    <button ion-fab (click)="addToCart(product)"><ion-icon name="cart"></ion-icon></button>
+  </ion-fab>
+</ion-content>

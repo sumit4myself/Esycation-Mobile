@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="profile-bg" *ngIf="contact">
+    <div class="profile-image">
+      <img [src]="contact.picture | sanitize:'url'">
+    </div>
+    <ion-card color="light">
+      <div class="profile-info">
+        <h1 color="secondary">{{contact?.firstname + " " + contact?.lastname}}</h1>
+        <p color="stable"><span *ngIf="contact.town">{{contact?.town}}</span> <span *ngIf="contact?.country">{{contact?.country}}</span></p>
+        <p class="small">Member since {{contact?.created_at | amTimeAgo}}</p>
+        <button ion-button color="primary" *ngIf="!is_friend" small (click)="follow(contact)">Follow</button>
+        <button ion-button color="primary" outline *ngIf="is_friend" small (click)="unfollow(contact)">Unfollow</button>
+        <ion-row [hidden]="!is_friend">
+          <ion-col (click)="goToChat(contact)">
+            <ion-icon name="chatbubbles"></ion-icon> Chat</ion-col>
+          <ion-col (click)="callContact(contact)">
+            <ion-icon name="call"></ion-icon> Call</ion-col>
+        </ion-row>
+      </div>
+    </ion-card>
+  </div>
+  <div class="profile-menu" *ngIf="contact && feed" [ngClass]="{'friend': is_friend}">
+    <ion-segment [(ngModel)]="profileMenus" color="secondary">
+      <ion-segment-button value="_stories">
+        Stories
+      </ion-segment-button>
+      <ion-segment-button value="_friends">
+        Friends
+      </ion-segment-button>
+      <ion-segment-button value="_events">
+        Events
+      </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="profileMenus">
+      <div *ngSwitchCase="'_stories'">
+        <div class="loading" *ngIf="!feed">
+          <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/progress.gif">
+        </div>
+        <div *ngIf="feed.length === 0">
+          <ion-card>
+            <ion-card-content>
+              No data to display
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <ion-scroll scrollY="true" *ngIf="feed.length > 0">
+          <ion-row *ngFor="let i of rows;" class="card-background-page">
+            <ion-col *ngFor="let item of feed | slice:(i*2):(i+1)*2">
+              <ion-card [navPush]="pushPage" [navParams]="item">
+                <img [src]="item?.images[0] | sanitize:'url'" *ngIf="item?.images?.length > 0" />
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-scroll>
+      </div>
+      <div *ngSwitchCase="'_friends'">
+        <div class="loading" *ngIf="!contact.friends">
+          <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/progress.gif">
+        </div>
+        <div *ngIf="contact?.friends?.length === 0">
+          <ion-card>
+            <ion-card-content>
+              No data to display
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <ion-scroll scrollY="true" *ngIf="contact?.friends?.length > 0">
+          <ion-list>
+            <ion-item *ngFor="let item of contact.friends">
+              <ion-avatar item-left>
+                <img [src]="item?.contact?.picture | sanitize:'url'">
+              </ion-avatar>
+              <h2>{{item.contact.firstname + " " + item.contact.lastname}}</h2>
+              <p>Friends Since: {{item.created_at | amTimeAgo}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+      </div>
+      <div *ngSwitchCase="'_events'">
+        <div class="loading" *ngIf="!contact.calendarEvents">
+          <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/progress.gif">
+        </div>
+        <div *ngIf="contact?.calendarEvents?.length === 0">
+          <ion-card>
+            <ion-card-content>
+              No data to display
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <ion-scroll scrollY="true" *ngIf="contact?.calendarEvents?.length > 0">
+          <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+          <ion-list>
+            <ion-item *ngFor="let item of contact.calendarEvents">
+              <ion-icon item-left name="calendar" [ngStyle]="{'color': item.color}">
+              </ion-icon>
+              <h2>{{item?.title}}</h2>
+              <p *ngIf="item?.description">{{item?.description}}</p>
+              <p>{{item?.created_at | amTimeAgo}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+      </div>
+    </div>
+  </div>
+</ion-content>

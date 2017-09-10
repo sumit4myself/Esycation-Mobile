@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Showcase</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="showSearch = !showSearch"><ion-icon name="search"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="card-showcase">
+  <ion-searchbar *ngIf="showSearch" (ionInput)="onSearch($event)"></ion-searchbar>
+  <ion-scroll scrollY="true">
+    <ion-card *ngIf="!feed || (feed && feed?.length === 0)" padding text-center>
+      <h1>No News Data</h1>
+      <h2>Add Friends to see thier news feed or add your own feed.</h2>
+      <button ion-button color="stable" (click)="peoplePage()">Add Friends</button>
+    </ion-card>
+    <ion-card *ngFor="let item of feed" [navPush]="pushPage" [navParams]="item">
+    <ion-row>
+      <ion-col *ngIf="item?.images?.length > 0" [style.background-image]="'url('+ item?.images[0]+')'| sanitize:'style'" class="background-image">
+        <div class="time">posted {{item?.created_at | amTimeAgo}}</div>
+        <div class="card-content">
+          <ion-item text-wrap>
+            <ion-avatar item-left>
+              <img [src]="item?.contact?.picture | sanitize: 'url'" *ngIf="item?.contact?.picture">
+              <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/placeholder.png" *ngIf="!item?.contact?.picture">
+            </ion-avatar>
+            <h2>{{item?.contact?.firstname + " " + item?.contact?.lastname}}</h2>
+            <p>{{item?.title | slice: 0: 70}}</p>
+            <div item-right>
+              <span ion-text color="light" class="badge"><ion-icon name="heart"></ion-icon><span *ngIf="item?.likes?.length > 0">{{item?.likes?.length}}</span></span>
+              <span ion-text color="light" class="badge"><ion-icon name="chatboxes"></ion-icon><span *ngIf="item?.likes?.length > 0">{{item?.comments?.length}}</span></span>
+            </div>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  </ion-scroll>
+</ion-content>

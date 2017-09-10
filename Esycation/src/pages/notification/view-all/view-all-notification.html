@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notifications</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+  <ion-card *ngFor="let notification of notifications.contents">
+        <ion-row (click)="onView(notification.id)">
+          <ion-col>
+            <div class="card-content">
+              <ion-item text-wrap>
+                <ion-avatar item-left>
+                    <img  src="assets/img/info.png" > 
+                </ion-avatar>
+                <div>
+                    <h2>{{notification.notificationId.template.subject}}</h2>
+                    <ion-row>
+                        <ion-col ><span item-right >{{notification.notificationId.pushTime}}</span></ion-col>
+                        <ion-col text-right> 
+                          <span *ngIf="notification.notificationId.template.resources.length> 0 || notification.notificationId.resources.length>0">
+                              <ion-icon name="attach"></ion-icon>
+                          </span>  
+                          <span  *ngIf="notification.readStatus=='READ'" 
+                            class="notification-success"><ion-icon name="done-all"></ion-icon></span>
+                            <span  *ngIf="notification.readStatus=='UNREAD'">
+                              <ion-icon name="checkmark"></ion-icon></span> 
+                        </ion-col>
+                    </ion-row>      
+                </div>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+    </ion-card> 
+
+</ion-content>

@@ -1,0 +1,81 @@
+profile-contacts {
+  .header-md::after {
+    background-image: none !important;
+  }
+  .scroll-content {
+    overflow-y: hidden;
+  }
+  .small {
+    font-size: 1rem;
+  }
+  .profile-bg {
+    position: relative;
+    height: 120px;
+    width: 100%;
+    background: color($colors, secondary);
+    .profile-image {
+      position: relative;
+      text-align: center;
+      border-radius: 50%;
+      z-index: 45;
+      img {
+        border-radius: 100%;
+        width: 98px;
+        height: 98px;
+        border: 2px solid color($colors, light);
+      }
+    }
+    ion-card {
+      position: absolute;
+      top: 40px;
+    }
+    .card-md {
+      margin: 10px 20px 10px 20px;
+      width: calc(100% - 40px);
+    }
+    .card-md h1 {
+      font-size: 2rem;
+    }
+    .profile-info {
+      margin-top: 55px;
+      width: 100%;
+      z-index: 2;
+      text-align: center;
+      button {
+        margin-bottom: 10px;
+      }
+      ion-col {
+        padding: 10px;
+        border: 1px solid aliceblue;
+        text-transform: uppercase;
+        font-size: 1.3rem;
+        color: color($colors, stable);
+        ion-icon {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .profile-menu {
+    margin-top: 125px;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+  }
+  .profile-menu.friend {
+    margin-top: 155px;
+  }
+  .loading {
+    width: 150px;
+    margin: 20% auto;
+  }
+  ion-scroll {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  .loading {
+    width: 150px;
+    margin: 20% auto;
+  }
+}

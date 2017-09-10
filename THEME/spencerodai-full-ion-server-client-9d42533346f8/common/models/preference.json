@@ -1,0 +1,95 @@
+{
+  "name": "Preference",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Extraprop": true
+  },
+  "forceId": false,
+  "properties": {
+      "mapRadius": {
+      "type": "number",
+      "required": true,
+      "default": 500
+    },
+    "mapType": {
+      "type": "string",
+      "required": true,
+      "default": "geocode"
+    },
+    "sortFeedBy": {
+      "type": "string",
+      "required": true,
+      "default": "created_at"
+    },
+    "sortFeedOrder": {
+      "type": "string",
+      "required": true,
+      "default": "ASC"
+    },
+    "sortProductBy": {
+      "type": "string",
+      "required": true,
+      "default": "created_at"
+    },
+    "sortProductOrder": {
+      "type": "string",
+      "required": true,
+      "default": "ASC"
+    },
+    "productsView": {
+      "type": "string",
+      "required": true,
+      "default": "list"
+    },
+    "chatWallpaper": {
+      "type": "string",
+      "required": true,
+      "default": "http://www.ionicity.co.uk/wp-content/uploads/2016/12/64.jpg"
+    },
+    "chat_archives": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "created_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_at": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "string",
+      "required": true
+    },
+    "created_by": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "contact": {
+      "type": "belongsTo",
+      "model": "Contact",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

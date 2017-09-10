@@ -1,0 +1,172 @@
+dashboard-calendar {
+  .title-accent {
+    font-size: 1.4rem;
+    color: color($colors, primary);
+  }
+  .month {
+    padding: 10px 10px 0 10px;
+    span {
+      font-size: 2rem;
+    }
+    .prev {
+      padding: 0 10px;
+    }
+    .next {
+      padding: 0 10px;
+    }
+  }
+  .calendar {
+    padding-top: 15px;
+    .weeks {
+      ion-col {
+        text-align: center;
+        font-size: 1.6rem;
+      }
+    }
+    .weekdays {
+      ion-col {
+        text-align: center;
+        padding: 0;
+        height: 42px;
+        span {
+          display: inline-block;
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          font-weight: 300;
+        }
+        .event-badge {
+          position: absolute;
+          height: 10px;
+          width: 10px;
+          color: color($colors, light);
+          background: darken( color($colors, favorite), 60%);
+          line-height: 10px;
+          border-radius: 100%;
+          font-size: 1rem;
+          margin-left: 20px;
+        }
+        .today {
+          border-radius: 100%;
+          color: color($colors, primary);
+          border: 1px solid lighten(color($colors, stable), 50%);
+          background: lighten(color($colors, stable), 50%);
+        }
+        .different-month {
+          color: lighten(color($colors, stable), 30%);
+        }
+        .selected {
+          border-radius: 100%;
+          border: 1px solid color($colors, primary);
+        }
+        .calendar-events {
+          display: block;
+          top: -5px;
+          position: relative;
+        }
+        .has-events {
+          padding: 0 2px;
+          height: auto;
+          width: auto;
+          line-height: 0;
+        }
+        .event-ticks {
+          width: 4px;
+          height: 4px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+  .divider {
+    margin: 20px 40px 0px;
+    border: 1px solid #ccc;
+  }
+  .events-list {
+    ion-card-header{
+      font-size:2.3rem;
+      color: color($colors, primary);
+    }
+    ion-card-content{
+      font-size:1.7rem;
+      color: color($colors, stable);
+    }
+    ion-scroll {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      .scroll-content {
+        position: relative;
+        height: 40%;
+      }
+    }
+  }
+  .list-md {
+    margin: -1px 10px 16px 10px;
+}
+  .item-divider-md {
+    padding-left: 6px;
+    border-bottom: 1px solid #dedede;
+    font-weight: 400;
+}
+  .item {
+    .label-md {
+      margin: 10px;
+    }
+    ion-icon[item-left]+.item-inner {
+      margin-left: 10px;
+    }
+    .title {
+      font-size: 1.4rem;
+      font-weight: 400 !important;
+      margin-bottom: 5px;
+      color: color($colors, dark);
+    }
+    .subtitle {
+      font-size: 1.175rem;
+      font-weight: 300 !important;
+      margin-bottom: 5px;
+      color: lighten(color($colors, stable), 30%);
+    }
+    .times {
+      font-size: 1.125rem;
+      color: color($colors, stable);
+    }
+  }
+  ion-icon[item-right] {
+    font-size: 1.975rem !important;
+  }
+  .item-block:first-child {
+    border: none !important;
+  }
+  .item-block:last-child {
+    border: none !important;
+  }
+  ion-fab {
+    margin-top: -30px;
+  }
+}
+
+dashboard-calendar-modal {
+  .item-md {
+    padding-left: 0px;
+  }
+  ion-col {
+    padding: 0;
+  }
+  .text-input-md {
+    font-weight: 400;
+  }
+  .select-text {
+    font-weight: 300;
+}
+}
+
+.alert-md .alert-message,
+  .alert-md .alert-input-group {
+    padding: 0 24px 4px 24px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .danger-button{
+    color: color($colors, danger) !important;
+  }

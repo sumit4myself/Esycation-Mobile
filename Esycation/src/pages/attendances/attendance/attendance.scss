@@ -1,0 +1,27 @@
+page-attendance{
+
+    ion-label {
+    color: #009688;
+    .small{
+        font-size: 1rem;
+    }
+  }
+  .item-divider {
+    ion-label {
+      font-weight: 500;
+    }
+  }
+  .persent {
+  background-color:#c5e1a5!important; 
+  border: none;
+  color: #212121!important;  
+  text-decoration: none;
+  
+ }
+ .absent{
+   background: #ffab91;
+   border: none;
+  color: #212121!important;  
+  text-decoration: none;
+ }
+}

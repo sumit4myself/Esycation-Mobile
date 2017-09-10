@@ -1,0 +1,166 @@
+dashboard-timeline {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  ion-scroll {
+    position: relative;
+    height: 100%;
+  }
+  %clearfix {
+    &:after,
+    &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      clear: both;
+    }
+  }
+  // Timeline
+  #timeline {
+    width: 100%;
+    margin: 15px 30px auto;
+    position: relative;
+    padding: 0 10px;
+    transition: all .4s ease;
+    &:before {
+      content: "";
+      width: 3px;
+      height: 100%;
+      background: color($colors, primary);
+      left: 50%;
+      top: 0;
+      position: absolute;
+    }
+    &:after {
+      content: "";
+      clear: both;
+      display: table;
+      width: 100%;
+    }
+    .timeline-item {
+      margin-bottom: 40px;
+      position: relative;
+      @extend %clearfix;
+      .timeline-icon {
+        background: color($colors, primary);
+        border: 2px solid color($colors, primary);
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        overflow: hidden;
+        margin-left: -23px;
+        border-radius: 50%;
+      }
+      .timeline-content {
+        width: 45%;
+        background: #fff;
+        padding: 0 10px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        transition: all .3s ease;
+        h2 {
+          padding: 10px;
+          background: color($colors, primary);
+          color: color($colors, light);
+          font-size: 1.4rem;
+          margin: 0px -10px 0 -10px;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          font-weight: 300;
+          text-transform: capitalize;
+        }
+        h3 {
+          color: color($colors, stable);
+          font-size: 1.4rem;
+          font-weight: 300;
+          margin: 0;
+          border-bottom: 1px solid color($colors, primary);
+          padding: 10px 0;
+          text-transform: capitalize;
+        }
+        ion-row.content {
+          padding-top: 15px;
+          ion-col {
+            padding: 0;
+            position: relative;
+            p {
+              margin-bottom: 15px;
+              padding-left: 5px;
+              margin: 0;
+              font-size: 1.4rem;
+              color: color($colors, stable);
+            }
+          }
+          ion-col[width-30] {
+            flex: 0 0 30%;
+            max-width: 30%;
+          }
+        }
+        ion-row.social {
+          margin: -15px 0 10px 0;
+          position: relative;
+          padding: 0 !important;
+          bottom: 0;
+          ion-icon {
+            padding-left: 10px;
+            font-size: 1.8rem;
+            color: color($colors, primary);
+          }
+          span {
+            font-size: 1rem;
+            color: color($colors, stable);
+            margin-right: -10px;
+            padding-left: 10px;
+          }
+        }
+        &:before {
+          content: '';
+          position: absolute;
+          left: 45%;
+          top: 20px;
+          width: 0;
+          height: 0;
+          border-top: 7px solid transparent;
+          border-bottom: 7px solid transparent;
+          border-left: 7px solid color($colors, primary);
+        }
+        &.right {
+          float: right;
+          &:before {
+            content: '';
+            right: 45%;
+            left: inherit;
+            border-left: 0;
+            border-right: 7px solid color($colors, primary);
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    #timeline {
+      margin: 25px 30px;
+      padding: 0px;
+      width: 90%;
+      &:before {
+        left: 0;
+      }
+      .timeline-item {
+        .timeline-content {
+          width: 90%;
+          float: right;
+          &:before,
+          &.right:before {
+            left: 10%;
+            margin-left: -6px;
+            border-left: 0;
+            border-right: 7px solid color($colors, primary);
+          }
+        }
+        .timeline-icon {
+          left: 0;
+        }
+      }
+    }
+  }
+}

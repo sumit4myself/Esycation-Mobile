@@ -1,0 +1,60 @@
+news-classic {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  ion-scroll {
+    position: relative;
+    height: 100%;
+  }
+  ion-content {
+    background: color($colors, light) !important;
+  }
+  ion-card-header {
+    padding: 0 !important;
+    border-bottom: 1px solid #ddd;
+    p {
+      font-size: 1.3rem!important;
+    }
+  }
+  ion-card-content {
+    .time {
+      float: left;
+      position: absolute;
+      margin-left: -5px;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      background: rgba(121, 128, 125, 0.81);
+      padding: 7px 10px 7px 15px;
+      color: white;
+      text-transform: capitalize;
+    }
+    padding-top: 13px !important;
+    padding-bottom: 5px !important;
+    p {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 10px 0 !important;
+      font-size: 1.475rem!important;
+    }
+    .social {
+      color: color($colors, tertiary);
+      ion-col[width-70] {
+        flex: 0 0 70%;
+        max-width: 70%;
+      }
+      span {
+        margin-right: 10px !important;
+        font-size: 1.475rem!important;
+        font-weight: 300;
+        ion-icon {
+          margin-right: 5px !important;
+        }
+        .small {
+          margin-right: 0px !important;
+          font-size: 0.975rem!important;
+        }
+      }
+    }
+  }
+}

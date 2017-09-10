@@ -1,0 +1,48 @@
+<ion-content>
+  <div class="control">
+    <!--Header-->
+    <ion-row class="header">
+      <ion-col>
+        <img src="http://www.ionicity.co.uk/wp-content/uploads/2016/12/logo-full-starter-icon-only.png" />
+      </ion-col>
+    </ion-row>
+    <!--Content - form-->
+    <ion-row class="content">
+      <ion-col>
+        <form [formGroup]="loginForm">
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="at" item-left></ion-icon>Username</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon name="lock" item-left></ion-icon>Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+        </form>
+        <button ion-button block (click)="login(loginForm)" [disabled]="!loginForm.valid">Login</button>
+        <ion-row class="social">
+          <ion-col>
+            <button ion-button color="facebook" block (click)="socialLogin('facebook')">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button color="google" block (click)="socialLogin('google')">
+              <ion-icon name="logo-google"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="footer">
+          <ion-col text-left (click)="openForgot()" no-padding>
+            <p>need help?</p>
+          </ion-col>
+          <ion-col text-right (click)="viewCtrl.dismiss()" no-padding>
+            <p>Close</p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

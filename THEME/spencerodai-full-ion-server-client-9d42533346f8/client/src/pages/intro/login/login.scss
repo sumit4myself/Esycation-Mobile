@@ -1,0 +1,70 @@
+page-login {
+  ion-content {
+    background-image: url('http://www.ionicity.co.uk/wp-content/uploads/2016/12/plaid_bg2.png');
+    background-size: cover;
+    background-position: top;
+    .scroll-content {
+      overflow-y: auto;
+    }
+    .control {
+      width: 80%;
+      height: 60%;
+      margin: 10% auto;
+      .header {
+        text-align: center;
+        img {
+          max-width: 100%;
+          border: 0;
+          background: white;
+          top: 40px;
+          padding: 10px;
+          position: relative;
+        }
+      }
+      .content {
+        padding: 25px 16px 6px;
+        background: white;
+        border-radius: 6px;
+        .list-md>.item-block:first-child {
+          border-top: none;
+        }
+        .list-md>.item-block:last-child .item-inner {
+          border-bottom: 1px solid #dedede;
+        }
+        .item-ios {
+          padding-left: 0;
+          ion-icon[item-left] {
+            margin: 0 12px 0 0;
+          }
+        }
+        .item-ios:last-child {
+          margin-bottom: 20px;
+        }
+        .item-md {
+          padding-left: 0;
+          ion-icon[item-left] {
+            margin: 0 12px 0 0;
+          }
+        }
+        .item-md:last-child {
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .social {
+      ion-col:first-of-type {
+        padding-left: 0;
+      }
+      ion-col:last-of-type {
+        padding-right: 0;
+      }
+    }
+    .footer {
+      margin-top: 10px;
+      p {
+        margin: 0;
+        text-transform: capitalize;
+      }
+    }
+  }
+}

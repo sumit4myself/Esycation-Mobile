@@ -1,0 +1,42 @@
+<ion-content>
+  <div class="control">
+    <ion-row class="content">
+      <ion-col>
+        <form [formGroup]="forgotForm" *ngIf="!resetForm">
+          <p>Please type in your email to have a password reset link sent to you</p>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>
+                <ion-icon name="at" item-left></ion-icon>Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+        <form [formGroup]="forgotForm" *ngIf="resetForm">
+          <ion-list>
+            <ion-item>
+              <ion-label floating>
+                <ion-icon name="lock" item-left></ion-icon>Password</ion-label>
+              <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>
+                <ion-icon name="lock" item-left></ion-icon>Confirm Password</ion-label>
+              <ion-input type="password" formControlName="rpassword"></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+        <button ion-button block (click)="resetPassword(forgotForm)" [disabled]="!forgotForm.valid">Reset</button>
+        <ion-row class="footer">
+          <ion-col text-right (click)="openSignUp()">
+            <p>Create account</p>
+          </ion-col>
+          <ion-col text-left (click)="openLogin()">
+            <p>have an account</p>
+          </ion-col>
+        </ion-row>
+        <p text-center style="margin:15px 0 0 0;" (click)="dismiss()">Close</p>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

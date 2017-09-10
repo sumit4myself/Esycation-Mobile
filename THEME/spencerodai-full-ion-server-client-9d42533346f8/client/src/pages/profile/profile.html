@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col no-padding>
+      <div class="profile-bg" *ngIf="contact">
+        <div class="profile-content-bg">
+          <p class="title">{{contact?.firstname + " " + contact?.lastname}}</p>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col no-padding>
+      <div class="profile-content" *ngIf="contact">
+        <ion-fab top right>
+          <button ion-fab mini color="secondary"><ion-icon name="add"></ion-icon></button>
+          <ion-fab-list>
+            <button ion-fab color="tertiary" (click)="addFeed()"><ion-icon name="images"></ion-icon></button>
+            <button ion-fab color="royal" (click)="addEvent()"><ion-icon name="calendar"></ion-icon></button>
+            <button ion-fab color="favorite" (click)="addFriend()"><ion-icon name="person-add"></ion-icon></button>
+            <button ion-fab color="dark" (click)="editUser()"><ion-icon name="create"></ion-icon></button>
+          </ion-fab-list>
+        </ion-fab>
+        <div class="profile-info">
+          <img class="profile-image" [src]="contact?.picture | sanitize:'url'">
+          <div class="personal-info">
+            <span class="subtitle" *ngIf="contact.address">{{contact?.address}} <ion-icon name="home" color="primary"></ion-icon></span><br/>
+            <span class="subtitle" *ngIf="contact?.town">{{contact?.town}}, </span><span class="subtitle" *ngIf="contact.country">{{contact?.country}} </span>
+            <ion-icon name="pin" color="primary" *ngIf="contact.country && contact.town"></ion-icon><br/>
+            <span class="subtitle email" *ngIf="contact?.email">{{contact?.email}} <ion-icon name="at" color="primary"></ion-icon></span><br/>
+            <span class="subtitle" *ngIf="contact?.phone">{{contact?.phone}} <ion-icon name="call" color="primary"></ion-icon></span>
+          </div>
+        </div>
+        <div class="profile-menu">
+          <ion-segment [(ngModel)]="profileMenus">
+            <ion-segment-button value="_stories">
+              Stories
+            </ion-segment-button>
+            <ion-segment-button value="_friends">
+              Friends
+            </ion-segment-button>
+            <ion-segment-button value="_events">
+              Events
+            </ion-segment-button>
+          </ion-segment>
+          <div [ngSwitch]="profileMenus">
+            <div *ngSwitchCase="'_stories'">
+              <profile-stories></profile-stories>
+            </div>
+            <div *ngSwitchCase="'_friends'">
+              <profile-friends></profile-friends>
+            </div>
+            <div *ngSwitchCase="'_events'">
+              <profile-events></profile-events>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

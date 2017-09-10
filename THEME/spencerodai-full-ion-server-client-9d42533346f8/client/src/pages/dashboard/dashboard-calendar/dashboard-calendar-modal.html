@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="!calendar_event.id">
+      Add Event
+    </ion-title>
+    <ion-title *ngIf="calendar_event.id">
+      Edit Event
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="eventsForm" class="content">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Type</ion-label>
+          <ion-select formControlName="type">
+            <ion-option [value]="item" *ngFor="let item of event_types">{{item}}</ion-option>
+          </ion-select>
+        </ion-item>
+      <ion-item>
+        <ion-label>Starts</ion-label>
+        <ion-datetime pickerFormat="DDD D MMM H:mm" displayFormat="DDD D MMM H:mm" formControlName="start"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>All day event?</ion-label>
+        <ion-toggle formControlName="all_day"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="!eventsForm.value.all_day">
+        <ion-label>Ends &nbsp;</ion-label>
+        <ion-datetime pickerFormat="DDD D MMM H:mm" displayFormat="DDD D MMM H:mm" formControlName="end"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Recurrence</ion-label>
+        <ion-select formControlName="recurrence">
+          <ion-option [value]="item" *ngFor="let item of recurrences">{{item}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>More Options...</ion-label>
+        <ion-checkbox item-right color="dark" (click)="showMore = !showMore"></ion-checkbox>
+      </ion-item>
+      <div *ngIf="showMore">
+        <ion-item>
+          <ion-label>Color</ion-label>
+          <ion-select formControlName="color">
+            <ion-option *ngFor="let item of colors" [value]="item.value">{{item.text}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Description</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+      </div>
+    </ion-list>
+    <button ion-button block (click)="setEvent(eventsForm)" [disabled]="!eventsForm.valid">Save Event</button>
+  </form>
+</ion-content>

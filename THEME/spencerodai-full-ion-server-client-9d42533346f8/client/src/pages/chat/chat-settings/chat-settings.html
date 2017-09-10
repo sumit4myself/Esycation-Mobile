@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>settings</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item (click)="editUser();">
+      <ion-avatar item-left>
+        <img [src]="user.picture | sanitize:'url'">
+      </ion-avatar>
+      <h2>{{user.firstname + " " + user.lastname}}</h2>
+      <p *ngIf="user.chat_headline">{{user.chat_headline}}</p>
+      <p>Edit Profile</p>
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img [src]="setting.chatWallpaper | sanitize:'url'" alt="">
+      </ion-thumbnail>
+      <button ion-button item-right outline small (click)="changeWallpaper()">Change Wallpaper</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item (click)="showArchives()" *ngIf="setting.chat_archives">
+      <ion-icon name="archive" color="primary" item-left></ion-icon>
+      Showing Archives
+    </ion-item>
+    <ion-item (click)="showArchives()" *ngIf="!setting.chat_archives">
+      <ion-icon name="archive" item-left></ion-icon>
+      Hiding Archives
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="lock" item-left></ion-icon>
+      Privacy
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="eye-off" item-left></ion-icon>
+      Blocked List
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button full ion-button (click)="saveSetting(setting)"> Save Settings</button>
+</ion-footer>

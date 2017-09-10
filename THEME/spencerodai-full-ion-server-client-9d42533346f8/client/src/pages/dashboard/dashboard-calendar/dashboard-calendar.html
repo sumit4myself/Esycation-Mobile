@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{month.format("MMMM")}} <span class="title-accent">{{month.format("YYYY")}}</span></ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="previous()"><ion-icon name="arrow-back"></ion-icon></button>
+      <button ion-button icon-only (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div>
+    <div class="calendar">
+      <ion-row class="weeks">
+        <ion-col *ngFor="let item of weekDayNames">{{item | slice: 0: 3}}</ion-col>
+      </ion-row>
+      <div *ngIf="weeks">
+        <ion-row class="weekdays" *ngFor="let week of weeks">
+          <ion-col class="day" (click)="select(day)" *ngFor="let day of week.days">
+            <span [ngClass]="{'today': day.isToday, 'different-month': !day.isCurrentMonth, 'selected': day.date.isSame(selected) }">{{day.number}}</span>
+            <div class="calendar-events" [ngClass]="{'different-month': !day.isCurrentMonth}">
+              <span *ngFor="let events of day.events| slice: 0: 5" [ngClass]="{ 'has-events': day.events}">
+              <span class="event-ticks" [ngStyle]="{'backgroundColor': events.color}"></span>
+              </span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+  <div class="divider">
+    <ion-fab right edge>
+      <button ion-fab mini (click)="addEvent()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+  </div>
+  <div class="events-list">
+    <ion-scroll scrollY="true">
+      <ion-card *ngIf="!dayEvents">
+        <ion-card-header>No Events</ion-card-header>
+        <ion-card-content>
+          There are no events set for {{selected.format("DD MMMM", "YYYY")}}
+        </ion-card-content>
+      </ion-card>
+      <ion-list *ngIf="dayEvents">
+        <ion-item-group>
+          <ion-item-divider color="light">Events on {{selected.format("DD MMMM, YYYY")}}</ion-item-divider>
+          <ion-item *ngFor="let eventItem of dayEvents" text-wrap>
+            <ion-icon name="md-calendar" item-left [ngStyle]="{'color': eventItem.color}"></ion-icon>
+            <ion-icon name="create" item-right color="secondary" (click)="addEvent(eventItem)"></ion-icon>
+            <ion-icon name="trash" item-right color="danger" (click)="removeEvent(eventItem)"></ion-icon>
+            <p class="title">{{eventItem.title | slice: 0: 30}}</p>
+            <p class="subtitle" *ngIf="eventItem.description">{{eventItem.description | slice: 0: 40}}...</p>
+            <p class="times">{{eventItem.start | date: 'shortTime'}} - {{eventItem.end | date: 'shortTime'}}</p>
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
+      <!--<ion-list *ngIf="dayEvents && !calendar.eventControls" no-lines>
+        <ion-item-group>
+          <ion-item-divider color="light">Events on {{selected.format("DD MMMM", "YYYY")}}</ion-item-divider>
+          <ion-item-sliding *ngFor="let eventItem of dayEvents">
+            <ion-item text-wrap>
+              <ion-icon name="calendar" item-left [ngStyle]="{'color': eventItem.color}"></ion-icon>
+              <p class="title">{{eventItem.title | slice: 0: 30}}</p>
+              <p class="subtitle" *ngIf="eventItem.description">{{eventItem.description | slice: 0: 40}}...</p>
+              <p class="times">{{eventItem.start | date: 'shortTime'}} - {{eventItem.end | date: 'shortTime'}}</p>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="secondary" (click)="addEvent(eventItem)">
+        <ion-icon name="create"></ion-icon> Edit
+      </button>
+              <button ion-button color="danger" (click)="removeEvent(eventItem)">
+        <ion-icon name="trash"></ion-icon> Delete
+      </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-item-group>
+      </ion-list>-->
+    </ion-scroll>
+  </div>
+</ion-content>
