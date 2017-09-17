@@ -26,27 +26,6 @@ export class AttendanceService extends BaseLoopBackApi {
   }
 
 
-  public findAll(): Observable<any> {
-
-    let _method: string = "GET";
-    let _url: string = ServerConfig.getPath() + "/" + ServerConfig.getApiVersion() + "/notifications/?RESPONSE_VIEW=Notification.Details";
-
-    console.log("_url====",_url);
-    
-    let _routeParams: any = {};
-    let _urlParams: any = {};
-    let _postBody: any = {
-      //credentials: credentials
-    };
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody)
-      .map(
-        (response: any) => {
-          return response;
-        }
-      );
-      return result;
-  }
-
   public findById(id:number):Observable<any>{
 
     let _method: string = "GET";
@@ -64,9 +43,6 @@ export class AttendanceService extends BaseLoopBackApi {
       );
       return result;
   }
-
-  
-
 
   public findStudentByBatchId(batchId:number):Observable<any>{
 
@@ -88,16 +64,30 @@ export class AttendanceService extends BaseLoopBackApi {
 
   }
 
+  public findBatchByRemoteId(remoteId:number){
+
+      let _method: string = "GET";
+      let _url: string = ServerConfig.getPath() + "/" + ServerConfig.getApiVersion() +
+      "/batches/findByClassTeacherIds/"+remoteId+"/?RESPONSE_VIEW=Batch.Details"+
+      "&page=1&&size=1000";
+      let _routeParams: any = {};
+      let _urlParams: any = {};
+      let _postBody: any = {};
+      let result = this.request(_method, _url, _routeParams, _urlParams, _postBody).map(
+        (response: any) => {
+          return response;
+        }
+      );
+      return result;
+  }
 
   public save(data:any):Observable<any>{
 
     let _method: string = "POST";
     let _url: string = ServerConfig.getPath() + "/" + ServerConfig.getApiVersion() +
-    "/studentAttendances?RESPONSE_VIEW=Student.NameId";
+    "/studentAttendances";
     let _routeParams: any = {};
-    let _urlParams: any = {
-      id:1
-    };
+    let _urlParams: any = { };
     let _postBody: any = {
         data: data
     };
@@ -112,7 +102,7 @@ export class AttendanceService extends BaseLoopBackApi {
 
     let _method: string = "PUT";
     let _url: string = ServerConfig.getPath() + "/" + ServerConfig.getApiVersion() +
-    "/studentAttendances/"+id+"/?RESPONSE_VIEW=Student.NameId";
+    "/studentAttendances/"+id+"";
     let _routeParams: any = {};
     let _urlParams: any = {};
     let _postBody: any = {

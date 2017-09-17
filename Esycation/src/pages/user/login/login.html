@@ -3,7 +3,7 @@
     <!--Header-->
     <ion-row class="header">
       <ion-col>
-        
+         
       </ion-col>
     </ion-row>
     <!--Content - form-->
@@ -11,13 +11,21 @@
       <ion-col>
         <form [formGroup]="loginForm">
           <ion-item>
+             <ion-label floating>Branch *</ion-label>
+              <ion-select formControlName="branchId">
+                <ion-option *ngFor="let b of branchs"  value="{{b.id}}">
+                  <p>{{b.name}}</p>
+                </ion-option>
+              </ion-select> 
+          </ion-item>  
+          <ion-item>
             <ion-label floating>
-              <ion-icon name="person" item-left></ion-icon>Username</ion-label>
+              <ion-icon name="person" item-left></ion-icon>Username *</ion-label>
             <ion-input type="text" formControlName="userName"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label floating>
-              <ion-icon name="key" item-left></ion-icon>Password</ion-label>
+              <ion-icon name="key" item-left></ion-icon>Password *</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
           </ion-item>
         </form>

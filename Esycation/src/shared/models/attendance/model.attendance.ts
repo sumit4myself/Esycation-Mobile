@@ -2,6 +2,7 @@ declare var Object:any
 export class AttendanceModel{
 
     id:number =null;
+    studentId:number=null;
     attendanceId:number=null;
     name:string=null;
     dob:string=null;
@@ -54,10 +55,14 @@ export class Registration{
 export class StudentAttendanceDetails{
 
     id:number;
+    branchId:number;
     courseId:number;
     batchId:number;
     attenderId:number;
     inTime:string;
+    date:string;
+    createdBy:string;
+    createdOn:string;
     studentAttendances:Array<StudentAttendance>;
     constructor(){}
 
@@ -75,4 +80,17 @@ export class StudentAttendance{
     studentId:number;
     outTime:string;
     present:boolean;
+}
+
+export class Attendance{
+
+    id:number=null;
+    attendanceId:number=null;
+    inTime:string=null;
+    courseId:number=null;
+    batchId:number=null;
+    date:string=null;
+    createdBy:string=null;
+    createdOn:string=null;
+
 }

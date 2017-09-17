@@ -1,13 +1,14 @@
 
 export class ServerConfig {
-  //private static path: string = 'http://192.168.0.100:9000/';
-  private static path: string = 'http://educoresystems.com/';
+
+  private static notificationSenderID = "19285209844";
   
+  private static path: string = 'http://educoresystems.com/';
   private static version: string | number = 'api-v1.0';
   private static authPrefix: string = '';
   private static debug: boolean = true;
   private static viewName :string ='?RESPONSE_VIEW=';
-  
+
   public static setApiVersion(version: string = 'api-v1.0'): void {
     ServerConfig.version = version;
   }
@@ -49,5 +50,8 @@ export class ServerConfig {
     return ServerConfig.debug;
   }
 
+  public static senderID(){
+    return ServerConfig.notificationSenderID;
+  }
 
 }

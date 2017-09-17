@@ -3,17 +3,17 @@ import { Nav, Platform, Events,AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CONFIG } from './base.url';
-import {AttendanceComponent} from '../pages/attendances/attendance/attendance.componet';
+
+
 import {LoginComponent} from '../pages/user/login/login.component';
-import {LogoutComponent} from '../pages/user/logout/logout.component';
-import {AccountListComponent} from '../pages/user/addaccount/accountlist.component';
-import {ViewAllNotificationComponent} from '../pages/notification/view-all/view-all-notification.component';
-import {SettingComponent} from '../pages/setting/setting.component';
-import {ProfileComponent} from '../pages/profile/profile.component';
 import {HomeComponent} from '../pages/default/home/home.componet';
+import {ViewAllNotificationComponent} from '../pages/notification/view-all/view-all-notification.component';
+
 import {NotificationService} from '../shared/services/common/push.notification.service';
-import {ManageAttendanceComponent} from '../pages/attendances/manage-attendance/manage.attendance.componet';
 import {CommonServices} from '../shared/services/common/common.service';
+import {RoleService} from '../shared/services/userauth/role.service';
+import {RoleModel} from '../shared/models/baseModel/role.model';
+import {UserPrefernce} from '../shared/models/baseModel/BaseModels';
 
 @Component({
   selector: 'page-root',
@@ -26,15 +26,17 @@ export class AppComponent {
   color: string = '#009688';
   rootPage: any = LoginComponent;
   userId:number=null;
-  pages: Array<{ title: string, component: any, icon: string; image: boolean, show: boolean }> = [];
-
+  userPrefernce:UserPrefernce;
+ // pages: Array<{ title: string, component: any, icon: string; image: boolean, show: boolean }> = [];
+ pages: Array<RoleModel>;
   constructor(
     private platform: Platform,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private events: Events,
     private notification:NotificationService,
-    private commonServices:CommonServices) {
+    private commonServices:CommonServices,
+    private roleService:RoleService) {
     this.initializeApp();
     
     
@@ -44,18 +46,22 @@ export class AppComponent {
      */
     this.events.subscribe('isLoggedIn', () => {
 
-      this.userId = this.commonServices.findCurrentUserId(); 
-       console.log("this.userId===",this.userId);
-       
-      this.pages = [
+
+      this.userPrefernce = this.commonServices.currentUser();
+      this.userId = this.commonServices.findCurrentUserId();   
+    
+      this.pages =  this.roleService.findRole(this.userPrefernce.module);
+
+      /*this.pages = [
        { title: 'Profile', component: ProfileComponent, icon: "assets/img/default.png", image: true, show: false },
        { title: 'Home', component: HomeComponent, icon: 'ios-home-outline', image: false, show: false }, 
        { title: 'Add Acount', component: AccountListComponent, icon: 'people-outline', image: false, show: false },
        { title: 'Attendance', component: ManageAttendanceComponent, icon: 'clipboard-outline', image: false, show: false },
        { title: 'Notification', component: ViewAllNotificationComponent, icon: 'chatboxes-outline', image: false, show: false },
+       { title: 'Leave', component: LeaveComponent, icon: 'ios-plane-outline', image: false, show: false },
        { title: 'Settings', component: SettingComponent, icon: 'settings-outline', image: false, show: false },
        { title: 'Logout', component: LogoutComponent, icon: 'ios-log-in-outline', image: false, show: false }
-      ];
+      ];*/
     });
   }
 
@@ -80,6 +86,8 @@ export class AppComponent {
   /*
   open page from menu selection
    */
+
+   
   openPage(page) {
     this.nav.setRoot(page.component);
   }

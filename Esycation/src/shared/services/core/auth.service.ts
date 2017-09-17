@@ -100,7 +100,7 @@ export class UserAuth {
     let _userDetails: any = {
         user: userDetails,
         schoolId:userDetails.schoolId,
-        sessionYearId:userDetails.sessionYearId,
+        sessionYearId:userDetails.sessionYear.id,
         branchId:userDetails.branchId,
         userId:userDetails.id,
         deviceId:userDetails.deviceId,
@@ -130,7 +130,7 @@ export class UserAuth {
       let _userDetails: any = {
           user: token,
           schoolId:token.schoolId,
-          sessionYearId:token.sessionYearId,
+          sessionYearId:token.sessionYear.id,
           branchId:token.branchId,
           userId:token.id,
           deviceId:token.deviceId,

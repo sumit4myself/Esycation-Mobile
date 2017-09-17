@@ -3,6 +3,7 @@ import { IonicModule } from 'ionic-angular';
 import { MomentModule } from 'angular2-moment';
 
 import { ProfileComponent } from './profile.component';
+import {EditProfileComponent} from '../profile/edit/profile-edit.component'
 //import { ProfileStoriesComponent } from './stories/profile-stories.component';
 //import { ProfileFriendsComponent } from './friends/profile-friends.component';
 //import { ProfileEventsComponent } from './events/profile-events.component';
@@ -16,10 +17,12 @@ import { ProfileComponent } from './profile.component';
     ],
     entryComponents: [
         ProfileComponent,
+        EditProfileComponent
       //  ProfileEditComponent
     ],
     declarations: [
         ProfileComponent,
+        EditProfileComponent
         //ProfileStoriesComponent,
         //ProfileFriendsComponent,
         //ProfileEventsComponent,

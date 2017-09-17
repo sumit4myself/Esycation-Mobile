@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import {CommonServices} from '../../../shared/services/common/common.service';
 import {LoginService} from '../../../shared/services/userauth/login.auth';
+import {Branch} from '../../../shared/models/branch/model.branch';
+import {NotificationService} from '../../../shared/services/notification/notification.service';
 @Component({
   selector : 'page-login',
   templateUrl: 'login.html',
@@ -14,7 +16,8 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   loading: Loading;
-
+  branchs:Array<Branch>=new Array<Branch>();
+  branch:Branch=new Branch();
   constructor(
     private navCtrl: NavController,
     private viewCtrl: ViewController,
@@ -23,11 +26,13 @@ export class LoginComponent {
     private loadingCtrl: LoadingController,
     private events:Events,
     private commonServices: CommonServices,
-    private loginService: LoginService) 
+    private loginService: LoginService,
+    private notificationService:NotificationService) 
     {        
       this.loginForm = this._fb.group({
         userName: ['', [<any>Validators.required]],
-        password: ['', [<any>Validators.required]]
+        password: ['', [<any>Validators.required]],
+        branchId:   ['',[]]
       });
     }
 
@@ -35,22 +40,27 @@ export class LoginComponent {
   ionViewDidLoad() {
     
     let userId = localStorage.getItem('$LoopBackSDK$userId');
-    console.log("LoginComponent ionViewDidLoad.......",userId);
-
     if(userId){
       this.events.publish('isLoggedIn');
       this.navCtrl.setRoot(HomeComponent);
     }
-
-  /*
-    this.configureSlides();
-    let accessToken = localStorage.getItem('$LoopBackSDK$id');
-    let user: Account = JSON.parse(localStorage.getItem('$LoopBackSDK$user'));
-    let userId = localStorage.getItem('$LoopBackSDK$userId');
-    if (accessToken && user) {
-      this.getAccountDetails(userId);
-    }
-    */
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading..'
+    });
+    this.loading.present();
+    this.loginService.findAllBranch().subscribe(
+      data=>{
+        for(let branchDetails of data.contents){
+          this.branch = new Branch();
+          let b = Object.assign(this.branch,branchDetails);
+          this.branchs.push(b);
+        }
+        this.loading.dismissAll();
+      },
+      error=>{
+        this.loading.dismissAll();
+      }
+    );
   }
   
   login({ value, valid }: { value: ILogin, valid: boolean }){
@@ -60,11 +70,20 @@ export class LoginComponent {
         content: 'Logging In...'
       }); this.loading.present();
       
-      this.loginService.login({ userName: value.userName, password: value.password }).subscribe(
+      this.loginService.login(
+        { 
+          userName: value.userName, 
+          password: value.password,
+          branchId:value.branchId
+          
+        }).subscribe(
           data => {
             this.events.publish('isLoggedIn');
-              this.navCtrl.setRoot(HomeComponent);
-              this.loading.dismissAll();
+            this.notificationService.registerNotificationUser().subscribe(d=>{
+              console.log("d===",d)
+            });
+            this.navCtrl.setRoot(HomeComponent);
+            this.loading.dismissAll();
           },
           error => {
             this.loading.dismissAll();
@@ -78,7 +97,11 @@ export class LoginComponent {
   }
 }
 
+
 interface ILogin {
   userName: string;
   password: string;
+  branchId:number;
 }
+
+

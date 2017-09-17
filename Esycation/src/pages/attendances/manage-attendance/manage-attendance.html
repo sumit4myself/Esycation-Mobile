@@ -7,8 +7,8 @@
     </ion-navbar>
   </ion-header>
   <ion-content >
-    <ion-card >
-          <ion-row (click)="onAttendanceMark(13)">
+    <ion-card *ngFor="let batch of batches">
+          <ion-row (click)="onAttendanceMark(batch.id,batch.courseId.id)">
             <ion-col>
               <div class="card-content">
                 <ion-item text-wrap>
@@ -16,16 +16,12 @@
                       <img  src="assets/img/task.png" > 
                   </ion-avatar>
                   <div>
-                      <h2 color="primary">Batch : 20017-A</h2>
+                      <h2 color="primary">Batch : {{batch.name}}</h2>
                       <ion-row>
                           <ion-col>
                             <span>
-                                <ion-icon color="primary" name="people"></ion-icon> 
-                                Total Student: 48
-                            </span>
-                            &nbsp;| &nbsp;
-                            <span>
-                                <ion-icon color="primary" name="book"></ion-icon> Subject Name: Computer
+                                <ion-icon color="primary" name="book"></ion-icon> 
+                                Course : {{batch.courseId.name}}
                             </span>
                           </ion-col>
                           <ion-col text-right>   
@@ -39,38 +35,4 @@
             </ion-col>
           </ion-row>
       </ion-card> 
-
-      <ion-card >
-          <ion-row (click)="onAttendanceMark(11)">
-            <ion-col>
-              <div class="card-content">
-                <ion-item text-wrap>
-                  <ion-avatar item-left>
-                      <img  src="assets/img/task.png" > 
-                  </ion-avatar>
-                  <div>
-                      <h2 color="primary">Batch : 20017-A</h2>
-                      <ion-row>
-                          <ion-col>
-                            <span>
-                                <ion-icon color="primary" name="people"></ion-icon> 
-                                Total Student: 20
-                            </span>
-                            &nbsp;| &nbsp;
-                            <span>
-                                <ion-icon color="primary" name="book"></ion-icon> Subject Name: Math
-                            </span>
-                          </ion-col>
-                          <ion-col text-right>   
-                              <span  >
-                                <ion-icon name="checkmark"></ion-icon></span> 
-                          </ion-col>
-                      </ion-row>      
-                  </div>
-                </ion-item>
-              </div>
-            </ion-col>
-          </ion-row>
-      </ion-card> 
-
   </ion-content>  

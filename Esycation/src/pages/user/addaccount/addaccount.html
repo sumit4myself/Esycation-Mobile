@@ -8,6 +8,14 @@
     <ion-row class="content">
       <ion-col>
         <form [formGroup]="loginForm">
+            <ion-item>
+                <ion-label floating>Branch *</ion-label>
+                 <ion-select formControlName="branchId">
+                   <ion-option *ngFor="let b of branchs"  value="{{b.id}}">
+                     <p>{{b.name}}</p>
+                   </ion-option>
+                 </ion-select> 
+             </ion-item> 
           <ion-item>
             <ion-label floating>
               <ion-icon name="at" item-left></ion-icon>Username</ion-label>

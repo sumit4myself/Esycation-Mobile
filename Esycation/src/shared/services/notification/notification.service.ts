@@ -10,11 +10,12 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-
+import {Device} from '../../models/notification/device.model';
 
 @Injectable()
 export class NotificationService extends BaseLoopBackApi {
 
+  userPrefernce:UserPrefernce;
   constructor(
     @Inject(Http) protected http: Http,
     @Inject(BaseModels) protected models: BaseModels,
@@ -65,7 +66,7 @@ export class NotificationService extends BaseLoopBackApi {
       );
       return result;
   }
-  public readMessage(id:number):void{
+  public readMessage(id:number):Observable<any>{
 
 
     let _method: string = "PATCH";
@@ -75,14 +76,35 @@ export class NotificationService extends BaseLoopBackApi {
      console.log("_url==",_url);
 
     let _routeParams: any = {};
-    let _urlParams: any = {
-      //status:"READ"
-    };
+    let _urlParams: any = {};
     let _postBody: any = {};
-    this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody);
 
   }
 
+  public registerNotificationUser():Observable<any>{
+
+    let device = new Device();
+    let registerDeviceId = this.auth.load("registerId")
+    this.userPrefernce = this.auth.getUserPrefernce()
+    device.receiverId =this.userPrefernce.remoteId; 
+    device.receiverType = this.userPrefernce.module;
+    device.registrationId  = registerDeviceId;
+
+    let _method: string = "POST";
+    let _url: string = ServerConfig.getPath() + "/" + ServerConfig.getApiVersion() +
+     "/devices";
+     let _postBody: any = {
+        data: device
+    }; 
+    let _routeParams: any = {};
+    let _urlParams: any = {};
+    
+    console.log("_url==",_url,JSON.stringify(_postBody));
+
+    return this.request(_method, _url, _routeParams, _urlParams, _postBody);
+
+  }
 
   /**
    * The name of the model represented by this $resource,

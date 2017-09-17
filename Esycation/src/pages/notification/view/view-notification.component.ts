@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { NavController,Events,NavParams,LoadingController, Loading} from 'ionic-angular';
 import {NotificationService} from '../../../shared/services/notification/notification.service';
 import {NotificationDetails} from '../../../shared/models/notification/notification.model';
-
+import {CommonServices} from '../../../shared/services/common/common.service';
 @Component({
   selector: 'view-notification-page',
   templateUrl: 'view-notification.html'
@@ -18,7 +18,8 @@ export class ViewNotificationComponent {
     private events:Events,
     private navParams:NavParams,
     private notificationService:NotificationService,
-    private loadingCtrl:LoadingController){}
+    private loadingCtrl:LoadingController,
+    private commonServices:CommonServices){}
  
     ionViewDidLoad(){
       let id = this.navParams.get("id");
@@ -28,7 +29,13 @@ export class ViewNotificationComponent {
       this.notificationService.findById(id).subscribe(data=>{
          this.notification = Object.assign(this.notification, data);
        });
-       this.notificationService.readMessage(id);
+       this.notificationService.readMessage(id).subscribe(
+         data=>{},
+         error=>{
+           this.commonServices.presentToast("Error :");
+          this.loading.dismissAll();
+         }
+        );
        this.loading.dismissAll();
     }
    

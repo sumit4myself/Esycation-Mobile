@@ -11,8 +11,8 @@
     <ion-item *ngFor="let student of students; let count = index" 
     [ngClass]="{'persent': student.present==true, 'absent': student.absent==true}" (click)="onTouch(count)">
       <ion-avatar item-left>
-        <img *ngIf="student.gender=='MALE' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
-        <img *ngIf="student.gender=='FEMALE' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
+        <img *ngIf="student.gender=='Male' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
+        <img *ngIf="student.gender=='Female' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
       </ion-avatar>
         <p>
            <span color="primary">{{student.name}}</span>&nbsp; 
@@ -41,10 +41,13 @@
             <p *ngIf="student.absent==true"><ion-icon color="danger" name="close"></ion-icon></p>
         </ion-note>
     </ion-item>
+    <ion-item *ngIf="students.length==0">
+        <h2>Student not found.</h2>
+    </ion-item>  
   </ion-list>
 </ion-content>
-<ion-footer>
-  <ion-row class="social" *ngIf="students.length!=counter">
+<ion-footer *ngIf="students.length!=0">
+  <ion-row class="social" *ngIf="students.length!=counter && mode=='create'">
       <ion-col>
         <button ion-button color="danger" block block (click)="onAbsent()">
           Absent
@@ -56,12 +59,12 @@
         </button>
       </ion-col>
   </ion-row>
-  <ion-row *ngIf="students.length==counter && attendanceId==null">
+  <ion-row *ngIf="students.length==counter && mode=='create'">
       <ion-col>
           <button ion-button block color="primary" (click)="onSave()">Save</button>
       </ion-col>  
   </ion-row>
-  <ion-row *ngIf="students.length==counter && attendanceId!=null">
+  <ion-row *ngIf="mode=='update'">
     <ion-col>
         <button ion-button block color="primary" (click)="onUpdate()">Update</button>
     </ion-col>  

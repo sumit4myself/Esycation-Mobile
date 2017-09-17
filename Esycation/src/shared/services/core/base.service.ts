@@ -66,15 +66,6 @@ export abstract class BaseLoopBackApi {
     let headers: Headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    if(urlParams.id==1){
-
-      headers.append("USER_ID","1");
-      headers.append("SCHOOL_ID","1");
-      headers.append("SESSION_YEAR_ID","1");
-      headers.append("BRANCH_ID","1");
-  
-    }
-
     // Authenticate request
     this.authenticate(url, headers);
     // Transpile route variables to the actual request Values
@@ -129,16 +120,12 @@ export abstract class BaseLoopBackApi {
         ServerConfig.getAuthPrefix() + this.auth.getAccessTokenId()
       );
     }
-
-    /*
     headers.append("USER_ID",this.auth.load("userId"));
     headers.append("SCHOOL_ID",this.auth.load("schoolId"));
     headers.append("SESSION_YEAR_ID",this.auth.load("sessionYearId"));
     headers.append("BRANCH_ID",this.auth.load("branchId"));
 
-    */
-
-    console.log("authenticate Tokan : ",ServerConfig.getAuthPrefix() + this.auth.getAccessTokenId());
+    //console.log("authenticate Tokan : ",ServerConfig.getAuthPrefix() + this.auth.getAccessTokenId());
   }
   /**
    * @method create

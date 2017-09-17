@@ -1,0 +1,33 @@
+page-edit-profile {
+  ion-label {
+    text-transform: capitalize;
+  }
+  .profile-header {
+    height: 220px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.5);
+    .profile-image {
+      margin: 0 auto;
+      text-align: center;
+      img {
+        width: 108px;
+        height: 108px;
+        margin-top: 5%;
+        border-radius: 50%;
+        border: 2px solid color($colors, light);
+      }
+      .buttons {
+        display: block;
+      }
+    }
+  }
+  ion-list {
+    padding: 16px;
+  }
+  .list-md .item-input:last-child {
+    border-bottom: 0
+  }
+}

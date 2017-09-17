@@ -443,6 +443,25 @@ export class LoginService extends BaseLoopBackApi {
    * 
    *
    */
+
+  public findAllBranch(){
+
+    let _method: string = "GET";
+    let _url: string = ServerConfig.getPath() + "/" + ServerConfig.getApiVersion() +
+    "/branches/?RESPONSE_VIEW=Branch.Details"+
+    "&page=1&&size=1000";
+    let _routeParams: any = {};
+    let _urlParams: any = {};
+    let _postBody: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody).map(
+      (response: any) => {
+        return response;
+      }
+    );
+    return result;
+
+  }
+
   public login(credentials: any, include: any = 'user', rememberMe: boolean = true): Observable<any> {
 
     let _method: string = "POST";

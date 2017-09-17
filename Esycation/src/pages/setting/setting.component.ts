@@ -13,7 +13,7 @@ export class SettingComponent {
     public navCtrl: NavController,
     public events:Events,
     private storage:InternalStorage) {
-      this.deviceId = storage.get("registerId");
+      this.deviceId = storage.get("$LoopBackSDK$registerId");
       this.message = storage.get("notification");
 
     }

@@ -16,8 +16,10 @@ import {DefaultModule} from '../pages/default/default.module';
 import {NotificationModule} from '../pages/notification/notification.module';
 import {SettingModule} from '../pages/setting/setting.module';
 import {ProfileModule} from '../pages/profile/profile.module';
+import {LeaveModule} from '../pages/leave/leave.module'
 import {CommonServices} from '../shared/services/common/common.service'
 import {NotificationService} from '../shared/services/common/push.notification.service';
+import {RoleService} from '../shared/services/userauth/role.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import {NotificationService} from '../shared/services/common/push.notification.s
      DefaultModule,
      NotificationModule,
      SettingModule,
-     ProfileModule
+     ProfileModule,
+     LeaveModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +46,7 @@ import {NotificationService} from '../shared/services/common/push.notification.s
     
     StatusBar,
     SplashScreen,
-    CommonServices,NotificationService,
+    CommonServices,NotificationService,RoleService,
     {provide: ErrorHandler, useClass: IonicErrorHandler,
     }
   ]

@@ -9,7 +9,7 @@
 <ion-content>
     <ion-card class="active_user">
         <ion-row >
-          <ion-col>
+          <ion-col (click)="onViewProfile(activeUserDetail.user.id)">
             <div class="active_user">
               <ion-item text-wrap class="active_user">
                 <ion-avatar item-left>
@@ -77,10 +77,10 @@
       </ion-item-sliding>     
   </ion-list>
 </ion-content>
-<ion-footer>
-    <ion-list>
-        <ion-item >
-            <button ion-button block (click)="onAddAcount()">Add Acount</button>
-       </ion-item> 
-    </ion-list>
+<ion-footer>     
+    <ion-row >
+        <ion-col>
+            <button ion-button block color="primary" (click)="onAddAcount()">Add Acount</button>
+        </ion-col>  
+    </ion-row>    
 </ion-footer>
