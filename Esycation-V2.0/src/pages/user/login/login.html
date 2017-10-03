@@ -1,0 +1,42 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" color="light"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+  <div class="login-container">
+    <img class="logo" src="./assets/medium_150.70391061453px_1202562_easyicon.net.png" />
+    
+    <!--*********** Form ***********-->
+    <form [formGroup]="loginForm" novalidate>
+      
+      <ion-item>
+        <ion-label floating>Branch</ion-label>
+        <ion-select formControlName="branchId" okText="Okay" cancelText="Dismiss"  interface="popover">
+          <ion-option *ngFor="let b of branchs"  value="{{b.id}}">{{b.name}}</ion-option>
+        </ion-select> 
+
+      </ion-item>
+      
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input tappable color="light"  
+          type="text" formControlName="userName" >
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input tappable #password type="password" formControlName="password">
+        </ion-input>
+      </ion-item>
+
+      <div class="submit-box">
+        <button ion-button block (click)="login(loginForm)" color="blue2">Log in</button>
+      </div>
+    </form>
+  </div>
+</ion-content>
