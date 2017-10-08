@@ -98,7 +98,7 @@ export class PrivilageService{
                       ]
                     },
                     {
-                        title: 'Attendance',
+                        title: 'Attendances',
                         iconLeft: 'ios-clipboard-outline',
                         icon: 'ios-add-outline',
                         showDetails: false,
@@ -110,13 +110,13 @@ export class PrivilageService{
                         ]
                       } ,
                       {
-                        title: 'Notification',
+                        title: 'Notifications',
                         iconLeft: 'ios-chatboxes-outline',
                         icon: 'ios-add-outline',
                         showDetails: false,
                         items:  [
                           {
-                          name:'View',
+                          name:'Notification',
                           component:'ViewAllNotificationComponent'
                           }
                         ]

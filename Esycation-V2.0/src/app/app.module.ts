@@ -29,13 +29,13 @@ import { ZoomableImage } from 'ionic-gallery-modal';
 
 
 //********** firebase configuration  ************ */
-export const config = { 
-   apiKey: 'your-key',
-   authDomain: 'your-project-authdomain', 
-   databaseURL: 'your-database-URL', 
-   projectId: 'your-project-id', 
-   storageBucket: 'your-storage-bucket', 
-   messagingSenderId: 'your-messaging-sender-id' 
+export const config = {
+  apiKey: "AIzaSyD59dHa51HDOS9GxzqjOxiVQafG3IzAQoc",
+  authDomain: "educoresystems-9ba56.firebaseapp.com",
+  databaseURL: "https://educoresystems-9ba56.firebaseio.com",
+  projectId: "educoresystems-9ba56",
+  storageBucket: "educoresystems-9ba56.appspot.com",
+  messagingSenderId: "1069407400206"
 };
 
 //********** Base service  ************ */
@@ -45,7 +45,7 @@ import {PrivilageService} from '../providers/service/core/privilage.service';
 import {CostumErrorHandler} from '../providers/service/core/error.service';
 import {AuthService} from '../providers/service/core/auth.service';
 import {UserSessionService} from '../providers/service/core/user.session.service';
-
+import {LocalStorage} from '../providers/storage/local.storage';
 @NgModule({
   declarations: [
     MyApp, 
@@ -70,7 +70,8 @@ import {UserSessionService} from '../providers/service/core/user.session.service
   providers: [
     StatusBar,
     SplashScreen,
-    Geolocation,CommonServices,PrivilageService,CostumErrorHandler,AuthService,UserSessionService,
+    Geolocation,CommonServices,PrivilageService,CostumErrorHandler,
+    AuthService,UserSessionService,LocalStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthData,
     RadioPlayer

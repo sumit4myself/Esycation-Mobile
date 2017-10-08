@@ -9,6 +9,9 @@ export class RadioPlayer  {
   };
 
   play(url) {
+
+
+    /*
     this.stream = new Audio(url);
     this.stream.play();
     this.stream.volume = 0.5;
@@ -24,12 +27,18 @@ export class RadioPlayer  {
         });
       });
     return this.promise;
+*/
+    
   };
   pause() {
+    /*
     console.log("Radio service is pause");
-    this.stream.pause(); 
+    this.stream.pause();
+    
+    */
   };
   stop() {
+    /*
     console.log("Radio service is STOP");
     this.stream.pause(); 
     // This stops the stream from downloading
@@ -38,7 +47,7 @@ export class RadioPlayer  {
       temp.stream.src = "about:blank"; 
       temp.stream.load(); 
     })
-
+*/
   };
  
 }

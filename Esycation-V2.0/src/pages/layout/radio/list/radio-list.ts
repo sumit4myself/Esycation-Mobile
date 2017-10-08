@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, LoadingController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+//import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 
 @IonicPage()
@@ -10,9 +10,11 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class RadioListPage {
 
-  radioList: FirebaseListObservable<any[]>;
+  //radioList: FirebaseListObservable<any[]>;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public loadingCtrl: LoadingController , public afDB: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, 
+      public modalCtrl: ModalController,public loadingCtrl: LoadingController , 
+     ) {
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', 
@@ -20,8 +22,8 @@ export class RadioListPage {
     });
     loadingPopup.present();
 
-    this.radioList = afDB.list('/radio');
-    this.radioList.subscribe(() => loadingPopup.dismiss());
+    //this.radioList = afDB.list('/radio');
+    //this.radioList.subscribe(() => loadingPopup.dismiss());
   }
 
   openPlayer(radioId) {

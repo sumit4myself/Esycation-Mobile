@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController,ToastController} from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable , FirebaseObjectObservable} from 'angularfire2/database';
+//import { AngularFireDatabase, FirebaseListObservable , FirebaseObjectObservable} from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -9,21 +9,23 @@ import { AngularFireDatabase, FirebaseListObservable , FirebaseObjectObservable}
 })
 export class Profile4Page {
 
-    profile:  FirebaseObjectObservable<any[]>;
-    imgGallery: FirebaseListObservable<any[]>;
-    friends:  FirebaseListObservable<any[]>;
+   // profile:  FirebaseObjectObservable<any[]>;
+    //imgGallery: FirebaseListObservable<any[]>;
+    //friends:  FirebaseListObservable<any[]>;
     imgGalleryArray : any=[]; 
 
     segmentView: string = "one";
     following: boolean = false;
     
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,private toastCtrl: ToastController, public afDB: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public loadingCtrl: LoadingController,private toastCtrl: ToastController) {
       let loadingPopup = this.loadingCtrl.create({
         spinner: 'crescent', 
         content: ''
       });
       loadingPopup.present();
 
+      /*
       this.profile = afDB.object('/profile/1');
       this.friends = afDB.list('/profile/1/friends');
       this.imgGallery = afDB.list('/gallery');
@@ -31,6 +33,9 @@ export class Profile4Page {
           this.imgGalleryArray = imgGallery;
           loadingPopup.dismiss()
       })
+
+
+      */
   }
 
   follow() {

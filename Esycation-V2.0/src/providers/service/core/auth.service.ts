@@ -4,21 +4,25 @@ import { Http} from '@angular/http';
 import {BaseService} from '../core/base.service';
 import { CostumErrorHandler } from './error.service';
 import {UserPrefernce,UserPrefernceInterface} from '../../model/common/UserPrefernce';
-import { Storage  } from '@ionic/storage';
 import {ServerConfig} from '../../../providers/config';
 import { Observable } from 'rxjs/Rx';
+import {LocalStorage} from '../../storage/local.storage';
 
 
 @Injectable()
-export class AuthService extends BaseService<UserPrefernce>{
+export class AuthService extends BaseService<UserPrefernce> {
 
     userPrefernceInterface:UserPrefernceInterface;
     private userPrefernce=UserPrefernce.factory(this.userPrefernceInterface);
     constructor(@Inject(Http) protected http: Http,
                 @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
-                protected storage:Storage){
+                @Inject(LocalStorage) private storage:LocalStorage){
                 super(http,errorHandler);
     
+
+
+                console.log("auth service userId===", this.load('userId'));
+
                 this.userPrefernce.userId         = this.load('userId');
                 this.userPrefernce.schoolId       = this.load("schoolId");
                 this.userPrefernce.sessionYearId  = this.load("sessionYearId");
@@ -28,12 +32,12 @@ export class AuthService extends BaseService<UserPrefernce>{
                 this.userPrefernce.remoteId       = this.load("remoteId");
                 this.userPrefernce.user           = this.load('user');
                 this.userPrefernce.level          = this.load("level");
-                this.userPrefernce.loginUsers     = this.load("loginUsers");
-
-                console.log("userId==",this.load('loginUsers'))
+                this.userPrefernce.loginUsers     = this.load("loginUsers");   
+                
     }
 
     public findCurrentUserDetails():UserPrefernce{
+
         return this.userPrefernce;
     }
 
@@ -95,7 +99,6 @@ export class AuthService extends BaseService<UserPrefernce>{
 
     protected setUserDetails(details: any) {
         
-        console.log("setUserDetails==",details);
 
         let loginUsers  =this.load("loginUsers");
         if(loginUsers==null){
@@ -130,13 +133,16 @@ export class AuthService extends BaseService<UserPrefernce>{
         this.storage.set(prop,(typeof value ==='object')?JSON.stringify(value):value);
     }
 
-    protected load(prop: string): any {
+    public load(prop: string): any {
         
-        this.storage.get(prop).then((val) => {
-            console.log("val===",val);
-            return val;
-          });
+        let value = this.storage.get(prop);
+        if(value){
+            return value;
+        }
+        else
+            return null;
     }
+
     protected clearStorage(): void {
         Object.keys(this.userPrefernce).forEach((prop: string) => this.storage.remove(prop));
         this.userPrefernce = new UserPrefernce();

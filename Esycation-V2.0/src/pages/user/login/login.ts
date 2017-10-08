@@ -68,7 +68,7 @@ export class LoginComponent {
   login({ value, valid }: { value: Login, valid: boolean }){
     
     console.log("Login..",valid);
-
+    this.navCtrl.setRoot("HomeComponent");    
     if (valid) {
       this.loading = this.loadingCtrl.create({
         spinner: 'crescent', 

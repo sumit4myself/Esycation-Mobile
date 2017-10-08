@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, LoadingController } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+//import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -45,8 +45,9 @@ export class ChartPage {
 
     chartView: string = "Bar";
     isDataAvailable: boolean = false;  
-    chartList: FirebaseListObservable<any[]>;
+    //chartList: FirebaseListObservable<any[]>;
 
+    /*
     constructor(public afDB: AngularFireDatabase,public loadingCtrl: LoadingController ) {
     let loadingPopup = this.loadingCtrl.create({
         spinner: 'crescent',
@@ -68,4 +69,5 @@ export class ChartPage {
                 loadingPopup.dismiss()
         })
     } 
+    */
 }
