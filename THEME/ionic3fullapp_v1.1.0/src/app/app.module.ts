@@ -28,18 +28,18 @@ import { ZoomableImage } from 'ionic-gallery-modal';
 
 
 //********** firebase configuration  ************ */
-export const config = { 
-   apiKey: 'your-key',
-   authDomain: 'your-project-authdomain', 
-   databaseURL: 'your-database-URL', 
-   projectId: 'your-project-id', 
-   storageBucket: 'your-storage-bucket', 
-   messagingSenderId: 'your-messaging-sender-id' 
+export const config = {
+   apiKey: "AIzaSyDDfVPvJP9zXrBVDZWYqSb8-LLYpi-hRpA",
+   authDomain: "newapplication-ebc21.firebaseapp.com",
+   databaseURL: "https://newapplication-ebc21.firebaseio.com",
+   projectId: "newapplication-ebc21",
+   storageBucket: "newapplication-ebc21.appspot.com",
+   messagingSenderId: "887416420415"
 };
-  
+
 @NgModule({
   declarations: [
-    MyApp, 
+    MyApp,
     GalleryModal,
     ZoomableImage,
 
