@@ -1,0 +1,90 @@
+view-notification-page{
+    
+  ion-content {
+    background: color($colors, light) !important;
+  }
+  .card-md {
+    box-shadow: none !important;
+  }
+  ion-card-header {
+    padding: 0 !important;
+    border-bottom: 1px solid #ddd;
+    .item-md.item-block .item-inner {
+      border-bottom: none !important;
+    }
+    h2 {
+      font-size: 1.7rem !important;
+    }
+    p {
+      font-size: 1.2rem!important;
+    }
+  }
+  ion-card-content {
+    padding-top: 13px !important;
+    padding-bottom: 5px !important;
+    h3 {
+      padding-top: 10px !important;
+      font-size: 1.675rem !important;
+      font-weight: 300 !important;
+      color: color($colors, tertiary) !important;
+      text-transform: capitalize;
+    }
+    .subtitle {
+      margin: 10px 0 !important;
+      font-size: 1.475rem!important;
+      color: color($colors, tertiary) !important;
+      text-transform: capitalize;
+    }
+    .content {
+      margin: 10px 0 !important;
+      font-size: 1.475rem!important;
+    }
+  }
+  .showcase {
+    width: 100%!important;
+    margin: 0;
+    ion-card-content {
+      ion-slides {
+        border-bottom: 1px solid lighten(color($colors, stable), 20%);
+      }
+      padding: 0!important;
+      .content-inner {
+        padding: 0 10px 0 16px;
+        h3 {
+          padding-top: 10px !important;
+          border-left: 2px solid color($colors, primary);
+          padding-left: 10px;
+          padding-bottom: 10px;
+          font-size: 1.675rem !important;
+          font-weight: 500 !important;
+          color: color($colors, dark) !important;
+          text-transform: capitalize;
+        }
+        .subtitle {
+          margin: 10px 0 !important;
+          font-size: 1.475rem!important;
+          color: color($colors, dark) !important;
+        }
+        .content-text {
+          margin: 10px 0 !important;
+          font-size: 1.475rem!important;
+        }
+      }
+    }
+  }
+  ion-footer {
+  background: #FEFEFF !important;
+  ion-col:last-of-type {
+    border-right: none;
+  }
+  ion-col {
+    border-right: 1px solid #FEFEFF;
+  }
+  small {
+    margin-right: 10px;
+  }
+}
+.atteched-file-success{
+  color: color($colors, primary) !important;
+}
+}

@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col no-padding>
+      <div class="profile-bg" >
+        <div class="profile-content-bg">
+          <p class="title">{{userDetails.user.fullName}}</p>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col no-padding>
+      <div class="profile-content" >
+        <div class="profile-info">
+          <img class="profile-image" src="assets/img/default.png">
+          <div class="personal-info">
+            <span class="subtitle email" ><ion-icon name="at" color="primary"></ion-icon> {{userDetails.user.email}}</span><br/>
+            <span class="subtitle" ><ion-icon name="call" color="primary"></ion-icon> {{userDetails.user.mobile}}</span>
+          </div>
+        </div>
+        <div class="profile-menu">
+            <ion-row wrap>
+                <ion-col>
+                    <ion-icon name="person"></ion-icon> {{userDetails.user.userName}}
+                </ion-col>  
+            </ion-row> 
+            <ion-row wrap>
+                <ion-col>
+                    <samp>
+                        <ion-icon name="key" item-start></ion-icon>
+                        {{userDetails.user.usersServiceMap.module}}
+                    </samp>  
+                </ion-col>  
+            </ion-row>
+            <ion-row wrap>
+                <ion-col>
+                    <samp>
+                        <ion-icon name="mail" item-start></ion-icon>
+                        {{userDetails.user.email}}
+                    </samp>  
+                </ion-col>  
+            </ion-row>
+            <ion-row wrap>
+                <ion-col>
+                    <samp>
+                        <ion-icon name="call" item-start></ion-icon>
+                        {{userDetails.user.mobile}}
+                    </samp>  
+                </ion-col>  
+            </ion-row>  
+          <!--
+          <ion-card>
+            <ion-card-header>
+               <ion-icon name="contact"></ion-icon> {{userDetails.user.userName}}
+            </ion-card-header>
+                <ion-list>
+                  <button ion-item>
+                    <ion-icon name="key" item-start></ion-icon>
+                      {{userDetails.user.usersServiceMap.module}}
+                  </button>
+                  <button ion-item>
+                    <ion-icon name="mail" item-start></ion-icon>
+                    {{userDetails.user.email}}
+                  </button>
+                  <button ion-item>
+                    <ion-icon name="call" item-start></ion-icon>
+                       {{userDetails.user.mobile}}
+                  </button>
+                </ion-list>
+          </ion-card> -->
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
