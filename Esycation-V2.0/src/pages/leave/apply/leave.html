@@ -1,9 +1,10 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="lightblue">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Apply Leave</ion-title>
+
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -12,7 +13,7 @@
         <ion-row>
           <ion-col no-padding>
             <ion-item>
-              <ion-label color="secondary" floating>From </ion-label>
+              <ion-label color="primary" floating>From </ion-label>
               <ion-datetime formControlName="fromDate"
                 pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
               </ion-datetime>
@@ -20,7 +21,7 @@
           </ion-col>
           <ion-col no-padding>
             <ion-item>
-              <ion-label color="secondary" floating>To</ion-label>
+              <ion-label color="primary" floating>To</ion-label>
               <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
                 displayFormat="DD/MM/YYYY" >
               </ion-datetime>
@@ -28,14 +29,14 @@
           </ion-col>
         </ion-row>
         <ion-item>
-          <ion-label color="secondary" floating>Leave Type</ion-label>
+          <ion-label color="primary" floating>Leave Type</ion-label>
           <ion-select formControlName="leaveType">
             <ion-option value="1">Sick</ion-option>
             <ion-option value="2">Others</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label color="secondary" floating>Comment</ion-label>
+          <ion-label color="primary" floating>Comment</ion-label>
           <ion-textarea formControlName="comment" type="text" ></ion-textarea>
         </ion-item>
       </ion-list>
@@ -44,7 +45,7 @@
   <ion-footer>
       <ion-row >
           <ion-col>
-              <button ion-button color="primary" full (click)="onApply(leaveForm)" >Apply</button>
+              <button ion-button block color="secondary" (click)="onApply(leaveForm)" >Apply</button>
           </ion-col>  
       </ion-row>   
   </ion-footer>

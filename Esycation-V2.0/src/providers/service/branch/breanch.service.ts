@@ -9,13 +9,13 @@ import {ServerConfig} from '../../../providers/config';
 import { Observable } from 'rxjs/Rx';
 import {Branch} from '../../../providers/model/common/model.branch';
 import {PagedResponse} from '../../model/common/PaggedResponse';
-
 @Injectable()
 export class BreanchService extends BaseService<Branch>{
 
     
     constructor(@Inject(Http) protected http: Http,
-                @Inject(Http) protected errorHandler: CostumErrorHandler){
+                @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
+                ){
                 super(http,errorHandler);
     }
 

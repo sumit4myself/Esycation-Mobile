@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import {LeaveComponent} from '../apply/leave';
-
+import {LeaveService} from '../../../providers/service/leave/leave.service';
 
 @NgModule({
     imports: [
@@ -9,6 +9,6 @@ import {LeaveComponent} from '../apply/leave';
     ],
     exports: [LeaveComponent ],
     declarations: [LeaveComponent],
-    providers: [],
+    providers: [LeaveService],
 })
 export class LeaveModule { }

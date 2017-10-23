@@ -6,13 +6,13 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import {BaseService} from '../core/base.service';
 import {LeaveModel} from '../../model/leave/model.leave';
-
 @Injectable()
 export class LeaveService  extends BaseService<LeaveModel> {
 
     
   constructor(@Inject(Http) protected http: Http,
-      @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler){
+      @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
+      ){
       super(http,errorHandler);
   }
 

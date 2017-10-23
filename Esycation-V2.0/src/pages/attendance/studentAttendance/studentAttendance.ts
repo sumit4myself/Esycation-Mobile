@@ -1,7 +1,7 @@
 declare var Object: any;
 
 import { Component,ViewChild  } from '@angular/core';
-import { NavController,NavParams, LoadingController, Loading } from 'ionic-angular';
+import { NavController,IonicPage,NavParams, LoadingController, Loading } from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import {AttendanceService} from '../../../providers/service/attendance/attendance.service';
 import { AttendanceModel,StudentAttendanceDetails,StudentAttendance,Attendance} from '../../../providers/model/attendance/model.attendance';
@@ -10,6 +10,7 @@ import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 
 import * as moment from 'moment';
 
+@IonicPage()
 @Component({
   selector: 'page-attendance',
   templateUrl: 'studentAttendance.html'
@@ -58,7 +59,7 @@ export class StudentAttendanceComponent  {
         }
        this.attendanceService.findTodayAttendance(this.batchId).subscribe(data=>{
 
-          if(this.pagedResponse.contents[0].attenderId){
+          if(this.pagedResponse.contents[0].id){
             this.mode = "update";
             this.prepareUpdateData(data); 
           }

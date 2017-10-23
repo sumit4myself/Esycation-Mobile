@@ -14,7 +14,7 @@ export class UserSessionService{
     
 
     public switchAccount(userId:number):void{
-        this.switchAccount(userId);
+        this.authService.switchAccount(userId);
     }
 
     public findUserDetails():UserPrefernce{
@@ -39,5 +39,10 @@ export class UserSessionService{
 
     public findBranchId():number{
         return this.userPrefernce.branchId;
+    }
+
+    public findUsers():Array<any>{
+
+        return this.userPrefernce.loginUsers;
     }
 }

@@ -14,14 +14,12 @@ export class AuthService extends BaseService<UserPrefernce> {
 
     userPrefernceInterface:UserPrefernceInterface;
     private userPrefernce=UserPrefernce.factory(this.userPrefernceInterface);
+
     constructor(@Inject(Http) protected http: Http,
                 @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
                 @Inject(LocalStorage) private storage:LocalStorage){
+
                 super(http,errorHandler);
-    
-
-
-                console.log("auth service userId===", this.load('userId'));
 
                 this.userPrefernce.userId         = this.load('userId');
                 this.userPrefernce.schoolId       = this.load("schoolId");
@@ -32,7 +30,9 @@ export class AuthService extends BaseService<UserPrefernce> {
                 this.userPrefernce.remoteId       = this.load("remoteId");
                 this.userPrefernce.user           = this.load('user');
                 this.userPrefernce.level          = this.load("level");
+                this.userPrefernce.fullName       = this.load("fullName");
                 this.userPrefernce.loginUsers     = this.load("loginUsers");   
+                this.userPrefernce.email          = this.load("email"); 
                 
     }
 
@@ -60,7 +60,7 @@ export class AuthService extends BaseService<UserPrefernce> {
     public login(loginDetails: any): Observable<any> {
         
         let _method: string = "POST";
-        let _url: string = ServerConfig.getPath() +"/users/authenticate?RESPONSE_VIEW=User.Details";
+        let _url: string = ServerConfig.getPath() +"/users/authenticate?RESPONSE_VIEW=User.MobileAccount";
         let _postBody: any = {
             loginDetails:loginDetails
         };
@@ -73,10 +73,11 @@ export class AuthService extends BaseService<UserPrefernce> {
         return result;      
     }
 
-    public logOut(userId:number):void{
+    public logOut(userId:number):Observable<boolean>{
      
         var users = this.load("loginUsers");
         let index = 0;
+        if(users!=null)
         for(let user of users){
             if(user.id==userId){
               users.splice(index,1);
@@ -84,17 +85,21 @@ export class AuthService extends BaseService<UserPrefernce> {
             }
             index++;
         }
-        if(users.length>0){
+        if(users!=null && users.length>0){
     
           let user = users[0];
           let userDetails = this.toJson(user);
           userDetails.loginUsers=users;
           Object.assign(this.userPrefernce, userDetails); 
           this.savetoStorage();
+
+          return Observable.of(true);
         }
         else{
           this.clearStorage();
+          return Observable.of(false);
         }
+       
     }    
 
     protected setUserDetails(details: any) {
@@ -107,7 +112,6 @@ export class AuthService extends BaseService<UserPrefernce> {
        loginUsers.push(details);
        let userDetails = this.toJson(details);
        userDetails.loginUsers=loginUsers;
-
         Object.assign(this.userPrefernce,userDetails);  
         this.savetoStorage();
         
@@ -126,6 +130,8 @@ export class AuthService extends BaseService<UserPrefernce> {
         this.persist('user', this.userPrefernce.user);
         this.persist("level",this.userPrefernce.level);
         this.persist('loginUsers',this.userPrefernce.loginUsers);
+        this.persist('fullName',this.userPrefernce.fullName)
+        this.persist('email',this.userPrefernce.email);
     }
 
     protected persist(prop: string, value: any): void {
@@ -153,14 +159,17 @@ export class AuthService extends BaseService<UserPrefernce> {
         let _userDetails: any = {
             user: userDetails,
             schoolId:userDetails.schoolId,
-            sessionYearId:userDetails.sessionYearId,
+            sessionYearId:userDetails.sessionYear.id,
             branchId:userDetails.branchId,
             userId:userDetails.id,
             deviceId:userDetails.deviceId,
-            module:userDetails.module,
-            remoteId:userDetails.remoteId,
+            module:userDetails.usersServiceMap.module,
+            remoteId:userDetails.usersServiceMap.remoteId,
             tokenId:userDetails.tokenId,
             level:userDetails.level,
+            fullName:userDetails.fullName,
+            email:userDetails.email
+
         };
         return _userDetails;
     }

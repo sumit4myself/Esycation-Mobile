@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController,Events,LoadingController, Loading} from 'ionic-angular';
-//import {LeaveService} from '../../../shared/services/leave/leave.service';
+import {IonicPage, NavController,Events,LoadingController, Loading} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
-//import {Leave} from '../../../shared/models/leave/model.leave';
-//import {HomeComponent} from '../../default/home/home.componet';
+import {LeaveService} from '../../../providers/service/leave/leave.service';
+import {Leave} from '../../../providers/model/leave/model.leave'
 import * as moment from 'moment';
 
+@IonicPage()
 @Component({
   selector: 'leave-page',
   templateUrl: 'leave.html'
@@ -18,7 +18,7 @@ export class LeaveComponent {
     private navCtrl: NavController,
     private events:Events,
     private formBuilder:FormBuilder,
-    //private leaveService:LeaveService,
+    private leaveService:LeaveService,
     private loadingCtrl:LoadingController) {
 
       this.buildForm();
@@ -39,7 +39,7 @@ export class LeaveComponent {
 
     }
 
-    /*
+  
     onApply({value,valid}:{value:Leave,valid:boolean}){
 
       this.loading = this.loadingCtrl.create({
@@ -54,14 +54,14 @@ export class LeaveComponent {
 
       console.log("Leave==",JSON.stringify(value));
 
-      this.leaveService.save(value).subscribe(save=>{
+      this.leaveService.saveLeave(value).subscribe(save=>{
         this.loading.dismissAll();
-        this.navCtrl.setRoot(HomeComponent);
+        this.navCtrl.setRoot("HomeComponent");
       },
       error=>{
         this.loading.dismissAll();
       }
     );
     }
-*/
+
 }

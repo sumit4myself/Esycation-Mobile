@@ -1,12 +1,14 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage,ViewController,NavController,ModalController, LoadingController, Loading,Events } from 'ionic-angular';
+import { IonicPage,ViewController,NavController,ModalController, 
+  LoadingController, Loading,Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Branch} from '../../../providers/model/common/model.branch';
 import {AuthService} from '../../../providers/service/core/auth.service';
 import {CommonServices} from '../../../providers/service/common/common.service';
 import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 import {BreanchService} from '../../../providers/service/branch/breanch.service';
-
+import {UserSessionService} from '../../../providers/service/core/user.session.service';
+import {UserPrefernce} from '../../../providers/model/common/UserPrefernce';
 @IonicPage()
 @Component({
   selector: 'login-page',
@@ -20,6 +22,7 @@ export class LoginComponent {
   pagedResponse=PagedResponse.getInstance();
   branchs:Array<Branch>=new Array<Branch>();
   branch:Branch=new Branch();
+  userPrefernce:UserPrefernce;
   public backgroundImage: any = "./assets/bg1.jpg";
   public imgLogo: any = "./assets/medium_150.70391061453px_1202562_easyicon.net.png";
 
@@ -32,15 +35,22 @@ export class LoginComponent {
     private events:Events,
     private authService:AuthService,
     private commonServices:CommonServices,
-    private breanchService:BreanchService) 
+    private breanchService:BreanchService,
+    private session:UserSessionService) 
     {        
       this.loginForm = this.formBuilder.group({
         userName: ['', [<any>Validators.required]],
         password: ['', [<any>Validators.required]],
         branchId:   ['',[]]
       });
+      this.userPrefernce = this.session.findUserDetails();
 
-      console.log("s==",JSON.stringify(this.pagedResponse));
+      console.log("login===",this.userPrefernce);
+
+      if(this.userPrefernce.userId){
+        this.navCtrl.setRoot('HomeComponent');
+      }
+
     }
 
 
@@ -66,9 +76,7 @@ export class LoginComponent {
   }
   
   login({ value, valid }: { value: Login, valid: boolean }){
-    
-    console.log("Login..",valid);
-    this.navCtrl.setRoot("HomeComponent");    
+      
     if (valid) {
       this.loading = this.loadingCtrl.create({
         spinner: 'crescent', 
@@ -83,8 +91,9 @@ export class LoginComponent {
           
         }).subscribe(
           data => {
-            //this.events.publish('isLoggedIn');
+
             this.navCtrl.setRoot("HomeComponent");            
+            this.events.publish('LOGIN_USER_EVENT');
             this.loading.dismissAll();
           },
           error => {

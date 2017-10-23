@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import {ManageAttendanceComponent} from '../manageAttendance/manageStudentAttendance';
-
+import {AttendanceService} from '../../../providers/service/attendance/attendance.service';
 
 @NgModule({
     imports: [
@@ -9,6 +9,6 @@ import {ManageAttendanceComponent} from '../manageAttendance/manageStudentAttend
     ],
     exports: [ManageAttendanceComponent ],
     declarations: [ManageAttendanceComponent],
-    providers: [],
+    providers: [AttendanceService],
 })
 export class ManageAttendanceModule { }

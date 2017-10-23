@@ -11,14 +11,16 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 
+
 @Injectable()
 export abstract class BaseService<T> {
 
   constructor(
     @Inject(Http) protected http: Http,
-    @Optional() @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler
-    ) {
-
+    @Optional() @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler) {
+     
+      
+  
     }
   
   public request(
@@ -27,15 +29,16 @@ export abstract class BaseService<T> {
     postBody    : any = {}
     ): Observable<any> {
 
+      console.log("URL",url);
+      
     let headers: Headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
-    /*
-    headers.append("USER_ID",this.auth.load("userId"));
-    headers.append("SCHOOL_ID",this.auth.load("schoolId"));
-    headers.append("SESSION_YEAR_ID",this.auth.load("sessionYearId"));
-    headers.append("BRANCH_ID",this.auth.load("branchId"));
-   */
+    
+    headers.append("USER_ID",localStorage.getItem("userId"));
+    headers.append("SCHOOL_ID",localStorage.getItem("schoolId"));
+    headers.append("SESSION_YEAR_ID",localStorage.getItem("sessionYearId"));
+    headers.append("BRANCH_ID",localStorage.getItem("branchId"));
+  
     let body: any;
     let postBodyKeys = typeof postBody === 'object' ? Object.keys(postBody) : []
     if (postBodyKeys.length === 1) {

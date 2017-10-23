@@ -15,14 +15,14 @@ export interface NotificationDetailsInterface{
 export class NotificationDetails implements NotificationDetailsInterface{
 
     id: number=null;
-    email:null;
-    mobile:null;
-    message:null;
-    receiverType:null;
-    receiverId:null;
-    readStatus:null;
+    email:string =null;
+    mobile:number=null;
+    message:string=null;
+    receiverType:string=null;
+    receiverId:string=null;
+    readStatus:string=null;
     resources:any=null;
-    notificationId:NotificationId=new NotificationId();
+    notificationId:Notification=new Notification();
     constructor(data?:NotificationDetailsInterface){
     }
 
@@ -32,10 +32,11 @@ export class NotificationDetails implements NotificationDetailsInterface{
   
 }
 
-export class NotificationId{
+export class Notification{
 
   pushTime:number=null;
   resources:any=null
   template:Template=new Template();
+  type:string="INFORMATIVE";
 }
 

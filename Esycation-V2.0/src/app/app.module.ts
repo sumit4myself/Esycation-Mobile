@@ -29,13 +29,15 @@ import { ZoomableImage } from 'ionic-gallery-modal';
 
 
 //********** firebase configuration  ************ */
+
+
 export const config = {
-  apiKey: "AIzaSyD59dHa51HDOS9GxzqjOxiVQafG3IzAQoc",
-  authDomain: "educoresystems-9ba56.firebaseapp.com",
-  databaseURL: "https://educoresystems-9ba56.firebaseio.com",
-  projectId: "educoresystems-9ba56",
-  storageBucket: "educoresystems-9ba56.appspot.com",
-  messagingSenderId: "1069407400206"
+  apiKey: "AIzaSyDDfVPvJP9zXrBVDZWYqSb8-LLYpi-hRpA",
+  authDomain: "newapplication-ebc21.firebaseapp.com",
+  databaseURL: "https://newapplication-ebc21.firebaseio.com",
+  projectId: "newapplication-ebc21",
+  storageBucket: "newapplication-ebc21.appspot.com",
+  messagingSenderId: "887416420415"
 };
 
 //********** Base service  ************ */

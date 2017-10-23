@@ -10,8 +10,133 @@ export class PrivilageService{
 
     public privilaged(module?:String):Array<any>{
 
+      console.log("Privilage module===",module);
 
-        this.menu = [          
+      if(module=='STAFF')
+       return this.findStaffRole();
+      //return this.adminRole();
+      else if(module=='PARENT'){
+        return this.findParentRole();
+      }
+      else if(module=='STUDENT'){
+        return this.findStudentRole();
+      }
+      else{
+        return this.adminRole()
+      }
+        
+    }
+
+    findStaffRole():Array<any>{
+
+      this.menu = [          
+                 {
+                    title: 'Attendances',
+                    iconLeft: 'ios-clipboard-outline',
+                    icon: 'ios-add-outline',
+                    showDetails: false,
+                    items:  [
+                      {
+                      name:'Attendance',
+                      component:'ManageAttendanceComponent'
+                      }
+                    ]
+                  } ,
+                  {
+                    title: 'Notifications',
+                    iconLeft: 'ios-chatboxes-outline',
+                    icon: 'ios-add-outline',
+                    showDetails: false,
+                    items:  [
+                      {
+                      name:'Notification',
+                      component:'ViewAllNotificationComponent'
+                      }
+                    ]
+                  },
+                  {
+                    title: 'Leave',
+                    iconLeft: 'ios-calendar-outline',
+                    icon: 'ios-add-outline',
+                    showDetails: false,
+                    items:  [
+                      {
+                      name:'Apply',
+                      component:'LeaveComponent'
+                      }
+                    ]
+                  }
+            ];
+        
+       return this.menu;
+    }
+
+    findParentRole():Array<any>{
+      
+            this.menu = [          
+                        {
+                          title: 'Notifications',
+                          iconLeft: 'ios-chatboxes-outline',
+                          icon: 'ios-add-outline',
+                          showDetails: false,
+                          items:  [
+                            {
+                            name:'Notification',
+                            component:'ViewAllNotificationComponent'
+                            }
+                          ]
+                        },
+                        {
+                          title: 'Leave',
+                          iconLeft: 'ios-calendar-outline',
+                          icon: 'ios-add-outline',
+                          showDetails: false,
+                          items:  [
+                            {
+                            name:'Apply',
+                            component:'LeaveComponent'
+                            }
+                          ]
+                        }
+                  ];
+              
+             return this.menu;
+      }
+      findStudentRole():Array<any>{
+        
+              this.menu = [          
+                          {
+                            title: 'Notifications',
+                            iconLeft: 'ios-chatboxes-outline',
+                            icon: 'ios-add-outline',
+                            showDetails: false,
+                            items:  [
+                              {
+                              name:'Notification',
+                              component:'ViewAllNotificationComponent'
+                              }
+                            ]
+                          },
+                          {
+                            title: 'Leave',
+                            iconLeft: 'ios-calendar-outline',
+                            icon: 'ios-add-outline',
+                            showDetails: false,
+                            items:  [
+                              {
+                              name:'Apply',
+                              component:'LeaveComponent'
+                              }
+                            ]
+                          }
+                    ];
+                
+               return this.menu;
+        }
+
+        adminRole(){
+
+          this.menu = [          
             
                     {
                       title: 'Layout with firebase',
@@ -105,7 +230,7 @@ export class PrivilageService{
                         items:  [
                           {
                           name:'Attendance',
-                          component:'StudentAttendanceComponent'
+                          component:'ManageAttendanceComponent'
                           }
                         ]
                       } ,
@@ -139,6 +264,6 @@ export class PrivilageService{
                   // { icon:'call', title:'Contact us', component: 'ContactPage' },
                   { icon:'bookmark', title:'Version 1.1.0', component: "" }    
                 ];
-        return this.menu;
-    }
+          return this.menu;
+        }
 }

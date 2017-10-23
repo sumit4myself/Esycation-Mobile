@@ -13,7 +13,8 @@ export class AttendanceService extends BaseService<StudentAttendanceDetails>{
   
   
       constructor(@Inject(Http) protected http: Http,
-                  @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler){
+                  @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
+                 ){
                   super(http,errorHandler);
                 }
           

@@ -9,11 +9,13 @@ import {Device} from '../../model/notification/device.model';
 import {BaseService} from '../core/base.service';
 import {UserSessionService} from '../../service/core/user.session.service'
 import {PagedResponse} from '../../model/common/PaggedResponse';
+import {NotificationDetails} from '../../model/notification/notification.model';
 
 @Injectable()
 export class NotificationService extends BaseService<Device> {
 
-  
+  notifications:Array<NotificationDetails>;
+  notificationDetails:NotificationDetails=new NotificationDetails();
  constructor(@Inject(Http) protected http: Http,
   @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
   @Inject(UserSessionService) protected userSessionService:UserSessionService){
@@ -22,9 +24,9 @@ export class NotificationService extends BaseService<Device> {
 
  public findAllByRemoteIdAndModule(remoteId:number,module:string): Observable<PagedResponse> {
   
+      this.notifications = new Array<NotificationDetails>();
       let url: string = ServerConfig.getPath() +
-    "/notifications/receivers/"+module+"/"+remoteId+"/?RESPONSE_VIEW=NotificationReceiver.Details";
-
+    "/notifications/receivers/"+module+"/"+remoteId+"/?RESPONSE_VIEW=NotificationReceiver.Details"; 
     return this.findAll(url);
  }
 

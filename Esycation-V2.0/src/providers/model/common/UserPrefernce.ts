@@ -13,6 +13,8 @@ export interface UserPrefernceInterface {
    remoteId:number;
    module:string;
    level:string;
+   fullName:string;
+   email:string;
 }
 
 export class UserPrefernce implements UserPrefernceInterface {
@@ -27,6 +29,8 @@ export class UserPrefernce implements UserPrefernceInterface {
    remoteId:number=null;
    level:string;
    user: any = null;
+   fullName:string=null;
+   email:string=null;
    loginUsers = new Array<any>();
 
   constructor(data?: UserPrefernceInterface) {

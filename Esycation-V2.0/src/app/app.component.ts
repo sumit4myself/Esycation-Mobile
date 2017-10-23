@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform,ModalController,Events } from 'ionic-angular';
 
 //***********  ionic-native **************/
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {PrivilageService} from '../providers/service/core/privilage.service'
+import {UserPrefernce} from '../providers/model/common/UserPrefernce';
+import {UserSessionService} from '../providers/service/core/user.session.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,19 +19,36 @@ export class MyApp {
   rootPage: string = 'LoginComponent';
   menu:Array<any> = [];
   pages: Array<any>;
-
+  userPrefernce:UserPrefernce=UserPrefernce.factory();
+  loginUsers:Array<any>;
+  userShow:boolean=false;
+  icon:string="ios-add-outline"
   constructor(public platform: Platform, 
               public statusBar: StatusBar, 
               public splashScreen: SplashScreen,
-              protected privilageService:PrivilageService) {
-    this.initializeApp();
+              private privilageService:PrivilageService,
+              private session:UserSessionService,
+              private modal:ModalController,
+              private events:Events) {
+        this.initializeApp();
 
-    this.menu = this.privilageService.privilaged();
+        this.userPrefernce = this.session.findUserDetails();
+        this.loginUsers = this.session.findUsers();
+        this.menu = this.privilageService.privilaged(this.userPrefernce.module);
 
-    this.pages = [ 
-      // { icon:'call', title:'Contact us', component: 'ContactPage' },
-      { icon:'ios-log-in-outline', title:'Logout', component: "" }    
-    ];
+
+        this.events.subscribe("LOGIN_USER_EVENT", ()=>{
+          this.userPrefernce = this.session.findUserDetails();
+          this.loginUsers = this.session.findUsers();
+          this.menu = this.privilageService.privilaged(this.userPrefernce.module);
+
+          console.log("LOGIN_USER_EVENT..!");
+          
+        });
+        this.pages = [ 
+          // { icon:'call', title:'Contact us', component: 'ContactPage' },
+          { icon:'ios-log-in-outline', title:'Logout', component: "LogoutComponent" }    
+        ];
 
   }
 
@@ -51,6 +70,17 @@ export class MyApp {
         menu.icon = 'ios-remove-outline';
     }
   }
+  toggleUsers(isShow){
+
+    if(isShow){
+      this.userShow=false;
+      this.icon = 'ios-add-outline';
+    }
+    else{
+      this.userShow=true;
+      this.icon = 'ios-remove-outline';
+    }
+  }
 
   openPage(page) {
     // Reset the content nav to have just this page
@@ -60,4 +90,21 @@ export class MyApp {
     this.nav.setRoot(page.component).catch(err => console.error(err));
   }
 
+ onAddAccount(){
+    let modal = this.modal.create("AddAccountComponent");
+    modal.onDidDismiss(isaddAccount => {
+      if(isaddAccount){
+        this.nav.setRoot("AddAccountComponent");
+      }
+  });
+  modal.present();
+ }
+
+ onSwitchAccount(userId:number){
+  this.session.switchAccount(userId);
+  this.events.publish('LOGIN_USER_EVENT');
+ }
+
 }
+
+
