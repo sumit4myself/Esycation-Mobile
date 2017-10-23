@@ -36,7 +36,7 @@ export class AttendanceService extends BaseService<StudentAttendanceDetails>{
       }
 
 
-      public findTodayAttendance(id:number):Observable<PagedResponse>{
+      public findTodayAttendance(id:number):Observable<any>{
 
         let url: string = ServerConfig.getPath()+
         "/studentAttendances/today/"+id+"/?RESPONSE_VIEW=StudentAttendance.Details";

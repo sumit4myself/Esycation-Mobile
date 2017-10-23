@@ -57,11 +57,11 @@ export class StudentAttendanceComponent  {
           this.student.id=null;
           this.students.push(d);
         }
-       this.attendanceService.findTodayAttendance(this.batchId).subscribe(data=>{
+       this.attendanceService.findTodayAttendance(this.batchId).subscribe(todayAttendances=>{
 
-          if(this.pagedResponse.contents[0].id){
+          if(todayAttendances.id){
             this.mode = "update";
-            this.prepareUpdateData(data); 
+            this.prepareUpdateData(todayAttendances); 
           }
         }) 
         this.loading.dismissAll();
@@ -171,6 +171,9 @@ export class StudentAttendanceComponent  {
 
 private prepareUpdateData(data:any){
 
+
+    
+
       this.attendance.id = data.id;
       this.attendance.attendanceId = data.attenderId;
       this.attendance.courseId = data.courseId;
@@ -178,26 +181,27 @@ private prepareUpdateData(data:any){
       this.attendance.date = data.date;
       this.attendance.createdOn = data.createdOn;
       this.attendance.createdBy = data.createdBy;
-
-      for(let attendance of data.studentAttendances){
-        let index=0;
-        for(let student of this.students){
-            if(attendance.studentId==student.studentId){
-
-              this.students[index].id =attendance.id;
-                if(attendance.present){
-                  this.students[index].present=true;
-                  this.students[index].absent=false;
-                }
-                else{
-                  this.students[index].present=false;
-                  this.students[index].absent=true; 
-                }
-              break;
-            } 
-            index++;
+      
+        for(let attendance of data.studentAttendances){
+          let index=0;
+          for(let student of this.students){
+              if(attendance.studentId==student.studentId){
+  
+                this.students[index].id =attendance.id;
+                  if(attendance.present){
+                    this.students[index].present=true;
+                    this.students[index].absent=false;
+                  }
+                  else{
+                    this.students[index].present=false;
+                    this.students[index].absent=true; 
+                  }
+                break;
+              } 
+              index++;
+          }
         }
-      }
+     
   }
 
 }
