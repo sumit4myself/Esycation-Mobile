@@ -15,8 +15,8 @@ export class PrivilageService{
       if(module=='STAFF')
        return this.findStaffRole();
       //return this.adminRole();
-      else if(module=='PARENT'){
-        return this.findParentRole();
+      else if(module=='GUARDIAN'){
+        return this.findGuardianRole();
       }
       else if(module=='STUDENT'){
         return this.findStudentRole();
@@ -71,7 +71,7 @@ export class PrivilageService{
        return this.menu;
     }
 
-    findParentRole():Array<any>{
+    findGuardianRole():Array<any>{
       
             this.menu = [          
                         {
