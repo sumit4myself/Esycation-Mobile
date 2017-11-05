@@ -1,0 +1,66 @@
+<ion-header no-border>
+  <ion-navbar color="lightblue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  class="content"  >
+
+  <div class="profile-header" color="lightblue"></div>
+  <div class="profile">
+    <div class="profile-box">
+        <ion-img  class="profile-image" src="assets/img/default.png"></ion-img>
+        <h3 id="profile2-name" padding-top>{{profile.name}}</h3>
+    
+        <ion-note item-right>
+            <ion-fab bottom right edge class="pop-in" (click)="onEdit()">
+                <button ion-fab color="green">
+                  <ion-icon name="ios-create" color="white"></ion-icon>
+                </button>
+              </ion-fab>
+        </ion-note>
+        <ion-list >
+            <ion-item class="icon-align" >
+              <ion-icon name="md-mail" item-left></ion-icon>
+              <span *ngIf="profile.email=='-'">N/A</span>
+              <h2 *ngIf="profile.email!='-'">{{profile.email}}</h2>
+              <div [innerHTML]="(profile2 | async)?.openingTime" class="opening-time"></div>
+            </ion-item>
+            <ion-item class="icon-align">
+              <ion-icon name="ios-call"  item-left></ion-icon>
+              <h2>{{profile.mobile}}</h2>
+          </ion-item>
+          <ion-item class="icon-align">
+            <ion-icon name="ios-water"  item-left></ion-icon>
+            <span *ngIf="profile.bloodGroup=='-'">N/A</span>
+            <h2 *ngIf="profile.bloodGroup!='-'">{{profile.bloodGroup}}</h2>
+          </ion-item>
+          <ion-item class="icon-align">
+              <ion-icon name="ios-calendar"  item-left></ion-icon>
+              <span *ngIf="profile.dob=='-'">N/A</span>
+              <h2 *ngIf="profile.dob!='-'">{{profile.dob}}</h2>
+            </ion-item>
+          <ion-item class="icon-align" text-wrap>
+                <ion-icon name="ios-pin" item-left></ion-icon>
+                <span>
+                    {{profile.address1}} 
+                </span>
+                <span *ngIf="profile.address2!='-'">
+                  ,{{profile.address2}} 
+                </span>  
+                <span>,
+                    <b>City:</b> {{profile.city}},<b>State :</b> {{profile.state}} - {{profile.pinCode}} 
+                </span>  
+            </ion-item>
+        </ion-list>
+    </div>
+  </div>
+
+</ion-content>
+
+
+
+

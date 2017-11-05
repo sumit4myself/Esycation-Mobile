@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import {BaseService} from '../core/base.service';
 import {LeaveModel} from '../../model/leave/model.leave';
+import {PagedResponse} from '../../model/common/PaggedResponse';
 @Injectable()
 export class LeaveService  extends BaseService<LeaveModel> {
 
@@ -22,6 +23,13 @@ export class LeaveService  extends BaseService<LeaveModel> {
     let url: string = ServerConfig.getPath() +"/studentLeaves";
 
     return this.save(url,data);
+  }
+
+  public findStudentByGuardianIds(remoteId:number):Observable<any>{
+
+    let url:string =ServerConfig.getPath()+"/students/findByGuardianIds/"+remoteId;
+
+    return this.findAll(url);
   }
 
 }

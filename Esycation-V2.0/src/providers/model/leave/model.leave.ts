@@ -4,7 +4,6 @@ export interface Leave{
     studentId:number;
     fromDate:string;
     toDate:string;
-    leaveType:number;
     comment:string;
     totalLeave:number
     status:string
@@ -16,7 +15,6 @@ export class LeaveModel implements Leave{
     studentId:number;
     fromDate:string=null;
     toDate:string=null;
-    leaveType:number=null;
     comment:string=null;
     totalLeave:number;
     status:string;

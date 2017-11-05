@@ -15,9 +15,7 @@ export class NotificationService{
     pushNotificationSetup():Boolean {
         let isViewAll = false;
         const options: PushOptions = {
-            android: {
-               // senderID: "ServerConfig.senderID()";
-            },
+            android: {},
             ios: {
                 alert: 'true',
                 badge: true,
@@ -37,7 +35,7 @@ export class NotificationService{
             });
             pushObject.on('registration').subscribe((registration: any) => {
              this.commonServices.presentToast("You have resigter :"+JSON.stringify(registration));
-             this.storage.set("$LoopBackSDK$registerId",registration.registrationId);
+             this.storage.set("registerId",registration.registrationId);
             });
             pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
 

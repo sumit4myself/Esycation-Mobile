@@ -16,27 +16,15 @@ export class HomeComponent {
   slides = [
     {
       title: "WELCOME",
-      description: "This is ionic3FullApp with firebase  introduction / walkthrough page ",
-      image: "./assets/slide1.png",
-      color: "#673ab7"
+      description: "To Educore Systems ",
+      image: "./assets/img/1.jpg",
+      //color: "#673ab7"
     },
     {
-      title: "Layout with firebase",
-      description: "This is ionic3FullApp with firebase introduction / walkthrough page",
-      image: "./assets/slide2.png",
+      title: "WELCOME",
+      description: "To Educore Systems ",
+      image: "./assets/1.jpg",
       color: "#007aff"
-    },
-    {
-      title: "Components",
-      description: "This is ionic3FullApp with firebase introduction / walkthrough page",
-      image: "./assets/slide3.png",
-      color: "#ffcc00"
-    },
-    {
-      title: "Theme",
-      description: "This is ionic3FullApp with firebase introduction / walkthrough page",
-      image: "./assets/slide4.png",
-      color: "#ff2d55"
     }
   ];
 

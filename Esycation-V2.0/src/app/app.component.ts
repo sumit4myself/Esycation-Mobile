@@ -42,7 +42,7 @@ export class MyApp {
           this.loginUsers = this.session.findUsers();
           this.menu = this.privilageService.privilaged(this.userPrefernce.module);
 
-          console.log("LOGIN_USER_EVENT..!");
+          console.log("LOGIN_USER_EVENT..!",JSON.stringify(this.userPrefernce));
           
         });
         this.pages = [ 
@@ -103,6 +103,9 @@ export class MyApp {
  onSwitchAccount(userId:number){
   this.session.switchAccount(userId);
   this.events.publish('LOGIN_USER_EVENT');
+ }
+ onViewProfile(){
+  this.nav.setRoot("ViewProfileComponent");
  }
 
 }
