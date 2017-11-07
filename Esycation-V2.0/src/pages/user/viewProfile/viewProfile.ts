@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController,Nav } from 'ionic-angular';
+import { IonicPage,Nav } from 'ionic-angular';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {ProfileService} from '../../../providers/service/profile/profile.service';
 import {Profile} from '../../../providers/model/profile/model.profile';
@@ -13,7 +13,7 @@ export class ViewProfileComponent {
   
   profile:Profile=Profile.getInstance();
   constructor(
-    private navCtrl: NavController,
+   
     private session: UserSessionService,
     private nav:Nav,
     private ProfileService:ProfileService) {

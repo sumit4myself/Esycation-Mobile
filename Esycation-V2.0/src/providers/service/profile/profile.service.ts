@@ -5,7 +5,6 @@ import {BaseService} from '../core/base.service';
 import {Profile} from '../../model/profile/model.profile';
 import { Observable } from 'rxjs/Rx';
 import {ServerConfig} from '../../../providers/config';
-declare var Object: any;
 
 @Injectable()
 export class ProfileService extends BaseService<Profile>{

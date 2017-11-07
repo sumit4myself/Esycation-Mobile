@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,ViewController,Nav,Events } from 'ionic-angular';
+import { IonicPage,Nav,Events } from 'ionic-angular';
 import {AuthService} from '../../../providers/service/core/auth.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 @IonicPage()
@@ -11,7 +11,6 @@ import {UserSessionService} from '../../../providers/service/core/user.session.s
 export class LogoutComponent {
 
   constructor(
-    private viewCtrl: ViewController,
     private events:Events,
     private authService:AuthService,
     private session:UserSessionService,

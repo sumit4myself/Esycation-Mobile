@@ -66,8 +66,10 @@ export class StudentAttendanceComponent  {
         }) 
         this.loading.dismissAll();
       },error=>{
+        console.log("Error: ",error);
         this.loading.dismissAll();
-      });
+      }
+    );
     
   }
 
@@ -122,9 +124,12 @@ export class StudentAttendanceComponent  {
     let studentAttendanceDetails = this.prepareDataSet();
     this.attendanceService.saveAttendance(studentAttendanceDetails).subscribe(
       data=>{
+        console.log(data);
         this.loading.dismissAll();
         this.navCtrl.setRoot("ManageAttendanceComponent");
-      },error=>{
+      },
+      error=>{
+        console.log(error);
         this.loading.dismissAll();
       });
   }
@@ -136,9 +141,11 @@ export class StudentAttendanceComponent  {
     this.loading.present();
     this.attendanceService.updateAttendance(this.attendance.id,studentAttendanceDetails).subscribe(
       data=>{
+        console.log(data);
         this.loading.dismissAll();
         this.navCtrl.setRoot("ManageAttendanceComponent");
       },error=>{
+        console.log(error);
         this.loading.dismissAll();
       });
   }

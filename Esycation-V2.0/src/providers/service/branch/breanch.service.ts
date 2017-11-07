@@ -1,10 +1,8 @@
-declare var Object: any;
+
 import { Injectable, Inject } from '@angular/core';
 import { Http} from '@angular/http';
 import {BaseService} from '../core/base.service';
 import { CostumErrorHandler } from '../../service/core/error.service';
-import {UserPrefernce,UserPrefernceInterface} from '../../model/common/UserPrefernce';
-import { Storage  } from '@ionic/storage';
 import {ServerConfig} from '../../../providers/config';
 import { Observable } from 'rxjs/Rx';
 import {Branch} from '../../../providers/model/common/model.branch';

@@ -1,4 +1,4 @@
-declare var Object: any;
+
 import { Injectable, Inject } from '@angular/core';
 import { Http} from '@angular/http';
 import {BaseService} from '../core/base.service';

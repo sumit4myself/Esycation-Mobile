@@ -1,4 +1,4 @@
-declare var Object: any;
+
 import {Inject,Injectable} from '@angular/core';
 import {UserPrefernce} from '../../model/common/UserPrefernce';
 import {AuthService} from '../core/auth.service';

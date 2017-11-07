@@ -1,7 +1,7 @@
-import { Component,ViewChild } from '@angular/core';
-import { IonicPage,ViewController,NavController,ModalController, LoadingController, Loading,Events } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage,ViewController, LoadingController, Loading,Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {Branch} from '../../../providers/model/common/model.branch';
+//import {Branch} from '../../../providers/model/common/model.branch';
 import {AuthService} from '../../../providers/service/core/auth.service';
 import {CommonServices} from '../../../providers/service/common/common.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
@@ -22,8 +22,6 @@ export class AddAccountComponent {
 
   constructor(
     private viewCtrl: ViewController,
-    private navCtrl: NavController,
-    private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
     private events:Events,
@@ -57,15 +55,18 @@ export class AddAccountComponent {
           
         }).subscribe(
           data => {
+            console.log(data);
             this.events.publish('LOGIN_USER_EVENT');
            // this.navCtrl.setRoot("HomeComponent"); 
            this.viewCtrl.dismiss();           
             this.loading.dismissAll();
-          },
-          error => {
-            console.log("Login Erro...");
+          },error=>{
+            this.viewCtrl.dismiss();           
             this.loading.dismissAll();
-          });
+            console.log(error)
+           // this.commonServices.presentToast(error,"short");
+          }
+        );
     } else {
       this.commonServices.showAlert('Invalid Details', 'Enter a valid login ID and password to continue')
     } 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from 'ionic-angular';
-import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Injectable()
 export class CommonServices {
@@ -8,7 +8,6 @@ export class CommonServices {
     constructor(
         private alertCtrl: AlertController,
         private toastCtrl: ToastController,
-        private sanitizer: DomSanitizer
     ) { }
 
   

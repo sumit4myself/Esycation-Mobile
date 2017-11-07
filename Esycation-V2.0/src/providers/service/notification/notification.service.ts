@@ -1,9 +1,8 @@
 /* tslint:disable */
-import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Injectable, Inject } from '@angular/core';
+import { Http } from '@angular/http';
 import { ServerConfig } from '../../config';
 import { CostumErrorHandler } from '../core/error.service';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import {Device} from '../../model/notification/device.model';
 import {BaseService} from '../core/base.service';

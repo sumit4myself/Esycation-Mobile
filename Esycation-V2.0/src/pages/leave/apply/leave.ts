@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController,Events,LoadingController, Loading} from 'ionic-angular';
+import {IonicPage, NavController,LoadingController, Loading} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {LeaveService} from '../../../providers/service/leave/leave.service';
 import {Leave} from '../../../providers/model/leave/model.leave'
@@ -18,7 +18,6 @@ export class LeaveComponent {
  students:PagedResponse= PagedResponse.getInstance();
  constructor(
     private navCtrl: NavController,
-    private events:Events,
     private formBuilder:FormBuilder,
     private leaveService:LeaveService,
     private loadingCtrl:LoadingController,
@@ -50,6 +49,9 @@ export class LeaveComponent {
     
     onApply({value,valid}:{value:Leave,valid:boolean}){
 
+      
+      console.log("valid==",valid)
+      
       this.loading = this.loadingCtrl.create({
         content: 'Saving..'
       }); this.loading.present();
@@ -61,14 +63,15 @@ export class LeaveComponent {
 
       console.log("Leave==",JSON.stringify(value));
 
-      this.leaveService.saveLeave(value).subscribe(save=>{
+      this.leaveService.saveLeave(value).subscribe(data=>{
+        if(data){
+          console.log("Leave Service Save :",data);
+        }
         this.loading.dismissAll();
         this.navCtrl.setRoot("HomeComponent");
-      },
-      error=>{
-        this.loading.dismissAll();
-      }
-    );
+      },error=>{
+        console.log("Error :",error);
+      });
     }
 
 }

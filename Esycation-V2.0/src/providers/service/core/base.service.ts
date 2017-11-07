@@ -1,12 +1,8 @@
 /* tslint:disable */
 import { Injectable, Inject, Optional } from '@angular/core';
 import { Http, Headers, Request } from '@angular/http';
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CostumErrorHandler } from './error.service';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { ServerConfig } from '../../../providers/config';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -77,7 +73,7 @@ export abstract class BaseService<T> {
 
 
    public find<T>(url:string,id:number): Observable<T> {
-    
+    console.log(id);
     let requestBody: any = {};
     let result = this.request("GET", url, requestBody).map((response: any) => {
         return response;

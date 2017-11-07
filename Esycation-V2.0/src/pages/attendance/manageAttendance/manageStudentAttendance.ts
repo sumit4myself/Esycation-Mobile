@@ -1,6 +1,6 @@
-import { Component,OnInit,ViewChild  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { NavController, IonicPage,LoadingController, Loading } from 'ionic-angular';
-import {StudentAttendanceComponent} from '../../attendance/studentAttendance/studentAttendance';
+//import {StudentAttendanceComponent} from '../../attendance/studentAttendance/studentAttendance';
 import {AttendanceService} from '../../../providers/service/attendance/attendance.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 
@@ -29,6 +29,7 @@ export class ManageAttendanceComponent {
           this.batches = data.contents;
           this.loading.dismissAll();
         },error=>{
+          console.log(error);
           this.loading.dismissAll();
         });
         

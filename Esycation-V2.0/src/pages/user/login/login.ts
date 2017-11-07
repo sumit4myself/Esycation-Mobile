@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,ViewController,NavController,ModalController, 
+import { IonicPage,NavController, 
   LoadingController, Loading,Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Branch} from '../../../providers/model/common/model.branch';
@@ -27,9 +27,9 @@ export class LoginComponent {
   public imgLogo: any = "./assets/medium_150.70391061453px_1202562_easyicon.net.png";
 
   constructor(
-    private viewCtrl: ViewController,
+   
     private navCtrl: NavController,
-    private modalCtrl: ModalController,
+ 
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
     private events:Events,
@@ -68,10 +68,7 @@ export class LoginComponent {
         this.branchs.push(b);
       }
       loadingPopup.dismiss();
-   }
-   , error => {
-    loadingPopup.dismiss()
-  });
+   });
     
   }
   
@@ -89,16 +86,15 @@ export class LoginComponent {
           password: value.password,
           branchId:value.branchId
           
-        }).subscribe(
-          data => {
-
+        }).subscribe( data => {
+            console.log("Login data==="+data);
             this.navCtrl.setRoot("HomeComponent");            
             this.events.publish('LOGIN_USER_EVENT');
             this.loading.dismissAll();
-          },
-          error => {
-            console.log("Login Erro...");
+          },error=>{
             this.loading.dismissAll();
+            console.log(error)
+            //this.commonServices.presentToast(error,"long");
           });
     } else {
       this.commonServices.showAlert('Invalid Details', 'Enter a valid login ID and password to continue')

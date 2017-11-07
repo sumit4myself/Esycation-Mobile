@@ -1,6 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage,ViewController,Nav, LoadingController, Loading,Events } from 'ionic-angular';
-import  {UserSessionService} from '../../providers/service/core/user.session.service';
+import { IonicPage,Nav, Loading,Events } from 'ionic-angular';
+
 import {UserPrefernce} from '../../providers/model/common/UserPrefernce';
 @IonicPage()
 @Component({
@@ -29,10 +29,9 @@ export class HomeComponent {
   ];
 
   constructor(
-    private viewCtrl: ViewController,
-    private loadingCtrl: LoadingController,
+    
     private events:Events,
-    private session:UserSessionService) 
+    ) 
     { 
        this.events.publish('LOGIN_USER_EVENT');     
     }

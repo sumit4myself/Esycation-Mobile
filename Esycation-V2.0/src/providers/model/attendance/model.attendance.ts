@@ -1,4 +1,4 @@
-declare var Object:any
+
 export class AttendanceModel{
 
     id:number =null;

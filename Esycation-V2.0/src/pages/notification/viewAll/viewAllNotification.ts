@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController,IonicPage,Events,LoadingController, Loading} from 'ionic-angular';
+import { IonicPage,LoadingController, Loading} from 'ionic-angular';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {NotificationService} from '../../../providers/service/notification/notification.service';
 import {NotificationDetails} from '../../../providers/model/notification/notification.model';
-import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
+//import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 
 @IonicPage()
 @Component({
@@ -18,8 +18,6 @@ export class ViewAllNotificationComponent {
      module:string;
      shownDetail = null;
      constructor(
-         private navCtrl: NavController,
-         private events:Events,
          private loadingCtrl: LoadingController,
          private session:UserSessionService,
          private notificationService:NotificationService) {
@@ -31,28 +29,26 @@ export class ViewAllNotificationComponent {
       }
 
     findAllNotifications(remoteId:number,module:string){
+        
         this.loading = this.loadingCtrl.create({
             content: 'Loading..'
         }); this.loading.present();
-        this.notificationService.findAllByRemoteIdAndModule(remoteId,this.module).subscribe(data=>{
+        this.notificationService.findAllByRemoteIdAndModule(remoteId,module).subscribe(data=>{
            
             for(let notification of data.contents){
                 let b = Object.assign({},notification);
                 this.notifications.push(b);
               }
             this.loading.dismissAll();
-
-            console.log(this.notifications);
-        },
-        rrror=>{
+            console.log("notifications===",this.notifications);
+        },error=>{
             this.loading.dismissAll();
+            console.log(error);
         });
     }
 
     onRead(id:number){
-        this.notificationService.readMessage(id).subscribe(data=>{
-            
-        });
+        this.notificationService.readMessage(id).subscribe();
     }
  
     toggleDetail(group) {

@@ -1,4 +1,4 @@
-declare var Object: any;
+
 export interface ReceiversInterface{
     
       id?:number;

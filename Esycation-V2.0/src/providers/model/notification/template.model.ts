@@ -1,4 +1,4 @@
-declare var Object: any;
+
 export interface TemplateInterface{
     subject:string;
     resources?:any;
@@ -9,6 +9,6 @@ export interface TemplateInterface{
     id:number;
     subject:string=null;
     resources:any=null;
-    constructor(data?:TemplateInterface){}
+    constructor(){}
   
   }

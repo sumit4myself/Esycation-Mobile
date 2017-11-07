@@ -1,12 +1,11 @@
-import {Injectable,Inject,Optional} from '@angular/core'
-import { Http, Response } from '@angular/http';
+import {Injectable,Inject} from '@angular/core'
+import { Http } from '@angular/http';
 import { ServerConfig } from '../../config';
 import { CostumErrorHandler} from '../core/error.service';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import {BaseService} from '../core/base.service';
 import {LeaveModel} from '../../model/leave/model.leave';
-import {PagedResponse} from '../../model/common/PaggedResponse';
+//import {PagedResponse} from '../../model/common/PaggedResponse';
 @Injectable()
 export class LeaveService  extends BaseService<LeaveModel> {
 

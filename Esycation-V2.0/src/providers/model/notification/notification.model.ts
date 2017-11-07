@@ -1,7 +1,7 @@
 import {Receivers} from '../notification/receiver.model';
 import {Template} from '../notification/template.model';
 
-declare var Object: any;
+
 
 export interface NotificationDetailsInterface{
 
@@ -23,7 +23,7 @@ export class NotificationDetails implements NotificationDetailsInterface{
     readStatus:string=null;
     resources:any=null;
     notificationId:Notification=new Notification();
-    constructor(data?:NotificationDetailsInterface){
+    constructor(){
     }
 
     public static factory(): NotificationDetails{

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController,Events,LoadingController,Loading,Nav} from 'ionic-angular';
-import {FormGroup,FormBuilder,Validators,FormControl} from '@angular/forms';
+import {IonicPage,LoadingController,Loading,Nav} from 'ionic-angular';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {UserSessionService} from "../../../providers/service/core/user.session.service";
 import {ProfileService} from '../../../providers/service/profile/profile.service';
 import {Profile,ProfileInterface} from '../../../providers/model/profile/model.profile';
@@ -18,8 +18,6 @@ export class EditProfileComponent {
  profile:Profile=Profile.getInstance();
  segmentView:string;
  constructor(
-    private navCtrl: NavController,
-    private events:Events,
     private formBuilder:FormBuilder,
     private loadingCtrl:LoadingController,
     private nav:Nav,
@@ -63,15 +61,14 @@ export class EditProfileComponent {
   onUpdate({value,valid}:{value:ProfileInterface,valid:boolean}){
 
       value.dob=moment(value.dob).format("MM/DD/YYYY");
-      console.log("Edit Profile==",JSON.stringify(value));
+      console.log("Edit Profile==",JSON.stringify(value),valid);
 
       this.loading= this.loadingCtrl.create({content:'Updating..'});
       this.loading.present();
       this.profileService.editProfile(value).subscribe(data=>{
+        console.log(data);
         this.loading.dismissAll();
         this.nav.setRoot("HomeComponent");
-      },error=>{
-        this.loading.dismissAll();
       });
     
   }

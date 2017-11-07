@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage,ViewController,Nav, LoadingController, Loading,Events } from 'ionic-angular';
+import { IonicPage,Nav, Loading, } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -38,10 +38,7 @@ export class ManageAccountComponent {
     }
   ];
 
-  constructor(
-    private viewCtrl: ViewController,
-    private loadingCtrl: LoadingController,
-    private events:Events) 
+  constructor() 
     {        
       console.log("Home........");
     }
