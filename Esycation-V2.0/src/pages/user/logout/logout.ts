@@ -17,6 +17,9 @@ export class LogoutComponent {
     private nav:Nav){ 
        
       this.authService.logOut(this.session.findUserId()).subscribe(isActiveUser=>{
+      
+        console.log("##############Auth==",isActiveUser);
+        
         if(isActiveUser){
           this.events.publish('LOGIN_USER_EVENT');
           this.nav.setRoot('HomeComponent');

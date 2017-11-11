@@ -31,4 +31,16 @@ export class LeaveService  extends BaseService<LeaveModel> {
     return this.findAll(url);
   }
 
+  public saveStaffLeave(data:any):Observable<any>{
+
+    let url: string = ServerConfig.getPath() +"/staffLeaves";
+    
+    return this.save(url,data);
+  }
+
+  public findRemaining(remoteId:number):Observable<any>{
+    let url:string = ServerConfig.getPath() +"/staffLeaveDefinitions//remaining/"+remoteId+"?RESPONSE_VIEW=StaffLeaveDefinition.Remaining";
+    return this.findAll(url);
+  }
+
 }

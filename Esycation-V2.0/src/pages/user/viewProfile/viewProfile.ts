@@ -13,7 +13,6 @@ export class ViewProfileComponent {
   
   profile:Profile=Profile.getInstance();
   constructor(
-   
     private session: UserSessionService,
     private nav:Nav,
     private ProfileService:ProfileService) {

@@ -1,18 +1,16 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage,Nav, Loading,Events } from 'ionic-angular';
+import { IonicPage,Nav, Loading} from 'ionic-angular';
 
-import {UserPrefernce} from '../../providers/model/common/UserPrefernce';
+import {UserSessionService} from '../../providers/service/core/user.session.service';
+
 @IonicPage()
 @Component({
   selector: 'home-page',
-  templateUrl: 'home.html',
-   
+  templateUrl: 'home.html'
 })
 export class HomeComponent {
   @ViewChild(Nav) nav: Nav;
   loading: Loading;
-  userPrefernce:UserPrefernce;
-  
   slides = [
     {
       title: "WELCOME",
@@ -29,17 +27,13 @@ export class HomeComponent {
   ];
 
   constructor(
-    
-    private events:Events,
-    ) 
+     private session:UserSessionService) 
     { 
-       this.events.publish('LOGIN_USER_EVENT');     
+      console.log("Home==",this.session.findModule());
+
+        
     }
-
-
-  ionViewDidLoad() {
-   
-  }
+ 
    
 }
 

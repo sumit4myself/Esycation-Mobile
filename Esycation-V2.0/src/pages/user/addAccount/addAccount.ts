@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,ViewController, LoadingController, Loading,Events } from 'ionic-angular';
+import { IonicPage,ViewController, LoadingController, Loading,Events,NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 //import {Branch} from '../../../providers/model/common/model.branch';
 import {AuthService} from '../../../providers/service/core/auth.service';
@@ -23,6 +23,7 @@ export class AddAccountComponent {
   constructor(
     private viewCtrl: ViewController,
     private formBuilder: FormBuilder,
+    private navCtrl:NavController,
     private loadingCtrl: LoadingController,
     private events:Events,
     private authService:AuthService,
@@ -37,8 +38,6 @@ export class AddAccountComponent {
     }
 
 
- 
-  
   login({ value, valid }: { value: Login, valid: boolean }){
       
     if (valid) {
@@ -55,13 +54,13 @@ export class AddAccountComponent {
           
         }).subscribe(
           data => {
-            console.log(data);
-            this.events.publish('LOGIN_USER_EVENT');
-           // this.navCtrl.setRoot("HomeComponent"); 
-           this.viewCtrl.dismiss();           
+            console.log(data);      
             this.loading.dismissAll();
+            this.events.publish('LOGIN_USER_EVENT');   
+            this.navCtrl.setRoot("HomeComponent"); 
+           
+           
           },error=>{
-            this.viewCtrl.dismiss();           
             this.loading.dismissAll();
             console.log(error)
            // this.commonServices.presentToast(error,"short");

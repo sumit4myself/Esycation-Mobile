@@ -19,6 +19,7 @@ export interface UserPrefernceInterface {
 
 export class UserPrefernce implements UserPrefernceInterface {
   
+   private static  instance:UserPrefernce;
    tokenId : any = null;
    schoolId : number = null;
    sessionYearId : number =null;
@@ -33,12 +34,16 @@ export class UserPrefernce implements UserPrefernceInterface {
    email:string=null;
    loginUsers = new Array<any>();
 
-  constructor(data?: UserPrefernceInterface) {
+    private constructor(data?: UserPrefernceInterface) {
         Object.assign(this, data);
     }
     
-    public static factory(data?: UserPrefernceInterface): UserPrefernce{
-        return new UserPrefernce(data);
+    public static getInstance(data?: UserPrefernceInterface): UserPrefernce{
+
+        if(!UserPrefernce.instance){
+             UserPrefernce.instance = new  UserPrefernce(data);
+        }
+        return UserPrefernce.instance;
     }
     
 }

@@ -10,6 +10,7 @@ export class UserSessionService{
 
     constructor(@Inject(AuthService) protected authService:AuthService){
         this.userPrefernce = authService.findCurrentUserDetails();
+
     }
     
 

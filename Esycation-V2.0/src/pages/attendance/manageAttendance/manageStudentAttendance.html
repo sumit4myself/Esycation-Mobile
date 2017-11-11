@@ -25,7 +25,8 @@
                  <span class="small"><b> Section :</b> {{batch.name}} - {{batch.code}} </span>
               </p>
               <ion-note item-right>
-                <ion-icon name="checkmark"></ion-icon> 
+                <ion-icon *ngIf="batch.ismarkedAttendance==false" name="checkmark"></ion-icon> 
+                <ion-icon *ngIf="batch.ismarkedAttendance==true" color="ios-green" name="checkmark"></ion-icon> 
               </ion-note>
             </ion-item>
         </ion-list>

@@ -55,14 +55,14 @@ export class PrivilageService{
                     ]
                   },
                   {
-                    title: 'Leave',
+                    title: 'Leaves',
                     iconLeft: 'ios-calendar-outline',
                     icon: 'ios-add-outline',
                     showDetails: false,
                     items:  [
                       {
                       name:'Apply',
-                      component:'LeaveComponent'
+                      component:'StaffLeaveComponent'
                       }
                     ]
                   }

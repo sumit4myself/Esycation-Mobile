@@ -19,8 +19,6 @@ import {LocalStorage} from '../providers/storage/local.storage';
 @NgModule({
   declarations: [
     MyApp, 
-    
-
   ],
   imports: [
     BrowserModule,HttpModule,

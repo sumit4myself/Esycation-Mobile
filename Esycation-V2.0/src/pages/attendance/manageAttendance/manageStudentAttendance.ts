@@ -27,7 +27,22 @@ export class ManageAttendanceComponent {
       this.attendanceService.findBatchByRemoteId(this.session.findRemote()).subscribe(
         data=>{
           this.batches = data.contents;
+          if(this.batches){
+            for(let batch of this.batches){
+             
+              this.attendanceService.findTodayAttendance(batch.id).subscribe(todayAttendances=>{
+                  if(todayAttendances.id){
+                    batch.ismarkedAttendance=true;
+                  }
+                  else{
+                    batch.ismarkedAttendance=false;
+                  }
+              }) 
+            }
+          }
           this.loading.dismissAll();
+          console.log(this.batches);
+
         },error=>{
           console.log(error);
           this.loading.dismissAll();

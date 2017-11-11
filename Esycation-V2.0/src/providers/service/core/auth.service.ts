@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http} from '@angular/http';
 import {BaseService} from '../core/base.service';
 import { CostumErrorHandler } from './error.service';
-import {UserPrefernce,UserPrefernceInterface} from '../../model/common/UserPrefernce';
+import {UserPrefernce} from '../../model/common/UserPrefernce';
 import {ServerConfig} from '../../../providers/config';
 import { Observable } from 'rxjs/Rx';
 import {LocalStorage} from '../../storage/local.storage';
@@ -12,9 +12,7 @@ import {LocalStorage} from '../../storage/local.storage';
 @Injectable()
 export class AuthService extends BaseService<UserPrefernce> {
 
-    userPrefernceInterface:UserPrefernceInterface;
-    private userPrefernce=UserPrefernce.factory(this.userPrefernceInterface);
-
+    private userPrefernce=UserPrefernce.getInstance();
     constructor(@Inject(Http) protected http: Http,
                 @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
                 @Inject(LocalStorage) private storage:LocalStorage){
@@ -85,7 +83,7 @@ export class AuthService extends BaseService<UserPrefernce> {
             }
             index++;
         }
-        if(users!=null && users.length>0){
+        if(userId!=null && users!=null && users.length>0){
     
           let user = users[0];
           let userDetails = this.toJson(user);
@@ -102,7 +100,7 @@ export class AuthService extends BaseService<UserPrefernce> {
        
     }    
 
-    protected setUserDetails(details: any) {
+    private setUserDetails(details: any) {
         
 
         let loginUsers  =this.load("loginUsers");
@@ -150,8 +148,10 @@ export class AuthService extends BaseService<UserPrefernce> {
     }
 
     protected clearStorage(): void {
+        if(this.userPrefernce)
         Object.keys(this.userPrefernce).forEach((prop: string) => this.storage.remove(prop));
-        this.userPrefernce = new UserPrefernce();
+       
+        this.userPrefernce = Object.assign(this.userPrefernce,this.newJson());
     }
    
     protected toJson(userDetails:any): any{
@@ -170,6 +170,24 @@ export class AuthService extends BaseService<UserPrefernce> {
             fullName:userDetails.fullName,
             email:userDetails.email
 
+        };
+        return _userDetails;
+    }
+    protected newJson(): any{
+        
+        let _userDetails: any = {
+            user: null,
+            schoolId:null,
+            sessionYearId:null,
+            branchId:null,
+            userId:null,
+            deviceId:null,
+            module:null,
+            remoteId:null,
+            tokenId:null,
+            level:null,
+            fullName:null,
+            email:null
         };
         return _userDetails;
     }

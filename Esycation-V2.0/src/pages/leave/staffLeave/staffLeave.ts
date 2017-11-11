@@ -2,20 +2,18 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController,LoadingController, Loading} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {LeaveService} from '../../../providers/service/leave/leave.service';
-import {Leave} from '../../../providers/model/leave/model.leave'
+import {StaffLeaveDetailsInterface} from '../../../providers/model/leave/model.staffLeave';
 import * as moment from 'moment';
 import {UserSessionService} from "../../../providers/service/core/user.session.service";
-import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 @IonicPage()
 @Component({
-  selector: 'leave-page',
-  templateUrl: 'leave.html'
+  selector: 'staffleave-page',
+  templateUrl: 'staffLeave.html'
 })
-export class LeaveComponent {
+export class StaffLeaveComponent {
 
  leaveForm: FormGroup;
  loading: Loading;
- students:PagedResponse= PagedResponse.getInstance();
  constructor(
     private navCtrl: NavController,
     private formBuilder:FormBuilder,
@@ -23,6 +21,7 @@ export class LeaveComponent {
     private loadingCtrl:LoadingController,
     private session:UserSessionService) {
 
+     console.log("StaffId==",this.session.findRemote());
       this.buildForm();  
     }
  
@@ -33,45 +32,26 @@ export class LeaveComponent {
         fromDate: ['', [<any>Validators.required]],
         toDate: ['', [<any>Validators.required]],
         comment: ['',[<any>Validators.required]],
-        studentId: ['',[<any>Validators.required]],
         totalLeave: ['',[<any>Validators.required]],
       });
 
-      this.leaveService.findStudentByGuardianIds(this.session.findRemote()).subscribe(data=>{
-        this.students = Object.assign(this.students,data);
-
-        console.log("this.students.contents.length==",this.students.contents.length);
-
-        if(this.students.contents.length==1){
-          this.leaveForm.setValue({
-            fromDate: null,
-            toDate: null,
-            comment: null,
-            studentId: this.students.contents[0].id,
-            totalLeave: null,
-          })
-        }
-
-      });
     }
     
-    onApply({value,valid}:{value:Leave,valid:boolean}){
+    onApply({value,valid}:{value:StaffLeaveDetailsInterface,valid:boolean}){
 
-      
       console.log("valid==",valid)
       
       this.loading = this.loadingCtrl.create({
         content: 'Saving..'
       }); this.loading.present();
-      value.status=null;
-      value.studentId=value.studentId;
+      value.approvalStatus=null;
       value.fromDate=moment(value.fromDate).format("MM/DD/YYYY");
       value.toDate=moment(value.toDate).format("MM/DD/YYYY");
       value.totalLeave = moment(value.toDate).diff(moment(value.fromDate),'days');
 
-      console.log("Leave==",JSON.stringify(value));
+      console.log("Staff Leave==",JSON.stringify(value));
 
-      this.leaveService.saveLeave(value).subscribe(data=>{
+      this.leaveService.saveStaffLeave(value).subscribe(data=>{
         if(data){
           console.log("Leave Service Save :",data);
         }

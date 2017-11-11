@@ -8,7 +8,6 @@ import {CommonServices} from '../../../providers/service/common/common.service';
 import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 import {BreanchService} from '../../../providers/service/branch/breanch.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
-import {UserPrefernce} from '../../../providers/model/common/UserPrefernce';
 @IonicPage()
 @Component({
   selector: 'login-page',
@@ -22,14 +21,12 @@ export class LoginComponent {
   pagedResponse=PagedResponse.getInstance();
   branchs:Array<Branch>=new Array<Branch>();
   branch:Branch=new Branch();
-  userPrefernce:UserPrefernce;
+  userId:number;
   public backgroundImage: any = "./assets/bg1.jpg";
   public imgLogo: any = "./assets/medium_150.70391061453px_1202562_easyicon.net.png";
 
   constructor(
-   
     private navCtrl: NavController,
- 
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
     private events:Events,
@@ -43,11 +40,10 @@ export class LoginComponent {
         password: ['', [<any>Validators.required]],
         branchId:   ['',[]]
       });
-      this.userPrefernce = this.session.findUserDetails();
-
-      console.log("login===",this.userPrefernce);
-
-      if(this.userPrefernce.userId){
+      console.log(this.session.findUserId());
+      
+      this.userId = this.session.findUserId();
+      if(this.userId){
         this.navCtrl.setRoot('HomeComponent');
       }
 
@@ -87,10 +83,12 @@ export class LoginComponent {
           branchId:value.branchId
           
         }).subscribe( data => {
-            console.log("Login data==="+data);
-            this.navCtrl.setRoot("HomeComponent");            
-            this.events.publish('LOGIN_USER_EVENT');
+            console.log("Login===",data);
+            console.log("LoginModule==",this.session.findUserDetails());
             this.loading.dismissAll();
+            this.events.publish('LOGIN_USER_EVENT');
+            this.navCtrl.setRoot("HomeComponent");  
+
           },error=>{
             this.loading.dismissAll();
             console.log(error)

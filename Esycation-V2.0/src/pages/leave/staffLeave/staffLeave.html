@@ -10,13 +10,9 @@
     <form [formGroup]="leaveForm">
       <ion-list class="padding">
         <ion-item>
-            <ion-label color="primary" floating>Student</ion-label>
-            <ion-select formControlName="studentId">
-                <ion-option *ngFor="let student of students.contents" 
-                    value="{{student.id}}">{{student.name}}
-              </ion-option>
-            </ion-select>
-         </ion-item>
+              <ion-label color="primary" floating>Comment</ion-label>
+              <ion-textarea formControlName="comment" type="text" ></ion-textarea>
+        </ion-item>
         <ion-row>
           <ion-col no-padding>
             <ion-item>
@@ -35,10 +31,6 @@
             </ion-item>
           </ion-col>
         </ion-row>
-        <ion-item>
-          <ion-label color="primary" floating>Comment</ion-label>
-          <ion-textarea formControlName="comment" type="text" ></ion-textarea>
-        </ion-item>
       </ion-list>
     </form>
   </ion-content>

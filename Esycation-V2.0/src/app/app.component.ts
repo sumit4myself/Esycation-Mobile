@@ -19,7 +19,7 @@ export class MyApp {
   rootPage: string = 'LoginComponent';
   menu:Array<any> = [];
   pages: Array<any>;
-  userPrefernce:UserPrefernce=UserPrefernce.factory();
+  userPrefernce:UserPrefernce;//=UserPrefernce.getInstance();
   loginUsers:Array<any>;
   userShow:boolean=false;
   icon:string="ios-add-outline"
@@ -103,6 +103,7 @@ export class MyApp {
  onSwitchAccount(userId:number){
   this.session.switchAccount(userId);
   this.events.publish('LOGIN_USER_EVENT');
+  this.nav.setRoot('HomeComponent');
  }
  onViewProfile(){
   this.nav.setRoot("ViewProfileComponent");
