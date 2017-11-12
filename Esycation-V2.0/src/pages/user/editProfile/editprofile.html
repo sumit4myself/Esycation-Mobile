@@ -93,18 +93,48 @@
                 </ion-item>
               </div>
               <div *ngIf="segmentView==='three'">
-                  <ion-item>
-                      <ion-label color="primary" floating>In Time *</ion-label>
+                <span *ngIf="moduleType=='STAFF'">
+                <ion-item>
+                      <ion-label color="primary" floating>In Time </ion-label>
                       <ion-datetime formControlName="inTime"
                         pickerFormat="HH:mm" displayFormat="HH:mm" >
                       </ion-datetime>
                   </ion-item>
                   <ion-item>
-                      <ion-label color="primary" floating>Out Time *</ion-label>
+                      <ion-label color="primary" floating>Out Time </ion-label>
                       <ion-datetime formControlName="outTime"
                         pickerFormat="HH:mm" displayFormat="HH:mm" >
                       </ion-datetime>
                   </ion-item>
+                  <ion-item>
+                        <ion-label color="primary" floating>Identification Marks </ion-label>
+                        <ion-input formControlName="identificationMarks" type="text" ></ion-input>
+                 </ion-item>
+                </span>  
+                <span *ngIf="moduleType=='GUARDIAN'">
+                    <ion-item>
+                        <ion-label color="primary" floating>Annual Income </ion-label>
+                         <ion-input formControlName="annualIncome" type="text" ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" floating>Occupation </ion-label>
+                        <ion-input formControlName="occupation" type="text" ></ion-input>
+                    </ion-item>
+                </span>
+                <span *ngIf="moduleType=='STUDENT'">
+                    <ion-item>
+                        <ion-label color="primary" floating>Nationality</ion-label>
+                            <ion-input formControlName="nationality" type="text" ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" floating>Religion </ion-label>
+                        <ion-input formControlName="religion" type="text" ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" floating>Mother Tongue </ion-label>
+                        <ion-input formControlName="motherTongue" type="text" ></ion-input>
+                    </ion-item>
+                </span>
               </div>
         </ion-list>
     </form>

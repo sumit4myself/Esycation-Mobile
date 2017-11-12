@@ -17,6 +17,12 @@ export interface ProfileInterface{
 	adharNumber:number;
 	inTime:string;
 	outTime:string;
+	identificationMarks:string;
+	nationality:string;
+	religion:string;
+	motherTongue:string;
+	annualIncome:string;
+	occupation:string;
 }
 
 export class Profile implements ProfileInterface{
@@ -38,7 +44,13 @@ export class Profile implements ProfileInterface{
 	inTime:string=null;
 	outTime:string=null;
 	adharNumber:number=null;
-
+	identificationMarks:string=null;
+	nationality:string=null;
+	religion:string=null;
+	motherTongue:string=null;
+	annualIncome:string=null;
+	occupation:string=null;
+	
 	constructor(){}
 
 	public static getInstance():Profile{

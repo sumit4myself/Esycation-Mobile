@@ -17,6 +17,7 @@ export class EditProfileComponent {
  loading: Loading;
  profile:Profile=Profile.getInstance();
  segmentView:string;
+ moduleType:String;
  constructor(
     private formBuilder:FormBuilder,
     private loadingCtrl:LoadingController,
@@ -24,11 +25,11 @@ export class EditProfileComponent {
     private session:UserSessionService,
     private profileService:ProfileService) {
 
-      this.segmentView="one";
       this.buildForm();
+      this.segmentView="one";
+      this.moduleType = this.session.findModule();
+      
     }
- 
-   
 
     buildForm(){
 
@@ -49,6 +50,12 @@ export class EditProfileComponent {
         inTime:['',[<any>Validators.required]],
         outTime:['',[<any>Validators.required]],
         module:['',[<any>Validators.required]],
+        identificationMarks:['',[<any>Validators.required]],
+        nationality:['',[<any>Validators.required]],
+        religion:['',[<any>Validators.required]],
+        motherTongue:['',[<any>Validators.required]],
+        annualIncome:['',[<any>Validators.required]],
+        occupation:['',[<any>Validators.required]],
       });
      
       this.profileService.findProfileDetails(this.session.findRemote(),this.session.findModule())
@@ -91,6 +98,12 @@ export class EditProfileComponent {
         pinCode:profile.pinCode,
         inTime:profile.inTime,
         outTime:profile.outTime,
+        identificationMarks:profile.identificationMarks,
+        nationality:profile.nationality,
+        religion:profile.religion,
+        motherTongue:profile.motherTongue,
+        annualIncome:profile.annualIncome,
+        occupation:profile.occupation,
       }
      
       return data;

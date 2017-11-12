@@ -35,6 +35,12 @@ export class StaffLeaveComponent {
         totalLeave: ['',[<any>Validators.required]],
       });
 
+      this.leaveService.findRemaining(this.session.findRemote()).subscribe(data=>{
+        console.log("StaffLeave==",JSON.stringify(data));
+      });
+
+      
+
     }
     
     onApply({value,valid}:{value:StaffLeaveDetailsInterface,valid:boolean}){
