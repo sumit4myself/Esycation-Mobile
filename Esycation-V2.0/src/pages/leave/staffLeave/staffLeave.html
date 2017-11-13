@@ -31,6 +31,48 @@
             </ion-item>
           </ion-col>
         </ion-row>
+        <!--*********Leave Type*********** -->
+        <div formArrayName="staffLeaves" >
+        <ion-row  
+          *ngFor="let staffLeave of leaveForm.controls.staffLeaves.controls; let i=index"
+          [formGroupName]="i" >
+        <ion-col no-padding>
+          <ion-item>
+              <ion-label color="primary" floating>Leave Type </ion-label>
+              <ion-input type="text" formControlName="type"></ion-input>
+          </ion-item>
+          </ion-col>
+          <ion-col no-padding>
+          <ion-item>
+            <ion-label color="primary" floating>From </ion-label>
+            <ion-datetime formControlName="fromDate"
+              pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
+            </ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col no-padding>
+          <ion-item>
+            <ion-label color="primary" floating>To</ion-label>
+            <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
+              displayFormat="DD/MM/YYYY" >
+            </ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col no-padding>
+          <ion-item>
+              <ion-label color="primary" floating>Total Leave </ion-label>
+              <ion-input type="text" formControlName="totalLeave"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col no-padding>
+          <ion-item>
+              <ion-label color="primary" floating>Remaining Leave </ion-label>
+              <ion-input type="text" formControlName="remainingLeave"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      </div>
+    <!--*********End Leave Type*********** -->
       </ion-list>
     </form>
   </ion-content>

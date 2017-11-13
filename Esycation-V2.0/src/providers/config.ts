@@ -3,7 +3,7 @@ export class ServerConfig {
     
       private static notificationSenderID = "19285209844";
       
-      private static path: string = 'http://educoresystems.com/api-v1.0/';
+      private static path: string = 'http://demo.educoresystems.com/api-v1.0/';
       private static version: string | number = 'api-v1.0';
       private static authPrefix: string = '';
       private static viewName :string ='?RESPONSE_VIEW=';

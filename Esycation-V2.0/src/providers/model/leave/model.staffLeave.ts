@@ -22,7 +22,7 @@ export class StaffLeaveDetails implements StaffLeaveDetailsInterface{
     totalLeave:number=null;
     approvalStatus:string=null;
     approverComment:string=null;
-    staffLeaves:Array<StaffLeave>=null;
+    staffLeaves:Array<StaffLeave>=new Array<StaffLeave>();
 
     public static getInstance():StaffLeaveDetails{
         return new StaffLeaveDetails();
@@ -32,9 +32,10 @@ export class StaffLeaveDetails implements StaffLeaveDetailsInterface{
 export class StaffLeave{
 
     id:number=null;
-    type:number=null;
+    type:String=null;
     fromDate:string=null;
     toDate:string=null;
     totalLeave:number=null;
+    remainingLeave:number=null;
 
 }
