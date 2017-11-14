@@ -24,12 +24,12 @@ export class PrivilageService{
       else{
         return this.adminRole()
       }
-        
+
     }
 
     findStaffRole():Array<any>{
 
-      this.menu = [          
+      this.menu = [
                  {
                     title: 'Attendances',
                     iconLeft: 'ios-clipboard-outline',
@@ -73,19 +73,19 @@ export class PrivilageService{
                     showDetails: false,
                     items:  [
                       {
-                      name:'Apply',
-                      component:'StaffLeaveComponent'
+                      name:'Dashboard',
+                      component:'StaffdashboardComponent'
                       }
                     ]
                   }
             ];
-        
+
        return this.menu;
     }
 
     findGuardianRole():Array<any>{
-      
-            this.menu = [          
+
+            this.menu = [
                         {
                           title: 'Notifications',
                           iconLeft: 'ios-chatboxes-outline',
@@ -109,14 +109,26 @@ export class PrivilageService{
                             component:'LeaveComponent'
                             }
                           ]
+                        },
+                        {
+                            title: 'Dashboard',
+                            iconLeft: 'ios-calendar-outline',
+                            icon: 'ios-add-outline',
+                            showDetails: false,
+                            items:  [
+                                {
+                                    name:'Dashboard',
+                                    component:'GuardiandashboardComponent'
+                                }
+                            ]
                         }
                   ];
-              
+
              return this.menu;
       }
       findStudentRole():Array<any>{
-        
-              this.menu = [          
+
+              this.menu = [
                           {
                             title: 'Notifications',
                             iconLeft: 'ios-chatboxes-outline',
@@ -140,16 +152,28 @@ export class PrivilageService{
                               component:'LeaveComponent'
                               }
                             ]
+                          },
+                          {
+                            title: 'DashBoard',
+                            iconLeft: 'ios-calendar-outline',
+                            icon: 'ios-add-outline',
+                            showDetails: false,
+                            items:  [
+                              {
+                              name:'Dashboard',
+                              component:'StudentdashboardComponent'
+                              }
+                            ]
                           }
                     ];
-                
+
                return this.menu;
         }
 
         adminRole(){
 
-          this.menu = [          
-            
+          this.menu = [
+
                     {
                       title: 'Layout with firebase',
                       myicon:'',
@@ -157,13 +181,13 @@ export class PrivilageService{
                       icon: 'ios-add-outline',
                       showDetails: false,
                       items:  [
-                            
+
                           {name:'Authentication(Login)',component:'LoginPage'},
                           {name:'Authentication(Register)',component:'RegisterPage'},
                           {name:'Authentication(Forgot)',component:'ForgotPage'},
                           {name:'Authentication(Profile)',component:'AfterLoginPage'},
                           {name:'Chart',component:'ChartPage'},
-            
+
                           {name:'City guide', component: 'Category1Page'},// app1 folder
                           {name:'Shopping',component:'Category2Page'},// app2 folder
                           {name:'Restaurant',component:'Category3Page'}, // app3 folder
@@ -171,17 +195,17 @@ export class PrivilageService{
                           {name:'Image gallery',component: 'GalleryPage'},
                           {name:'Feed',component: 'FeedPage'},
                           {name:'Form',component: 'FormResultPage'},
-            
-            
+
+
                           {name:'Intro', component:'IntroPage'},
-            
+
                           {name:'Pinterest(Masonry)',component: 'MasonryPage'},
                           {name:'Profile1',component: 'ProfilePage'},
                           {name:'Profile2',component: 'Profile2Page'},
                           {name:'Profile3',component: 'Profile3Page'},
                           {name:'Profile4', component: 'Profile4Page'},
                           {name:'Radio player',component:'RadioListPage'},
-            
+
                           {name:'Search',component:'SearchPage'},
                           {name:'Timeline',component: 'TimelinePage'}
                       ]
@@ -192,11 +216,11 @@ export class PrivilageService{
                       showDetails: false,
                       items:  [
                             {name:'Accordion',component:'AccordionPage'},
-            
+
                             {name:'Action sheet',component:'ActionsheetPage'},
                             {name:'Alert',component:'AlertPage'},
                             {name:'Animation',component:'AnimationsPage'},
-            
+
                             {name:'Button',component:'ButtonPage'},
                             {name:'Datetime',component:'DatetimePage'},
                             {name:'Fab', component:'FabPage'},
@@ -209,18 +233,18 @@ export class PrivilageService{
                             {name:'Label',component:'LabelPage'},
                             {name:'Radio button',component:'RadioButtonPage'},
                             {name:'Rating',component:'RatingPage'},
-                            
+
                             {name:'Range',component:'RangePage'},
                             {name:'Search bar', component:'SearchBarPage'},
                             {name:'Select option',component:'SelectOptionPage'},
                             {name:'Segment',component:'SegmentPage'},
                             {name:'Shrinking',component:'ShrinkingPage'},
-            
+
                             {name:'Tag',component:'TagPage'},
                             {name:'Table',component:'TablePage'},
                             {name:'Transparent header',component:'TransparentHeaderPage'},
                             {name:'Toast',component:'ToastPage'}
-            
+
                         ]
                     },{
                       title: 'Theme',
@@ -271,10 +295,10 @@ export class PrivilageService{
                         ]
                       }
                 ];
-            
-                this.pages = [ 
+
+                this.pages = [
                   // { icon:'call', title:'Contact us', component: 'ContactPage' },
-                  { icon:'bookmark', title:'Version 1.1.0', component: "" }    
+                  { icon:'bookmark', title:'Version 1.1.0', component: "" }
                 ];
           return this.menu;
         }
