@@ -1,0 +1,6 @@
+.tmp
+.sourcemaps/*
+www/*
+node_modules/*
+platforms/*
+plugins/*
