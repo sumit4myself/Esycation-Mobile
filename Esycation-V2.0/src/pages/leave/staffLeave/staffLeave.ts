@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController,LoadingController, Loading} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {LeaveService} from '../../../providers/service/leave/leave.service';
-import {StaffLeaveDetailsInterface,StaffLeave} from '../../../providers/model/leave/model.staffLeave';
+import {StaffLeaveDetailsInterface,StaffLeave,StaffLeaveDetails} from '../../../providers/model/leave/model.staffLeave';
 import * as moment from 'moment';
 import {UserSessionService} from "../../../providers/service/core/user.session.service";
 @IonicPage()
@@ -71,9 +71,9 @@ export class StaffLeaveComponent {
         }
       }
       
-      console.log("Staff==",JSON.stringify(value));
+      console.log("Staff==",JSON.stringify(this.PrepareData(value)));
 
-      this.leaveService.saveStaffLeave(value).subscribe(data=>{
+      this.leaveService.saveStaffLeave(this.PrepareData(value)).subscribe(data=>{
         if(data){
           console.log("Leave Service Save :",data);
         }
@@ -82,6 +82,7 @@ export class StaffLeaveComponent {
       },error=>{
         console.log("Error :",error);
       });
+
     }
 
     prepareLeaveType(data:any):Array<StaffLeave>{
@@ -90,13 +91,36 @@ export class StaffLeaveComponent {
       for(let leave of data.leaves){
         let leaveType = new StaffLeave();
         leaveType.id=null;
-        leaveType.totalLeave = null;
+        leaveType.totalLeave = 0;
         leaveType.type=leave.type;
         leaveType.remainingLeave = leave.totalLeave;
         staffLeaves.push(leaveType);
       }
       return staffLeaves;
 
+    }
+
+    PrepareData(data:StaffLeaveDetailsInterface):StaffLeaveDetails{
+
+      let staff = new StaffLeaveDetails();
+      let staffLeaves=new Array<StaffLeave>();
+      staff.staffId=data.staffId;
+      staff.comment=data.comment;
+      staff.fromDate = data.fromDate;
+      staff.toDate = data.toDate;
+      staff.totalLeave = data.totalLeave;
+      for(let leave of data.staffLeaves){
+        if(leave.fromDate){
+          let leaveType = new StaffLeave();
+          leaveType.fromDate = leave.fromDate;
+          leaveType.toDate = leave.toDate;
+          leaveType.totalLeave=leave.totalLeave;
+          leaveType.type = leave.type;
+          staffLeaves.push(leaveType)
+        }
+      }
+      staff.staffLeaves =staffLeaves; 
+      return staff;
     }
 
 }

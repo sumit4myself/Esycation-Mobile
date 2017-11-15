@@ -66,18 +66,8 @@ export class PrivilageService{
                       }
                     ]
                   },
-                  {
-                    title: 'DashBoard',
-                    iconLeft: 'ios-calendar-outline',
-                    icon: 'ios-add-outline',
-                    showDetails: false,
-                    items:  [
-                      {
-                      name:'Apply',
-                      component:'StaffLeaveComponent'
-                      }
-                    ]
-                  }
+              
+
             ];
         
        return this.menu;
