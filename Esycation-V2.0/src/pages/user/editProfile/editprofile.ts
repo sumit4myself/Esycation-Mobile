@@ -39,23 +39,23 @@ export class EditProfileComponent {
         bloodGroup: ['', [<any>Validators.required]],
         gender: ['',[<any>Validators.required]],
         dob: ['',[<any>Validators.required]],
-        mobile: ['',[<any>Validators.required]],
+        mobile: ['',[<any>Validators.required,Validators.maxLength(10)]],
         email:['',[<any>Validators.required]],
-        adharNumber:['',[<any>Validators.required]],
+        adharNumber:'',
         address1:['',[<any>Validators.required]],
-        address2:['',[<any>Validators.required]],
+        address2:'',
         city:['',[<any>Validators.required]],
         state:['',[<any>Validators.required]],
         pinCode:['',[<any>Validators.required]],
-        inTime:['',[<any>Validators.required]],
-        outTime:['',[<any>Validators.required]],
+        inTime:'',
+        outTime:'',
         module:['',[<any>Validators.required]],
-        identificationMarks:['',[<any>Validators.required]],
-        nationality:['',[<any>Validators.required]],
-        religion:['',[<any>Validators.required]],
-        motherTongue:['',[<any>Validators.required]],
-        annualIncome:['',[<any>Validators.required]],
-        occupation:['',[<any>Validators.required]],
+        identificationMarks:'',
+        nationality:'',
+        religion:'',
+        motherTongue:'',
+        annualIncome:'',
+        occupation:'',
       });
      
       this.profileService.findProfileDetails(this.session.findRemote(),this.session.findModule())
@@ -72,12 +72,16 @@ export class EditProfileComponent {
 
       this.loading= this.loadingCtrl.create({content:'Updating..'});
       this.loading.present();
-      this.profileService.editProfile(value).subscribe(data=>{
-        console.log(data);
+      if(valid){
+        this.profileService.editProfile(value).subscribe(data=>{
+          console.log(data);
+          this.loading.dismissAll();
+          this.nav.setRoot("HomeComponent");
+        });
+      }else{
+        this.loading.dismiss();
         this.loading.dismissAll();
-        this.nav.setRoot("HomeComponent");
-      });
-    
+      }
   }
   prepareData(profile:Profile):any{
  
