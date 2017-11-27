@@ -15,6 +15,7 @@ export interface UserPrefernceInterface {
    level:string;
    fullName:string;
    email:string;
+   imageId:number;
 }
 
 export class UserPrefernce implements UserPrefernceInterface {
@@ -32,6 +33,7 @@ export class UserPrefernce implements UserPrefernceInterface {
    user: any = null;
    fullName:string=null;
    email:string=null;
+   imageId:number=null;
    loginUsers = new Array<any>();
 
     private constructor(data?: UserPrefernceInterface) {

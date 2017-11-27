@@ -3,6 +3,7 @@ import { NavController, IonicPage,LoadingController, Loading } from 'ionic-angul
 //import {StudentAttendanceComponent} from '../../attendance/studentAttendance/studentAttendance';
 import {AttendanceService} from '../../../providers/service/attendance/attendance.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
+import {BaseComponent} from '../../baseComponent/base.component';
 
 @IonicPage()
 @Component({
@@ -10,16 +11,19 @@ import {UserSessionService} from '../../../providers/service/core/user.session.s
   templateUrl: 'manageStudentAttendance.html'
 })
 
-export class ManageAttendanceComponent {
+export class ManageAttendanceComponent extends BaseComponent{
 
   
   loading: Loading;
   batches:any;
   constructor( 
-    private navCtrl: NavController,
+    protected navCtrl: NavController,
     private loadingCtrl:LoadingController,
     private attendanceService:AttendanceService,
-   private session:UserSessionService) { }
+    protected session:UserSessionService) { 
+
+    super(session,navCtrl);
+   }
 
     ionViewDidLoad(){
 

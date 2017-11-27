@@ -18,6 +18,7 @@ export class EditProfileComponent {
  profile:Profile=Profile.getInstance();
  segmentView:string;
  moduleType:String;
+ imageId:string=null;
  constructor(
     private formBuilder:FormBuilder,
     private loadingCtrl:LoadingController,
@@ -62,6 +63,7 @@ export class EditProfileComponent {
       .subscribe(data=>{
          this.profile = Object.assign(this.profile, data);
          this.profileForm.setValue(this.prepareData(this.profile));
+         this.imageId = this.profile.imageId;
       });      
     }
 

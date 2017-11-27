@@ -22,8 +22,9 @@
             <span> 
                 <ion-icon name="done-all" *ngIf="notificationDetails.readStatus=='UNREAD'"></ion-icon> 
                 <ion-icon color="secondary" name="done-all" *ngIf="notificationDetails.readStatus=='READ'"></ion-icon> 
-                  <!--  {{ notificationDetails.notificationId.pushTime }} -->
-                  2 days
+                   <!--{{ notificationDetails.notificationId.pushTime }} -->
+                   {{notificationDetails.notificationId.pushTime | date:'shortTime'}}
+                  
             </span>
           </ion-note>
            <ion-icon color="gray" item-right [name]="isDetailShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>

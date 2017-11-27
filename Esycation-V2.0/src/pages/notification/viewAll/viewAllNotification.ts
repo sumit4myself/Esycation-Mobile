@@ -17,6 +17,7 @@ export class ViewAllNotificationComponent {
      remoteId:number;
      module:string;
      shownDetail = null;
+     notificationCount:any=0;
      constructor(
          private loadingCtrl: LoadingController,
          private session:UserSessionService,
@@ -38,9 +39,16 @@ export class ViewAllNotificationComponent {
             for(let notification of data.contents){
                 let b = Object.assign({},notification);
                 this.notifications.push(b);
-              }
+                if(b.readStatus=='UNREAD'){
+                    this.notificationCount++;
+                }
+            }
+            localStorage.setItem("notificationCount",this.notificationCount); 
+
             this.loading.dismissAll();
             console.log("notifications===",this.notifications);
+
+
         },error=>{
             this.loading.dismissAll();
             console.log(error);
@@ -48,7 +56,16 @@ export class ViewAllNotificationComponent {
     }
 
     onRead(id:number){
-        this.notificationService.readMessage(id).subscribe();
+        this.notificationService.readMessage(id).subscribe(data=>{
+            console.error(data);
+            for(let notification of this.notifications){
+                if(id==notification.id && notification.readStatus=='UNREAD'){
+                    notification.readStatus="READ";
+                    this.notificationCount=this.notificationCount-1;
+                    localStorage.setItem("notificationCount",this.notificationCount);
+                }
+            }
+        });
     }
  
     toggleDetail(group) {

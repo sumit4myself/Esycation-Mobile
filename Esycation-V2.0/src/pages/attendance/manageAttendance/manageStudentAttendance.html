@@ -3,12 +3,19 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
+      <ion-buttons end>
+          <button icon-only ion-button  (click)="onNotification()" >
+            <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
+            <span *ngIf="notificationCount!='0'" class="notification">    
+                <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+             </span>
+          </button>
+      </ion-buttons>
       <ion-title>Attendance</ion-title>
-
     </ion-navbar>
   </ion-header>
   
-  
+
   <ion-content >
         <ion-list   >
             <ion-item *ngFor="let batch of batches" (click)="onAttendanceMark(batch.id,batch.courseId.id)">

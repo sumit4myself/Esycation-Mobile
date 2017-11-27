@@ -8,6 +8,7 @@ export class AttendanceModel{
     dob:string=null;
     gender:string=null;
     mobile:string=null;
+    imageId:string=null;
     present:boolean=false;
     absent:boolean=false;
     parentId:Parent= new Parent();

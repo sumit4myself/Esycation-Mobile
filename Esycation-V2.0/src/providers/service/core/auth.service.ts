@@ -31,6 +31,7 @@ export class AuthService extends BaseService<UserPrefernce> {
                 this.userPrefernce.fullName       = this.load("fullName");
                 this.userPrefernce.loginUsers     = this.load("loginUsers");   
                 this.userPrefernce.email          = this.load("email"); 
+                this.userPrefernce.imageId        = this.load("imageId"); 
                 
     }
 
@@ -130,6 +131,7 @@ export class AuthService extends BaseService<UserPrefernce> {
         this.persist('loginUsers',this.userPrefernce.loginUsers);
         this.persist('fullName',this.userPrefernce.fullName)
         this.persist('email',this.userPrefernce.email);
+        this.persist('imageId',this.userPrefernce.imageId);
     }
 
     protected persist(prop: string, value: any): void {
@@ -168,7 +170,8 @@ export class AuthService extends BaseService<UserPrefernce> {
             tokenId:userDetails.tokenId,
             level:userDetails.level,
             fullName:userDetails.fullName,
-            email:userDetails.email
+            email:userDetails.email,
+            imageId:userDetails.imageId
 
         };
         return _userDetails;
@@ -187,7 +190,8 @@ export class AuthService extends BaseService<UserPrefernce> {
             tokenId:null,
             level:null,
             fullName:null,
-            email:null
+            email:null,
+            imageId:null
         };
         return _userDetails;
     }

@@ -1,11 +1,15 @@
 
 <ion-menu [content]="content">
-  <ion-content>
+  
+    <ion-content>
 
 <!--***********  Side menu for android ***********-->
       <div id="menu-material" showWhen="android">
           <ion-header class="menu-header" (click)="onViewProfile()">      
-            <img class="user-avatar round" src="assets/img/default.png" >
+            <p *ngIf="userPrefernce.imageId==null"><img class="user-avatar round" src="assets/img/default.png" ></p>
+            <p *ngIf="userPrefernce.imageId!=null">
+                <img class="user-avatar round" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{userPrefernce.imageId}}">
+            </p>
             <p class="name">{{userPrefernce.fullName}}  </p>
             <p class="email">{{userPrefernce.email}}</p>    
           </ion-header>
@@ -61,11 +65,12 @@
   
     <div id="menu-ios" showWhen="ios" class="sideMenu-header"  color="gray">
         <div class="menu-header" (click)="onViewProfile()">
-  
-            <img class="user-avatar round" src="assets/img/default.png" >
+            <p *ngIf="userPrefernce.imageId==null"><img class="user-avatar round" src="assets/img/default.png" ></p>
+            <p *ngIf="userPrefernce.imageId!=null">
+                <img class="user-avatar round" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{userPrefernce.imageId}}">
+            </p>
             <p class="name">{{userPrefernce.fullName}}  </p>
-            <p class="email">{{userPrefernce.email}}</p>             
-          
+            <p class="email">{{userPrefernce.email}}</p>       
         </div>
       <!--***********  menu ***********-->
         <ion-list no-lines>
@@ -112,9 +117,12 @@
 <!--***********  Side menu for PWA ***********-->
       <div id="menu-pwa" hideWhen="android,ios">
         <div class="menu-header" (click)="onViewProfile()">
-                <img class="user-avatar round" src="assets/img/default.png" >
-                <p class="name">{{userPrefernce.fullName}}  </p>
-                <p class="email">{{userPrefernce.email}}</p>                 
+            <p *ngIf="userPrefernce.imageId==null"><img class="user-avatar round" src="assets/img/default.png" ></p>
+            <p *ngIf="userPrefernce.imageId!=null">
+                <img class="user-avatar round" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{userPrefernce.imageId}}">
+            </p>
+            <p class="name">{{userPrefernce.fullName}}  </p>
+            <p class="email">{{userPrefernce.email}}</p>                 
         </div>
           <div class="list-box">
             <ion-list  no-lines>

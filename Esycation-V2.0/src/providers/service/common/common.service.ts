@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from 'ionic-angular';
+//import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -35,6 +36,37 @@ export class CommonServices {
             subTitle: subTitle,
             buttons: [buttons]
         });
+        alert.present();
+    }
+
+    confirmAlert(title:string,message:string,yes?:string,no?:string){
+        
+        !yes? yes="yes" :null;
+        !no? no="No":null;
+        let alert = this.alertCtrl.create({
+          title: title,
+          message: message,
+          buttons: [
+            {
+              text: yes,
+              handler: () => {
+               console.log("Yes Confirm alert.....");   
+               alert.dismiss(true);
+               
+              }
+            },
+            {
+                text: no,
+                role: 'cancel',
+                handler: () => {
+                    console.log("Cancel Confirm alert.....");
+                    
+                    
+                }
+              }
+          ]
+        });
+
         alert.present();
     }
 

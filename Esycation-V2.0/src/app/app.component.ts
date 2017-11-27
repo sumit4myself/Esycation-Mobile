@@ -8,6 +8,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {PrivilageService} from '../providers/service/core/privilage.service'
 import {UserPrefernce} from '../providers/model/common/UserPrefernce';
 import {UserSessionService} from '../providers/service/core/user.session.service';
+import {NotificationService} from '../providers/service/notification/notification.service';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+//import {CommonServices} from '../providers/service/common/common.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +32,10 @@ export class MyApp {
               private privilageService:PrivilageService,
               private session:UserSessionService,
               private modal:ModalController,
-              private events:Events) {
+              private events:Events,
+            //  private commonServices:CommonServices,
+              private notificationService:NotificationService,
+              private push:Push) {
         this.initializeApp();
 
         this.userPrefernce = this.session.findUserDetails();
@@ -52,6 +58,7 @@ export class MyApp {
 
   }
 
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -59,6 +66,8 @@ export class MyApp {
       
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.pushNotificationSetup();
+      
     });
   }
   toggleDetails(menu) {
@@ -109,6 +118,41 @@ export class MyApp {
   this.nav.setRoot("ViewProfileComponent");
  }
 
+
+    pushNotificationSetup() {
+  
+          const options: PushOptions = {
+              android: {
+              sound: true,
+              vibrate:true,
+              iconColor:"#f53d3d",
+  
+              },
+              ios: {
+                  alert: 'true',
+                  badge: true,
+                  sound: 'false'
+              },
+              windows: {}
+          };   
+          const pushObject: PushObject = this.push.init(options);
+          pushObject.on('notification').subscribe((notification: any) => {
+  
+            if(notification.additionalData.foreground){
+              //this.commonServices.presentToast(notification);
+              //this.commonServices.showAlert("Notification",JSON.stringify(notification));
+              var notificationCount=Number(localStorage.getItem("notificationCount"));
+              var count = notificationCount+1;
+              localStorage.setItem("notificationCount",count+"");
+            }
+          });
+          pushObject.on('registration').subscribe((registration: any) => {
+            this.notificationService.registerNotificationUser(registration.registrationId);
+            //this.commonServices.showAlert("Notification",JSON.stringify(registration.registrationId));
+          });
+          pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
+    }
+   
 }
 
 

@@ -21,7 +21,7 @@ export class CostumErrorHandler {
     if(responseJson.exception == 'com.webientsoft.esycation.common.exception.EsycationException'){
       this.commonServices.presentToast(responseJson.message);
     }else{
-      this.commonServices.showAlert("Error",JSON.stringify(error));
+      this.commonServices.showAlert("","Either server is not responding or you don't have intrenet connection","OK");
     }
     console.log("ERROR :",responseJson);
     

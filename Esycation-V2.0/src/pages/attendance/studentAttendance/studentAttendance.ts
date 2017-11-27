@@ -7,7 +7,7 @@ import {AttendanceService} from '../../../providers/service/attendance/attendanc
 import { AttendanceModel,StudentAttendanceDetails,StudentAttendance,Attendance} from '../../../providers/model/attendance/model.attendance';
 import {UserSessionService} from "../../../providers/service/core/user.session.service";
 import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
-
+import {BaseComponent} from '../../baseComponent/base.component';
 import * as moment from 'moment';
 
 @IonicPage()
@@ -16,7 +16,7 @@ import * as moment from 'moment';
   templateUrl: 'studentAttendance.html'
 })
 
-export class StudentAttendanceComponent  {
+export class StudentAttendanceComponent  extends BaseComponent{
 @ViewChild(Content) content: Content;
   
   loading: Loading;
@@ -29,14 +29,14 @@ export class StudentAttendanceComponent  {
   student:AttendanceModel
   attendance:Attendance=new Attendance();
   students:Array<AttendanceModel>=new Array<AttendanceModel>();
-
+  dataNotfound:string=null;
   constructor( 
-    private navCtrl: NavController,
+    protected navCtrl: NavController,
     private navParam:NavParams,
     private attendanceService:AttendanceService,
     private loadingCtrl:LoadingController,
-    private userSessionService:UserSessionService) {
-
+    protected userSessionService:UserSessionService) {
+      super(userSessionService,navCtrl);
       this.attendance.inTime= moment(new Date()).format('HH:mm:ss');
     }
  
@@ -64,11 +64,16 @@ export class StudentAttendanceComponent  {
             this.prepareUpdateData(todayAttendances); 
           }
         }) 
+        if(this.students.length==0){
+          this.dataNotfound="Student not found.";
+        }
         this.loading.dismissAll();
       },error=>{
         console.log("Error: ",error);
         this.loading.dismissAll();
       }
+
+      
     );
     
   }
@@ -108,7 +113,10 @@ export class StudentAttendanceComponent  {
     if(index==this.counter){
       this.counter++;
     }
-  this.onScroll();
+    /*if(this.mode!='update'){
+      this.onScroll();
+    }
+    */
  }
 
   onScroll(){

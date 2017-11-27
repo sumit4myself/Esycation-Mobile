@@ -10,4 +10,4 @@ import {StudentdashboardComponent} from '../student/studentdashboard';
     declarations: [StudentdashboardComponent],
     providers: [],
 })
-export class StaffdashboardModule { }
+export class StudentdashboardModule { }

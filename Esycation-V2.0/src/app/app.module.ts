@@ -16,6 +16,9 @@ import {CostumErrorHandler} from '../providers/service/core/error.service';
 import {AuthService} from '../providers/service/core/auth.service';
 import {UserSessionService} from '../providers/service/core/user.session.service';
 import {LocalStorage} from '../providers/storage/local.storage';
+import { Push} from '@ionic-native/push';
+import {NotificationService} from '../providers/service/notification/notification.service';
+
 @NgModule({
   declarations: [
     MyApp, 
@@ -33,7 +36,7 @@ import {LocalStorage} from '../providers/storage/local.storage';
   ],
   providers: [
     StatusBar,
-    SplashScreen,CommonServices,PrivilageService,CostumErrorHandler,
+    SplashScreen,CommonServices,PrivilageService,CostumErrorHandler,Push,NotificationService,
     AuthService,UserSessionService,LocalStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
    

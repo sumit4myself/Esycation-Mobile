@@ -1,14 +1,15 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage,Nav, Loading} from 'ionic-angular';
+import { IonicPage,Nav, Loading,NavController} from 'ionic-angular';
 
 import {UserSessionService} from '../../providers/service/core/user.session.service';
+import {BaseComponent} from '../baseComponent/base.component';
 
 @IonicPage()
 @Component({
   selector: 'home-page',
   templateUrl: 'home.html'
 })
-export class HomeComponent {
+export class HomeComponent extends BaseComponent{
   @ViewChild(Nav) nav: Nav;
   loading: Loading;
   slides = [
@@ -26,13 +27,11 @@ export class HomeComponent {
     }
   ];
 
-  constructor(
-     private session:UserSessionService) 
-    { 
+  constructor( protected session:UserSessionService,
+              protected navController:NavController) { 
+      super(session,navController);
       console.log("Home==",this.session.findModule());
-
-        
-    }
+  }
  
    
 }

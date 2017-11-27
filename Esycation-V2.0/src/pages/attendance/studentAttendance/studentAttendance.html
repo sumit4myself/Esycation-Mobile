@@ -3,6 +3,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-buttons end>
+        <button icon-only ion-button  (click)="onNotification()" >
+          <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
+          <span *ngIf="notificationCount!='0'" class="notification">    
+              <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
+           </span>
+        </button>
+    </ion-buttons>
     <ion-title>Attendance</ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,19 +18,25 @@
   <ion-list >
     <ion-item *ngFor="let student of students; let count = index" 
     [ngClass]="{'persent': student.present==true, 'absent': student.absent==true}" (click)="onTouch(count)">
-      <ion-avatar item-left>
-        <img *ngIf="student.gender=='Male' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
+      <ion-avatar item-left *ngIf="student.imageId==null">
+        <img *ngIf="student.gender==null || student.gender=='Male' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
         <img *ngIf="student.gender=='Female' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
+      </ion-avatar>
+      <ion-avatar item-left *ngIf="student.imageId!=null">
+        <img  class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{student.imageId}}">
+      
       </ion-avatar>
         <p>
            <span color="primary">{{student.name}}</span>&nbsp; 
-            <span >&nbsp;| &nbsp;</span>
-            <span class="small" >
-                &nbsp; RollNumber : {{student.admissionId.registrations[0].rollNumber}}
-            </span>
+            
         </p>
         <p>
-            <span class="small" > 
+          <span class="small" >
+                &nbsp; <b>Roll Number :</b> {{student.admissionId.registrations[0].rollNumber}}
+          </span>
+        </p>  
+        <!--<p>
+            <span class="small" >
               <ion-icon color="primary" name="person"></ion-icon> Guardian :  {{student.guardianId.name}}
             </span> 
         </p>
@@ -33,7 +47,7 @@
              City: {{student.contactDetailId.city}}
              &nbsp;| &nbsp; State : {{student.contactDetailId.state}} - {{student.contactDetailId.pinCode}} 
         </span>
-        </p>
+        </p> -->
         <ion-note item-right ion-text color="stable">
             <p *ngIf="student.present==true">
               <ion-icon color="ios-green" name="done-all"></ion-icon>              
@@ -41,8 +55,12 @@
             <p *ngIf="student.absent==true"><ion-icon color="ios-red" name="close"></ion-icon></p>
         </ion-note>
     </ion-item>
-    <ion-item *ngIf="students.length==0">
-        <h2>Student not found.</h2>
+    <ion-item *ngIf="dataNotfound==null">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+    </ion-item> 
+    <ion-item *ngIf="dataNotfound!=null">
+        <h2>{{dataNotfound}}</h2>
     </ion-item>  
   </ion-list>
 </ion-content>
