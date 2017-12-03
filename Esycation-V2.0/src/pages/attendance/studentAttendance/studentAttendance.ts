@@ -127,7 +127,7 @@ export class StudentAttendanceComponent  extends BaseComponent{
   onSave(){
 
     this.loading = this.loadingCtrl.create({
-      content: 'saveing....'
+      content: 'saving....'
     }); this.loading.present();
     let studentAttendanceDetails = this.prepareDataSet();
     this.attendanceService.saveAttendance(studentAttendanceDetails).subscribe(

@@ -34,9 +34,16 @@ export class NotificationDetails implements NotificationDetailsInterface{
 
 export class Notification{
 
-  pushTime:number=null;
+  id:number=null;
+  pushTime:string=null;
   resources:any=null
   template:Template=new Template();
   type:string="INFORMATIVE";
+  expiryTime:string=null;
+  selections:any=null;
+  approved:boolean=false;
+  bulk:boolean=false;
+  receivers:Receivers=new Receivers();
+
 }
 

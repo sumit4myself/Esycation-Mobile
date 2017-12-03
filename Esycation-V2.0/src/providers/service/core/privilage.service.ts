@@ -51,6 +51,10 @@ export class PrivilageService{
                       {
                       name:'Notification',
                       component:'ViewAllNotificationComponent'
+                      },
+                      {
+                        name:'Bulk Notification',
+                        component:'BulkNotificationComponent'
                       }
                     ]
                   },
