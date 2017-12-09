@@ -6,46 +6,72 @@
     <ion-title>Apply Leave</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-    <form [formGroup]="leaveForm">
-      <ion-list class="padding">
-        <ion-item>
-            <ion-label color="primary" floating>Student</ion-label>
+<ion-content padding>
+  <form [formGroup]="leaveForm">
+    <ion-list no-lines>
+
+
+      <ion-row class="form-item-margin">
+
+        <ion-col>
+          <ion-item no-lines item-content class="form-items-padding form-item-rounder-items">
+            <ion-label color="darkGray">
+              <ion-icon class="form-icons-size" name="man">
+              </ion-icon>
+              <span class="form-lable-size">Select Student</span>
+            </ion-label>
             <ion-select formControlName="studentId">
-                <ion-option *ngFor="let student of students.contents" 
-                    value="{{student.id}}">{{student.name}}
+              <ion-option *ngFor="let student of students.contents" value="{{student.id}}">{{student.name}}
               </ion-option>
             </ion-select>
-         </ion-item>
-        <ion-row>
-          <ion-col no-padding>
-            <ion-item>
-              <ion-label color="primary" floating>From </ion-label>
-              <ion-datetime formControlName="fromDate"
-                pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
-              </ion-datetime>
-            </ion-item>
-          </ion-col>
-          <ion-col no-padding>
-            <ion-item>
-              <ion-label color="primary" floating>To</ion-label>
-              <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
-                displayFormat="DD/MM/YYYY" >
-              </ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-item>
-          <ion-label color="primary" floating>Comment</ion-label>
-          <ion-textarea formControlName="comment" type="text" ></ion-textarea>
-        </ion-item>
-      </ion-list>
-    </form>
-  </ion-content>
-  <ion-footer>
-      <ion-row >
-          <ion-col>
-              <button ion-button block color="secondary" (click)="onApply(leaveForm)" >Apply</button>
-          </ion-col>  
-      </ion-row>   
-  </ion-footer>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row class="form-item-margin">
+
+        <ion-col>
+          <ion-item no-lines item-content class="form-items-padding form-item-rounder-items">
+            <ion-label color="darkGray">
+              <ion-icon class="form-icons-size" name="calendar">
+              </ion-icon>
+              <span class="form-lable-size">From</span>
+            </ion-label>
+            <ion-datetime formControlName="fromDate" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
+            </ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item no-lines class="form-items-padding form-item-rounder-items">
+            <ion-label color="darkGray">
+              <ion-icon class="form-icons-size" name="calendar">
+              </ion-icon>
+              <span class="form-lable-size">To</span>
+            </ion-label>
+            <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate" displayFormat="DD/MM/YYYY">
+            </ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row  class="form-item-margin">
+        <ion-col>
+          <ion-item no-lines item-content class="form-items-padding form-item-rounder-items">
+            <ion-label color="darkGray" stacked>
+              <ion-icon class="form-icons-size" name="clipboard">
+              </ion-icon>
+              <span class="form-lable-size">Comment</span>
+            </ion-label>
+            <ion-textarea formControlName="comment" type="text" rows="5"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar transparent>
+    <button padding color="stable" class="form-item-rounder-items" (click)="onApply(leaveForm)" ion-button full text-uppercase>Apply</button>
+  </ion-toolbar>
+</ion-footer>

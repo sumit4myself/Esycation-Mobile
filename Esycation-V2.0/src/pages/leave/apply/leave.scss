@@ -1,6 +1,32 @@
 leave-page{
 
+  .form-item-margin{
+      margin-bottom: 10px;
+  }
+
+  .form-items-padding{
+      padding-top: 5px;
+      padding-bottom: 5px;
+  }
+
+  .form-icons-size{
+      font-size: 20px;
+  }
+
+  .form-lable-size{
+    font-size: 16px;
+    margin-left:8px;
+  }
   
+
+  .form-item-rounder-items{
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    -khtml-border-radius: 5px; 
+  }
+
   
     
 }
