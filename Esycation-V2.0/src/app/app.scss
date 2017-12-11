@@ -28,7 +28,9 @@
     padding: 5px 15px;
     background-image: url('../assets/md-bg3.jpg');
     background-size: cover;
-    background-color: color($colors, blue2);
+    // background-color: color($colors, blue2);
+    background-color: #2AACD8 !important;
+    
     color: white;
     .name {
       font-weight: 400;
@@ -98,7 +100,8 @@
     margin-bottom: 20px;
     padding: 5px 15px;
     background-size: cover;
-    background-color: color($colors, ios-gray);
+    // background-color: color($colors, ios-gray);
+    background-color: #2AACD8 !important;
     color: #ffffff;
     .name {
       margin-top:8px;

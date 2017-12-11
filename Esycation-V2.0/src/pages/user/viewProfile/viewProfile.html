@@ -1,76 +1,96 @@
-<ion-header >
+<ion-header>
   <ion-navbar color="ios-blue">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-        <button icon-only ion-button  (click)="onNotification()" >
-          <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
-          <span *ngIf="notificationCount!='0'" class="notification">    
-              <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
-           </span>
-        </button>
+      <button icon-only ion-button (click)="onNotification()">
+        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+        <span *ngIf="notificationCount!='0'" class="notification">
+          <small>
+            <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+          </small>
+        </span>
+      </button>
     </ion-buttons>
     <ion-title>Profile</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content  class="content"  >
+<ion-content class="content">
 
-  <div class="profile-header" color="lightblue"></div>
-  <div class="profile">
-    <div class="profile-box">
-       <p *ngIf="profile.imageId==null"><ion-img  class="profile-image" src="assets/img/default.png"></ion-img> </p>
-       <p *ngIf="profile.imageId!=null">
-         <ion-img  class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{profile.imageId}}"></ion-img> 
-        </p>
-        <h3 id="profile2-name" padding-top>{{profile.name}}</h3>
-        <ion-note item-right>
-            <ion-fab bottom right edge class="pop-in" (click)="onEdit()">
-                <button ion-fab color="green">
-                  <ion-icon name="ios-create" color="white"></ion-icon>
-                </button>
-              </ion-fab>
-        </ion-note>
-        <ion-list >
-            <ion-item class="icon-align" >
-              <ion-icon name="md-mail" item-left></ion-icon>
-              <span *ngIf="profile.email=='-'">N/A</span>
-              <h2 *ngIf="profile.email!='-'">{{profile.email}}</h2>
-              <div [innerHTML]="(profile2 | async)?.openingTime" class="opening-time"></div>
-            </ion-item>
-            <ion-item class="icon-align">
-              <ion-icon name="ios-call"  item-left></ion-icon>
-              <h2>{{profile.mobile}}</h2>
-          </ion-item>
-          <ion-item class="icon-align">
-            <ion-icon name="ios-water"  item-left></ion-icon>
-            <span *ngIf="profile.bloodGroup=='-'">N/A</span>
-            <h2 *ngIf="profile.bloodGroup!='-'">{{profile.bloodGroup}}</h2>
-          </ion-item>
-          <ion-item class="icon-align">
-              <ion-icon name="ios-calendar"  item-left></ion-icon>
-              <span *ngIf="profile.dob=='-'">N/A</span>
-              <h2 *ngIf="profile.dob!='-'">{{profile.dob}}</h2>
-            </ion-item>
-          <ion-item class="icon-align" text-wrap>
-                <ion-icon name="ios-pin" item-left></ion-icon>
-                <span>
-                    {{profile.address1}} 
-                </span>
-                <span *ngIf="profile.address2!='-'">
-                  ,{{profile.address2}} 
-                </span>  
-                <span>,
-                    <b>City:</b> {{profile.city}},<b>State :</b> {{profile.state}} - {{profile.pinCode}} 
-                </span>  
-            </ion-item>
-        </ion-list>
-    </div>
-  </div>
+  <aside class="profile-card">
+    <header>
+      <a *ngIf="profile.imageId==null">
+        <img src="assets/img/default.png"> </a>
+      <a *ngIf="profile.imageId!=null">
+        <img src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{profile.imageId}}">
+
+      </a>
+      <h2 id="profile2-name">{{profile.name}}</h2>
+    </header>
+  </aside>
+
+
+
+  <ion-list padding class="list-semi-transperent">
+    <ion-item class="icon-align">
+      <ion-avatar item-start>
+        <ion-icon name="md-mail" item-left></ion-icon>
+      </ion-avatar>
+      <p>Email</p>
+      <h2 *ngIf="profile.email=='-'">N/A</h2>
+      <h2 *ngIf="profile.email!='-'">{{profile.email}}</h2>
+      <div [innerHTML]="(profile2 | async)?.openingTime" class="opening-time"></div>
+    </ion-item>
+    <ion-item class="icon-align">
+      <ion-avatar item-start>
+        <ion-icon name="ios-call" item-left></ion-icon>
+      </ion-avatar>
+      <p>Mobile</p>
+      <h2>{{profile.mobile}}</h2>
+    </ion-item>
+    <ion-item class="icon-align">
+      <ion-avatar item-start>
+        <ion-icon name="ios-water" item-left></ion-icon>
+      </ion-avatar>
+      <p>Blood Group</p>
+      <h2 *ngIf="profile.bloodGroup=='-'">N/A</h2>
+      <h2 *ngIf="profile.bloodGroup!='-'">{{profile.bloodGroup}}</h2>
+    </ion-item>
+    <ion-item class="icon-align">
+        <ion-avatar item-start>
+            <ion-icon name="ios-calendar" item-left></ion-icon>
+          </ion-avatar>
+      <p>Date Of Birth</p>
+      <h2 *ngIf="profile.dob=='-'">N/A</h2>
+      <h2 *ngIf="profile.dob!='-'">{{profile.dob}}</h2>
+    </ion-item>
+    <ion-item class="icon-align" text-wrap>
+        <ion-avatar item-start>
+            <ion-icon name="ios-pin" item-left></ion-icon>
+          </ion-avatar>
+      <p>Address</p>
+      <h2>
+        {{profile.address1}}
+        <span *ngIf="profile.address2!='-'">
+            ,{{profile.address2}}
+          </span>
+          <span>,
+            <b>City:</b> {{profile.city}},
+            <b>State :</b> {{profile.state}} - {{profile.pinCode}}
+          </span>
+      </h2>
+      
+    </ion-item>
+  </ion-list>
+  <ion-note item-right>
+      <ion-fab bottom right edge class="pop-in" (click)="onEdit()">
+        <button ion-fab color="green">
+          <ion-icon name="ios-create" color="white"></ion-icon>
+        </button>
+      </ion-fab>
+    </ion-note>
+  
 
 </ion-content>
-
-
-
-

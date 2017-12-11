@@ -156,7 +156,8 @@ tertiary:   #FF4653,
     contrast: #ffffff
   ),
       ios-blue :(
-    base: #007aff,
+    // base: #007aff,
+    base: #2AACD8,
     contrast: #ffffff
   ),
       ios-yellow:(
@@ -198,6 +199,8 @@ $toolbar-md-background:                   color($colors, primary);
 $toolbar-md-active-color:                 #fff;
 
 
+$segment-button-ios-background-color-activated : #488aff;
+
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
@@ -229,3 +232,5 @@ $toolbar-md-active-color:                 #fff;
 
 @import "roboto";
 @import "noto-sans";
+
+

@@ -1,41 +1,64 @@
-<ion-header >
-    <ion-navbar color="ios-blue">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
+<ion-header>
+  <ion-navbar color="ios-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button icon-only ion-button (click)="onNotification()">
+        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+        <span *ngIf="notificationCount!='0'" class="notification">
+          <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+        </span>
       </button>
-      <ion-buttons end>
-          <button icon-only ion-button  (click)="onNotification()" >
-            <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
-            <span *ngIf="notificationCount!='0'" class="notification">    
-                <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
-             </span>
-          </button>
-      </ion-buttons>
-      <ion-title>Attendance</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
+    </ion-buttons>
+    <ion-title>Attendance</ion-title>
+  </ion-navbar>
+</ion-header>
 
-  <ion-content >
-        <ion-list   >
-            <ion-item *ngFor="let batch of batches" (click)="onAttendanceMark(batch.id,batch.courseId.id)">
-              <ion-avatar  item-left >
-                  <img  src="assets/img/task.png" > 
-              </ion-avatar>
-              <p>
-                <span>
-                    <ion-icon color="ios-red" name="book"></ion-icon>  <b>Class :</b> {{batch.courseId.name}} 
-                </span>
-              </p>  
-  
-              <p>
-                 <span class="small"><b> Section :</b> {{batch.name}} - {{batch.code}} </span>
-              </p>
-              <ion-note item-right>
-                <ion-icon *ngIf="batch.ismarkedAttendance==true" color="ios-green" name="checkmark"></ion-icon> 
-              </ion-note>
-            </ion-item>
-        </ion-list>
-    </ion-content>
 
-    
+<ion-content padding>
+
+
+    <ion-list>
+      <!-- <ion-item no-padding style="height:60px;">
+        <ion-list-header no-lines style="padding-top:20px; margin-left:50px;">
+            <h2>Class</h2>
+            <p>Section</p>
+          </ion-list-header>
+        </ion-item> -->
+        <ion-item *ngFor="let batch of batches" 
+        (click)="onAttendanceMark(batch.id,batch.courseId.id)">
+        <ion-icon *ngIf="batch.ismarkedAttendance==true" item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
+        <ion-icon *ngIf="!batch.ismarkedAttendance==true" item-start  color="light" name="ios-timer-outline"></ion-icon>
+        
+        {{batch.courseId.name}}
+          <p>
+              {{batch.name}} - {{batch.code}}
+          </p>
+            <ion-icon color="dark" item-end name="ios-arrow-forward-outline"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+   
+  <!-- <ion-list>
+    <ion-item *ngFor="let batch of batches" (click)="onAttendanceMark(batch.id,batch.courseId.id)">
+      <ion-avatar item-left>
+        <img src="assets/img/task.png">
+      </ion-avatar>
+      <p>
+        <span>
+          <ion-icon color="ios-red" name="book"></ion-icon>
+          <b>Class :</b> {{batch.courseId.name}}
+        </span>
+      </p>
+
+      <p>
+        <span class="small">
+          <b> Section :</b> {{batch.name}} - {{batch.code}} </span>
+      </p>
+      <ion-note item-right>
+        <ion-icon *ngIf="batch.ismarkedAttendance==true" color="ios-green" name="checkmark"></ion-icon>
+      </ion-note>
+    </ion-item>
+  </ion-list> -->
+</ion-content>

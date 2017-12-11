@@ -14,13 +14,13 @@
     <ion-title>Bluk Notifications</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content >
+<ion-content padding>
   <form [formGroup]="bulkNotificationForm">
-      <ion-list>
+      <ion-list class="bulkNotificationFormList">
           <ion-row>
-              <ion-col no-padding>
-                  <ion-item>
-                      <ion-label floating>Receiver Type</ion-label>
+              <ion-col >
+                  <ion-item no-lines>
+                      <ion-label >Receiver Type</ion-label>
                       <ion-select formControlName="receiverType" (ngModelChange)="onReceiverType($event)"
                                   okText="Okay" cancelText="Dismiss"  interface="popover">
                         <ion-option  value="GROUP">GROUP</ion-option>
@@ -30,9 +30,9 @@
               
                     </ion-item>
               </ion-col>
-              <ion-col no-padding>
-                  <ion-item>
-                      <ion-label floating>Communication Mode</ion-label>
+              <ion-col >
+                  <ion-item no-lines>
+                      <ion-label >Communication Mode</ion-label>
                       <ion-select formControlName="mode" (ngModelChange)="onCommunication($event)" 
                                   okText="Okay" cancelText="Dismiss"  interface="popover">
                         <ion-option  value="SMS">SMS</ion-option>
@@ -43,16 +43,16 @@
               </ion-col>
             </ion-row>
              <ion-row>
-                <ion-col no-padding>
-                  <ion-item>
-                        <ion-label floating>Date*</ion-label>
+                <ion-col >
+                  <ion-item no-lines>
+                        <ion-label >Date*</ion-label>
                         <ion-datetime formControlName="date"  pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
                         </ion-datetime>  
                   </ion-item>
                 </ion-col>
-                <ion-col no-padding>
-                    <ion-item>
-                        <ion-label  floating>Time* </ion-label>
+                <ion-col >
+                    <ion-item no-lines>
+                        <ion-label  >Time* </ion-label>
                         <ion-datetime formControlName="time" pickerFormat="HH:mm" displayFormat="HH:mm" >
                         </ion-datetime>
                     </ion-item>
@@ -60,9 +60,9 @@
               </ion-row>
             
               <ion-row>
-                  <ion-col no-padding>
-                      <ion-item>
-                          <ion-label floating>Template</ion-label>
+                  <ion-col >
+                      <ion-item no-lines>
+                          <ion-label >Template</ion-label>
                           <ion-select formControlName="templateId"  okText="Okay" 
                                 cancelText="Dismiss"  interface="popover">
                             <ion-option *ngFor="let template of templates"  value="{{template.id}}">
@@ -73,9 +73,9 @@
                   </ion-col>
               </ion-row>
               <ion-row *ngIf="comMode=='STUDENT'">
-                    <ion-col no-padding>
-                        <ion-item>
-                            <ion-label floating>Class*</ion-label>
+                    <ion-col >
+                        <ion-item no-lines>
+                            <ion-label >Class*</ion-label>
                             <ion-select formControlName="courses" multiple="true"
                             (ngModelChange)="findBatchByCourseIds($event)"
                                         okText="Okay" cancelText="Dismiss"  interface="popover">
@@ -86,9 +86,9 @@
                     </ion-col>
                 </ion-row>
                 <ion-row *ngIf="comMode=='STUDENT'">
-                    <ion-col no-padding>
-                        <ion-item>
-                            <ion-label floating>Section</ion-label>
+                    <ion-col >
+                        <ion-item no-lines>
+                            <ion-label >Section</ion-label>
                             <ion-select formControlName="batches" multiple="true"
                             (ngModelChange)="findStudentByBatchId($event)"
                                         okText="Okay" cancelText="Dismiss"  interface="popover">
@@ -99,9 +99,9 @@
                     </ion-col>
                 </ion-row>
                 <ion-row *ngIf="comMode=='STUDENT'">
-                        <ion-col no-padding>
-                            <ion-item>
-                                <ion-label floating>Student*</ion-label>
+                        <ion-col >
+                            <ion-item no-lines>
+                                <ion-label >Student*</ion-label>
                                 <ion-select formControlName="students" multiple="true"
                                             okText="Okay" cancelText="Dismiss"  interface="popover">
                                   <ion-option *ngFor="let st of students"
@@ -111,9 +111,9 @@
                         </ion-col>
                     </ion-row>
               <ion-row *ngIf="comMode=='STAFF'">
-                  <ion-col no-padding>
-                      <ion-item>
-                          <ion-label floating>Department*</ion-label>
+                  <ion-col >
+                      <ion-item no-lines>
+                          <ion-label >Department*</ion-label>
                           <ion-select formControlName="departments" (ngModelChange)="onStaff($event)"
                                       okText="Okay" cancelText="Dismiss"  interface="popover">
                             <ion-option  *ngFor="let dp of departments"
@@ -123,9 +123,9 @@
                   </ion-col>
               </ion-row>
               <ion-row *ngIf="comMode=='STAFF'">
-                  <ion-col no-padding>
-                      <ion-item>
-                          <ion-label floating>Staff</ion-label>
+                  <ion-col >
+                      <ion-item no-lines>
+                          <ion-label >Staff</ion-label>
                           <ion-select formControlName="staffs" multiple="true"
                                       okText="Okay" cancelText="Dismiss"  interface="popover">
                             <ion-option  *ngFor="let st of staffs"
@@ -135,9 +135,9 @@
                   </ion-col>
               </ion-row>
               <ion-row *ngIf="comMode=='GROUP'">
-                  <ion-col no-padding>
-                      <ion-item>
-                          <ion-label floating>Group*</ion-label>
+                  <ion-col >
+                      <ion-item no-lines>
+                          <ion-label >Group*</ion-label>
                           <ion-select formControlName="groups" multiple="true"
                                       okText="Okay" cancelText="Dismiss"  interface="popover">
                             <ion-option  *ngFor="let g of groups"
@@ -147,17 +147,17 @@
                   </ion-col>
               </ion-row>
               <ion-row>
-                  <ion-col no-padding>
-                      <ion-item>
-                          <ion-label floating>Subject*</ion-label>
+                  <ion-col >
+                      <ion-item no-lines>
+                          <ion-label class="stacked-lable" stacked>Subject*</ion-label>
                           <ion-input formControlName="subject" type="text" ></ion-input>
                         </ion-item>
                   </ion-col>
               </ion-row>
               <ion-row>
-                  <ion-col no-padding>
-                      <ion-item>
-                          <ion-label floating>Message*</ion-label>
+                  <ion-col >
+                      <ion-item no-lines>
+                          <ion-label class="stacked-lable" stacked>Message*</ion-label>
                           <ion-textarea elastic name="content"   rows="6" cols="40" 
                           formControlName="content"></ion-textarea>
                         </ion-item>
@@ -167,10 +167,17 @@
         </ion-list>
   </form>
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
     <ion-row >
         <ion-col>
             <button ion-button block color="secondary" (click)="onSave(bulkNotificationForm)" >Save</button>
         </ion-col>  
     </ion-row>   
-</ion-footer>
+</ion-footer> -->
+
+<ion-footer no-border>
+    <ion-toolbar transparent>
+      <button padding color="stable" class="form-item-rounder-items"
+       (click)="onSave(bulkNotificationForm)" ion-button full text-uppercase>Save</button>
+    </ion-toolbar>
+  </ion-footer>
