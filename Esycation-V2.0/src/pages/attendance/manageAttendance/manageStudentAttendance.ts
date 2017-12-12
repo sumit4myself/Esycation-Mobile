@@ -5,6 +5,7 @@ import {AttendanceService} from '../../../providers/service/attendance/attendanc
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {BaseComponent} from '../../baseComponent/base.component';
 
+
 @IonicPage()
 @Component({
   selector: 'manageAttendance-page',
