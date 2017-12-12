@@ -1,4 +1,223 @@
 <ion-header>
+    <ion-navbar color="ios-title-theme">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        Home
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content color="ios-page-theme">
+  
+  
+    <ion-slides pager="true" class="home-profile-slide">
+      <ion-slide *ngFor="let profile of homeProfilesDetails">
+        <ion-card>
+          <ion-item padding>
+            <ion-avatar item-start>
+              <img src="./assets/slide3.png">
+            </ion-avatar>
+            <h2 class="home-profile-slide-font-color">{{profile.name}}</h2>
+            <h3 class="home-profile-slide-font-color">{{profile.batch.name}} - {{profile.course.name}}</h3>
+          </ion-item>
+  
+  
+          <ion-row class="home-profile-slide-row">
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon class="home-profile-slide-font-color" name="ios-mail-outline"></ion-icon>
+                <div>
+                  <a class="home-profile-slide-font-color" href="mailto:{{profile.email}}">{{profile.email}}</a>
+                </div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon class="home-profile-slide-font-color" name="ios-call-outline"></ion-icon>
+                <div>
+                  <a class="home-profile-slide-font-color" href="tel:{{profile.mobile}}">{{profile.mobile}}</a>
+                </div>
+              </button>
+            </ion-col>
+  
+          </ion-row>
+        </ion-card>
+  
+      </ion-slide>
+  
+    </ion-slides>
+  
+  
+    <ion-card style="margin-bottom:30px;">
+      <ion-row padding class="home-profile-slide-row">
+        <h2 class="home-profile-slide-font-color"> Performace</h2>
+      </ion-row>
+      <canvas padding class="home-attendence-canvas" #performaceCanvas></canvas>
+  
+    </ion-card>
+  
+    <ion-slides pager="true" class="home-attendence-slide">
+      <ion-slide>
+        <ion-card>
+          <ion-row padding class="home-profile-slide-row">
+            <h2 class="home-profile-slide-font-color"> Weekly Attendance</h2>
+          </ion-row>
+          <canvas padding class="home-attendence-canvas" #weeklyAttendanceCanvas></canvas>
+        </ion-card>
+      </ion-slide>
+  
+      <ion-slide>
+        <ion-card>
+          <ion-row padding class="home-profile-slide-row">
+            <h2 class="home-profile-slide-font-color"> Monthly Attendance</h2>
+          </ion-row>
+         
+  
+          <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+            (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+            step="30">
+          </calendar>
+        </ion-card>
+      </ion-slide>
+  
+      <ion-slide>
+        <ion-card>
+          <ion-row padding class="home-profile-slide-row">
+            <h2 class="home-profile-slide-font-color"> Annualy Attendance</h2>
+          </ion-row>
+          <canvas padding class="home-attendence-canvas" #annualyAttendanceCanvas></canvas>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  
+    <ion-row *ngIf="false">
+      <ion-item no-lines class="content">
+        <div align="center">
+          <ion-spinner name="bubbles"></ion-spinner>
+        </div>
+  
+  
+        <ion-scroll scrollX="true">
+          <ion-card *ngFor="let profile of homeProfilesDetails" class="scroll-item -selectable-icon home-profile-card">
+  
+            <ion-item>
+              <ion-avatar item-start>
+                <img src="./assets/slide3.png">
+              </ion-avatar>
+              <h2>{{profile.name}}</h2>
+              <h3>{{profile.batch.name}} - {{profile.course.name}}</h3>
+            </ion-item>
+  
+  
+            <ion-row *ngIf="false">
+              <ion-col>
+                <button ion-button icon-left clear small>
+                  <ion-icon name="ios-mail-outline"></ion-icon>
+                  <div>
+                    <a href="mailto:{{profile.email}}">{{profile.email}}</a>
+                  </div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small>
+                  <ion-icon name="ios-call-outline"></ion-icon>
+                  <div>
+                    <a href="tel:{{profile.mobile}}">{{profile.mobile}}</a>
+                  </div>
+                </button>
+              </ion-col>
+  
+            </ion-row>
+  
+          </ion-card>
+        </ion-scroll>
+      </ion-item>
+    </ion-row>
+  
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <div align="center" sclass="home-items">
+                <ion-card class="home-items" text-center>
+                  <ion-icon name="ios-clipboard"></ion-icon>
+                  <div>Apply Leaves</div>
+                </ion-card>
+              </div>
+        </ion-col>
+        <ion-col>
+            <div align="center" sclass="home-items">
+                <ion-card class="home-items" text-center>
+                  <ion-icon name="ios-notifications"></ion-icon>
+                  <div>Holiday/Events</div>
+                </ion-card>
+              </div>
+        </ion-col>
+        <ion-col>
+          <div align="center" sclass="home-items">
+            <ion-card class="home-items" text-center>
+              <ion-icon name="notifications"></ion-icon>
+              <div>Notifications</div>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <div align="center" sclass="home-items">
+                <ion-card class="home-items" text-center>
+                  <ion-icon name="ios-bookmarks"></ion-icon>
+                  <div>Attender</div>
+                </ion-card>
+              </div>
+        </ion-col>
+        <ion-col>
+            <div align="center" sclass="home-items">
+                <ion-card class="home-items" text-center>
+                  <ion-icon name="bus"></ion-icon>
+                  <div>Transport Info</div>
+                </ion-card>
+              </div>
+        </ion-col>
+        <ion-col>
+            <div align="center" sclass="home-items">
+                <ion-card class="home-items" text-center>
+                  <ion-icon name="locate"></ion-icon>
+                  <div>GPS tracking</div>
+                </ion-card>
+              </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div style="height:80px;"></div>
+  
+  
+  </ion-content>
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ion-header>
     <ion-navbar color="ios-blue">
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -26,6 +245,5 @@
               </div>
         </ion-slide>
     </ion-slides>
-  
   </ion-content>         
-  
+   -->
