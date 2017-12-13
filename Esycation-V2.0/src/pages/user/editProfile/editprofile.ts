@@ -19,17 +19,22 @@ export class EditProfileComponent {
  segmentView:string;
  moduleType:String;
  imageId:string=null;
+ mySelectOptions : any={};  
+ 
  constructor(
     private formBuilder:FormBuilder,
     private loadingCtrl:LoadingController,
     private nav:Nav,
     private session:UserSessionService,
     private profileService:ProfileService) {
-
+    
       this.buildForm();
       this.segmentView="one";
       this.moduleType = this.session.findModule();
-      
+      this.mySelectOptions = {
+        mode :'ios',
+        cssClass: 'remove-ok'
+      }
     }
 
     buildForm(){

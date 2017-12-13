@@ -24,7 +24,7 @@
       <a *ngIf="profile.imageId==null">
         <img src="assets/img/default.png"> </a>
       <a *ngIf="profile.imageId!=null">
-        <img src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{profile.imageId}}">
+        <img class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{profile.imageId}}">
 
       </a>
       <h2 id="profile2-name">{{profile.name}}</h2>
@@ -33,10 +33,10 @@
 
 
 
-  <ion-list padding class="list-semi-transperent">
+  <ion-list  class="list-semi-transperent">
     <ion-item class="icon-align">
       <ion-avatar item-start>
-        <ion-icon name="md-mail" item-left></ion-icon>
+        <ion-icon name="ios-mail-outline" item-left></ion-icon>
       </ion-avatar>
       <p>Email</p>
       <h2 *ngIf="profile.email=='-'">N/A</h2>
@@ -45,14 +45,14 @@
     </ion-item>
     <ion-item class="icon-align">
       <ion-avatar item-start>
-        <ion-icon name="ios-call" item-left></ion-icon>
+        <ion-icon name="ios-call-outline" item-left></ion-icon>
       </ion-avatar>
       <p>Mobile</p>
       <h2>{{profile.mobile}}</h2>
     </ion-item>
     <ion-item class="icon-align">
       <ion-avatar item-start>
-        <ion-icon name="ios-water" item-left></ion-icon>
+        <ion-icon name="ios-water-outline" item-left></ion-icon>
       </ion-avatar>
       <p>Blood Group</p>
       <h2 *ngIf="profile.bloodGroup=='-'">N/A</h2>
@@ -60,15 +60,16 @@
     </ion-item>
     <ion-item class="icon-align">
         <ion-avatar item-start>
-            <ion-icon name="ios-calendar" item-left></ion-icon>
+            <ion-icon name="ios-calendar-outline" item-left></ion-icon>
           </ion-avatar>
       <p>Date Of Birth</p>
       <h2 *ngIf="profile.dob=='-'">N/A</h2>
       <h2 *ngIf="profile.dob!='-'">{{profile.dob}}</h2>
     </ion-item>
+    
     <ion-item class="icon-align" text-wrap>
         <ion-avatar item-start>
-            <ion-icon name="ios-pin" item-left></ion-icon>
+            <ion-icon name="ios-pin-outline" item-left></ion-icon>
           </ion-avatar>
       <p>Address</p>
       <h2>
@@ -84,13 +85,13 @@
       
     </ion-item>
   </ion-list>
-  <ion-note item-right>
-      <ion-fab bottom right edge class="pop-in" (click)="onEdit()">
-        <button ion-fab color="green">
-          <ion-icon name="ios-create" color="white"></ion-icon>
-        </button>
-      </ion-fab>
-    </ion-note>
+  <ion-fab bottom right (click)="onEdit()">
+      <button ion-fab>
+          <ion-icon name="ios-create" color="white"></ion-icon>  
+      </button>
+      
+    </ion-fab>
+  
   
 
 </ion-content>

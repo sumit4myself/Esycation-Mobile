@@ -27,7 +27,7 @@ import {NotificationService} from '../providers/service/notification/notificatio
     BrowserModule,HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-   
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

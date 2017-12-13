@@ -7,6 +7,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content class="content">
+    
     <div class="profile-header" color="lightblue"></div>
     <div class="profile">
         <div class="profile-box">
@@ -16,7 +17,7 @@
             <p *ngIf="imageId!=null">
                 <ion-img class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{imageId}}"></ion-img>
             </p>
-            <ion-segment mode="md" [(ngModel)]="segmentView" color="blue2">
+            <!-- <ion-segment mode="md" [(ngModel)]="segmentView" color="blue2">
                 <ion-segment-button value="one">
                     <ion-icon class="segment-font" name="ios-contact">&nbsp;&nbsp;About</ion-icon>
                 </ion-segment-button>
@@ -26,38 +27,45 @@
                 <ion-segment-button value="three">
                     <ion-icon class="segment-font" name="settings">&nbsp;&nbsp;Settings</ion-icon>
                 </ion-segment-button>
-            </ion-segment>
+            </ion-segment> -->
+            
             <form [formGroup]="profileForm">
-                <ion-list no-lines class="edit-profile-list" no-padding>
-                    <div *ngIf="segmentView==='one'">
+                <ion-list no-liness class="edit-profile-list" no-padding>
+                    <!-- <div *ngIf="segmentView==='one'"> -->
+                            <ion-list-header color="ios-blue" class="list-item-header">
+                                    <p>About</p>
+                                  </ion-list-header>
                         <ion-item>
-                            <ion-label color="darkGray" floating>name *
+                            <ion-label color="darkGray" stacked>Name *
                                 <p class="error" *ngIf="!profileForm.controls['name'].valid">This field is required *</p>
                             </ion-label>
                             <ion-input formControlName="name" type="text">
                             </ion-input>
                         </ion-item>
+                        
                         <ion-item>
-                            <ion-label color="darkGray" floating>Gender *
+                            <ion-label color="darkGray" stacked>Gender *
                                 <p class="error" *ngIf="!profileForm.controls['gender'].valid">This field is required *</p>
                             </ion-label>
-                            <ion-select formControlName="gender">
+                            
+                            <ion-select  
+                            formControlName="gender" [selectOptions]="mySelectOptions">
                                 <ion-option value="Male">Male</ion-option>
                                 <ion-option value="Female">Female</ion-option>
                             </ion-select>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Date Of Birth *
+                            <ion-label color="darkGray" stacked>Date Of Birth *
                                 <p class="error" *ngIf="!profileForm.controls['dob'].valid">This field is required *</p>
                             </ion-label>
                             <ion-datetime formControlName="dob" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
                             </ion-datetime>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Blood Group *
+                            <ion-label color="darkGray" stacked>Blood Group *
                                 <p class="error" *ngIf="!profileForm.controls['bloodGroup'].valid">This field is required *</p>
                             </ion-label>
-                            <ion-select formControlName="bloodGroup">
+                            <ion-select [selectOptions]="mySelectOptions" formControlName="bloodGroup">
                                 <ion-option value="A+">A+</ion-option>
                                 <ion-option value="A-">A-</ion-option>
                                 <ion-option value="B+">B+</ion-option>
@@ -69,94 +77,100 @@
                             </ion-select>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Mobile Number *
+                            <ion-label color="darkGray" stacked>Mobile Number *
                                 <p class="error" *ngIf="!profileForm.controls['mobile'].valid">This field is required *</p>
                             </ion-label>
                             <ion-input formControlName="mobile" type="text"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Email *
+                            <ion-label color="darkGray" stacked>Email *
                                 <p class="error" *ngIf="!profileForm.controls['email'].valid">This field is required *</p>
                             </ion-label>
                             <ion-input formControlName="email" type="text"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Adhar Number</ion-label>
+                            <ion-label color="darkGray" stacked>Adhar Number</ion-label>
                             <ion-input formControlName="adharNumber" type="text"></ion-input>
                         </ion-item>
-                    </div>
-                    <div *ngIf="segmentView==='two'">
+                    <!-- </div> -->
+                    <!-- <div *ngIf="segmentView==='two'"> -->
+                            <ion-list-header color="ios-blue" class="list-item-header">
+                                    <p>Address</p>
+                                  </ion-list-header>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Address 1 *
+                            <ion-label color="darkGray" stacked>Address 1 *
                                 <p class="error" *ngIf="!profileForm.controls['address1'].valid">This field is required *</p>
                             </ion-label>
                             <ion-input formControlName="address1" type="text"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Address 2</ion-label>
+                            <ion-label color="darkGray" stacked>Address 2</ion-label>
                             <ion-input formControlName="address2" type="text"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>City *
+                            <ion-label color="darkGray" stacked>City *
                                 <p class="error" *ngIf="!profileForm.controls['city'].valid">This field is required *</p>
                             </ion-label>
                             <ion-input formControlName="city" type="text"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>State *
+                            <ion-label color="darkGray" stacked>State *
                                 <p class="error" *ngIf="!profileForm.controls['state'].valid">This field is required *</p>
                             </ion-label>
                             <ion-input formControlName="state" type="text"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label color="darkGray" floating>Pin Code *
+                            <ion-label color="darkGray" stacked>Pin Code *
                                 <p class="error" *ngIf="!profileForm.controls['pinCode'].valid">This field is required *</p>
                             </ion-label>
                             <ion-input formControlName="pinCode" type="text"></ion-input>
                         </ion-item>
-                    </div>
-                    <div *ngIf="segmentView==='three'">
+                    <!-- </div> -->
+                    <!-- <div *ngIf="segmentView==='three'"> -->
+                            <ion-list-header color="ios-blue" class="list-item-header">
+                                    <p>Settings</p>
+                                  </ion-list-header>
                         <span *ngIf="moduleType=='STAFF'">
                             <ion-item>
-                                <ion-label color="darkGray" floating>In Time </ion-label>
+                                <ion-label color="darkGray" stacked>In Time </ion-label>
                                 <ion-datetime formControlName="inTime" pickerFormat="HH:mm" displayFormat="HH:mm">
                                 </ion-datetime>
                             </ion-item>
                             <ion-item>
-                                <ion-label color="darkGray" floating>Out Time </ion-label>
+                                <ion-label color="darkGray" stacked>Out Time </ion-label>
                                 <ion-datetime formControlName="outTime" pickerFormat="HH:mm" displayFormat="HH:mm">
                                 </ion-datetime>
                             </ion-item>
                             <ion-item>
-                                <ion-label color="darkGray" floating>Identification Marks </ion-label>
+                                <ion-label color="darkGray" stacked>Identification Marks </ion-label>
                                 <ion-input formControlName="identificationMarks" type="text"></ion-input>
                             </ion-item>
                         </span>
                         <span *ngIf="moduleType=='GUARDIAN'">
                             <ion-item>
-                                <ion-label color="darkGray" floating>Annual Income </ion-label>
+                                <ion-label color="darkGray" stacked>Annual Income </ion-label>
                                 <ion-input formControlName="annualIncome" type="text"></ion-input>
                             </ion-item>
                             <ion-item>
-                                <ion-label color="darkGray" floating>Occupation </ion-label>
+                                <ion-label color="darkGray" stacked>Occupation </ion-label>
                                 <ion-input formControlName="occupation" type="text"></ion-input>
                             </ion-item>
                         </span>
                         <span *ngIf="moduleType=='STUDENT'">
                             <ion-item>
-                                <ion-label color="darkGray" floating>Nationality</ion-label>
+                                <ion-label color="darkGray" stacked>Nationality</ion-label>
                                 <ion-input formControlName="nationality" type="text"></ion-input>
                             </ion-item>
                             <ion-item>
-                                <ion-label color="darkGray" floating>Religion </ion-label>
+                                <ion-label color="darkGray" stacked>Religion </ion-label>
                                 <ion-input formControlName="religion" type="text"></ion-input>
                             </ion-item>
                             <ion-item>
-                                <ion-label color="darkGray" floating>Mother Tongue </ion-label>
+                                <ion-label color="darkGray" stacked>Mother Tongue </ion-label>
                                 <ion-input formControlName="motherTongue" type="text"></ion-input>
                             </ion-item>
                         </span>
-                    </div>
+                    <!-- </div> -->
                 </ion-list>
             </form>
         </div>
