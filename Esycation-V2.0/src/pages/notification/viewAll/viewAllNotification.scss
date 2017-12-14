@@ -4,4 +4,28 @@ view-all-notification-page{
     -ms-flex-align:  flex-start !important;
     align-items:  flex-start !important;
 }
+
+.unread-notification{
+  color:#2AACD8;
+}
+
+
+.noti-tag{
+  padding:3px;
+  padding-left:8px;
+  padding-right:8px;
+  font-size:12px;
+  border: 1px solid #2AACD8;
+  border-radius: 5px;
+}
+.list-time{
+  margin-top: 5px;
+  text-align:right !important;
+  font-size: 12px;
+  color: rgb(141, 141, 141) !important;
+}
+.notification-list ion-item{
+  border-top: 1px solid #dedede !important;  
+}
+
 }

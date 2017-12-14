@@ -1,11 +1,21 @@
 manageAttendance-page{
  
 
-    .small{
-        font-size: 1rem;
+    .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input {
+        margin-left: 8px  !important;
+    }
+
+    .item-md{
+        padding-left: 15px  !important;
     }
 
     .item-padding{
         padding : 1rem;
     }
+
+    .attendance-list ion-item{
+        border-top: 1px solid #dedede !important;  
+    }
+
+
 }

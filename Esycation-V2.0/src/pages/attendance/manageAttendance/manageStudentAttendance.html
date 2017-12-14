@@ -16,10 +16,9 @@
 </ion-header>
 
 
-<ion-content padding>
-
-
-    <ion-list>
+<ion-content>
+    
+    <ion-list no-lines class="attendance-list">
       <!-- <ion-item no-padding style="height:60px;">
         <ion-list-header no-lines style="padding-top:20px; margin-left:50px;">
             <h2>Class</h2>
@@ -28,14 +27,14 @@
         </ion-item> -->
         <ion-item *ngFor="let batch of batches" 
         (click)="onAttendanceMark(batch.id,batch.courseId.id)">
-        <ion-icon *ngIf="batch.ismarkedAttendance==true" item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
-        <ion-icon *ngIf="!batch.ismarkedAttendance==true" item-start  color="light" name="ios-timer-outline"></ion-icon>
+        <ion-icon *ngIf="batch.ismarkedAttendance==true"  item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
+        <ion-icon *ngIf="!batch.ismarkedAttendance==true" item-start  color="lightGray" name="ios-timer-outline"></ion-icon>
         
         {{batch.courseId.name}}
           <p>
               {{batch.name}} - {{batch.code}}
           </p>
-            <ion-icon color="dark" item-end name="ios-arrow-forward-outline"></ion-icon>
+            <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
         </ion-item>
       </ion-list>
 

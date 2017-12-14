@@ -42,6 +42,7 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222,
 darkGray:   #333333,
+lightGray:   #D3D3D3,
 stable:#32db64,
 tertiary:   #FF4653,
 
@@ -150,6 +151,10 @@ tertiary:   #FF4653,
       ios-gray:(
     base: #8e8e93,
     contrast: #ffffff
+  ),
+  ios-light-gray:(
+    base: #D3D3D3,
+    contrast: #0f0f0f
   ),
       ios-lightblue:(
     base: #5ac8fa,

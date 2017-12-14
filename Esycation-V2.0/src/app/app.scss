@@ -65,10 +65,12 @@
     margin: auto;
     // width: 50%;
     // margin-top: 10px;
-    margin-bottom: 20px;
-    padding: 5px 15px;
-    background-color: #fff;
-    color:#000;
+    // margin-bottom: 20px;
+    // padding: 5px 15px;
+    padding: 5px 5px;
+    background-color: #2AACD8 !important;;
+    
+    color:#ffffff;
     .name {
       margin-top:8px;
       font-weight: 500;
@@ -151,7 +153,19 @@
 
 .ion-content{
   background-color: #E9EFFB;
+  // background-image: url('../assets/appbg.jpg') !important;
+  // opacity:0.3;
 }
 .content-md{
   background-color: #E9EFFB;
+  // background-image: url('../assets/appbg.jpg') !important;
+  // opacity:0.3;
+}
+
+.list-header-md {
+  margin-bottom: 0px !important;
+}
+
+.menu-pages-items{
+  border-top: 1px solid #dedede !important;  
 }

@@ -12,7 +12,7 @@ edit-profile-page{
     
       .profile-header{
           position: relative;
-          height: 160px;
+          height: 120px;
           background-color: rgb(26, 177, 241);
           -webkit-background-size: cover;
           -moz-background-size: cover;
@@ -164,13 +164,15 @@ edit-profile-page{
       //************ Fading header  **********//
       .show-background{
         border-style: none;
-        background : color($colors, green)
+        background : color($colors, green);
+        height: 10px;
       }
       .transition{
          transition: font-size .3s ease-in;
       }
       .error{
         color: red !important;
+        font-size: 10px;
       }
 
 
@@ -184,18 +186,22 @@ edit-profile-page{
       }
 
       .edit-profile-list ion-label{
-        font-size:16px !important;
-        font-weight: bold;
-        color: black;
-      }
-
-      .edit-profile-list ion-input, ion-select, ion-datetime {
-        font-size:13px !important;
+        font-size:12px !important;
+        // font-weight: bold;
         color: gray;
       }
 
+      .edit-profile-list ion-input, ion-select, ion-datetime {
+        font-size:16px !important;
+        color: black;
+      }
 
-      
+
+      .update-button{
+        width: 180px;
+        margin-bottom: 80px;
+        margin-top: 30px;
+      }
 
       .segment-font{
         font-size: 18px !important;
@@ -203,12 +209,13 @@ edit-profile-page{
   
       .list-item-header{
         margin-bottom:2px;margin-top:15px;
-        color: white !important;
+        color: #0f0f0f !important;
+        text-align:left;
       }
 
       .list-item-header p{
         font-size:16px !important;
-        color: white !important;
+        // color: white !important;
       }
 
       .remove-ok {
@@ -240,3 +247,9 @@ edit-profile-page{
     }
   
   }
+
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: #32db64;
+    -webkit-box-shadow: inset 0 1px 0 0 #32db64 !important;
+    box-shadow: inset 0 1px 0 0 #32db64 !important;
+}

@@ -32,9 +32,8 @@
   </aside>
 
 
-
   <ion-list  class="list-semi-transperent">
-    <ion-item class="icon-align">
+    <ion-item no-lines class="icon-align bottom-border">
       <ion-avatar item-start>
         <ion-icon name="ios-mail-outline" item-left></ion-icon>
       </ion-avatar>
@@ -43,14 +42,14 @@
       <h2 *ngIf="profile.email!='-'">{{profile.email}}</h2>
       <div [innerHTML]="(profile2 | async)?.openingTime" class="opening-time"></div>
     </ion-item>
-    <ion-item class="icon-align">
+    <ion-item no-lines class="icon-align bottom-border">
       <ion-avatar item-start>
         <ion-icon name="ios-call-outline" item-left></ion-icon>
       </ion-avatar>
       <p>Mobile</p>
       <h2>{{profile.mobile}}</h2>
     </ion-item>
-    <ion-item class="icon-align">
+    <ion-item no-lines class="bottom-border" class="icon-align bottom-border">
       <ion-avatar item-start>
         <ion-icon name="ios-water-outline" item-left></ion-icon>
       </ion-avatar>
@@ -58,7 +57,7 @@
       <h2 *ngIf="profile.bloodGroup=='-'">N/A</h2>
       <h2 *ngIf="profile.bloodGroup!='-'">{{profile.bloodGroup}}</h2>
     </ion-item>
-    <ion-item class="icon-align">
+    <ion-item no-lines class="bottom-border" class="icon-align bottom-border">
         <ion-avatar item-start>
             <ion-icon name="ios-calendar-outline" item-left></ion-icon>
           </ion-avatar>
@@ -67,7 +66,7 @@
       <h2 *ngIf="profile.dob!='-'">{{profile.dob}}</h2>
     </ion-item>
     
-    <ion-item class="icon-align" text-wrap>
+    <ion-item class="icon-align" no-lines class="bottom-border bottom-border" text-wrap>
         <ion-avatar item-start>
             <ion-icon name="ios-pin-outline" item-left></ion-icon>
           </ion-avatar>
@@ -78,8 +77,8 @@
             ,{{profile.address2}}
           </span>
           <span>,
-            <b>City:</b> {{profile.city}},
-            <b>State :</b> {{profile.state}} - {{profile.pinCode}}
+            City: {{profile.city}},
+            State : {{profile.state}} - {{profile.pinCode}}
           </span>
       </h2>
       

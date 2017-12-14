@@ -4,8 +4,8 @@
     <ion-content>
 
 <!--***********  Side menu for android ***********-->
-      <div id="menu-material" showWhen="android">
-          <ion-header class="menu-header" (click)="onViewProfile()">      
+      <!-- <div id="menu-material" showWhen="android">
+          <ion-header class="menu-header" menuClose (click)="onViewProfile()">      
             <p *ngIf="userPrefernce.imageId==null"><img class="user-avatar round" src="assets/img/default.png" ></p>
             <p *ngIf="userPrefernce.imageId!=null">
                 <img class="user-avatar round" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{userPrefernce.imageId}}">
@@ -13,7 +13,6 @@
             <p class="name">{{userPrefernce.fullName}}  </p>
             <p class="email">{{userPrefernce.email}}</p>    
           </ion-header>
-      <!--***********  Menu for android  ***********-->
           <div class="list-box">
             <ion-list  no-lines>
                 <div >
@@ -55,7 +54,7 @@
 
             </ion-list>
           </div>
-      </div>
+      </div> -->
 
 
 
@@ -63,8 +62,8 @@
 
 <!--***********  Header for ios ***********-->
   
-    <div id="menu-ios" showWhen="ios" class="sideMenu-header"  color="gray">
-        <div class="menu-header" (click)="onViewProfile()">
+    <div id="menu-ios" sshowWhen="ios" class="sideMenu-header"  color="gray">
+        <div class="menu-header" menuClose (click)="onViewProfile()">
             <p *ngIf="userPrefernce.imageId==null"><img class="user-avatar round" src="assets/img/default.png" ></p>
             <p *ngIf="userPrefernce.imageId!=null">
                 <img class="user-avatar round" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{userPrefernce.imageId}}">
@@ -74,8 +73,8 @@
         </div>
       <!--***********  menu ***********-->
         <ion-list no-lines>
-            <div >
-                <ion-item tappable  (click)="toggleUsers(userShow)">
+            <div>
+                <ion-item  tappable  (click)="toggleUsers(userShow)">
                     <ion-icon color="gray" name="ios-people" item-left ></ion-icon>
                      Accounts
                     <ion-icon item-right [name]="icon"></ion-icon>
@@ -91,8 +90,24 @@
                       </ion-item>
                   </div>
             </div>
+            <ion-item menuClose (click)="openHome()" class="menu-pages-items">
+                    <ion-icon 
+                    color="gray" name="ios-home-outline" item-left></ion-icon>
+                    Home
+            </ion-item>
           <div *ngFor="let d of menu">
-            <ion-item tappable  (click)="toggleDetails(d)">
+                <ion-list-header>
+                        <ion-icon  color="gray" [name]="d.iconLeft" item-left></ion-icon>
+                          {{d.title}}
+                        <!-- <ion-icon item-right [name]="d.icon"></ion-icon> -->
+                      </ion-list-header>
+                          <div class="sub-menu">
+                                <ion-item tappable  menuClose item-right
+                                 *ngFor="let item of d.items" (click)="openPage(item)" >
+                                    <div >{{item.name}}</div>             
+                                </ion-item>
+                          </div>
+            <!-- <ion-item tappable  (click)="toggleDetails(d)">
               <ion-icon  color="gray" [name]="d.iconLeft" item-left></ion-icon>
                 {{d.title}}
               <ion-icon item-right [name]="d.icon"></ion-icon>
@@ -101,9 +116,9 @@
                       <ion-item tappable  menuClose item-right *ngFor="let item of d.items" (click)="openPage(item)" >
                           <div >{{item.name}}</div>             
                       </ion-item>
-                </div>
+                </div> -->
           </div> 
-          <div *ngFor="let p of pages">
+          <div class="menu-pages-items" *ngFor="let p of pages">
               <ion-item menuClose (click)="openPage(p)">
                 <ion-icon  [name]="p.icon" color="gray"item-left></ion-icon>
                   {{p.title}}
@@ -115,7 +130,7 @@
 
 
 <!--***********  Side menu for PWA ***********-->
-      <div id="menu-pwa" hideWhen="android,ios">
+      <!-- <div id="menu-pwa" hideWhen="android,ios">
         <div class="menu-header" (click)="onViewProfile()">
             <p *ngIf="userPrefernce.imageId==null"><img class="user-avatar round" src="assets/img/default.png" ></p>
             <p *ngIf="userPrefernce.imageId!=null">
@@ -166,7 +181,7 @@
 
             </ion-list>
           </div>
-      </div>
+      </div> -->
   </ion-content>
 </ion-menu>
 
