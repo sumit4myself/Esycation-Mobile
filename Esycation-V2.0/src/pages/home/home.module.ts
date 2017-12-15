@@ -5,6 +5,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
 
 @NgModule({
  imports: [
+
+    
     NgCalendarModule,
     IonicPageModule.forChild(HomeComponent),
  

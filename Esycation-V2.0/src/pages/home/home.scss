@@ -72,11 +72,14 @@ home-page {
   }
 
   .home-profile-slide{
-    height:185px !important;
+    margin-top: 10px;
+    // height:300px !important;
+    // height:300px !important;
   }
 
   .home-attendence-slide{
     height:380px !important;
+    padding: 10px;
   }
 
   .swiper-pagination-bullet-active {
@@ -97,7 +100,10 @@ home-page {
   }
   
   .home-items{
-    background:#2AACD8;color:white;padding-top:30px;padding-bottom:30px;
+    background:#2AACD8;
+    color:white;
+    padding-top:30px;
+    padding-bottom:30px;
   }
 
 
@@ -191,6 +197,202 @@ home-page {
     }
   }
 
+
+
+
+
+
+.expandUp {
+  animation-name: expandUp;
+  -webkit-animation-name: expandUp;
+  animation-duration: 0.7s;
+  -webkit-animation-duration: 0.7s;
+  animation-timing-function: ease;
+  -webkit-animation-timing-function: ease;
+  visibility: visible !important;
+}
+
+@keyframes expandUp {
+  0% {
+    transform: translateY(100%) scale(0.6) scaleY(0.5);
+  }
+  60% {
+    transform: translateY(-7%) scaleY(1.12);
+  }
+  75% {
+    transform: translateY(3%);
+  }
+  100% {
+    transform: translateY(0%) scale(1) scaleY(1);
+  }
+}
+
+@-webkit-keyframes expandUp {
+  0% {
+    -webkit-transform: translateY(100%) scale(0.6) scaleY(0.5);
+  }
+  60% {
+    -webkit-transform: translateY(-7%) scaleY(1.12);
+  }
+  75% {
+    -webkit-transform: translateY(3%);
+  }
+  100% {
+    -webkit-transform: translateY(0%) scale(1) scaleY(1);
+  }
+}
+
+
+
+.top-container {
+  width: 95%;
+  background-color: white;
+  margin: 0 auto;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+/*------ the HEAD ------*/
+
+.head {
+  overflow: auto;
+  padding: 20px 10px 20px 10px;
+  background: white;
+  border-radius: 5px 5px 0 0;
+  font-size: 1.2em;
+  color: gray;
+}
+
+
+.circular--portrait {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  background-size: 80px;
+  // border-radius: 100%;
+  margin-right: 20px;
+}
+
+.circular--portrait img {
+  width: 100%;
+  height: auto;
+}
+
+
+.head-img{
+  
+    position: relative;
+    top:20px;
+    left: 10px;
+    display: block;
+    float: left;
+    text-align:left !important;
+
+}
+
+
+// .head:before {
+//   content: "";
+//   display: block;
+//   float: left;
+//   width: 80px;
+//   height: 80px;
+//   margin-right: 20px;
+//   background: url("https://www.brainpickings.org/wp-content/uploads/2014/03/georgelucas.jpg") no-repeat;
+//   background-size: 80px;
+//   border-radius: 100%;
+// }
+
+.head h1 {
+  margin: 15px 0 5px;
+  font-weight: 50;
+  font-size: 18px;
+  text-align: left;
+  color: gray;
+}
+
+
+.head h3 {
+  font-weight: 20;
+  font-size: 13px;
+  text-align: left;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.performance{
+  margin-bottom:30px;
+  margin-top:20px;
+}
+
+.performance h3 {
+  font-weight: 50;
+  font-size: 18px;
+  margin-left: 20px;
+  text-align: left;
+  color: black !important;
+  // margin-bottom: 20px;
+} 
+
+.grid-items-lable{
+  font-size: 12px;
+}
+
+.home-attendence-slide h4{
+  font-weight: 50;
+  font-size: 18px;
+  margin-left: 20px;
+  text-align: left;
+  color: black !important;
+  // margin-bottom: 20px;
+} 
+
+
+/* --- FOOT --- */
+
+.foot {
+  /*height: 100px;*/
+}
+
+[class^="footItem"] {
+  display: inline-block;
+  width: 50%;
+  padding: 15px 0;
+  text-align: center;
+  color: rgba(255, 255, 255, .8);
+  font-size: 1.1em;
+}
+
+[class^="footItem"] i {
+  display: block;
+  font-size: .4em;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+
+.student-profile-icons{
+  font-size: 18px !important;
+}
+
+.footItem1,
+.footItem2,
+.footItem3 {
+  background-color: #213F48;
+}
+
+.footItem1 {
+  border-radius: 0 0 0 5px;
+  border-right: 0.5px solid #447076;
+}
+
+.footItem3 {
+  border-radius: 0 0 5px 0;
+  border-left: 0.5px solid #447076;
+}
+
   }
   
 
@@ -268,3 +470,7 @@ home-page {
 
 //   }
   
+
+
+
+

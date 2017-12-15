@@ -1,5 +1,6 @@
+
 <ion-header>
-    <ion-navbar color="ios-title-theme">
+    <ion-navbar color="ios-blue">
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
@@ -8,86 +9,87 @@
       </ion-title>
     </ion-navbar>
   </ion-header>
-  <ion-content color="ios-page-theme">
-  
-  
-    <ion-slides pager="true" class="home-profile-slide">
-      <ion-slide *ngFor="let profile of homeProfilesDetails">
-        <ion-card>
-          <ion-item padding>
-            <ion-avatar item-start>
-              <img src="./assets/slide3.png">
-            </ion-avatar>
-            <h2 class="home-profile-slide-font-color">{{profile.name}}</h2>
-            <h3 class="home-profile-slide-font-color">{{profile.batch.name}} - {{profile.course.name}}</h3>
-          </ion-item>
-  
-  
-          <ion-row class="home-profile-slide-row">
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon class="home-profile-slide-font-color" name="ios-mail-outline"></ion-icon>
-                <div>
-                  <a class="home-profile-slide-font-color" href="mailto:{{profile.email}}">{{profile.email}}</a>
-                </div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon class="home-profile-slide-font-color" name="ios-call-outline"></ion-icon>
-                <div>
-                  <a class="home-profile-slide-font-color" href="tel:{{profile.mobile}}">{{profile.mobile}}</a>
-                </div>
-              </button>
-            </ion-col>
-  
-          </ion-row>
-        </ion-card>
+  <ion-content style="background-color:white !important;">
+      <div>
+         
+    <ion-slides pager="false" class="home-profile-slide">
+      <ion-slide  *ngFor="let profile of homeProfilesDetails">
+          <div class="expandUp top-container">
+            <div class="head-img" style="text-align:left !important;">
+                <div class="circular--portrait">
+                    <img src="https://www.brainpickings.org/wp-content/uploads/2014/03/georgelucas.jpg" />
+                  </div>
+            </div>  
+            
+            <div class="head">
+               
+                <h1>{{profile.name}}</h1> 
+                <h3>{{profile.batch.name}} - {{profile.course.name}}</h3>
+              </div>
+              
+              <div class="foot">
+                <a href="mailto:{{profile.email}}" class="footItem1">
+                    <ion-icon name="ios-mail-outline"></ion-icon>
+                  <i></i></a><a href="tel:{{profile.mobile}}" class="footItem3">
+                      <ion-icon  name="ios-call-outline"></ion-icon><i></i></a>
+              </div>
+            </div>
+       
   
       </ion-slide>
   
     </ion-slides>
+  </div>
   
+  <div class="performance">
+    <h3>Performance</h3>
+      <!-- <ion-row padding class="home-profile-slide-row"> -->
+        <!-- <h2 class="home-profile-slide-font-color"> Performace</h2> -->
+      <!-- </ion-row> -->
+      <canvas padding class="home-attendence-canvas" #performaceCanvas></canvas>
   
-    <ion-card style="margin-bottom:30px;">
+    </div>
+    <!-- <ion-card style="margin-bottom:30px;margin-top:20px;">
       <ion-row padding class="home-profile-slide-row">
         <h2 class="home-profile-slide-font-color"> Performace</h2>
       </ion-row>
       <canvas padding class="home-attendence-canvas" #performaceCanvas></canvas>
   
-    </ion-card>
+    </ion-card> -->
   
-    <ion-slides pager="true" class="home-attendence-slide">
-      <ion-slide>
-        <ion-card>
-          <ion-row padding class="home-profile-slide-row">
+    <ion-slides pager="false" class="home-attendence-slide">
+      <!-- <ion-slide>
+        <div style="text-align:left;"> -->
+          <!-- <ion-row padding class="home-profile-slide-row">
             <h2 class="home-profile-slide-font-color"> Weekly Attendance</h2>
-          </ion-row>
+          </ion-row> -->
+          <!-- <h4>Weekly Attendance</h4>
           <canvas padding class="home-attendence-canvas" #weeklyAttendanceCanvas></canvas>
-        </ion-card>
-      </ion-slide>
+        </div>
+      </ion-slide> -->
   
       <ion-slide>
-        <ion-card>
-          <ion-row padding class="home-profile-slide-row">
+        <div style="text-align:left;">
+          <!-- <ion-row padding class="home-profile-slide-row">
             <h2 class="home-profile-slide-font-color"> Monthly Attendance</h2>
-          </ion-row>
-         
+          </ion-row> -->
+          <h4>Monthly Attendance</h4>
   
           <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
             (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
             step="30">
           </calendar>
-        </ion-card>
+        </div>
       </ion-slide>
   
       <ion-slide>
-        <ion-card>
-          <ion-row padding class="home-profile-slide-row">
+        <div style="text-align:left;">
+          <!-- <ion-row padding class="home-profile-slide-row">
             <h2 class="home-profile-slide-font-color"> Annualy Attendance</h2>
-          </ion-row>
+          </ion-row> -->
+          <h4>Annualy Attendance</h4>
           <canvas padding class="home-attendence-canvas" #annualyAttendanceCanvas></canvas>
-        </ion-card>
+        </div>
       </ion-slide>
     </ion-slides>
   
@@ -139,52 +141,52 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-            <div align="center" sclass="home-items">
+            <div align="center">
                 <ion-card class="home-items" text-center>
                   <ion-icon name="ios-clipboard"></ion-icon>
-                  <div>Apply Leaves</div>
+                  <div class="grid-items-lable">Apply Leaves</div>
                 </ion-card>
               </div>
         </ion-col>
         <ion-col>
-            <div align="center" sclass="home-items">
+            <div align="center">
                 <ion-card class="home-items" text-center>
                   <ion-icon name="ios-notifications"></ion-icon>
-                  <div>Holiday/Events</div>
+                  <div class="grid-items-lable">Holiday/Events</div>
                 </ion-card>
               </div>
         </ion-col>
         <ion-col>
-          <div align="center" sclass="home-items">
+          <div align="center">
             <ion-card class="home-items" text-center>
               <ion-icon name="notifications"></ion-icon>
-              <div>Notifications</div>
+              <div class="grid-items-lable">Notifications</div>
             </ion-card>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-            <div align="center" sclass="home-items">
+            <div align="center">
                 <ion-card class="home-items" text-center>
                   <ion-icon name="ios-bookmarks"></ion-icon>
-                  <div>Attender</div>
+                  <div class="grid-items-lable">Attender</div>
                 </ion-card>
               </div>
         </ion-col>
         <ion-col>
-            <div align="center" sclass="home-items">
+            <div align="center">
                 <ion-card class="home-items" text-center>
                   <ion-icon name="bus"></ion-icon>
-                  <div>Transport Info</div>
+                  <div class="grid-items-lable">Transport Info</div>
                 </ion-card>
               </div>
         </ion-col>
         <ion-col>
-            <div align="center" sclass="home-items">
+            <div align="center">
                 <ion-card class="home-items" text-center>
                   <ion-icon name="locate"></ion-icon>
-                  <div>GPS tracking</div>
+                  <div class="grid-items-lable">GPS tracking</div>
                 </ion-card>
               </div>
         </ion-col>
@@ -247,3 +249,5 @@
     </ion-slides>
   </ion-content>         
    -->
+
+
