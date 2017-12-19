@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="ios-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notification</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content fullscreen=""  no-paddding shrink-header>
+    
+  <ion-card >
+    
+    <ion-card-content>
+      <ion-card-title ion-button icon-left clear color="gray">
+        {{notification.notificationId.template.subject}}
+      </ion-card-title>
+      <p [innerHTML]="notification.message | slice:0:230"></p>
+    </ion-card-content>
+    
+    <!--
+    <ion-row>
+        <ion-col center text-center> 
+          <button ion-button icon-left clear color="pink">     
+            <div>File</div>
+          </button>
+        </ion-col>
+    </ion-row>
+  -->
+  </ion-card>
+
+</ion-content>
