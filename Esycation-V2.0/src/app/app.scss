@@ -151,14 +151,21 @@
   }
 }
 
+.app-error{
+  font-weight: 50;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: red !important;
+}
+
 .ion-content{
   background-color: #E9EFFB;
-  // background-image: url('../assets/appbg.jpg') !important;
+  // background-image: url('../assets/appbg.jpg');
   // opacity:0.3;
 }
 .content-md{
   background-color: #E9EFFB;
-  // background-image: url('../assets/appbg.jpg') !important;
+  // background-image: url('../assets/appbg.jpg');
   // opacity:0.3;
 }
 
@@ -169,3 +176,40 @@
 .menu-pages-items{
   border-top: 1px solid #dedede !important;  
 }
+
+// primary:    #488aff,
+// secondary:  #32db64,
+// danger:     #f53d3d,
+// light:      #f4f4f4,
+// dark:       #222,
+// darkGray:   #333333,
+// lightGray:   #D3D3D3,
+// stable:#32db64,
+.toast-secondary{
+    > div{
+    background-color:#32db64!important;
+    color: white!important;
+  }
+}
+
+.toast-primary{
+  > div{
+  background-color:#488aff!important;
+  color: white!important;
+}
+}
+
+.toast-stable{
+  > div{
+  background-color:#32db64!important;
+  color: white!important;
+}
+}
+
+.toast-danger{
+  > div{
+  background-color:#f53d3d!important;
+  color: white!important;
+}
+}
+

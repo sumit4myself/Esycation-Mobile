@@ -91,7 +91,11 @@ export class MyApp {
     }
   }
 
+  openHome(){
+    this.nav.setRoot("HomeComponent").catch(err => console.error(err));
+  }
   openPage(page) {
+    console.log(page);
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     // page.component = item array.component --> 

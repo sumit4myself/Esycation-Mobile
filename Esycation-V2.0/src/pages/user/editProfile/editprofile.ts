@@ -37,6 +37,7 @@ export class EditProfileComponent {
       }
     }
 
+    
     buildForm(){
 
       this.profileForm = this.formBuilder.group({

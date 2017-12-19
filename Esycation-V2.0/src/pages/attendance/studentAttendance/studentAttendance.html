@@ -14,7 +14,7 @@
     <ion-title>Attendance</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
   <ion-list >
     <ion-item *ngFor="let student of students; let count = index" 
     [ngClass]="{'persent': student.present==true, 'absent': student.absent==true}" (click)="onTouch(count)">
@@ -24,30 +24,16 @@
       </ion-avatar>
       <ion-avatar item-left *ngIf="student.imageId!=null">
         <img  class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{student.imageId}}">
-      
       </ion-avatar>
+        
+            {{student.name}}
+        
         <p>
-           <span color="primary">{{student.name}}</span>&nbsp; 
-            
-        </p>
-        <p>
-          <span class="small" >
-                &nbsp; <b>Roll Number :</b> {{student.admissionId.registrations[0].rollNumber}}
-          </span>
+         
+                #{{student.admissionId.registrations[0].rollNumber}}
+         
         </p>  
-        <!--<p>
-            <span class="small" >
-              <ion-icon color="primary" name="person"></ion-icon> Guardian :  {{student.guardianId.name}}
-            </span> 
-        </p>
-        <p>
-         <span class="small" ><ion-icon color="primary" name="pin"></ion-icon>&nbsp;
-             {{student.contactDetailId.addressLine1}} 
-             &nbsp;| &nbsp;
-             City: {{student.contactDetailId.city}}
-             &nbsp;| &nbsp; State : {{student.contactDetailId.state}} - {{student.contactDetailId.pinCode}} 
-        </span>
-        </p> -->
+       
         <ion-note item-right ion-text color="stable">
             <p *ngIf="student.present==true">
               <ion-icon color="ios-green" name="done-all"></ion-icon>              
@@ -55,13 +41,13 @@
             <p *ngIf="student.absent==true"><ion-icon color="ios-red" name="close"></ion-icon></p>
         </ion-note>
     </ion-item>
-    <ion-item *ngIf="dataNotfound==null">
+    <!-- <ion-item *ngIf="dataNotfound==null">
         <p>&nbsp;</p>
         <p>&nbsp;</p>
     </ion-item> 
-    <ion-item *ngIf="dataNotfound!=null">
-        <h2>{{dataNotfound}}</h2>
-    </ion-item>  
+    <ion-item *ngIf="dataNotfound!=null"> -->
+        <p *ngIf="dataNotfound!=null" text-center class="app-error"> <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
+    <!-- </ion-item>   -->
   </ion-list>
 </ion-content>
 <ion-footer *ngIf="students.length!=0">

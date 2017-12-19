@@ -9,31 +9,42 @@
 </ion-header>
 <ion-content>
     <form [formGroup]="leaveForm">
-      <ion-list class="padding">
-        <ion-item>
-              <ion-label color="primary" floating>Comment</ion-label>
-              <ion-textarea formControlName="comment" type="text" ></ion-textarea>
-        </ion-item>
+      <ion-list no-line class="leave-list item-borderless">
+          <ion-item no-lines>
+              <ion-label class="leave-list-item" color="darkGray" stacked>Leave Type *
+                  <!-- <p class="error" *ngIf="!profileForm.controls['bloodGroup'].valid">This field is required *</p> -->
+              </ion-label>
+              <ion-select [selectOptions]="mySelectOptions">
+                  <ion-option value="A+">A+</ion-option>
+                  <ion-option value="A-">A-</ion-option>
+                  <ion-option value="B+">B+</ion-option>
+                 
+              </ion-select>
+          </ion-item>
+        
         <ion-row>
           <ion-col no-padding>
-            <ion-item>
-              <ion-label color="primary" floating>From </ion-label>
+            <ion-item no-lines>
+              <ion-label class="leave-list-item" color="darkGray" stacked>From </ion-label>
               <ion-datetime formControlName="fromDate"
                 pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
               </ion-datetime>
             </ion-item>
           </ion-col>
           <ion-col no-padding>
-            <ion-item>
-              <ion-label color="primary" floating>To</ion-label>
+            <ion-item no-lines>
+              <ion-label class="leave-list-item" color="darkGray" stacked>To</ion-label>
               <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
                 displayFormat="DD/MM/YYYY" >
               </ion-datetime>
             </ion-item>
           </ion-col>
         </ion-row>
-        <!--*********Leave Type*********** -->
-        <div formArrayName="staffLeaves" >
+        <ion-item no-lines>
+            <ion-label class="leave-list-item" color="darkGray" stacked>Comment</ion-label>
+            <ion-textarea formControlName="comment" type="text" rows="5"></ion-textarea>
+      </ion-item>
+        <!-- <div formArrayName="staffLeaves" >
           <ion-card *ngFor="let staffLeave of leaveForm.controls.staffLeaves.controls; let i=index"
                     [formGroupName]="i">
               <ion-card-header color="secondary">
@@ -43,13 +54,13 @@
                   <ion-row >
                       <ion-col no-padding>
                           <ion-item>
-                            <ion-label color="primary" floating>Total Leave </ion-label>
+                            <ion-label  floating>Total Leave </ion-label>
                             <ion-input type="text" formControlName="totalLeave"></ion-input>
                           </ion-item>
                       </ion-col>
                       <ion-col no-padding>
                           <ion-item>
-                            <ion-label color="primary" floating>Remaining Leave </ion-label>
+                            <ion-label  floating>Remaining Leave </ion-label>
                             <ion-input type="text" formControlName="remainingLeave"></ion-input>
                           </ion-item>
                       </ion-col>
@@ -57,7 +68,7 @@
                   <ion-row >
                       <ion-col no-padding>
                           <ion-item>
-                            <ion-label color="primary" floating>From </ion-label>
+                            <ion-label  floating>From </ion-label>
                             <ion-datetime formControlName="fromDate"
                               pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
                             </ion-datetime>
@@ -65,7 +76,7 @@
                       </ion-col>
                       <ion-col no-padding>
                           <ion-item>
-                            <ion-label color="primary" floating>To</ion-label>
+                            <ion-label  floating>To</ion-label>
                             <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
                               displayFormat="DD/MM/YYYY" >
                             </ion-datetime>
@@ -74,49 +85,8 @@
                   </ion-row>
               </ion-card-content>
           </ion-card>
-       </div>
-        <!--
-        <ion-row  
-          *ngFor="let staffLeave of leaveForm.controls.staffLeaves.controls; let i=index"
-          [formGroupName]="i" >
-        <ion-col no-padding>
-          <ion-item>
-              <ion-label color="primary" floating>Leave Type </ion-label>
-              <ion-input type="text" formControlName="type"></ion-input>
-          </ion-item>
-          </ion-col>
-          <ion-col no-padding>
-          <ion-item>
-            <ion-label color="primary" floating>From </ion-label>
-            <ion-datetime formControlName="fromDate"
-              pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
-            </ion-datetime>
-          </ion-item>
-        </ion-col>
-        <ion-col no-padding>
-          <ion-item>
-            <ion-label color="primary" floating>To</ion-label>
-            <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
-              displayFormat="DD/MM/YYYY" >
-            </ion-datetime>
-          </ion-item>
-        </ion-col>
-        <ion-col no-padding>
-          <ion-item>
-              <ion-label color="primary" floating>Total Leave </ion-label>
-              <ion-input type="text" formControlName="totalLeave"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col no-padding>
-          <ion-item>
-              <ion-label color="primary" floating>Remaining Leave </ion-label>
-              <ion-input type="text" formControlName="remainingLeave"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      </div>
-    -->
-    <!--*********End Leave Type*********** -->
+       </div> -->
+        
       </ion-list>
     </form>
   </ion-content>

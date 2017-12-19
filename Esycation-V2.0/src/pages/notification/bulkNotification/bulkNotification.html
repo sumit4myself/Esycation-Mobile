@@ -1,183 +1,150 @@
 <ion-header>
-  <ion-navbar color="ios-blue">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-buttons end>
-            <button icon-only ion-button  (click)="onNotification()" >
-              <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
-              <span *ngIf="notificationCount!='0'" class="notification">    
-                  <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
-               </span>
+    <ion-navbar color="ios-blue">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-buttons end>
+            <button icon-only ion-button (click)="onNotification()">
+                <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+                <span *ngIf="notificationCount!='0'" class="notification">
+                    <small>
+                        <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+                    </small>
+                </span>
             </button>
         </ion-buttons>
-    <ion-title>Bluk Notifications</ion-title>
-  </ion-navbar>
+        <ion-title>Bluk Notifications</ion-title>
+    </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <form [formGroup]="bulkNotificationForm">
-      <ion-list class="bulkNotificationFormList">
-          <ion-row>
-              <ion-col >
-                  <ion-item no-lines>
-                      <ion-label >Receiver Type</ion-label>
-                      <ion-select formControlName="receiverType" (ngModelChange)="onReceiverType($event)"
-                                  okText="Okay" cancelText="Dismiss"  interface="popover">
-                        <ion-option  value="GROUP">GROUP</ion-option>
-                        <ion-option  value="STUDENT">STUDENT</ion-option>
-                        <ion-option  value="STAFF">STAFF</ion-option>
-                      </ion-select> 
-              
-                    </ion-item>
-              </ion-col>
-              <ion-col >
-                  <ion-item no-lines>
-                      <ion-label >Communication Mode</ion-label>
-                      <ion-select formControlName="mode" (ngModelChange)="onCommunication($event)" 
-                                  okText="Okay" cancelText="Dismiss"  interface="popover">
-                        <ion-option  value="SMS">SMS</ion-option>
-                        <ion-option  value="EMAIL">EMAIL</ion-option>
-                        <ion-option  value="PUSH_MESSAGE">PUSH_MESSAGE</ion-option>
-                      </ion-select> 
-                    </ion-item>
-              </ion-col>
+<ion-content>
+    <form [formGroup]="bulkNotificationForm">
+        <ion-list class="bulkNotificationFormList">
+            <ion-row>
+                <ion-item no-lines>
+                    <ion-label>Receiver Type</ion-label>
+                    <ion-select formControlName="receiverType" (ngModelChange)="onReceiverType($event)" okText="Okay" cancelText="Dismiss" interface="popover">
+                        <ion-option value="GROUP">GROUP</ion-option>
+                        <ion-option value="STUDENT">STUDENT</ion-option>
+                        <ion-option value="STAFF">STAFF</ion-option>
+                    </ion-select>
+
+                </ion-item>
             </ion-row>
-             <ion-row>
-                <ion-col >
-                  <ion-item no-lines>
-                        <ion-label >Date*</ion-label>
-                        <ion-datetime formControlName="date"  pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
-                        </ion-datetime>  
-                  </ion-item>
-                </ion-col>
-                <ion-col >
+            <ion-row>
+                <ion-item no-lines>
+                    <ion-label>Communication Mode</ion-label>
+                    <ion-select formControlName="mode" (ngModelChange)="onCommunication($event)" okText="Okay" cancelText="Dismiss" interface="popover">
+                        <ion-option value="SMS">SMS</ion-option>
+                        <ion-option value="EMAIL">EMAIL</ion-option>
+                        <ion-option value="PUSH_MESSAGE">PUSH_MESSAGE</ion-option>
+                    </ion-select>
+                </ion-item>
+
+            </ion-row>
+            <ion-row>
                     <ion-item no-lines>
-                        <ion-label  >Time* </ion-label>
-                        <ion-datetime formControlName="time" pickerFormat="HH:mm" displayFormat="HH:mm" >
+                        <ion-label>Date*</ion-label>
+                        <ion-datetime formControlName="date" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
                         </ion-datetime>
                     </ion-item>
-                </ion-col>
-              </ion-row>
-            
-              <ion-row>
-                  <ion-col >
-                      <ion-item no-lines>
-                          <ion-label >Template</ion-label>
-                          <ion-select formControlName="templateId"  okText="Okay" 
-                                cancelText="Dismiss"  interface="popover">
-                            <ion-option *ngFor="let template of templates"  value="{{template.id}}">
+                </ion-row>
+            <ion-row>
+                    <ion-item no-lines>
+                        <ion-label>Time* </ion-label>
+                        <ion-datetime formControlName="time" pickerFormat="HH:mm" displayFormat="HH:mm">
+                        </ion-datetime>
+                    </ion-item>
+            </ion-row>
+
+            <ion-row>
+                    <ion-item no-lines>
+                        <ion-label>Template</ion-label>
+                        <ion-select formControlName="templateId" okText="Okay" cancelText="Dismiss" interface="popover">
+                            <ion-option *ngFor="let template of templates" value="{{template.id}}">
                                 {{template.name}}
                             </ion-option>
-                          </ion-select> 
-                        </ion-item>
-                  </ion-col>
-              </ion-row>
-              <ion-row *ngIf="comMode=='STUDENT'">
-                    <ion-col >
-                        <ion-item no-lines>
-                            <ion-label >Class*</ion-label>
-                            <ion-select formControlName="courses" multiple="true"
-                            (ngModelChange)="findBatchByCourseIds($event)"
-                                        okText="Okay" cancelText="Dismiss"  interface="popover">
-                              <ion-option *ngFor="let crs of cources"
-                               value="{{crs.id}}">{{crs.name}}</ion-option>
-                            </ion-select> 
-                          </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row *ngIf="comMode=='STUDENT'">
-                    <ion-col >
-                        <ion-item no-lines>
-                            <ion-label >Section</ion-label>
-                            <ion-select formControlName="batches" multiple="true"
-                            (ngModelChange)="findStudentByBatchId($event)"
-                                        okText="Okay" cancelText="Dismiss"  interface="popover">
-                              <ion-option *ngFor="let b of batchs"
-                               value="{{b.id}}">{{b.name}}</ion-option>
-                            </ion-select> 
-                          </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row *ngIf="comMode=='STUDENT'">
-                        <ion-col >
-                            <ion-item no-lines>
-                                <ion-label >Student*</ion-label>
-                                <ion-select formControlName="students" multiple="true"
-                                            okText="Okay" cancelText="Dismiss"  interface="popover">
-                                  <ion-option *ngFor="let st of students"
-                                   value="{{st.id}}">{{st.name}}</ion-option>
-                                </ion-select> 
-                              </ion-item>
-                        </ion-col>
-                    </ion-row>
-              <ion-row *ngIf="comMode=='STAFF'">
-                  <ion-col >
-                      <ion-item no-lines>
-                          <ion-label >Department*</ion-label>
-                          <ion-select formControlName="departments" (ngModelChange)="onStaff($event)"
-                                      okText="Okay" cancelText="Dismiss"  interface="popover">
-                            <ion-option  *ngFor="let dp of departments"
-                            value="{{dp.id}}">{{dp.name}}</ion-option>
-                          </ion-select> 
-                        </ion-item>
-                  </ion-col>
-              </ion-row>
-              <ion-row *ngIf="comMode=='STAFF'">
-                  <ion-col >
-                      <ion-item no-lines>
-                          <ion-label >Staff</ion-label>
-                          <ion-select formControlName="staffs" multiple="true"
-                                      okText="Okay" cancelText="Dismiss"  interface="popover">
-                            <ion-option  *ngFor="let st of staffs"
-                            value="{{st.id}}">{{st.name}}</ion-option>
-                          </ion-select> 
-                        </ion-item>
-                  </ion-col>
-              </ion-row>
-              <ion-row *ngIf="comMode=='GROUP'">
-                  <ion-col >
-                      <ion-item no-lines>
-                          <ion-label >Group*</ion-label>
-                          <ion-select formControlName="groups" multiple="true"
-                                      okText="Okay" cancelText="Dismiss"  interface="popover">
-                            <ion-option  *ngFor="let g of groups"
-                            value="{{g.id}}">{{g.name}}</ion-option>
-                          </ion-select> 
-                        </ion-item>
-                  </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col >
-                      <ion-item no-lines>
-                          <ion-label class="stacked-lable" stacked>Subject*</ion-label>
-                          <ion-input formControlName="subject" type="text" ></ion-input>
-                        </ion-item>
-                  </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col >
-                      <ion-item no-lines>
-                          <ion-label class="stacked-lable" stacked>Message*</ion-label>
-                          <ion-textarea elastic name="content"   rows="6" cols="40" 
-                          formControlName="content"></ion-textarea>
-                        </ion-item>
-                  </ion-col>
-              </ion-row>
-           
-        </ion-list>
-  </form>
-</ion-content>
-<!-- <ion-footer>
-    <ion-row >
-        <ion-col>
-            <button ion-button block color="secondary" (click)="onSave(bulkNotificationForm)" >Save</button>
-        </ion-col>  
-    </ion-row>   
-</ion-footer> -->
+                        </ion-select>
+                    </ion-item>
+                
+            </ion-row>
+            <ion-row *ngIf="comMode=='STUDENT'">
+                    <ion-list-header color="ios-light-gray" class="list-item-header">
+                            <p>Student Details</p>
+                        </ion-list-header>
+                    <ion-item no-lines>
+                        <ion-label>Class*</ion-label>
+                        <ion-select formControlName="courses" multiple="true" (ngModelChange)="findBatchByCourseIds($event)" okText="Okay" cancelText="Dismiss"
+                            interface="popover">
+                            <ion-option *ngFor="let crs of cources" value="{{crs.id}}">{{crs.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+            </ion-row>
+            <ion-row *ngIf="comMode=='STUDENT'">
+                    <ion-item no-lines>
+                        <ion-label>Section</ion-label>
+                        <ion-select formControlName="batches" multiple="true" (ngModelChange)="findStudentByBatchId($event)" okText="Okay" cancelText="Dismiss"
+                            interface="popover">
+                            <ion-option *ngFor="let b of batchs" value="{{b.id}}">{{b.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+            </ion-row>
+            <ion-row *ngIf="comMode=='STUDENT'">
+                    <ion-item no-lines>
+                        <ion-label>Student*</ion-label>
+                        <ion-select formControlName="students" multiple="true" okText="Okay" cancelText="Dismiss" interface="popover">
+                            <ion-option *ngFor="let st of students" value="{{st.id}}">{{st.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+            </ion-row>
+            <ion-row *ngIf="comMode=='STAFF'">
+                    <ion-list-header color="ios-light-gray" class="list-item-header">
+                            <p>Staff Details</p>
+                        </ion-list-header>
+                    <ion-item no-lines>
+                        <ion-label>Department*</ion-label>
+                        <ion-select formControlName="departments" (ngModelChange)="onStaff($event)" okText="Okay" cancelText="Dismiss" interface="popover">
+                            <ion-option *ngFor="let dp of departments" value="{{dp.id}}">{{dp.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+            </ion-row>
+            <ion-row *ngIf="comMode=='STAFF'">
+                    <ion-item no-lines>
+                        <ion-label>Staff</ion-label>
+                        <ion-select formControlName="staffs" multiple="true" okText="Okay" cancelText="Dismiss" interface="popover">
+                            <ion-option *ngFor="let st of staffs" value="{{st.id}}">{{st.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+            </ion-row>
+            <ion-row *ngIf="comMode=='GROUP'">
+                    <ion-list-header color="ios-light-gray" class="list-item-header">
+                            <p>Group Details</p>
+                        </ion-list-header>
+                    <ion-item no-lines>
+                        <ion-label>Group*</ion-label>
+                        <ion-select formControlName="groups" multiple="true" okText="Okay" cancelText="Dismiss" interface="popover">
+                            <ion-option *ngFor="let g of groups" value="{{g.id}}">{{g.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+            </ion-row>
+            <ion-row>
+                    <ion-item no-lines>
+                        <ion-label class="stacked-lable" stacked>Subject*</ion-label>
+                        <ion-input formControlName="subject" type="text"></ion-input>
+                    </ion-item>
+                
+            </ion-row>
+            <ion-row>
+                    <ion-item no-lines>
+                        <ion-label class="stacked-lable" stacked>Message*</ion-label>
+                        <ion-textarea elastic name="content" rows="6" cols="40" formControlName="content"></ion-textarea>
+                    </ion-item>
+            </ion-row>
 
+        </ion-list>
+    </form>
+</ion-content>
 <ion-footer no-border>
     <ion-toolbar transparent>
-      <button padding color="stable" class="form-item-rounder-items"
-       (click)="onSave(bulkNotificationForm)" ion-button full text-uppercase>Save</button>
+        <button padding color="stable" class="form-item-rounder-items" (click)="onSave(bulkNotificationForm)" ion-button full text-uppercase>Save</button>
     </ion-toolbar>
-  </ion-footer>
+</ion-footer>
