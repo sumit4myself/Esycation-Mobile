@@ -310,7 +310,7 @@ home-page {
   font-weight: 50;
   font-size: 18px;
   text-align: left;
-  color: gray;
+  color: #213F48;
 }
 
 
@@ -318,12 +318,12 @@ home-page {
   font-weight: 20;
   font-size: 13px;
   text-align: left;
-  color: gray;
+  color: #213F48;
   margin-bottom: 20px;
 }
 
 .performance{
-  margin-bottom:30px;
+  margin-bottom:20px;
   margin-top:20px;
 }
 
@@ -335,6 +335,32 @@ home-page {
   color: black !important;
   // margin-bottom: 20px;
 } 
+
+.timetable{
+  margin-top:30px;
+}
+
+.timetable h3 {
+  font-weight: 50;
+  font-size: 18px;
+  margin-left: 20px;
+  text-align: left;
+  color: black !important;
+  // margin-bottom: 20px;
+}
+
+.timetable-heading{
+  font-weight: 50;
+  font-size: 16px;
+  color: black !important;
+}
+
+.timetable-content{
+  font-weight: 50;
+  font-size: 15px;
+  color: black !important;
+}
+
 
 .grid-items-lable{
   font-size: 12px;
@@ -359,7 +385,7 @@ home-page {
 [class^="footItem"] {
   display: inline-block;
   width: 50%;
-  padding: 15px 0;
+  padding: 6px 0;
   text-align: center;
   color: rgba(255, 255, 255, .8);
   font-size: 1.1em;
@@ -368,7 +394,7 @@ home-page {
 [class^="footItem"] i {
   display: block;
   font-size: .4em;
-  margin-bottom: 5px;
+  // margin-bottom: 5px;
   color: #fff;
 }
 
@@ -392,6 +418,44 @@ home-page {
   border-radius: 0 0 5px 0;
   border-left: 0.5px solid #447076;
 }
+
+
+.rowItemsCol h3{
+  font-weight: 50;
+  font-size: 15px;
+  color: #213F48;
+  margin-top: 5px;
+}
+
+
+
+.rowItems ion-col{
+  margin: 0px !important;
+  padding : 0px !important;
+  margin-bottom:20px !important; 
+  
+}
+
+.round-item-icon{
+  font-size: 40px;
+  margin-top: 14px;
+  color: white;
+}
+
+.round-item{
+  height: 70px;
+  width: 70px;
+  background-color: #213F48;
+  -moz-border-radius: 35px;
+  // border: 2px solid #447076;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+  -khtml-border-radius: 5px; 
+  border-radius: 35px;
+}
+
 
   }
   

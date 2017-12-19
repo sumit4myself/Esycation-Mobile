@@ -19,7 +19,7 @@ export class CostumErrorHandler {
   public handleError(error: Response): any {
     let responseJson = error.json();
     if(responseJson.exception == 'com.webientsoft.esycation.common.exception.EsycationException'){
-      this.commonServices.presentToast(responseJson.message);
+      this.commonServices.presentToast(responseJson.message,"","error");
     }else{
       this.commonServices.showAlert("","Either server is not responding or you don't have intrenet connection","OK");
     }

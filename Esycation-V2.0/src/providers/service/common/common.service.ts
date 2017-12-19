@@ -12,8 +12,9 @@ export class CommonServices {
     ) { }
 
   
-    presentToast(message?: string, duration?: string) {
+    presentToast(message?: string, duration?: string,type?:string) {
         let durationTime = 0;
+        let classType = "toast-secondary";
         if (duration === 'long') {
             durationTime = 5000;
         } else if (duration === 'short') {
@@ -21,10 +22,21 @@ export class CommonServices {
         } else {
             durationTime = 3500;
         }
+
+        if (type === 'info') {
+            classType = "toast-primary";
+        } else if (type === 'success') {
+            classType = "toast-stable";
+        } else if (type === 'error') {
+            classType = "toast-danger";            
+        } else {
+            classType = "toast-secondary";
+        }
+
         let toast = this.toastCtrl.create({
             message: message,
             duration: durationTime,
-            cssClass :"secondary"
+            cssClass :classType
         });
         toast.present();
     }

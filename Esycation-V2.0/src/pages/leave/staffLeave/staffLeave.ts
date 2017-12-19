@@ -15,14 +15,20 @@ export class StaffLeaveComponent {
  leaveForm: FormGroup;
  loading: Loading;
  leaveTypes:any;
+ mySelectOptions : any={};  
  constructor(
     private navCtrl: NavController,
     private formBuilder:FormBuilder,
     private leaveService:LeaveService,
     private loadingCtrl:LoadingController,
+    
     private session:UserSessionService) {
 
       this.buildForm();  
+      this.mySelectOptions = {
+        mode :'ios',
+        cssClass: 'remove-ok'
+      }
     }
  
   

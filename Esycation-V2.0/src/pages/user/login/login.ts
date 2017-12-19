@@ -85,10 +85,10 @@ export class LoginComponent {
         }).subscribe( data => {
             console.log("Login===",data);
             console.log("LoginModule==",this.session.findUserDetails());
-            this.loading.dismissAll();
+            
             this.events.publish('LOGIN_USER_EVENT');
             this.navCtrl.setRoot("HomeComponent");  
-
+            this.loading.dismissAll();
           },error=>{
             this.loading.dismissAll();
             console.log(error)

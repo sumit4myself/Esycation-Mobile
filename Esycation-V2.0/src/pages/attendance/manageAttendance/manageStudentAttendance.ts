@@ -14,7 +14,6 @@ import {BaseComponent} from '../../baseComponent/base.component';
 
 export class ManageAttendanceComponent extends BaseComponent{
 
-  
   loading: Loading;
   batches:any;
   constructor( 

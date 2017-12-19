@@ -4,7 +4,10 @@ login-page {
       background-size: cover;
       background-repeat: no-repeat;
       border-color: transparent;
+      // background-image: "./assets/bg1.jpg" !important;
+      background-image: url('../assets/bg1.jpg') !important; 
     }
+    
     .scroll-content {
       margin-top: 0 !important;
     }

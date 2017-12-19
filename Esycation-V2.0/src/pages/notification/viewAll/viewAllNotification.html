@@ -7,41 +7,22 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-list class="notification-list">
-        <ion-item tappable no-lines
-        *ngFor="let notificationDetails of notifications; let i=index" 
-        text-wrap (click)="toggleDetail(i)" 
-        [ngClass]="{active: isDetailShown(i)}" (click)="onRead(notificationDetails.id)">
-        
-        <!-- <ion-icon item-start *ngIf="notificationDetails.notificationId.type!='INFORMATIVE'" 
-        color="stable" 
-        name="ios-information-circle-outline"></ion-icon> -->
-        <span class="unread-notification" *ngIf="notificationDetails.readStatus=='UNREAD'" >&#9679;</span> 
-        <h2>{{notificationDetails.notificationId.template.subject}}</h2>
-        <p  [innerHTML]="notificationDetails.message | slice:0:230"></p>
-        <ion-grid>
-            <ion-row>
-              <ion-col>
-                <span class="noti-tag">Info</span>
-              </ion-col>
-              <ion-col class="list-time">
-                <p>{{notificationDetails.notificationId.pushTime | date:'shortTime'}}</p>
-              </ion-col>
-            </ion-row>
-            </ion-grid>  
-        
-             
-        <!-- <ion-icon item-end name="done-all" *ngIf="notificationDetails.readStatus=='UNREAD'">
-          </ion-icon> 
-          <ion-icon item-end color="secondary" name="done-all" 
-          *ngIf="notificationDetails.readStatus=='READ'"></ion-icon>  -->
-             <!-- <p item-end>{{notificationDetails.notificationId.pushTime | date:'shortTime'}}</p> -->
-             
-             <ion-icon item-end small color="lightGray" 
-             item-right name="ios-arrow-forward-outline"></ion-icon>
-             
-            </ion-item>
-       
-      </ion-list>
-     
+  <ion-list class="notification-list">
+    <ion-item tappable no-lines *ngFor="let notificationDetails of notifications; let i=index" text-wrap (click)="toggleDetail(i)"
+      [ngClass]="{active: isDetailShown(i)}" (click)="onRead(notificationDetails.id)">
+      <span class="unread-notification">&#9679;</span>{{notificationDetails.notificationId.template.subject}}
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <span class="noti-info">
+              <ion-icon name="ios-attach-outline"></ion-icon> Info</span>
+          </ion-col>
+          <ion-col class="list-time">
+            <p>{{notificationDetails.notificationId.pushTime}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-icon item-end small color="lightGray" item-right name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>
