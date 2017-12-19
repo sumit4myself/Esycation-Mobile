@@ -44,7 +44,8 @@ export class LoginComponent {
       
       this.userId = this.session.findUserId();
       if(this.userId){
-        this.navCtrl.setRoot('HomeComponent');
+        this.navCtrl.setRoot('StaffdashboardComponent');
+        
       }
 
     }
@@ -87,7 +88,7 @@ export class LoginComponent {
             console.log("LoginModule==",this.session.findUserDetails());
             this.loading.dismissAll();
             this.events.publish('LOGIN_USER_EVENT');
-            this.navCtrl.setRoot("HomeComponent");  
+            this.navCtrl.setRoot("StaffdashboardComponent");  
 
           },error=>{
             this.loading.dismissAll();

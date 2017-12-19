@@ -118,6 +118,10 @@ export class MyApp {
   this.nav.setRoot("ViewProfileComponent");
  }
 
+ onHome1(){
+  this.nav.setRoot("HomeComponent");
+ }
+
 
     pushNotificationSetup() {
   

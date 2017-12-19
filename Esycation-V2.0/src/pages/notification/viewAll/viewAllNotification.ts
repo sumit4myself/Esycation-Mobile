@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,LoadingController, Loading} from 'ionic-angular';
+import { IonicPage,LoadingController, Loading,Nav} from 'ionic-angular';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {NotificationService} from '../../../providers/service/notification/notification.service';
 import {NotificationDetails} from '../../../providers/model/notification/notification.model';
@@ -21,7 +21,8 @@ export class ViewAllNotificationComponent {
      constructor(
          private loadingCtrl: LoadingController,
          private session:UserSessionService,
-         private notificationService:NotificationService) {
+         private notificationService:NotificationService,
+         private nav:Nav ) {
         
          this.remoteId=this.session.findRemote();
          this.module = this.session.findModule();
@@ -56,6 +57,7 @@ export class ViewAllNotificationComponent {
     }
 
     onRead(id:number){
+        this.onView(id);
         this.notificationService.readMessage(id).subscribe(data=>{
             console.error(data);
             for(let notification of this.notifications){
@@ -65,6 +67,7 @@ export class ViewAllNotificationComponent {
                     localStorage.setItem("notificationCount",this.notificationCount);
                 }
             }
+            
         });
     }
  
@@ -78,4 +81,8 @@ export class ViewAllNotificationComponent {
     isDetailShown(group) {
         return this.shownDetail === group;
     };
+
+    onView(id:number){
+        this.nav.push("ViewNotificationComponent",{id:id});
+    }
 }

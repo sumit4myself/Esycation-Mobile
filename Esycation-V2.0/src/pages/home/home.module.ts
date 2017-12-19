@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import {HomeComponent} from '../home/home';
-import { NgCalendarModule } from 'ionic2-calendar';
+//import { NgCalendarModule } from 'ionic2-calendar';
 
 @NgModule({
  imports: [
-    NgCalendarModule,
+   // NgCalendarModule,
     IonicPageModule.forChild(HomeComponent),
  
  ],
