@@ -57,9 +57,7 @@ export class AddAccountComponent {
             console.log(data);      
             this.loading.dismissAll();
             this.events.publish('LOGIN_USER_EVENT');   
-            this.navCtrl.setRoot("HomeComponent"); 
-           
-           
+            this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule())); 
           },error=>{
             this.loading.dismissAll();
             console.log(error)

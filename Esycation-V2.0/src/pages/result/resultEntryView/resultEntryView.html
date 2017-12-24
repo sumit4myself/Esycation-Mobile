@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="lightblue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button icon-only ion-button  (click)="onNotification()" >
+        <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
+        <span *ngIf="notificationCount!='0'" class="notification">    
+            <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
+         </span>
+      </button>
+  </ion-buttons>
+    <ion-title>Results</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list no-lines class="result-list">
+      <ion-item (click)="onResult(4)">
+      <ion-icon  item-start  color="lightGray" name="ios-timer-outline"></ion-icon>
+        Course 81157
+        <p>
+           BatchName - 10202
+        </p>
+          <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item (click)="onResult(4)">
+        <ion-icon   item-start  color="yellow" name="ios-timer-outline"></ion-icon>
+          Course 81157
+          <p>
+             BatchName - 10202
+          </p>
+            <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item >
+          <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
+            Course 81157
+            <p>
+               BatchName - 10202
+            </p>
+              <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
+          </ion-item>
+    </ion-list>
+</ion-content>
+ 

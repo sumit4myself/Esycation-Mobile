@@ -13,7 +13,6 @@ export class UserSessionService{
 
     }
     
-
     public switchAccount(userId:number):void{
         this.authService.switchAccount(userId);
     }
@@ -45,5 +44,22 @@ export class UserSessionService{
     public findUsers():Array<any>{
 
         return this.userPrefernce.loginUsers;
+    }
+
+
+    public static findDashBoardByModule(module:string):string{
+        
+        if(module=='STAFF')
+            return "StaffDashboardComponent";
+        
+        else if(module=='GUARDIAN'){
+            return "GuardianDashboardComponent";
+        }
+        else if(module=='STUDENT'){
+            return "StudentDashboardComponent";
+        }
+        else{
+            return "HomeComponent";
+        }
     }
 }

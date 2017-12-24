@@ -5,10 +5,10 @@ import { CostumErrorHandler } from '../../service/core/error.service';
 import {BaseService} from '../core/base.service';
 import { Observable } from 'rxjs/Rx';
 import {ServerConfig} from '../../../providers/config';
-import {ResultDetails} from '../../model/result/model.result.entry';
+import {StudentAssessmentDetails} from '../../model/assessment/model.assessment';
 
 @Injectable()
-export class ResultEntryService extends BaseService<ResultDetails>{
+export class AssessmentService extends BaseService<StudentAssessmentDetails>{
 
 
 
@@ -24,16 +24,16 @@ export class ResultEntryService extends BaseService<ResultDetails>{
         return null;
     }
 
-    draft(resultDetails:ResultDetails):Observable<any>{
+    saveAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
 
-        let url: string = ServerConfig.getPath() +"/results/"+resultDetails.id;
-        return this.update(url,resultDetails);
+        let url: string = ServerConfig.getPath() +"/assessmentRating/";
+        return this.save(url,assessmentDetails);
     }
     
-    publish(resultDetails:ResultDetails):Observable<any>{
+    updateAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
 
-        let url: string = ServerConfig.getPath() +"/results/"+resultDetails.id;
-        return this.update(url,resultDetails);
+        let url: string = ServerConfig.getPath() +"/assessmentRating/"+assessmentDetails.id;
+        return this.update(url,assessmentDetails);
     }
 
 }

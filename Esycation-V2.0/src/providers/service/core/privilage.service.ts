@@ -8,6 +8,7 @@ export class PrivilageService{
 
     constructor(){}
 
+  
     public privilaged(module?:String):Array<any>{
 
       console.log("Privilage module===",module);
@@ -31,7 +32,7 @@ export class PrivilageService{
 
       this.menu = [          
                  {
-                    title: 'Attendances',
+                    title: 'Attendances & Leave',
                     iconLeft: 'ios-clipboard-outline',
                     icon: 'ios-add-outline',
                     showDetails: false,
@@ -39,6 +40,22 @@ export class PrivilageService{
                       {
                       name:'Attendance',
                       component:'ManageAttendanceComponent'
+                      },
+                      {
+                        name:'Leave',
+                        component:'StaffLeaveComponent'
+                      },
+                      {
+                        name:'Staff DashBoard',
+                        component:'StaffDashboardComponent'
+                      },
+                      {
+                        name:'Guardian DashBoard',
+                        component:'GuardianDashboardComponent'
+                      },
+                      {
+                        name:'Student DashBoard',
+                        component:'StudentDashboardComponent'
                       }
                     ]
                   } ,
@@ -59,19 +76,21 @@ export class PrivilageService{
                     ]
                   },
                   {
-                    title: 'Leaves',
-                    iconLeft: 'ios-calendar-outline',
+                    title: 'Exam & Result',
+                    iconLeft: 'ios-book-outline',
                     icon: 'ios-add-outline',
                     showDetails: false,
                     items:  [
                       {
-                      name:'Apply',
-                      component:'StaffLeaveComponent'
+                      name:'Result',
+                      component:'ResultEntiryViewComponent'
+                      },
+                      {
+                        name:'Assassment',
+                        component:'AssassmentViewComponent'
                       }
                     ]
                   },
-              
-
             ];
         
        return this.menu;
@@ -272,4 +291,7 @@ export class PrivilageService{
                 ];
           return this.menu;
         }
+
+
+      
 }

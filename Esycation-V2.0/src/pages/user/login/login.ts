@@ -85,14 +85,13 @@ export class LoginComponent {
         }).subscribe( data => {
             console.log("Login===",data);
             console.log("LoginModule==",this.session.findUserDetails());
-            
+            console.log("log==",UserSessionService.findDashBoardByModule(this.session.findModule()));
             this.events.publish('LOGIN_USER_EVENT');
-            this.navCtrl.setRoot("HomeComponent");  
+            this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));  
             this.loading.dismissAll();
           },error=>{
             this.loading.dismissAll();
-            console.log(error)
-            //this.commonServices.presentToast(error,"long");
+            console.log(error);
           });
     } else {
       this.commonServices.showAlert('Invalid Details', 'Enter a valid login ID and password to continue')

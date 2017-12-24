@@ -116,7 +116,7 @@ export class MyApp {
  onSwitchAccount(userId:number){
   this.session.switchAccount(userId);
   this.events.publish('LOGIN_USER_EVENT');
-  this.nav.setRoot('HomeComponent');
+  this.nav.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
  }
  onViewProfile(){
   this.nav.setRoot("ViewProfileComponent");

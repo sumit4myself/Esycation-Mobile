@@ -64,11 +64,11 @@
   
     <div id="menu-ios" sshowWhen="ios" class="sideMenu-header"  color="gray">
         <div class="menu-header" menuClose (click)="onViewProfile()">
-            <p *ngIf="userPrefernce.imageId==null"><img class="user-avatar round" src="assets/img/default.png" ></p>
-            <p *ngIf="userPrefernce.imageId!=null">
+            <p *ngIf="userPrefernce.imageId==null || userPrefernce.imageId=='undefined' "><img class="user-avatar round" src="assets/img/default.png" ></p>
+            <p *ngIf="userPrefernce.imageId!=null && userPrefernce.imageId!='undefined'">
                 <img class="user-avatar round" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{userPrefernce.imageId}}">
             </p>
-            <p class="name">{{userPrefernce.fullName}}  </p>
+            <p class="name">{{userPrefernce.fullName}}</p>
             <p class="email">{{userPrefernce.email}}</p>       
         </div>
       <!--***********  menu ***********-->

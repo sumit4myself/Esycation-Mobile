@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import {GuardiandashboardComponent} from '../guardian/guardiandashboard';
-
+import {GuardianDashboardComponent} from '../guardian/guardiandashboard';
+import {ProfileService} from '../../../providers/service/profile/profile.service';
 @NgModule({
     imports: [
-        IonicPageModule.forChild(GuardiandashboardComponent),
+        IonicPageModule.forChild(GuardianDashboardComponent),
     ],
-    exports: [GuardiandashboardComponent ],
-    declarations: [GuardiandashboardComponent],
-    providers: [],
+    exports: [GuardianDashboardComponent ],
+    declarations: [GuardianDashboardComponent],
+    providers: [ProfileService],
 })
-export class GuardiandashboardModule { }
+export class GuardianDashboardModule { }

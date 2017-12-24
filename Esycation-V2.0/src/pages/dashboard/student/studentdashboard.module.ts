@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import {StudentdashboardComponent} from '../student/studentdashboard';
-
+import {StudentDashboardComponent} from '../student/studentdashboard';
+import {ProfileService} from '../../../providers/service/profile/profile.service';
 @NgModule({
     imports: [
-        IonicPageModule.forChild(StudentdashboardComponent),
+        IonicPageModule.forChild(StudentDashboardComponent),
     ],
-    exports: [StudentdashboardComponent ],
-    declarations: [StudentdashboardComponent],
-    providers: [],
+    exports: [StudentDashboardComponent ],
+    declarations: [StudentDashboardComponent],
+    providers: [ProfileService],
 })
-export class StudentdashboardModule { }
+export class StudentDashboardModule { }

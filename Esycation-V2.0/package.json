@@ -46,6 +46,7 @@
     "intl": "^1.2.5",
     "ionic-angular": "3.8.0",
     "ionic2-calendar": "^0.4.1",
+    "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
     "ngx-echarts": "^2.0.1",
     "phonegap-plugin-push": "^2.1.2",
