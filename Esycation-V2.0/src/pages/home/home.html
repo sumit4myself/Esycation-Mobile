@@ -1,208 +1,367 @@
-
 <ion-header>
     <ion-navbar color="ios-blue">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>
-        Home
-      </ion-title>
+    <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+    Home
+    </ion-title>
     </ion-navbar>
-  </ion-header>
-  <ion-content>
-    
-      
-
+   </ion-header>
+   <ion-content>
+   
     <div>
-         
+   
+    <ion-toolbar color="ios-light-blue">
+    <ion-title>
+    <p>Teacher Name - Designation</p>
+    <p>Session Year</p>
+    </ion-title>
+    </ion-toolbar>
+   
+    <div class="performance">
+    <h3>My Reporting Manager</h3>
+    <div class="expandUp top-container" style="background-color:#FFFCE9 !important;">
+    <div class="head-img" style="text-align:left !important;">
+    <div class="circular--portrait">
+    <img src="https://www.brainpickings.org/wp-content/uploads/2014/03/georgelucas.jpg" />
+    </div>
+    </div>
+    
+    <div class="head" style="background-color:#FFFCE9 !important;">
+    
+    <h1>Name</h1>
+    <h3>Address</h3>
+    </div>
+    
+    <div class="foot">
+    <a href="" class="footItem1">
+    <ion-icon name="ios-mail-outline"></ion-icon>
+    <i></i>
+    </a><a href="" class="footItem3">
+    <ion-icon name="ios-call-outline"></ion-icon>
+    <i></i>
+    </a>
+    </div>
+    </div>
+    </div>
+    <div class="performance">
+    <h3>Requests</h3>
+    <div>
+    <ion-segment padding [(ngModel)]="myrequests">
+    <ion-segment-button class="requests-title" value="pendings">
+    Pendings
+    </ion-segment-button>
+    <ion-segment-button class="requests-title" value="requests">
+    My Requests
+    </ion-segment-button>
+    </ion-segment>
+    </div>
+   
+    <div [ngSwitch]="myrequests">
+    <ion-list *ngSwitchCase="'pendings'">
+    <ion-item>
+    <h4>Message</h4>
+    <h5 class="req-details">Requestor Details</h5>
+    <ion-grid no-padding class="req-footers">
+    <ion-row class="req-footer-row">
+    <ion-col>
+    <div align="left" class="req-small">Request Type-Action</div>
+    </ion-col>
+    <ion-col>
+    <div align="right" class="req-small">Requested On</div>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-item>
+    <ion-item>
+    <h4>Message</h4>
+    <h5 class="req-details">Requestor Details</h5>
+    <ion-grid no-padding class="req-footers">
+    <ion-row class="req-footer-row">
+    <ion-col>
+    <div align="left" class="req-small">Request Type-Action</div>
+    </ion-col>
+    <ion-col>
+    <div align="right" class="req-small">Requested On</div>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-item>
+   
+    </ion-list>
+   
+    <ion-list *ngSwitchCase="'requests'">
+    <ion-item>
+    <h4>Message</h4>
+    <h5 class="req-details">Approver Details</h5>
+    <ion-grid no-padding class="req-footers">
+    <ion-row class="req-footer-row">
+    <ion-col>
+    <div align="left" class="req-small">Status - Action</div>
+    </ion-col>
+    <ion-col>
+    <div align="right" class="req-small">Requested On - Completed On</div>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-item>
+    <ion-item>
+    <h4>Message</h4>
+    <h5 class="req-details">Approver Details</h5>
+    <ion-grid no-padding class="req-footers">
+    <ion-row class="req-footer-row">
+    <ion-col>
+    <div align="left" class="req-small">Status - Action</div>
+    </ion-col>
+    <ion-col>
+    <div align="right" class="req-small">Requested On - Completed On</div>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-item>
+   
+    </ion-list>
+    </div>
+    </div>
+   
+   
+    
+   
+   
+   
+    <div class="performance">
+    <h3>My Classes</h3>
+   
+    <ion-item-group>
+    <ion-item-divider class="list-class" color="light">Class I</ion-item-divider>
+    <ion-item class="my-class-list" no-lines class="bottom-border">
+   
+    <h4 class="my-class-item">Section I-A</h4>
+   
+    <ion-grid class="top-border">
+    <ion-row>
+    <ion-col class="right-border">
+    <div align="center" class="small">Time Table</div>
+    </ion-col>
+    <ion-col>
+    <div align="center" class="small">Attendence</div>
+    </ion-col>
+    </ion-row>
+   
+    </ion-grid>
+    </ion-item>
+    <ion-item no-lines class="bottom-border">
+    <h4 class="my-class-item">Section I-C</h4>
+    <ion-grid class="top-border">
+    <ion-row>
+    <ion-col class="right-border">
+    <div align="center" class="small">Time Table</div>
+    </ion-col>
+    <ion-col>
+    <div align="center" class="small">Attendence</div>
+    </ion-col>
+    </ion-row>
+   
+    </ion-grid>
+    </ion-item>
+    </ion-item-group>
+   
+    <ion-item-group>
+    <ion-item-divider class="list-class" color="light">Class II</ion-item-divider>
+    <ion-item no-lines class="bottom-border">
+    <h4 class="my-class-item">Section II-A</h4>
+    <ion-grid class="top-border">
+    <ion-row>
+    <ion-col class="right-border">
+    <div align="center" class="small">Time Table</div>
+    </ion-col>
+    <ion-col>
+    <div align="center" class="small">Attendence</div>
+    </ion-col>
+    </ion-row>
+   
+    </ion-grid>
+    </ion-item>
+    <ion-item no-lines class="bottom-border">
+    <h4 class="my-class-item">Section II-B</h4>
+    <ion-grid class="top-border">
+    <ion-row>
+    <ion-col class="right-border">
+    <div align="center" class="small">Time Table</div>
+    </ion-col>
+    <ion-col>
+    <div align="center" class="small">Attendence</div>
+    </ion-col>
+    </ion-row>
+   
+    </ion-grid>
+    </ion-item>
+    </ion-item-group>
+   
+    </div>
+   
+   
+    </div>
+   
+   
+   
+    <div>
+   
     <ion-slides pager="false" class="home-profile-slide">
-      <ion-slide  *ngFor="let profile of homeProfilesDetails">
-          <div class="expandUp top-container" style="background-color:#FFFCE9 !important;">
-            <div class="head-img" style="text-align:left !important;">
-                <div class="circular--portrait">
-                    <img src="https://www.brainpickings.org/wp-content/uploads/2014/03/georgelucas.jpg" />
-                  </div>
-            </div>  
-            
-            <div class="head" style="background-color:#FFFCE9 !important;">
-               
-                <h1>{{profile.name}}</h1> 
-                <h3>{{profile.batch.name}} - {{profile.course.name}}</h3>
-              </div>
-              
-              <div class="foot">
-                <a href="mailto:{{profile.email}}" class="footItem1">
-                    <ion-icon name="ios-mail-outline"></ion-icon>
-                  <i></i></a><a href="tel:{{profile.mobile}}" class="footItem3">
-                      <ion-icon  name="ios-call-outline"></ion-icon><i></i></a>
-              </div>
-            </div>
-       
-  
-      </ion-slide>
-  
+    <ion-slide *ngFor="let profile of homeProfilesDetails">
+    <div class="expandUp top-container" style="background-color:#FFFCE9 !important;">
+    <div class="head-img" style="text-align:left !important;">
+    <div class="circular--portrait">
+    <img src="https://www.brainpickings.org/wp-content/uploads/2014/03/georgelucas.jpg" />
+    </div>
+    </div>
+   
+    <div class="head" style="background-color:#FFFCE9 !important;">
+   
+    <h1>{{profile.name}}</h1>
+    <h3>{{profile.batch.name}} - {{profile.course.name}}</h3>
+    </div>
+   
+    <div class="foot">
+    <a href="mailto:{{profile.email}}" class="footItem1">
+    <ion-icon name="ios-mail-outline"></ion-icon>
+    <i></i>
+    </a><a href="tel:{{profile.mobile}}" class="footItem3">
+    <ion-icon name="ios-call-outline"></ion-icon>
+    <i></i>
+    </a>
+    </div>
+    </div>
+   
+   
+    </ion-slide>
+   
     </ion-slides>
-  </div>
-  
-  <ion-grid style="margin-top:30px;">
-      <ion-row class="rowItems">
-        <ion-col>
-            <div class="rowItemsCol" align="center">
-                  <div class="round-item">
-                  <ion-icon class="round-item-icon" name="ios-clipboard"></ion-icon>
-                </div>
-                <h3>Apply Leaves</h3>
-              </div>
-        </ion-col>
-        <ion-col>
-            <div class="rowItemsCol" align="center">
-                <div class="round-item">
-                <ion-icon class="round-item-icon" name="ios-analytics"></ion-icon>
-              </div>
-              <h3>Holiday/Events</h3>
-            </div>
-        </ion-col>
-        <ion-col>
-            <div class="rowItemsCol" align="center">
-                <div class="round-item">
-                <ion-icon class="round-item-icon" name="ios-notifications"></ion-icon>
-              </div>
-              <h3>Notifications</h3>
-            </div>
-          
-        </ion-col>
-      </ion-row>
-      <ion-row class="rowItems">
-        <ion-col>
-            <div class="rowItemsCol" align="center">
-                <div class="round-item">
-                <ion-icon class="round-item-icon" name="ios-bookmarks"></ion-icon>
-              </div>
-              <h3>Notifications</h3>
-            </div>
-            
-        </ion-col>
-        <ion-col>
-            <div class="rowItemsCol" align="center">
-                <div class="round-item">
-                <ion-icon class="round-item-icon" name="bus"></ion-icon>
-              </div>
-              <h3>Transport Info</h3>
-            </div>
-           
-        </ion-col>
-        <ion-col>
-            <div class="rowItemsCol" align="center">
-                <div class="round-item">
-                <ion-icon class="round-item-icon" name="locate"></ion-icon>
-              </div>
-              <h3>GPS tracking</h3>
-            </div>
-           
-        </ion-col>
-      </ion-row>
+    </div>
+   
+    <ion-grid style="margin-top:30px;">
+    <ion-row class="rowItems">
+    <ion-col>
+    <div class="rowItemsCol" align="center">
+    <div class="round-item">
+    <ion-icon class="round-item-icon" name="ios-clipboard"></ion-icon>
+    </div>
+    <h3>Apply Leaves</h3>
+    </div>
+    </ion-col>
+    <ion-col>
+    <div class="rowItemsCol" align="center">
+    <div class="round-item">
+    <ion-icon class="round-item-icon" name="ios-analytics"></ion-icon>
+    </div>
+    <h3>Holiday/Events</h3>
+    </div>
+    </ion-col>
+    <ion-col>
+    <div class="rowItemsCol" align="center">
+    <div class="round-item">
+    <ion-icon class="round-item-icon" name="ios-notifications"></ion-icon>
+    </div>
+    <h3>Notifications</h3>
+    </div>
+   
+    </ion-col>
+    </ion-row>
+    <ion-row class="rowItems">
+    <ion-col>
+    <div class="rowItemsCol" align="center">
+    <div class="round-item">
+    <ion-icon class="round-item-icon" name="ios-bookmarks"></ion-icon>
+    </div>
+    <h3>Notifications</h3>
+    </div>
+   
+    </ion-col>
+    <ion-col>
+    <div class="rowItemsCol" align="center">
+    <div class="round-item">
+    <ion-icon class="round-item-icon" name="bus"></ion-icon>
+    </div>
+    <h3>Transport Info</h3>
+    </div>
+   
+    </ion-col>
+    <ion-col>
+    <div class="rowItemsCol" align="center">
+    <div class="round-item">
+    <ion-icon class="round-item-icon" name="locate"></ion-icon>
+    </div>
+    <h3>GPS tracking</h3>
+    </div>
+   
+    </ion-col>
+    </ion-row>
     </ion-grid>
-
-  <div class="timetable">
-    <h3>Today's Time Table</h3>  
+   
+    <div class="timetable">
+    <h3>Today's Time Table</h3>
     <ion-grid padding>
-      <ion-row style="border-bottom:1px solid black;margin-bottom:8px;">
-        <ion-col col-6>
-          <div class="timetable-heading">SUBJECTS</div>
-        </ion-col>
-        <ion-col>
-          <div class="timetable-heading">START TIME</div>
-        </ion-col>
-        <ion-col>
-          <div class="timetable-heading">END TIME</div>
-        </ion-col>
-      </ion-row>
-      
-      <ion-row>
-        <ion-col col-6>
-          <div class="timetable-content">English</div>
-        </ion-col>
-        <ion-col >
-          <div class="timetable-content">9:00AM</div>
-        </ion-col>
-        <ion-col>
-          <div class="timetable-content">9:30AM</div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-6>
-          <div class="timetable-content">English</div>
-        </ion-col>
-        <ion-col >
-          <div class="timetable-content">9:00AM</div>
-        </ion-col>
-        <ion-col>
-          <div class="timetable-content">9:30AM</div>
-        </ion-col>
-      </ion-row>
-     
+    <ion-row style="border-bottom:1px solid black;margin-bottom:8px;">
+    <ion-col col-6>
+    <div class="timetable-heading">SUBJECTS</div>
+    </ion-col>
+    <ion-col>
+    <div class="timetable-heading">START TIME</div>
+    </ion-col>
+    <ion-col>
+    <div class="timetable-heading">END TIME</div>
+    </ion-col>
+    </ion-row>
+   
+    <ion-row>
+    <ion-col col-6>
+    <div class="timetable-content">English</div>
+    </ion-col>
+    <ion-col>
+    <div class="timetable-content">9:00AM</div>
+    </ion-col>
+    <ion-col>
+    <div class="timetable-content">9:30AM</div>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+    <ion-col col-6>
+    <div class="timetable-content">English</div>
+    </ion-col>
+    <ion-col>
+    <div class="timetable-content">9:00AM</div>
+    </ion-col>
+    <ion-col>
+    <div class="timetable-content">9:30AM</div>
+    </ion-col>
+    </ion-row>
+   
     </ion-grid>
-  
-
-
-  </div>
-
-  <div class="performance" >
+   
+   
+   
+    </div>
+   
+    <div class="performance">
     <h3>Performance</h3>
     <div echarts style="height:280px; width:90%;" [options]="ppOptions" class="performance-chart"></div>
-         </div>
-    
-    
-    <div class="home-attendence-slide">
-        <h4>Attendance {{viewTitle}}</h4>  
-      <ion-buttons end>            
-            <!-- <button ion-button [disabled]="isToday" (click)="today()">Today</button> -->
-            <!-- <button ion-button (click)="changeMode('month')">M</button>
-            <button ion-button (click)="changeMode('week')">W</button>
-            <button ion-button (click)="changeMode('day')">D</button> -->
-            <button style="background-color: #213F48; color:white;" ion-button (click)="loadEvents()">Show Events</button>
-  </ion-buttons>
-        <calendar style="margin-top:90px;" [eventSource]="eventSource" 
-        [calendarMode]="calendar.mode" 
-        [currentDate]="calendar.currentDate" 
-        (onCurrentDateChanged)="onCurrentDateChanged($event)"
-          (onEventSelected)="onEventSelected($event)" 
-          (onTitleChanged)="onViewTitleChanged($event)" 
-          (onTimeSelected)="onTimeSelected($event)"
-          step="30">
-        </calendar>
     </div>
-         <!-- <ion-slides pager="false" class="home-attendence-slide">
-    
-      <ion-slide>
-        <div style="text-align:left;">
-          <h4>Monthly Attendance</h4>
-  
-          <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-            (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
-            step="30">
-          </calendar>
-        </div>
-      </ion-slide>
-  
-    </ion-slides> -->
-  
-    
-  
-  
-    
+   
+   
+    <div class="home-attendence-slide">
+    <h4>Attendance {{viewTitle}}</h4>
+    <ion-buttons end>
+    <button style="background-color: #213F48; color:white;" ion-button (click)="loadEvents()">Show Events</button>
+    </ion-buttons>
+    <calendar style="margin-top:90px;" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+    (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
+    (onTimeSelected)="onTimeSelected($event)" step="30">
+    </calendar>
+    </div>
     <div style="height:180px;"></div>
-  
-  
-  </ion-content>
-  
-  
-
-
-
-
-
-
-
-
-
+   
+   
+   </ion-content>
+   
+   
