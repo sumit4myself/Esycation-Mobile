@@ -108,5 +108,14 @@ export abstract class BaseService<T> {
         });
     return result;
   }
+
+  public search<T>(url:string,data: T): Observable<T> {
+    
+    let requestBody: any = {data};
+    let result = this.request("POST", url, requestBody).map((response: any) => {
+        return response;
+        });
+    return result;
+  }
   
 }

@@ -15,54 +15,55 @@
   </ion-navbar>
   <ion-toolbar color="lightGray">
       <ion-buttons >
-          <button ion-button >
-              Exam Name : <small>Test</small>
-          </button>
           <button ion-button  >
-              Subject : <small>Math</small>   
-          </button>
-        </ion-buttons>
-        <ion-buttons >
-          <button ion-button >
-              Exam Date : <small>10/11/2017</small>
-          </button>
-          <button ion-button>
-              Result Date : <small>20/12/2017</small> 
+              Subject : <small>{{studentAssessment.subjectName}}</small>   
           </button>
         </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list >
-    <ion-item *ngFor="let student of students; let count = index" 
-    [ngClass]="{'persent': student.present==true, 'absent': student.absent==true}">
-      <ion-avatar item-left *ngIf="student.imageId==null">
-        <img *ngIf="student.gender==null || student.gender=='Male' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
-        <img *ngIf="student.gender=='Female' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
-      </ion-avatar>
-      <ion-avatar item-left *ngIf="student.imageId!=null">
-        <img  class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{student.imageId}}">
-      </ion-avatar>
-            {{student.name}}
-        <p> #{{student.admissionId.registrations[0].rollNumber}}</p>  
-        <ion-note item-right ion-text >
-         
-            <rating [(ngModel)]="rate" 
-              max="5" 
-              emptyStarIconName="star-outline" 
-              halfStarIconName="star-half" 
-              starIconName="star"
-              nullable="false"
-              (click)="onModelChange($event)"> 
-          </rating>  
-            
-        </ion-note>
-    </ion-item>
-    <p *ngIf="dataNotfound!=null" text-center class="app-error"> <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
-  </ion-list>
+  <ion-card *ngFor="let stuAssessment of studentAssessment.studentAssessements; let count = index">
+        <ion-item>
+          <ion-avatar item-start>
+              <img  class="profile-image" src="assets/img/student-m.png">
+          </ion-avatar>
+          <h2>{{stuAssessment.studentName}}</h2>
+          <p> #{{stuAssessment.studentRollNumber}}</p>
+        </ion-item>
+        <ion-card-content>
+            <ion-row>
+                <ion-col>
+            <ul >
+                <li *ngFor="let assessement of stuAssessment.assessements">
+                    
+                   {{assessement.name}}  <rating [(ngModel)]="assessement.rating" 
+                    max="5" 
+                    emptyStarIconName="star-outline" 
+                    halfStarIconName="star-half" 
+                    starIconName="star"
+                    nullable="false"
+                     *ngIf="assessement.childs.length==0"> 
+                  </rating>  
+                  <ul>
+                    <li *ngFor="let child of assessement.childs">
+                          {{child.name}}  <rating [(ngModel)]="child.rating" 
+                          max="5" 
+                          emptyStarIconName="star-outline" 
+                          halfStarIconName="star-half" 
+                          starIconName="star"
+                          nullable="false"> 
+                        </rating>  
+                     </li> 
+                  </ul>
+                </li>
+              </ul>
+                </ion-col>
+                </ion-row>
+        </ion-card-content>
+  </ion-card>
 </ion-content>
-<ion-footer *ngIf="students.length!=0">
-  <ion-row class="social" *ngIf="students.length!=counter && mode=='create'">
+<ion-footer *ngIf="studentAssessment.studentAssessements!=0">
+  <ion-row class="social">
     <ion-col>
       <button ion-button color="orange" block block (click)="onDraft()">
         Draft
@@ -74,14 +75,5 @@
       </button>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="students.length==counter && mode=='create'">
-      <ion-col>
-          <button ion-button block color="secondary" (click)="onSave()">Save</button>
-      </ion-col>  
-  </ion-row>
-  <ion-row *ngIf="mode=='update'">
-    <ion-col>
-        <button ion-button block color="secondary" (click)="onUpdate()">Update</button>
-    </ion-col>  
-</ion-row>    
+   
 </ion-footer>

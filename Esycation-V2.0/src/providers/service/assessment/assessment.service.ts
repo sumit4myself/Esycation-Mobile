@@ -5,8 +5,7 @@ import { CostumErrorHandler } from '../../service/core/error.service';
 import {BaseService} from '../core/base.service';
 import { Observable } from 'rxjs/Rx';
 import {ServerConfig} from '../../../providers/config';
-import {StudentAssessmentDetails} from '../../model/assessment/model.assessment';
-
+import {StudentAssessmentDetails} from '../../model/assessment/model.assessmentDetails';
 @Injectable()
 export class AssessmentService extends BaseService<StudentAssessmentDetails>{
 
@@ -24,13 +23,13 @@ export class AssessmentService extends BaseService<StudentAssessmentDetails>{
         return null;
     }
 
-    saveAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
+    draftAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
 
         let url: string = ServerConfig.getPath() +"/assessmentRating/";
         return this.save(url,assessmentDetails);
     }
     
-    updateAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
+    publishAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
 
         let url: string = ServerConfig.getPath() +"/assessmentRating/"+assessmentDetails.id;
         return this.update(url,assessmentDetails);

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="ios-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Bulk Notification</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list class="notification-list">
+    <ion-item-sliding tappable no-lines *ngFor="let notification of notifications"  text-wrap >
+      <ion-item>
+          <p>{{notification.template.mode}} | {{notification.template.subject}} 
+            | <ion-icon name="time"></ion-icon> <small>{{notification.pushTime}}</small></p> 
+    </ion-item>
+    <ion-item-options>
+        <button ion-button color="secondary" (click)="onView(notification.id)">
+          <ion-icon name="ios-eye-outline"></ion-icon>
+          View
+        </button>
+        <button ion-button color="dark" (click)="onEdit(notification.id)">
+          <ion-icon name="ios-create"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger" (click)="onDelete(notification.id)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+      
+    </ion-item-sliding> 
+  </ion-list>
+
+  <ion-fab bottom right (click)="onAddNew()">
+      <button ion-fab>
+          <ion-icon name="ios-add-outline" color="white"></ion-icon>  
+      </button>    
+  </ion-fab>
+</ion-content>
