@@ -22,38 +22,34 @@
               Subject : <small>Math</small>   
           </button>
         </ion-buttons>
-        <ion-buttons >
-          <button ion-button >
-              Exam Date : <small>10/11/2017</small>
-          </button>
-          <button ion-button>
-              Result Date : <small>20/12/2017</small> 
-          </button>
-        </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-list >
-    <ion-item *ngFor="let student of students; let count = index" 
-    [ngClass]="{'persent': student.present==true, 'absent': student.absent==true}">
-      <ion-avatar item-left *ngIf="student.imageId==null">
-        <img *ngIf="student.gender==null || student.gender=='Male' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
-        <img *ngIf="student.gender=='Female' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
+    <ion-item *ngFor="let student of resultDetails.studentResults; let count = index" >
+      <ion-avatar item-left *ngIf="student.studentImageId==null">
+        <img class="profile-image" src="assets/img/student-m.png">
       </ion-avatar>
-      <ion-avatar item-left *ngIf="student.imageId!=null">
-        <img  class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{student.imageId}}">
+      <ion-avatar item-left *ngIf="student.studentImageId!=null">
+        <img  class="profile-image" src="{{imagePath}}/{{student.studentImageId}}">
       </ion-avatar>
-            {{student.name}}
-        <p> #{{student.admissionId.registrations[0].rollNumber}}</p>  
-        <ion-note item-right ion-text >
-          <input type="number" [(ngModel)]="marks" placeholder="Marks">
-        </ion-note>
+      <ion-grid>
+          <ion-row>
+            <ion-col col-8>
+                {{student.studentName}}
+                <p> #{{student.studentRollNumber}}</p>  
+            </ion-col>
+            <ion-col col-4>
+                <input type="number" class="inputStyle" [(ngModel)]="student.marks" placeholder="Marks">
+            </ion-col>
+          </ion-row>
+        </ion-grid>    
     </ion-item>
     <p *ngIf="dataNotfound!=null" text-center class="app-error"> <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
   </ion-list>
 </ion-content>
-<ion-footer *ngIf="students.length!=0">
-  <ion-row class="social" *ngIf="students.length!=counter && mode=='create'">
+<ion-footer >
+  <ion-row class="social" >
     <ion-col>
       <button ion-button color="orange" block block (click)="onDraft()">
         Draft
@@ -64,15 +60,5 @@
         Publish
       </button>
     </ion-col>
-  </ion-row>
-  <ion-row *ngIf="students.length==counter && mode=='create'">
-      <ion-col>
-          <button ion-button block color="secondary" (click)="onSave()">Save</button>
-      </ion-col>  
-  </ion-row>
-  <ion-row *ngIf="mode=='update'">
-    <ion-col>
-        <button ion-button block color="secondary" (click)="onUpdate()">Update</button>
-    </ion-col>  
-</ion-row>    
+  </ion-row>   
 </ion-footer>
