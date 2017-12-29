@@ -13,33 +13,57 @@
   </ion-buttons>
     <ion-title>Assassments</ion-title>
   </ion-navbar>
+  <ion-toolbar no-border-top   color="lightblue">
+    <ion-segment [(ngModel)]="viewMode" color="light">
+      <ion-segment-button value="first">
+        Assessment To Be Done
+      </ion-segment-button>
+      <ion-segment-button value="secand">
+        Completed Assessment
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list no-lines class="result-list">
-      <ion-item (click)="onResult(4)">
-      <ion-icon  item-start  color="lightGray" name="ios-timer-outline"></ion-icon>
-        Course 81157
+  <ion-list no-lines class="result-list" *ngIf="viewMode==='first'">
+      <ion-item (click)="onResult(assessment.batchAssessementId)" 
+            *ngFor="let assessment of manageAssessments">
+      
+        <ion-icon  *ngIf="assessment.resultStatus=='CREATED'"  item-start  color="tertiary" name="ios-timer-outline"></ion-icon>
+        <ion-icon  *ngIf="assessment.resultStatus!='CREATED'"  item-start  color="yellow" name="ios-timer-outline"></ion-icon>
+        {{assessment.courseName}}
         <p>
-           BatchName - 10202
+          <span class="small" >
+            <ion-icon name="time"></ion-icon> {{assessment.assassmentDate}} 
+          </span>
+          <span >&nbsp;|</span>
+          <span class="small" >{{assessment.batchName}}</span>
+          <span >&nbsp;| </span>
+          <span class="small" ><ion-icon name="book" ></ion-icon> {{assessment.subjectName}}</span> 
         </p>
           <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
       </ion-item>
-      <ion-item (click)="onResult(4)">
-        <ion-icon   item-start  color="yellow" name="ios-timer-outline"></ion-icon>
-          Course 81157
-          <p>
-             BatchName - 10202
-          </p>
-            <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
-        </ion-item>
-        <ion-item >
-          <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
-            Course 81157
-            <p>
-               BatchName - 10202
-            </p>
-              <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
-          </ion-item>
     </ion-list>
+
+    <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">
+      <ion-item  *ngFor="let assessment of completedAssessments">
+      <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
+        {{assessment.courseName}}
+        <p>
+          <span class="small" >
+            <ion-icon name="time"></ion-icon> {{assessment.assassmentDate}} 
+          </span>
+          <span >&nbsp;|</span>
+          <span class="small" >{{assessment.batchName}}</span>
+          <span >&nbsp;| </span>
+          <span class="small" ><ion-icon name="book" ></ion-icon> {{assessment.subjectName}}</span> 
+        </p>
+          <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
+      </ion-item>
+      <p  *ngIf="dataNotfound!=null" text-center class="app-error"> 
+        <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}
+      </p>
+    </ion-list>
+
 </ion-content>
  

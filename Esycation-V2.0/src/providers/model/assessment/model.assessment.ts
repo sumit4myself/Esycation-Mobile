@@ -13,11 +13,11 @@ export class AssessmentConfigurationDetails{
     id:number=null;
     name:string=null;
     courseId:number=null;
-    courseName:string;
-	courseCode:string;
-	sessionYearId:number;
-	status:string;
-	frequency:string;
+    courseName:string=null;
+	courseCode:string=null;
+	sessionYearId:number=null;
+	status:string=null;
+	frequency:string=null;
 	assessmentConfigurations:Array<AssessmentConfiguration>=new Array<AssessmentConfiguration>();
 }
 
@@ -47,7 +47,7 @@ export class BatchAssessement{
     id:number;
 	batchId:number;
     studentAssessements:Array<StudentAssessement>=new Array<StudentAssessement>();
-	resultStatus:String;
+	resultStatus:string;
 	batchName:string;
 	batchCode:string;
 }

@@ -16,23 +16,39 @@ export class AssessmentService extends BaseService<StudentAssessmentDetails>{
     super(http,errorHandler)
     }
 
-    findResult():Observable<any>{
+    findByBatchAssessementId(assessmentId:number):Observable<any>{
 
-        let url: string = ServerConfig.getPath()
-        console.log("url====",url);
-        return null;
+        let url: string = ServerConfig.getPath()+
+        "/studentAssessments/findByBatchAssessementId/"+assessmentId+"?RESPONSE_VIEW=StudentAssessment.Details";
+    
+        return this.findAll(url);
     }
 
     draftAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
 
-        let url: string = ServerConfig.getPath() +"/assessmentRating/";
+        let url: string = ServerConfig.getPath() +"/studentAssessments/";
         return this.save(url,assessmentDetails);
     }
     
     publishAssessment(assessmentDetails:StudentAssessmentDetails):Observable<any>{
 
-        let url: string = ServerConfig.getPath() +"/assessmentRating/"+assessmentDetails.id;
+        let url: string = ServerConfig.getPath() +"/studentAssessments/";
         return this.update(url,assessmentDetails);
     }
 
+    findPendingStudentAssessment(remotId:number):Observable<any>{
+
+        let url: string = ServerConfig.getPath() +"/studentAssessments/"+
+        "findPendingStudentAssessment/"+remotId+"?page=1&size=100&RESPONSE_VIEW=StudentAssessment.Summary";
+
+        return this.findAll(url)
+    }
+
+    findCompletedStudentAssessment(remotId:number):Observable<any>{
+
+        let url: string = ServerConfig.getPath() +"/studentAssessments/"+
+        "findCompletedStudentAssessment/"+remotId+"?page=1&size=100&RESPONSE_VIEW=StudentAssessment.Summary";
+
+        return this.findAll(url)
+    }
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import {AssassmentViewComponent} from '../assassmentView/assassmentview';
-
+import {AssessmentService} from '../../../providers/service/assessment/assessment.service';
 
 @NgModule({
     imports: [
@@ -9,6 +9,6 @@ import {AssassmentViewComponent} from '../assassmentView/assassmentview';
     ],
     exports: [AssassmentViewComponent ],
     declarations: [AssassmentViewComponent],
-    providers: [],
+    providers: [AssessmentService],
 })
 export class AssassmentViewModule { }

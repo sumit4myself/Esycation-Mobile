@@ -10,6 +10,7 @@ export class StudentAssessmentDetails{
     subjectId:number=null;
     subjectName:string=null
     subjectCode:string=null;
+    resultStatus:string=null;
     studentAssessements:Array<StudentAssessement>=new Array<StudentAssessement>();
 }
 
@@ -28,6 +29,7 @@ export class Assessement{
     rating:number=null;
     name:string=null;
     childs:Array<Assessement>=new Array<Assessement>();
+
 
 }
 
