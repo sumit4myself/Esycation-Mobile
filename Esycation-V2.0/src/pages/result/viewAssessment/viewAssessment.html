@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar color="ios-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+        <button icon-only ion-button  (click)="onNotification()" >
+          <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
+          <span *ngIf="notificationCount!='0'" class="notification">    
+              <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
+           </span>
+        </button>
+    </ion-buttons>
+    <ion-title>Assassment Viiew</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list >
+        <ion-item *ngFor="let stuAssessment of studentAssessment.studentAssessements" >
+          <!--
+          <ion-avatar item-left *ngIf="student.studentImageId==null">
+            <img class="profile-image" src="assets/img/student-m.png">
+          </ion-avatar>
+          <ion-avatar item-left *ngIf="student.studentImageId!=null">
+            <img  class="profile-image" src="{{imagePath}}/{{student.studentImageId}}">
+          </ion-avatar>
+        -->
+        <ion-avatar item-left >
+            <img class="profile-image" src="assets/img/student-m.png">
+          </ion-avatar>
+          {{stuAssessment.studentName}}
+          <p>
+            <span class="small">
+                <small>RollNumber :</small> {{stuAssessment.studentRollNumber}}
+            </span>
+           </p> 
+            <p>
+            <span class="small">
+                <ul >
+                    <li *ngFor="let assessement of stuAssessment.assessements">
+                        
+                       {{assessement.name}}  <rating [(ngModel)]="assessement.rating" 
+                        max="5" 
+                        emptyStarIconName="star-outline" 
+                        halfStarIconName="star-half" 
+                        starIconName="star"
+                        nullable="false"
+                         *ngIf="assessement.childs.length==0"> 
+                      </rating>  
+                      <ul>
+                        <li *ngFor="let child of assessement.childs">
+                              {{child.name}}  <rating [(ngModel)]="child.rating" 
+                              max="5" 
+                              emptyStarIconName="star-outline" 
+                              halfStarIconName="star-half" 
+                              starIconName="star"
+                              nullable="false"> 
+                            </rating>  
+                         </li> 
+                      </ul>
+                    </li>
+                  </ul>
+            </span>
+          </p>  
+        </ion-item>
+      </ion-list>  
+</ion-content>

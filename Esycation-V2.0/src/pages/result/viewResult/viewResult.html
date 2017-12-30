@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar color="ios-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+        <button icon-only ion-button  (click)="onNotification()" >
+          <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
+          <span *ngIf="notificationCount!='0'" class="notification">    
+              <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
+           </span>
+        </button>
+    </ion-buttons>
+    <ion-title>Result View</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list >
+    <ion-item *ngFor="let student of resultDetails.studentResults; let count = index" >
+      <ion-avatar item-left *ngIf="student.studentImageId==null">
+        <img class="profile-image" src="assets/img/student-m.png">
+      </ion-avatar>
+      <ion-avatar item-left *ngIf="student.studentImageId!=null">
+        <img  class="profile-image" src="{{imagePath}}/{{student.studentImageId}}">
+      </ion-avatar>
+      
+      {{student.studentName}}
+      <p>
+        <span class="small">
+            <small>RollNumber :</small> {{student.studentRollNumber}}
+        </span>
+        <span>&nbsp;|</span>
+        <span class="small"><small>Obtain marks :</small>  {{student.marks}}</span>
+      </p>  
+    </ion-item>
+  </ion-list>
+</ion-content>
+

@@ -4,42 +4,70 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-      <button icon-only ion-button  (click)="onNotification()" >
-        <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
-        <span *ngIf="notificationCount!='0'" class="notification">    
-            <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
-         </span>
+      <button icon-only ion-button (click)="onNotification()">
+        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+        <span *ngIf="notificationCount!='0'" class="notification">
+          <small>
+            <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+          </small>
+        </span>
       </button>
-  </ion-buttons>
-    <ion-title>Results</ion-title>
+    </ion-buttons>
+    <ion-title>Result</ion-title>
   </ion-navbar>
+  <ion-toolbar no-border-top color="lightblue">
+    <ion-segment [(ngModel)]="viewMode" color="light">
+      <ion-segment-button value="first">
+        Marks To be Entered
+      </ion-segment-button>
+      <ion-segment-button value="secand">
+        Marks Entered
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list no-lines class="result-list">
-      <ion-item (click)="onResult(4)">
-      <ion-icon  item-start  color="lightGray" name="ios-timer-outline"></ion-icon>
-        Course 81157
-        <p>
-           BatchName - 10202
-        </p>
-          <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-item (click)="onResult(4)">
-        <ion-icon   item-start  color="yellow" name="ios-timer-outline"></ion-icon>
-          Course 81157
-          <p>
-             BatchName - 10202
-          </p>
-            <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
-        </ion-item>
-        <ion-item >
-          <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
-            Course 81157
-            <p>
-               BatchName - 10202
-            </p>
-              <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
-          </ion-item>
-    </ion-list>
+  <ion-list no-lines class="result-list" *ngIf="viewMode==='first'">
+    <ion-item (click)="onResult(result.batchResultId)" *ngFor="let result of pendingResults">
+
+      <ion-icon *ngIf="result.resultStatus=='CREATED'" item-start color="tertiary" name="ios-timer-outline"></ion-icon>
+      <ion-icon *ngIf="result.resultStatus!='CREATED'" item-start color="yellow" name="ios-timer-outline"></ion-icon>
+      {{result.courseName}}
+      <p>
+        <span class="small">
+          {{result.examName}}
+        </span>
+        <span>&nbsp;|</span>
+        <span class="small">{{result.batchName}}</span>
+        <span>&nbsp;| </span>
+        <span class="small">
+          <ion-icon name="book"></ion-icon> {{result.subjectName}}</span>
+      </p>
+      <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">
+    <ion-item (click)="onViewResult(result.batchResultId)" *ngFor="let result of marksIntersResults">
+      
+        <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
+        
+      {{result.courseName}}
+      <p>
+        <span class="small">
+          {{result.examName}}
+        </span>
+        <span>&nbsp;|</span>
+        <span class="small">{{result.batchName}}</span>
+        <span>&nbsp;| </span>
+        <span class="small">
+          <ion-icon name="book"></ion-icon> {{result.subjectName}}</span>
+      </p>
+      <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+    <p *ngIf="dataNotfound!=null" text-center class="app-error">
+      <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}
+    </p>
+  </ion-list>
+
 </ion-content>
- 

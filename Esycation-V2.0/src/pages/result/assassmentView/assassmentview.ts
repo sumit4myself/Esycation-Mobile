@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, Loading, Nav, NavController } from 'ionic-angular';
-import { FormGroup } from '@angular/forms';
 import { UserSessionService } from "../../../providers/service/core/user.session.service";
 import { BaseComponent } from '../../baseComponent/base.component';
 import { AssessmentService } from '../../../providers/service/assessment/assessment.service';
@@ -14,7 +13,6 @@ import { ManageAssessment } from '../../../providers/model/assessment/model.mana
 })
 export class AssassmentViewComponent extends BaseComponent {
 
-  leaveForm: FormGroup;
   loading: Loading;
   viewMode: string;
   dataNotfound:string=null;
@@ -27,14 +25,13 @@ export class AssassmentViewComponent extends BaseComponent {
     private assessmentService: AssessmentService) {
     super(session, navCtrl);
     
+    this.viewMode="first";
   }
 
   ionViewDidLoad() {
-    this.viewMode="first"
-    this.assessmentService.findPendingStudentAssessment(this.session.findRemote()).subscribe(data => {
     
+    this.assessmentService.findPendingStudentAssessment(this.session.findRemote()).subscribe(data => {
       this.convertToFlatData(data.contents);
-     // console.log("manageAssessments===",this.manageAssessments);
     });
 
     this.assessmentService.findCompletedStudentAssessment(this.session.findRemote()).subscribe(data => {
@@ -48,10 +45,15 @@ export class AssassmentViewComponent extends BaseComponent {
 
   }
 
-  onResult(id: number) {
+  onAssessment(id: number) {
 
     this.nav.push("AssassmentComponent", { id: id });
 
+  }
+   
+  onViewAssessment(id:number){
+   
+    this.nav.push("ViewAssessmentComponent", { id: id });
   }
 
   convertToFlatData(data: any) {

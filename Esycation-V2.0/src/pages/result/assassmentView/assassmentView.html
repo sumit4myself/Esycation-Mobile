@@ -26,7 +26,7 @@
 </ion-header>
 <ion-content>
   <ion-list no-lines class="result-list" *ngIf="viewMode==='first'">
-      <ion-item (click)="onResult(assessment.batchAssessementId)" 
+      <ion-item (click)="onAssessment(assessment.batchAssessementId)" 
             *ngFor="let assessment of manageAssessments">
       
         <ion-icon  *ngIf="assessment.resultStatus=='CREATED'"  item-start  color="tertiary" name="ios-timer-outline"></ion-icon>
@@ -46,8 +46,10 @@
     </ion-list>
 
     <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">
-      <ion-item  *ngFor="let assessment of completedAssessments">
-      <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
+      <ion-item (click)="onViewAssessment(assessment.batchAssessementId)"  
+          *ngFor="let assessment of completedAssessments">
+      
+          <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
         {{assessment.courseName}}
         <p>
           <span class="small" >

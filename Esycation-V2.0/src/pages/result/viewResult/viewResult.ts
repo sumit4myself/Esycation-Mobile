@@ -10,10 +10,10 @@ import { ServerConfig } from '../../../providers/config';
 
 @IonicPage()
 @Component({
-  selector: 'result-entry-page',
-  templateUrl: 'resultEntry.html'
+  selector: 'view-result',
+  templateUrl: 'viewResult.html'
 })
-export class ResultEntiryComponent extends BaseComponent {
+export class ViewResultComponent extends BaseComponent {
 
   leaveForm: FormGroup;
   loading: Loading;
@@ -28,7 +28,7 @@ export class ResultEntiryComponent extends BaseComponent {
     private session: UserSessionService,
     private resultEntryService: ResultEntryService) {
     super(session, navCtrl);
-    console.log("session==", this.session);
+    console.log("session==", this.session,this.resultEntryService);
   }
 
   ionViewDidLoad() {
@@ -39,26 +39,6 @@ export class ResultEntiryComponent extends BaseComponent {
     this.resultDetails = d;
     console.log("data=$$=", JSON.stringify(this.resultDetails));
 
-  }
-
-  onDraft() {
-
-    this.resultDetails.resultStatus = "DRAFT";
-    console.log("Result onDraft===", JSON.stringify(this.resultDetails));
-    this.resultEntryService.draft(this.resultDetails).subscribe(data => {
-      console.log(data);
-      this.navCtrl.setRoot("ResultEntiryViewComponent");
-    });
-  }
-
-  onPublish() {
-
-    this.resultDetails.resultStatus = "PUBLISH";
-    console.log("Result Pubblish===", JSON.stringify(this.resultDetails));
-    this.resultEntryService.publish(this.resultDetails).subscribe(data => {
-      console.log(data);
-      this.navCtrl.setRoot("ResultEntiryViewComponent");
-    });
   }
 
   findData(): any {
@@ -82,26 +62,26 @@ export class ResultEntiryComponent extends BaseComponent {
           "studentName": "Student 6868",
           "studentRollNumber": 111,
           "studentImageId": null,
-          "marks": null,
+          "marks": 20,
         },
         {
           "studentId": 2,
           "studentName": "Student 777",
           "studentRollNumber": 222,
           "studentImageId": null,
-          "marks": null,
+          "marks": 10,
         }, {
           "studentId": 3,
           "studentName": "Student 888",
           "studentRollNumber": 33,
           "studentImageId": 1,
-          "marks": null,
+          "marks": 100,
         }, {
           "studentId": 3,
           "studentName": "Student 888",
           "studentRollNumber": 33,
           "studentImageId": 1,
-          "marks": null,
+          "marks": 18,
         }
         , {
           "studentId": 3,

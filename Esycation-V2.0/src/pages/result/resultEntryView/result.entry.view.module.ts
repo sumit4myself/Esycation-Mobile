@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import {ResultEntiryViewComponent} from '../resultEntryView/result.entry.view';
-
+import {ResultEntryService} from '../../../providers/service/resultEntry/result.entry.service';
 
 @NgModule({
     imports: [
@@ -9,6 +9,6 @@ import {ResultEntiryViewComponent} from '../resultEntryView/result.entry.view';
     ],
     exports: [ResultEntiryViewComponent ],
     declarations: [ResultEntiryViewComponent],
-    providers: [],
+    providers: [ResultEntryService],
 })
 export class ResultEntryViewModule { }
