@@ -34,10 +34,11 @@ export class ViewResultComponent extends BaseComponent {
   ionViewDidLoad() {
     let id = this.navParams.get("id")
     console.log("Result Id==", id);
-
-    let d = Object.assign({}, this.findData());
-    this.resultDetails = d;
-    console.log("data=$$=", JSON.stringify(this.resultDetails));
+    
+    this.resultEntryService.findByBatchResultId(id).subscribe(data=>{
+      let d = Object.assign({}, data);
+      this.resultDetails = d;
+    });
 
   }
 

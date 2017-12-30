@@ -5,6 +5,7 @@ export class StudentAssessmentDetails{
     courseName:string=null;
     courseCode:string=null;
     batchId:number=null
+    batchAssessementId:number=null;
     batchName:string=null;
     batchCode:string=null;
     subjectId:number=null;

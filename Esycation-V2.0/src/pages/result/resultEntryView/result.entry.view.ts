@@ -32,12 +32,11 @@ export class ResultEntiryViewComponent extends BaseComponent {
     this.resultEntryService.findPendingMarksEntry(this.session.findRemote()).subscribe(data => {
 
       this.ploatPendingResultData(data.contents);
-      console.log("findPendingMarksEntry==", this.pendingResults);
-
+     // console.log("findPendingMarksEntry==", this.pendingResults);
     });
 
     this.resultEntryService.findMarksEntry(this.session.findRemote()).subscribe(data=>{
-      console.log("findMarksEntry==",data);
+      //console.log("findMarksEntry==",data);
       this.ploatMarksEntryData(data.contents);
       if(this.marksIntersResults.length==0){
       this.dataNotfound="No not found.";

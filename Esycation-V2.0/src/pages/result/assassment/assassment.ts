@@ -37,8 +37,9 @@ export class AssassmentComponent extends BaseComponent{
     this.assessmentService.findByBatchAssessementId(id).subscribe(data=>{
         let d = Object.assign({},data);
         this.studentAssessment=d;
+        console.log("data=$$=",JSON.stringify(this.studentAssessment));
     }) ; 
-   // console.log("data=$$=",JSON.stringify(this.studentAssessment));
+   
  }
 
   onPublish(){

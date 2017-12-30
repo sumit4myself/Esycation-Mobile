@@ -26,14 +26,14 @@ export class AssessmentService extends BaseService<StudentAssessmentDetails>{
 
     draftAssessment(assessmentDetails: StudentAssessmentDetails): Observable<any> {
 
-        let url: string = ServerConfig.getPath() + "/studentAssessments/";
-        return this.save(url, assessmentDetails);
+        let url: string = ServerConfig.getPath() + "/studentAssessments/"+assessmentDetails.batchAssessementId;
+        return this.update(url, assessmentDetails);
     }
 
     publishAssessment(assessmentDetails: StudentAssessmentDetails): Observable<any> {
 
-        let url: string = ServerConfig.getPath() + "/studentAssessments/";
-        return this.save(url, assessmentDetails);
+        let url: string = ServerConfig.getPath() + "/studentAssessments/"+assessmentDetails.batchAssessementId;;
+        return this.update(url, assessmentDetails);
     }
 
     findPendingStudentAssessment(remotId: number): Observable<any> {

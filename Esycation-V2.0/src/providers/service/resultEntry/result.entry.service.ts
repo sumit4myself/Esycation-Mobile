@@ -17,11 +17,12 @@ export class ResultEntryService extends BaseService<ResultDetails>{
         super(http, errorHandler)
     }
 
-    findResult(): Observable<any> {
+    findByBatchResultId(batchResultId: number): Observable<any> {
 
-        let url: string = ServerConfig.getPath()
-        console.log("url====", url);
-        return null;
+        let url: string = ServerConfig.getPath() +
+            "results/findByBatchResultId/" + batchResultId + "";
+
+        return this.findAll(url);
     }
 
     findPendingMarksEntry(remotId: number): Observable<any> {
@@ -39,14 +40,14 @@ export class ResultEntryService extends BaseService<ResultDetails>{
     }
     draft(resultDetails: ResultDetails): Observable<any> {
 
-        let url: string = ServerConfig.getPath() + "/results/";
-        return this.save(url, resultDetails);
+        let url: string = ServerConfig.getPath() + "/results/"+resultDetails.batchResultId;
+        return this.update(url, resultDetails);
     }
 
     publish(resultDetails: ResultDetails): Observable<any> {
 
-        let url: string = ServerConfig.getPath() + "/results/";
-        return this.save(url, resultDetails);
+        let url: string = ServerConfig.getPath() + "/results/"+resultDetails.batchResultId;
+        return this.update(url, resultDetails);
     }
 
 }
