@@ -36,15 +36,13 @@ export class NotificationService extends BaseService<PagedResponse> {
 
         this.notifications = new Array<NotificationDetails>();
         let url: string = ServerConfig.getPath() +
-            "/notifications/receivers/" + module + "/" + remoteId + "/?RESPONSE_VIEW=NotificationReceiver.Details";
+            "/notifications/receivers/" + module + "/" + remoteId + "?mode=PUSH_MESSAGE&RESPONSE_VIEW=NotificationReceiver.Details";
         return this.findAll(url);
     }
 
-    public findPushCount(remoteId: number, module: string): Observable<any> {
-
-        this.notifications = new Array<NotificationDetails>();
+    public countAllByRemoteIdAndModule(remoteId: number, module: string): Observable<any> {
         let url: string = ServerConfig.getPath() +
-            "/notifications/receivers/" + module + "/" + remoteId + "/?RESPONSE_VIEW=NotificationReceiver.Details";
+            "/notifications/receivers/" + module + "/" + remoteId + "/count?mode=PUSH_MESSAGE&readStatus=UNREAD";
         return this.findAll(url);
     }
 
