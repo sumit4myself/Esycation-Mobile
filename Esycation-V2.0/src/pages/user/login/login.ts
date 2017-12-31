@@ -8,6 +8,7 @@ import {CommonServices} from '../../../providers/service/common/common.service';
 import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 import {BreanchService} from '../../../providers/service/branch/breanch.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
+
 @IonicPage()
 @Component({
   selector: 'login-page',
@@ -83,10 +84,14 @@ export class LoginComponent {
           branchId:value.branchId
           
         }).subscribe( data => {
-            console.log("Login===",data);
-            console.log("LoginModule==",this.session.findUserDetails());
-            console.log("log==",UserSessionService.findDashBoardByModule(this.session.findModule()));
+            
+            data={
+              remoteId:this.session.findRemote(),
+              module:this.session.findModule()
+            };
+            data.registrationId =localStorage.getItem("registrationId");
             this.events.publish('LOGIN_USER_EVENT');
+            this.events.publish('user:loggedin',data);   
             this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));  
             this.loading.dismissAll();
           },error=>{

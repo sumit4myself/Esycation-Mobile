@@ -8,10 +8,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {PrivilageService} from '../providers/service/core/privilage.service'
 import {UserPrefernce} from '../providers/model/common/UserPrefernce';
 import {UserSessionService} from '../providers/service/core/user.session.service';
-import {NotificationService} from '../providers/service/notification/notification.service';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-//import {CommonServices} from '../providers/service/common/common.service';
-
+import {CommonServices} from '../providers/service/common/common.service';
+import {DeviceService} from '../providers/service/notification/device.service';
 @Component({
   templateUrl: 'app.html'
 })
@@ -33,15 +32,15 @@ export class MyApp {
               private session:UserSessionService,
               private modal:ModalController,
               private events:Events,
-            //  private commonServices:CommonServices,
-              private notificationService:NotificationService,
-              private push:Push) {
+              private commonServices:CommonServices,
+              private push:Push,
+              private deviceService:DeviceService) {
         this.initializeApp();
 
         this.userPrefernce = this.session.findUserDetails();
         this.loginUsers = this.session.findUsers();
         this.menu = this.privilageService.privilaged(this.userPrefernce.module);
-
+        this.deviceService.initSubscribers();        
 
         this.events.subscribe("LOGIN_USER_EVENT", ()=>{
           this.userPrefernce = this.session.findUserDetails();
@@ -52,9 +51,11 @@ export class MyApp {
           
         });
         this.pages = [ 
-          // { icon:'call', title:'Contact us', component: 'ContactPage' },
           { icon:'ios-log-in-outline', title:'Logout', component: "LogoutComponent" }    
         ];
+
+        
+        
 
   }
 
@@ -148,15 +149,16 @@ export class MyApp {
   
             if(notification.additionalData.foreground){
               //this.commonServices.presentToast(notification);
-              //this.commonServices.showAlert("Notification",JSON.stringify(notification));
+              this.commonServices.showAlert("Notification",JSON.stringify(notification));
               var notificationCount=Number(localStorage.getItem("notificationCount"));
               var count = notificationCount+1;
               localStorage.setItem("notificationCount",count+"");
             }
           });
           pushObject.on('registration').subscribe((registration: any) => {
-            this.notificationService.registerNotificationUser(registration.registrationId);
-            //this.commonServices.showAlert("Notification",JSON.stringify(registration.registrationId));
+            this.commonServices.showAlert("Notification",JSON.stringify(registration.registrationId));
+            localStorage.setItem("registrationId",registration.registrationId);
+            
           });
           pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
     }

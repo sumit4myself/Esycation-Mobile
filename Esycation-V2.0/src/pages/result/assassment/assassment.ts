@@ -44,7 +44,7 @@ export class AssassmentComponent extends BaseComponent{
 
   onPublish(){
 
-    this.studentAssessment.resultStatus="PUBLISH";
+    this.studentAssessment.resultStatus="PUBLISHED";
     console.log("Onsave==",JSON.stringify(this.studentAssessment));
 
     this.assessmentService.publishAssessment(this.studentAssessment).subscribe(data=>{

@@ -8,14 +8,13 @@ import {ServerConfig} from '../../../providers/config';
 import { Observable } from 'rxjs/Rx';
 import {LocalStorage} from '../../storage/local.storage';
 
-
 @Injectable()
 export class AuthService extends BaseService<UserPrefernce> {
 
     private userPrefernce=UserPrefernce.getInstance();
     constructor(@Inject(Http) protected http: Http,
                 @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
-                @Inject(LocalStorage) private storage:LocalStorage){
+                @Inject(LocalStorage) private storage:LocalStorage, ){
 
                 super(http,errorHandler);
 
@@ -79,8 +78,8 @@ export class AuthService extends BaseService<UserPrefernce> {
         if(users!=null)
         for(let user of users){
             if(user.id==userId){
-              users.splice(index,1);
-              break;
+                users.splice(index,1);
+                break; 
             }
             index++;
         }

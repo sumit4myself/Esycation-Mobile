@@ -15,16 +15,22 @@ export class LogoutComponent {
     private authService:AuthService,
     private session:UserSessionService,
     private nav:Nav){ 
-       
+
+     let data={
+        remoteId:this.session.findRemote(),
+        module:this.session.findModule(),
+        registrationId :localStorage.getItem("registrationId")
+      };
       this.authService.logOut(this.session.findUserId()).subscribe(isActiveUser=>{
       
-        console.log("##############Auth==",isActiveUser);
-        
+        console.log("##############Auth==",isActiveUser);  
         if(isActiveUser){
           this.events.publish('LOGIN_USER_EVENT');
+          this.events.publish('user:loggedOut',data);
           this.nav.setRoot('HomeComponent');
         }
         else{
+          this.events.publish('user:loggedOut',data);
           this.nav.setRoot('LoginComponent');
         }
       });

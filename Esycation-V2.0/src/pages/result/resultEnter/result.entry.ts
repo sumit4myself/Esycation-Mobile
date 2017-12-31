@@ -52,7 +52,7 @@ export class ResultEntiryComponent extends BaseComponent {
 
   onPublish() {
 
-    this.resultDetails.resultStatus = "PUBLISH";
+    this.resultDetails.resultStatus = "PUBLISHED";
     console.log("Result Pubblish===", JSON.stringify(this.resultDetails));
     this.resultEntryService.publish(this.resultDetails).subscribe(data => {
       console.log(data);

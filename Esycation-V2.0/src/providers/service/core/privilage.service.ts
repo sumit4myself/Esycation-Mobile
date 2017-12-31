@@ -44,18 +44,6 @@ export class PrivilageService{
                       {
                         name:'Leave',
                         component:'StaffLeaveComponent'
-                      },
-                      {
-                        name:'Staff DashBoard',
-                        component:'StaffDashboardComponent'
-                      },
-                      {
-                        name:'Guardian DashBoard',
-                        component:'GuardianDashboardComponent'
-                      },
-                      {
-                        name:'Student DashBoard',
-                        component:'StudentDashboardComponent'
                       }
                     ]
                   } ,

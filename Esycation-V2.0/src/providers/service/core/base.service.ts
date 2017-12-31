@@ -14,27 +14,27 @@ export abstract class BaseService<T> {
   constructor(
     @Inject(Http) protected http: Http,
     @Optional() @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler) {
-     
-      
-  
-    }
-  
-  public request(
-    method      : string,
-    url         : string,
-    postBody    : any = {}
-    ): Observable<any> {
 
-      console.log("URL",url);
-      
+
+
+  }
+
+  public request(
+    method: string,
+    url: string,
+    postBody: any = {}
+  ): Observable<any> {
+
+    console.log("URL", url);
+
     let headers: Headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    
-    headers.append("USER_ID",localStorage.getItem("userId"));
-    headers.append("SCHOOL_ID",localStorage.getItem("schoolId"));
-    headers.append("SESSION_YEAR_ID",localStorage.getItem("sessionYearId"));
-    headers.append("BRANCH_ID",localStorage.getItem("branchId"));
-  
+
+    headers.append("USER_ID", localStorage.getItem("userId"));
+    headers.append("SCHOOL_ID", localStorage.getItem("schoolId"));
+    headers.append("SESSION_YEAR_ID", localStorage.getItem("sessionYearId"));
+    headers.append("BRANCH_ID", localStorage.getItem("branchId"));
+
     let body: any;
     let postBodyKeys = typeof postBody === 'object' ? Object.keys(postBody) : []
     if (postBodyKeys.length === 1) {
@@ -43,79 +43,78 @@ export abstract class BaseService<T> {
       body = postBody;
     }
     let request: Request = new Request({
-      headers : headers,
-      method  : method,
-      url     : url,
-      body    : body ? JSON.stringify(body) : undefined
+      headers: headers,
+      method: method,
+      url: url,
+      body: body ? JSON.stringify(body) : undefined
     });
     return this.http.request(request)
       .map((res: any) => (res.text() != "" ? res.json() as T : {}))
-      .catch((e) =>  this.errorHandler.handleError(e));
+      .catch((e) => this.errorHandler.handleError(e));
   }
-  
-  public save<T>(url:string,data: T): Observable<T> {
-    
-    let requestBody: any = {data};
+
+  public save<T>(url: string, data: T): Observable<T> {
+
+    let requestBody: any = { data };
     let result = this.request("POST", url, requestBody).map((response: any) => {
-        return response;
-        });
+      return response;
+    });
     return result;
-   }
- 
-  public update<T>(url:string,data: T): Observable<T> {
-    
-    let requestBody: any = {data};
+  }
+
+  public update<T>(url: string, data: T): Observable<T> {
+
+    let requestBody: any = { data };
     let result = this.request("PUT", url, requestBody).map((response: any) => {
-        return response;
-        });
+      return response;
+    });
     return result;
-   }
+  }
 
 
-   public find<T>(url:string,id:number): Observable<T> {
+  public find<T>(url: string, id: number): Observable<T> {
     console.log(id);
     let requestBody: any = {};
     let result = this.request("GET", url, requestBody).map((response: any) => {
-        return response;
-        });
+      return response;
+    });
     return result;
   }
 
-  public findAll(url:string): Observable<any> {
+  public findAll(url: string): Observable<any> {
 
     let requestBody: any = {};
     let result = this.request("GET", url, requestBody).map((response: any) => {
-        return response;
-        });
+      return response;
+    });
     return result;
   }
 
-  public changeStatus(url:string): Observable<T>{
+  public changeStatus(url: string): Observable<T> {
 
     let requestBody: any = {};
     let result = this.request("PATCH", url, requestBody).map((response: any) => {
-        return response;
-        });
+      return response;
+    });
     return result;
 
   }
 
-  public delete(url:string): Observable<T>{
-
-    let requestBody: any = {};
+  public delete(url: string, data: T): Observable<T> {
+    let requestBody: any = { data };
     let result = this.request("DELETE", url, requestBody).map((response: any) => {
-        return response;
-        });
+      return response;
+    });
     return result;
   }
 
-  public search<T>(url:string,data: T): Observable<T> {
-    
-    let requestBody: any = {data};
+  public search<T>(url: string, data: T): Observable<T> {
+
+    let requestBody: any = { data };
     let result = this.request("POST", url, requestBody).map((response: any) => {
-        return response;
-        });
+      return response;
+    });
     return result;
   }
-  
+
 }

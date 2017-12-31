@@ -9,37 +9,39 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyApp } from './app.component';
 
 //********** Base service  ************ */
-import { HttpModule} from '@angular/http';
-import {CommonServices} from '../providers/service/common/common.service';
-import {PrivilageService} from '../providers/service/core/privilage.service';
-import {CostumErrorHandler} from '../providers/service/core/error.service';
-import {AuthService} from '../providers/service/core/auth.service';
-import {UserSessionService} from '../providers/service/core/user.session.service';
-import {LocalStorage} from '../providers/storage/local.storage';
-import { Push} from '@ionic-native/push';
-import {NotificationService} from '../providers/service/notification/notification.service';
+import { HttpModule } from '@angular/http';
+import { CommonServices } from '../providers/service/common/common.service';
+import { PrivilageService } from '../providers/service/core/privilage.service';
+import { CostumErrorHandler } from '../providers/service/core/error.service';
+import { AuthService } from '../providers/service/core/auth.service';
+import { UserSessionService } from '../providers/service/core/user.session.service';
+import { LocalStorage } from '../providers/storage/local.storage';
+import { Push } from '@ionic-native/push';
+import { NotificationService } from '../providers/service/notification/notification.service';
+import { DeviceService } from '../providers/service/notification/device.service';
+import { NotificationCountDirective } from '../app/attribute-directives/notification.bell.directive';
 
 @NgModule({
   declarations: [
-    MyApp, 
+    MyApp,
+    NotificationCountDirective
   ],
   imports: [
-    BrowserModule,HttpModule,
+    BrowserModule, HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-  
   ],
   providers: [
     StatusBar,
-    SplashScreen,CommonServices,PrivilageService,CostumErrorHandler,Push,NotificationService,
-    AuthService,UserSessionService,LocalStorage,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-   
+    SplashScreen, CommonServices, PrivilageService, CostumErrorHandler, Push, NotificationService, DeviceService,
+    AuthService, UserSessionService, LocalStorage,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+
   ]
 })
-export class AppModule {}
+export class AppModule { }

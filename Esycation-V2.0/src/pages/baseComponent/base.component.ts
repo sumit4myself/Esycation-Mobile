@@ -1,5 +1,6 @@
 import { NavController} from 'ionic-angular';
 import {UserSessionService} from '../../providers/service/core/user.session.service';
+//import {NotificationService} from '../../providers/service/notification/notification.service';
 
 export abstract class BaseComponent {
     
@@ -8,13 +9,13 @@ export abstract class BaseComponent {
     constructor(protected service:UserSessionService,
                 protected navCtrl:NavController){
       this.notificationCount=localStorage.getItem("notificationCount");      
-      //console.log("BaseComponent.........!",this.notificationCount);   
+         
     }
 
     onNotification(){
         
-        console.log("onNotification............");     
         this.navCtrl.push('ViewAllNotificationComponent');
     }
+    
 
 }

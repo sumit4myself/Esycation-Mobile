@@ -237,6 +237,7 @@ export class BulkNotificationComponent extends BaseComponent {
         let notification = new Notification();
         let template = new Template();
         template.id=form.templateId;
+        template.content = form.content;
         template.mode = form.mode;
         form.staffs=form.staffs.toString();
         form.courses=form.courses.toString();
@@ -250,6 +251,7 @@ export class BulkNotificationComponent extends BaseComponent {
         notification.receivers=null;
         notification.template=template;
 
+        
         return notification;
 
     }

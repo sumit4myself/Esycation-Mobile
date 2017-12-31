@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage,ViewController, LoadingController, Loading,Events,NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-//import {Branch} from '../../../providers/model/common/model.branch';
 import {AuthService} from '../../../providers/service/core/auth.service';
 import {CommonServices} from '../../../providers/service/common/common.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
@@ -28,7 +27,7 @@ export class AddAccountComponent {
     private events:Events,
     private authService:AuthService,
     private commonServices:CommonServices,
-    private session:UserSessionService) 
+    private session:UserSessionService,) 
     {        
       this.loginForm = this.formBuilder.group({
         userName: ['', [<any>Validators.required]],
@@ -54,14 +53,18 @@ export class AddAccountComponent {
           
         }).subscribe(
           data => {
-            console.log(data);      
+            data={
+              remoteId:this.session.findRemote(),
+              module:this.session.findModule()
+            };
+            data.registrationId =localStorage.getItem("registrationId");
             this.loading.dismissAll();
             this.events.publish('LOGIN_USER_EVENT');   
+            this.events.publish('user:loggedin',data);
             this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule())); 
           },error=>{
             this.loading.dismissAll();
             console.log(error)
-           // this.commonServices.presentToast(error,"short");
           }
         );
     } else {

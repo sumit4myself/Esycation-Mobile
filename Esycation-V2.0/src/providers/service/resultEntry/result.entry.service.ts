@@ -40,13 +40,13 @@ export class ResultEntryService extends BaseService<ResultDetails>{
     }
     draft(resultDetails: ResultDetails): Observable<any> {
 
-        let url: string = ServerConfig.getPath() + "/results/"+resultDetails.batchResultId;
+        let url: string = ServerConfig.getPath() + "/results/batchResult/"+resultDetails.batchResultId;
         return this.update(url, resultDetails);
     }
 
     publish(resultDetails: ResultDetails): Observable<any> {
 
-        let url: string = ServerConfig.getPath() + "/results/"+resultDetails.batchResultId;
+        let url: string = ServerConfig.getPath() + "/results/batchResult/"+resultDetails.batchResultId;
         return this.update(url, resultDetails);
     }
 
