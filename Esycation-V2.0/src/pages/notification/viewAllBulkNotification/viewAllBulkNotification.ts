@@ -15,15 +15,20 @@ export class ViewAllBulkNotificationComponent {
          private nav:Nav,
          private bulkNotificationService:BulkNotificationService ) {
         
-         console.log("ViewAllBulkNotificationComponent==",this.session,this.bulkNotificationService);
+         console.log("ViewAllBulkNotificationComponent==",this.session);
       }
 
     ionViewDidLoad(){
 
         this.bulkNotificationService.manage().subscribe(data=>{
             this.notifications = data.contents;
-
-            console.log(JSON.stringify(this.notifications));
+            if(this.notifications.length>0){
+                for(let notification of this.notifications){
+                    notification.colorId = this.findColor(notification.id);
+                    notification.str = this.findFirstLatter(notification.template.mode);
+                }
+                console.log("notifications==",JSON.stringify(this.notifications));
+            }
         });
     }
 
@@ -41,5 +46,22 @@ export class ViewAllBulkNotificationComponent {
 
     onDelete(id:number){
         this.nav.push("DeleteBulkNotificationsComponent",{id:id});
+    }
+
+    findColor(id:number):string{
+
+        let renVal2=id+2;
+        let renVal3=id+4;
+        let color = 'rgb(' + (Math.floor(Math.random() * id)) + ',' 
+        + (Math.floor(Math.random() * renVal2)) + ',' 
+        + (Math.floor(Math.random() * renVal3)) + ')';
+        //console.log("color==",color);
+
+        return color;
+    }
+
+    findFirstLatter(title:string):string{
+
+      return title.substring(0,1);
     }
 }

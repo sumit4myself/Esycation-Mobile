@@ -39,7 +39,7 @@ export class ResultEntiryViewComponent extends BaseComponent {
       //console.log("findMarksEntry==",data);
       this.ploatMarksEntryData(data.contents);
       if(this.marksIntersResults.length==0){
-      this.dataNotfound="No not found.";
+      this.dataNotfound="Data not found.";
       }
       
     });

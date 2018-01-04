@@ -7,11 +7,23 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+
   <ion-list class="notification-list">
-    <ion-item-sliding tappable no-lines *ngFor="let notification of notifications"  text-wrap >
+
+    <ion-item-sliding tappable no-lines *ngFor="let notification of notifications">
       <ion-item>
-          <p>{{notification.template.mode}} | {{notification.template.subject}} 
-            | <ion-icon name="time"></ion-icon> <small>{{notification.pushTime}}</small></p> 
+          
+          <ion-avatar item-start >
+              <span class="serial" [style.background-color]="notification.colorId"> {{notification.str}}</span>
+          </ion-avatar>
+          {{notification.template.mode}}
+          <p> 
+            <span class="small"><ion-icon name="contact"></ion-icon> {{notification.createdBy}} </span>
+            <span>&nbsp;|</span>
+            <span class="small">
+             <ion-icon name="time"></ion-icon> <small>{{notification.updatedOn}}</small>
+          </span>
+        </p> 
     </ion-item>
     <ion-item-options>
         <button ion-button color="secondary" (click)="onView(notification.id)">

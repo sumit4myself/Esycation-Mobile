@@ -27,7 +27,7 @@ export class LogoutComponent {
         if(isActiveUser){
           this.events.publish('LOGIN_USER_EVENT');
           this.events.publish('user:loggedOut',data);
-          this.nav.setRoot('HomeComponent');
+          this.nav.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
         }
         else{
           this.events.publish('user:loggedOut',data);

@@ -207,7 +207,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
             this.bulkNotificationService.saveBulkNotification(data).subscribe(data=>{
                 console.log("data==",data);
                 this.loading.dismissAll();
-                this.navControl.setRoot("HomeComponent");
+                this.navControl.setRoot("ViewAllBulkNotificationComponent");
             },error=>{
                 console.error("ERROR :",error);
             });

@@ -39,6 +39,8 @@ export class BulkNotificationComponent extends BaseComponent {
     groups:Array<Group> = new Array<Group>();
     comMode:any;
     loading: Loading;
+    selectOptionStyle : any={};  
+
      constructor(private session:UserSessionService,
                  private formBuilder:FormBuilder,
                  private bulkNotificationService:BulkNotificationService,
@@ -51,8 +53,13 @@ export class BulkNotificationComponent extends BaseComponent {
                  private loadingCtrl: LoadingController ) {
 
             super(session,navControl)
-            console.log(this.session);
+           // console.log(this.session);
          
+           this.selectOptionStyle = {
+            mode :'ios',
+            cssClass: 'remove-ok'
+          }        
+
              this.buildForm();  
     }
 
@@ -204,13 +211,16 @@ export class BulkNotificationComponent extends BaseComponent {
         let data = this.prepareData(value);
         console.log(JSON.stringify(data));
         if(valid){
+           
             this.bulkNotificationService.saveBulkNotification(data).subscribe(data=>{
                 console.log("data==",data);
                 this.loading.dismissAll();
-                this.navControl.setRoot("HomeComponent");
+                this.navControl.setRoot("ViewAllBulkNotificationComponent");
             },error=>{
+                this.loading.dismissAll();
                 console.error("ERROR :",error);
             });
+            
         }else{
             this.loading.dismissAll();
         }
@@ -237,17 +247,20 @@ export class BulkNotificationComponent extends BaseComponent {
         let notification = new Notification();
         let template = new Template();
         template.id=form.templateId;
-        template.content = form.content;
+        //template.content = form.content;
         template.mode = form.mode;
+        template.subject = form.subject;
+        template.htmlContent = form.content
         form.staffs=form.staffs.toString();
         form.courses=form.courses.toString();
         form.batches=form.batches.toString();
         form.students=form.students.toString();
         form.departments=form.departments.toString();
         form.groups=form.groups.toString();
-        notification.selections = form;
-        notification.pushTime=moment(form.date).format("DD/MM/YYYY HH:mm:ss");
+        notification.selections = this.selectionValue(form);
+        notification.pushTime=  moment(form.date +" " + form.time + ":00").format("DD/MM/YYYY HH:mm:ss");
         notification.bulk=true;
+        notification.approved=true;
         notification.receivers=null;
         notification.template=template;
 
@@ -256,4 +269,19 @@ export class BulkNotificationComponent extends BaseComponent {
 
     }
     
+    selectionValue(form):any{
+
+        let data ={
+            groups:form.groups ,
+            receiverType:form.receiverType,
+            courses:form.courses,
+            batches:form.batches,
+            guardians:form.guardians,
+            students:form.students,
+            departments:form.departments,
+            staffs:form.staffs
+        }
+       return data;
+    }
+
 }

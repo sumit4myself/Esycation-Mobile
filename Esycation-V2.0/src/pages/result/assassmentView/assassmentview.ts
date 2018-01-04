@@ -38,7 +38,7 @@ export class AssassmentViewComponent extends BaseComponent {
      
       this.platDataCompletedAssessments(data.contents);
       if(this.completedAssessments.length==0){
-        this.dataNotfound="No not found.";
+        this.dataNotfound="Data not found.";
       }
      console.log("platDataCompletedAssessments===", this.completedAssessments);
     });
@@ -82,9 +82,10 @@ export class AssassmentViewComponent extends BaseComponent {
 
    platDataCompletedAssessments(data: any) {
     
-        let studentAssessmentDetail = new StudentAssessmentDetails();
-        studentAssessmentDetail = Object.assign(studentAssessmentDetail, data);
-        if(studentAssessmentDetail.id!=null){
+
+        let d = new StudentAssessmentDetails();
+       let studentAssessmentDetail = Object.assign(d, data);
+        if(studentAssessmentDetail[0].id!=null){
           for (let subjectAssessment of studentAssessmentDetail[0].subjectAssessements) {
             
                   for (let batchAssessement of subjectAssessment.batchAssessements) {

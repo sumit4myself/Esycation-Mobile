@@ -31,9 +31,9 @@
           <p> #{{stuAssessment.studentRollNumber}}</p>
         </ion-item>
         <ion-card-content>
-            <ion-row>
-                <ion-col>
-            <ul >
+           
+           <!--
+                  <ul >
                 <li *ngFor="let assessement of stuAssessment.assessements">
                     
                    {{assessement.name}}  <rating [(ngModel)]="assessement.rating" 
@@ -57,10 +57,46 @@
                   </ul>
                 </li>
               </ul>
-                </ion-col>
-                </ion-row>
+
+            -->
+
+            <div   text-wrap>
+                <div *ngFor="let assessement of stuAssessment.assessements">
+                    <ion-item >
+                        
+                        <h4 *ngIf="assessement.childs.length==0" item-start>{{assessement.name}}</h4> 
+                        <rating item-right  [(ngModel)]="assessement.rating" 
+                        max="5" 
+                        emptyStarIconName="star-outline" 
+                        halfStarIconName="star-half" 
+                        starIconName="star"
+                        nullable="false"
+                         *ngIf="assessement.childs.length==0"> 
+                      </rating>  
+                          <h4 *ngIf="assessement.childs.length>0">{{assessement.name}}</h4> 
+                        <div  *ngFor="let child of assessement.childs">
+                            
+                          <ion-item >
+                                
+                          <h4 item-start>{{child.name}}</h4>  
+                              <rating item-right  [(ngModel)]="child.rating" 
+                              max="5" 
+                              emptyStarIconName="star-outline" 
+                              halfStarIconName="star-half" 
+                              starIconName="star"
+                              nullable="false"> 
+                            </rating>  
+                            </ion-item>
+                         </div> 
+                    </ion-item>
+                  </div>
+            </div>
+          
+          
+                
         </ion-card-content>
   </ion-card>
+  <br/>
 </ion-content>
 <ion-footer *ngIf="studentAssessment.studentAssessements!=0">
   <ion-row class="social">

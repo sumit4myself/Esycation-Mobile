@@ -62,6 +62,12 @@ export class AssassmentComponent extends BaseComponent{
    });
     
   }
-
+  toggleDetails(data) {
+    if (data.showDetails) {
+        data.showDetails = false;
+    } else {
+        data.showDetails = true;
+    }
+  }
 
 }
