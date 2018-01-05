@@ -24,10 +24,10 @@ export class ViewAllBulkNotificationComponent {
             this.notifications = data.contents;
             if(this.notifications.length>0){
                 for(let notification of this.notifications){
-                    notification.colorId = this.findColor(notification.id);
+                    notification.colorId = this.findColor(notification.template.mode);
                     notification.str = this.findFirstLatter(notification.template.mode);
                 }
-                console.log("notifications==",JSON.stringify(this.notifications));
+                //console.log("notifications==",JSON.stringify(this.notifications));
             }
         });
     }
@@ -48,16 +48,19 @@ export class ViewAllBulkNotificationComponent {
         this.nav.push("DeleteBulkNotificationsComponent",{id:id});
     }
 
-    findColor(id:number):string{
+    findColor(title:string):string{
 
-        let renVal2=id+2;
-        let renVal3=id+4;
-        let color = 'rgb(' + (Math.floor(Math.random() * id)) + ',' 
-        + (Math.floor(Math.random() * renVal2)) + ',' 
-        + (Math.floor(Math.random() * renVal3)) + ')';
-        //console.log("color==",color);
-
-        return color;
+        let type = title.substring(0,1);
+        if (type == 'S')
+            return "#EA1E63";
+        else if (type == 'O')
+            return "#0059B2";
+        else if (type == 'E')
+            return "#8dc34b";
+        else if (type == 'P')
+            return "#ff9800";
+        else
+            return "#9e9e9e";
     }
 
     findFirstLatter(title:string):string{

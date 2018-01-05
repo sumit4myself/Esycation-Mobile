@@ -66,11 +66,15 @@ export class BulkNotificationComponent extends BaseComponent {
     
     buildForm(){
         
+        let currentTime = moment(new Date()).format("HH:mm");
+        let currentDate = moment(new Date()).format("DD/MM/YYYY");
+        
+        
         this.bulkNotificationForm = this.formBuilder.group({
         receiverType: ['', [<any>Validators.required]],
         mode: ['', [<any>Validators.required]],
-        date:['', [<any>Validators.required]],
-        time:['', [<any>Validators.required]],
+        date:[currentDate, [<any>Validators.required]],
+        time:[currentTime, [<any>Validators.required]],
         templateId:'',
         groups:'',
         courses:'',
@@ -150,23 +154,26 @@ export class BulkNotificationComponent extends BaseComponent {
             }
             //console.log("Batch==",JSON.stringify(this.batchs));
             this.loading.dismissAll();
-
-        });
+        },error=>{
+            console.error(error);
+            this.loading.dismissAll();
+       });
     }
     findStudentByBatchId(batchId:number){
 
         this.loading = this.loadingCtrl.create({
             content: 'Loading..'
         }); this.loading.present(); 
-        //this.students=[];
         this.studentService.findByBatchIds(batchId,"Student.MinDetails").subscribe(data=>{
             for(let student of data.contents){
                 let obj = Object.assign({},student);
                 this.students.push(obj);
             }
-            //console.log("Student==",JSON.stringify(this.students));
             this.loading.dismissAll();
-        });
+        },error=>{
+            console.error(error);
+            this.loading.dismissAll();
+       });
     }
 
     onDepartment(branchId:number){
@@ -180,10 +187,12 @@ export class BulkNotificationComponent extends BaseComponent {
             for(let department of data.contents){
                 let obj = Object.assign({},department);
                 this.departments.push(obj);
-            }
-           // console.log("department==",JSON.stringify(this.departments));   
+            } 
            this.loading.dismissAll(); 
-        });
+        },error=>{
+            console.error(error);
+            this.loading.dismissAll();
+       });
     }
 
     onStaff(departmentId:number){
@@ -198,9 +207,11 @@ export class BulkNotificationComponent extends BaseComponent {
                    let obj = Object.assign({},staff);
                    this.staffs.push(obj); 
                 }
-               // console.log("staff===",this.staffs);
                this.loading.dismissAll();
-            });
+            },error=>{
+                console.error(error);
+                this.loading.dismissAll();
+           });
     }
 
     onSave({value,valid}:{value:BulkNotificationForm,valid:boolean}){
@@ -238,7 +249,10 @@ export class BulkNotificationComponent extends BaseComponent {
                  this.groups.push(obj);
              }
              this.loading.dismissAll();  
-        });
+        },error=>{
+            console.error(error);
+            this.loading.dismissAll();
+       });
     }
 
 

@@ -9,6 +9,10 @@ view-all-notification-page{
   color:#2AACD8;
 }
 
+.read-notification{
+  color:#f6fcf8;
+}
+
 
 .noti-tag{
   padding:3px;
@@ -46,6 +50,26 @@ view-all-notification-page{
 
 .notification-list .item-inner {
   padding-right: 0px!important;
+}
+
+.small{
+  font-size: 1rem;
+}
+.serial{
+padding-top: 10%;
+font-size: 20px;
+color: #fff;
+background-color: red;
+display: inline-block;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+text-align: center;
+}
+
+.text-flot-right{
+  float: right;
+  padding-right: 7px;
 }
 
 }

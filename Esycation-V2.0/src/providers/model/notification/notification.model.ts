@@ -22,6 +22,8 @@ export class NotificationDetails implements NotificationDetailsInterface{
     receiverId:string=null;
     readStatus:string=null;
     resources:any=null;
+    styleColor:any;
+    typeInfo:any;
     notificationId:Notification=new Notification();
     constructor(){
     }

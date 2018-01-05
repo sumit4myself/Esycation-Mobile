@@ -8,21 +8,23 @@
 </ion-header>
 <ion-content>
   <ion-list class="notification-list">
-    <ion-item tappable no-lines *ngFor="let notificationDetails of notifications; let i=index" text-wrap (click)="toggleDetail(i)"
+    <ion-item tappable no-lines *ngFor="let notificationDetails of notifications; let i=index" 
+      text-wrap (click)="toggleDetail(i)"
       [ngClass]="{active: isDetailShown(i)}" (click)="onRead(notificationDetails.id)">
-      <span class="unread-notification">&#9679;</span>{{notificationDetails.notificationId.template.subject}}
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <span class="noti-info">
-              <ion-icon name="ios-attach-outline"></ion-icon> Info</span>
-          </ion-col>
-          <ion-col class="list-time">
-            <p>{{notificationDetails.notificationId.pushTime}}</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-icon item-end small color="lightGray" item-right name="ios-arrow-forward-outline"></ion-icon>
+      <ion-avatar item-start >
+          <span class="serial" [style.background-color]="notificationDetails.styleColor"> 
+            {{notificationDetails.typeInfo}}</span>
+      </ion-avatar>
+       {{notificationDetails.notificationId.template.subject}}
+       <p> 
+          <span class="small" [ngClass]="{'read-notification': notificationDetails.readStatus=='READ', 
+          'unread-notification': notificationDetails.readStatus=='UNREAD'}">&#9679;</span>
+          <span *ngIf="notificationDetails.notificationId.resources.lenght" > 
+              <ion-icon name="ios-attach-outline"></ion-icon></span>
+          <span class="small text-flot-right">
+           <ion-icon name="time"></ion-icon> <small>{{notificationDetails.notificationId.pushTime}}</small>
+        </span>
+      </p> 
     </ion-item>
   </ion-list>
 </ion-content>
