@@ -20,7 +20,7 @@
     <form [formGroup]="bulkNotificationForm">
         <ion-list no-liness class="bulk-notification-list" no-padding>
             <ion-item>
-                <ion-label color="darkGray" stacked>Receiver Type *</ion-label>
+                <ion-label color="darkGray" >Receiver Type *</ion-label>
                 <ion-select formControlName="receiverType" 
                         (ngModelChange)="onReceiverType($event)" 
                         [selectOptions]="selectOptionStyle">
@@ -117,7 +117,7 @@
             <ion-list-header color="ios-light-gray" class="list-item-header" >
                 <p>Message</p>
             </ion-list-header>
-            <ion-item >
+            <ion-item *ngIf="mode!=null && mode!='SMS' ">
                     <ion-label color="darkGray" stacked>Subject*</ion-label>
                     <ion-input formControlName="subject" type="text"></ion-input>
             </ion-item>

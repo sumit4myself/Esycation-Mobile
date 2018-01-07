@@ -1,7 +1,7 @@
 declare var Object: any;
 
 import { Component,ViewChild  } from '@angular/core';
-import { NavController,IonicPage,NavParams, LoadingController, Loading } from 'ionic-angular';
+import { NavController,IonicPage,NavParams} from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import {AttendanceService} from '../../../providers/service/attendance/attendance.service';
 import { AttendanceModel,StudentAttendanceDetails,StudentAttendance,Attendance} from '../../../providers/model/attendance/model.attendance';
@@ -9,6 +9,7 @@ import {UserSessionService} from "../../../providers/service/core/user.session.s
 import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 import {BaseComponent} from '../../baseComponent/base.component';
 import * as moment from 'moment';
+import {CommonServices} from '../../../providers/service/common/common.service';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,6 @@ import * as moment from 'moment';
 export class StudentAttendanceComponent  extends BaseComponent{
 @ViewChild(Content) content: Content;
   
-  loading: Loading;
   counter : number =0;
   offset : number=50;
   mode:string="create";
@@ -34,8 +34,8 @@ export class StudentAttendanceComponent  extends BaseComponent{
     protected navCtrl: NavController,
     private navParam:NavParams,
     private attendanceService:AttendanceService,
-    private loadingCtrl:LoadingController,
-    protected userSessionService:UserSessionService) {
+    protected userSessionService:UserSessionService,
+    private commonServices:CommonServices) {
       super(userSessionService,navCtrl);
       this.attendance.inTime= moment(new Date()).format('HH:mm:ss');
     }
@@ -45,9 +45,8 @@ export class StudentAttendanceComponent  extends BaseComponent{
     this.courseId = this.navParam.get("courseId");
     this.attendance.batchId = this.batchId;
     this.attendance.courseId = this.courseId;
-    this.loading = this.loadingCtrl.create({
-        content: 'Loading..'
-      }); this.loading.present();
+    this.commonServices.onLoader();
+
       this.attendanceService.findStudentByBatchId(this.batchId).subscribe(data=>{
         this.pagedResponse = data;
         for(let studentDetails of this.pagedResponse.contents){
@@ -67,14 +66,11 @@ export class StudentAttendanceComponent  extends BaseComponent{
         if(this.students.length==0){
           this.dataNotfound="Student not found.";
         }
-        this.loading.dismissAll();
+        this.commonServices.onDismissAll();
       },error=>{
         console.log("Error: ",error);
-        this.loading.dismissAll();
-      }
-
-      
-    );
+        this.commonServices.onDismissAll();
+      });
     
   }
 
@@ -126,35 +122,34 @@ export class StudentAttendanceComponent  extends BaseComponent{
   
   onSave(){
 
-    this.loading = this.loadingCtrl.create({
-      content: 'saving....'
-    }); this.loading.present();
+    this.commonServices.onLoader();
     let studentAttendanceDetails = this.prepareDataSet();
     this.attendanceService.saveAttendance(studentAttendanceDetails).subscribe(
       data=>{
         console.log(data);
-        this.loading.dismissAll();
+        this.commonServices.onDismissAll();
+        this.commonServices.presentToast("Data save successfully",null,"success");
         this.navCtrl.setRoot("ManageAttendanceComponent");
       },
       error=>{
         console.log(error);
-        this.loading.dismissAll();
+        this.commonServices.onDismissAll();
       });
   }
 
   onUpdate(){
    
     let studentAttendanceDetails = this.prepareDataSet();
-    this.loading = this.loadingCtrl.create({content: 'Updating....'});
-    this.loading.present();
+    this.commonServices.onLoader();
     this.attendanceService.updateAttendance(this.attendance.id,studentAttendanceDetails).subscribe(
       data=>{
         console.log(data);
-        this.loading.dismissAll();
+        this.commonServices.onDismissAll();
+        this.commonServices.presentToast("Data update successfully",null,"success");
         this.navCtrl.setRoot("ManageAttendanceComponent");
       },error=>{
         console.log(error);
-        this.loading.dismissAll();
+        this.commonServices.onDismissAll();
       });
   }
 

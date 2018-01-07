@@ -45,6 +45,9 @@
       </p>
       <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
     </ion-item>
+    <p *ngIf="resultEntryNotfound!=null" text-center class="app-error">
+        <ion-icon name="ios-alert-outline"></ion-icon> {{resultEntryNotfound}}
+      </p>
   </ion-list>
 
   <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">

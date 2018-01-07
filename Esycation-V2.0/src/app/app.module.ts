@@ -19,12 +19,11 @@ import { LocalStorage } from '../providers/storage/local.storage';
 import { Push } from '@ionic-native/push';
 import { NotificationService } from '../providers/service/notification/notification.service';
 import { DeviceService } from '../providers/service/notification/device.service';
-import { NotificationCountDirective } from '../app/attribute-directives/notification.bell.directive';
+
 
 @NgModule({
   declarations: [
     MyApp,
-    NotificationCountDirective
   ],
   imports: [
     BrowserModule, HttpModule,

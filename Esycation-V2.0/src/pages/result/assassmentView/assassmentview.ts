@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, Loading, Nav, NavController } from 'ionic-angular';
+import { IonicPage, Nav, NavController } from 'ionic-angular';
 import { UserSessionService } from "../../../providers/service/core/user.session.service";
 import { BaseComponent } from '../../baseComponent/base.component';
 import { AssessmentService } from '../../../providers/service/assessment/assessment.service';
 import { StudentAssessmentDetails } from '../../../providers/model/assessment/model.assessment';
 import { ManageAssessment } from '../../../providers/model/assessment/model.manage.assessment';
+import {CommonServices} from '../../../providers/service/common/common.service';
 
 @IonicPage()
 @Component({
@@ -13,16 +14,17 @@ import { ManageAssessment } from '../../../providers/model/assessment/model.mana
 })
 export class AssassmentViewComponent extends BaseComponent {
 
-  loading: Loading;
   viewMode: string;
   dataNotfound:string=null;
+  assessmentEntryNotfound:string=null;
   manageAssessments: Array<ManageAssessment> = new Array<ManageAssessment>();
   completedAssessments: Array<ManageAssessment> = new Array<ManageAssessment>();
   constructor(
     protected navCtrl: NavController,
     private nav: Nav,
     private session: UserSessionService,
-    private assessmentService: AssessmentService) {
+    private assessmentService: AssessmentService,
+    private commonServices:CommonServices) {
     super(session, navCtrl);
     
     this.viewMode="first";
@@ -30,19 +32,29 @@ export class AssassmentViewComponent extends BaseComponent {
 
   ionViewDidLoad() {
     
+    this.commonServices.onLoader();
     this.assessmentService.findPendingStudentAssessment(this.session.findRemote()).subscribe(data => {
-      this.convertToFlatData(data.contents);
-    });
-
-    this.assessmentService.findCompletedStudentAssessment(this.session.findRemote()).subscribe(data => {
      
-      this.platDataCompletedAssessments(data.contents);
-      if(this.completedAssessments.length==0){
+      this.commonServices.onDismissAll();
+      if(data.contents.length==0){
+       this.assessmentEntryNotfound="Data not found.";
+      }else{
+        this.convertToFlatData(data.contents);
+      }
+    },error=>{
+      this.commonServices.onDismissAll();
+         console.log(error);
+     });
+  
+    this.assessmentService.findCompletedStudentAssessment(this.session.findRemote()).subscribe(data => {
+      
+      if(data.contents.length==0){
         this.dataNotfound="Data not found.";
       }
-     console.log("platDataCompletedAssessments===", this.completedAssessments);
+      else{
+        this.platDataCompletedAssessments(data.contents);
+      }
     });
-
   }
 
   onAssessment(id: number) {
@@ -60,8 +72,6 @@ export class AssassmentViewComponent extends BaseComponent {
 
     let studentAssessmentDetail = new StudentAssessmentDetails();
     studentAssessmentDetail = Object.assign(studentAssessmentDetail, data);
-
-    console.log(JSON.stringify(studentAssessmentDetail[0]));
 
     for (let subjectAssessment of studentAssessmentDetail[0].subjectAssessements) {
 

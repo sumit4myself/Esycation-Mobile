@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController, 
-  LoadingController, Loading,Events } from 'ionic-angular';
+import { IonicPage,NavController,Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Branch} from '../../../providers/model/common/model.branch';
 import {AuthService} from '../../../providers/service/core/auth.service';
@@ -18,7 +17,6 @@ import {UserSessionService} from '../../../providers/service/core/user.session.s
 export class LoginComponent {
   
   loginForm: FormGroup;
-  loading: Loading;
   pagedResponse=PagedResponse.getInstance();
   branchs:Array<Branch>=new Array<Branch>();
   branch:Branch=new Branch();
@@ -29,7 +27,6 @@ export class LoginComponent {
   constructor(
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private loadingCtrl: LoadingController,
     private events:Events,
     private authService:AuthService,
     private commonServices:CommonServices,
@@ -53,30 +50,26 @@ export class LoginComponent {
 
   ionViewDidLoad() {
     
-    let loadingPopup = this.loadingCtrl.create({
-      spinner: 'crescent', 
-      content: 'Loading..'
-    });
-    loadingPopup.present();
+    this.commonServices.onLoader();
     this.breanchService.findBranch().subscribe(data=>{
+      this.commonServices.onDismissAll();
       for(let branchDetails of data.contents){
         this.branch = new Branch();
         let b = Object.assign(this.branch,branchDetails);
         this.branchs.push(b);
       }
-      loadingPopup.dismiss();
-   });
+   },error=>{
+    console.log("Error: ",error);
+    this.commonServices.onDismissAll();
+  });
     
   }
   
   login({ value, valid }: { value: Login, valid: boolean }){
-      
+     
+    
     if (valid) {
-      this.loading = this.loadingCtrl.create({
-        spinner: 'crescent', 
-        content: 'Logging In...'
-      }); this.loading.present();
-      
+      this.commonServices.onLoader("Logging In...");
       this.authService.login(
         { 
           userName: value.userName, 
@@ -93,9 +86,9 @@ export class LoginComponent {
             this.events.publish('LOGIN_USER_EVENT');
             this.events.publish('user:loggedin',data);   
             this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));  
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
           },error=>{
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
             console.log(error);
           });
     } else {

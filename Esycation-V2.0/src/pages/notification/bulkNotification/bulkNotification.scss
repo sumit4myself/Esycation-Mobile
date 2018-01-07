@@ -28,5 +28,19 @@ bulk-notification-page {
         // color: white !important;
       }
   
+      .bulk-notification-list ion-item{
+       
+      }
+
+      .bulk-notification-list ion-label{
+        font-size:12px !important;
+        color: gray;
+      }
+
+      .bulk-notification-list ion-input, ion-select, ion-datetime {
+        font-size:16px !important;
+        color: black;
+      }
+
         
 }

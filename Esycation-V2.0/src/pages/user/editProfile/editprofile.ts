@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import {IonicPage,LoadingController,Loading,Nav} from 'ionic-angular';
+import {IonicPage,Nav} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {UserSessionService} from "../../../providers/service/core/user.session.service";
 import {ProfileService} from '../../../providers/service/profile/profile.service';
 import {Profile,ProfileInterface} from '../../../providers/model/profile/model.profile';
 import * as moment from 'moment';
+import {CommonServices} from '../../../providers/service/common/common.service';
+import {ServerConfig} from '../../../providers/config'; 
 
 @IonicPage()
 @Component({
@@ -14,27 +16,29 @@ import * as moment from 'moment';
 export class EditProfileComponent {
 
  profileForm: FormGroup;
- loading: Loading;
  profile:Profile=Profile.getInstance();
  segmentView:string;
  moduleType:String;
  imageId:string=null;
  mySelectOptions : any={};  
- 
+ imagePath:String;
+
  constructor(
     private formBuilder:FormBuilder,
-    private loadingCtrl:LoadingController,
     private nav:Nav,
     private session:UserSessionService,
-    private profileService:ProfileService) {
+    private profileService:ProfileService,
+    private commonServices:CommonServices) {
     
       this.buildForm();
       this.segmentView="one";
+      this.imagePath=ServerConfig.imagePath();
       this.moduleType = this.session.findModule();
       this.mySelectOptions = {
         mode :'ios',
         cssClass: 'remove-ok'
       }
+
     }
 
     
@@ -65,30 +69,37 @@ export class EditProfileComponent {
         occupation:'',
       });
      
+      this.commonServices.onLoader();
       this.profileService.findProfileDetails(this.session.findRemote(),this.session.findModule())
       .subscribe(data=>{
+        this.commonServices.onDismissAll();
          this.profile = Object.assign(this.profile, data);
          this.profileForm.setValue(this.prepareData(this.profile));
          this.imageId = this.profile.imageId;
-      });      
+      },error=>{
+        console.log("Error: ",error);
+        this.commonServices.onDismissAll();
+      });
     }
 
   onUpdate({value,valid}:{value:ProfileInterface,valid:boolean}){
 
       value.dob=moment(value.dob).format("MM/DD/YYYY");
+      value.imageId = this.profile.imageId;
       console.log("Edit Profile==",JSON.stringify(value),valid);
-
-      this.loading= this.loadingCtrl.create({content:'Updating..'});
-      this.loading.present();
+      this.commonServices.onLoader();
       if(valid){
         this.profileService.editProfile(value).subscribe(data=>{
           console.log(data);
-          this.loading.dismissAll();
-          this.nav.setRoot("HomeComponent");
+          this.commonServices.onDismissAll();
+          this.commonServices.presentToast("Data update successfully",null,"success");
+          this.nav.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
+        },error=>{
+          console.log("Error: ",error);
+          this.commonServices.onDismissAll();
         });
       }else{
-        this.loading.dismiss();
-        this.loading.dismissAll();
+        this.commonServices.onDismissAll();
       }
   }
   prepareData(profile:Profile):any{

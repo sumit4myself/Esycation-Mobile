@@ -1,9 +1,9 @@
 import { Component  } from '@angular/core';
-import { NavController, IonicPage,LoadingController, Loading } from 'ionic-angular';
-//import {StudentAttendanceComponent} from '../../attendance/studentAttendance/studentAttendance';
+import { NavController, IonicPage } from 'ionic-angular';
 import {AttendanceService} from '../../../providers/service/attendance/attendance.service';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {BaseComponent} from '../../baseComponent/base.component';
+import {CommonServices} from '../../../providers/service/common/common.service';
 
 
 @IonicPage()
@@ -14,20 +14,19 @@ import {BaseComponent} from '../../baseComponent/base.component';
 
 export class ManageAttendanceComponent extends BaseComponent{
 
-  loading: Loading;
   batches:any;
   constructor( 
     protected navCtrl: NavController,
-    private loadingCtrl:LoadingController,
     private attendanceService:AttendanceService,
-    protected session:UserSessionService) { 
+    protected session:UserSessionService,
+    private commonServices:CommonServices) { 
 
     super(session,navCtrl);
    }
 
     ionViewDidLoad(){
 
-      this.loading = this.loadingCtrl.create({content: 'Loading....'}); this.loading.present();
+      this.commonServices.onLoader();
       this.attendanceService.findBatchByRemoteId(this.session.findRemote()).subscribe(
         data=>{
           this.batches = data.contents;
@@ -44,12 +43,12 @@ export class ManageAttendanceComponent extends BaseComponent{
               }) 
             }
           }
-          this.loading.dismissAll();
+          this.commonServices.onDismissAll();
           console.log(this.batches);
 
         },error=>{
           console.log(error);
-          this.loading.dismissAll();
+          this.commonServices.onDismissAll();
         });
         
     }

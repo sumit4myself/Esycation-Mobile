@@ -11,7 +11,7 @@
          </span>
       </button>
   </ion-buttons>
-    <ion-title>Assassments</ion-title>
+    <ion-title>Assessments</ion-title>
   </ion-navbar>
   <ion-toolbar no-border-top   color="lightblue">
     <ion-segment [(ngModel)]="viewMode" color="light">
@@ -43,6 +43,9 @@
         </p>
           <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
       </ion-item>
+      <p *ngIf="assessmentEntryNotfound!=null" text-center class="app-error">
+          <ion-icon name="ios-alert-outline"></ion-icon> {{assessmentEntryNotfound}}
+        </p>
     </ion-list>
 
     <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">
