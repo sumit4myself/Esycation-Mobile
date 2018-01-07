@@ -13,7 +13,7 @@ import {NotificationDetails} from '../../../providers/model/notification/notific
 export class ViewNotificationComponent {
   
      notification:NotificationDetails=new NotificationDetails();
-    
+     isLoaded:boolean=false;    
      notificationCount:any=0;
      constructor(private notificationService:NotificationService,
          private navParams:NavParams   ) {
@@ -26,7 +26,7 @@ export class ViewNotificationComponent {
 
           let b = Object.assign({},data);
           this.notification=b;
-
+          this.isLoaded = true;
          },error=>{
              console.log(error);
          });

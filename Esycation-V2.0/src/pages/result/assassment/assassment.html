@@ -14,90 +14,102 @@
     <ion-title>Student Assassment</ion-title>
   </ion-navbar>
   <ion-toolbar color="lightGray">
-      <ion-buttons >
-          <button ion-button  >
-              Subject : <small>{{studentAssessment.subjectName}}</small>   
-          </button>
-        </ion-buttons>
+    <p>{{studentAssessment.subjectName}}</p>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <ion-card *ngFor="let stuAssessment of studentAssessment.studentAssessements; let count = index">
-        <ion-item>
-          <ion-avatar item-start>
-              <img  class="profile-image" src="assets/img/student-m.png">
-          </ion-avatar>
-          <h2>{{stuAssessment.studentName}}</h2>
-          <p> #{{stuAssessment.studentRollNumber}}</p>
-        </ion-item>
-        <ion-card-content>
-           
-           <!--
-                  <ul >
-                <li *ngFor="let assessement of stuAssessment.assessements">
+    <div *ngFor="let stuAssessment of studentAssessment.studentAssessements; let count = index">
+        <ion-list-header (click)="toggleDetails(stuAssessment)">
+            <ion-avatar item-start>
+                <img  class="profile-image" src="assets/img/student-m.png">
+            </ion-avatar>
+            <ion-icon color="primary" item-right [name]="(!stuAssessment.showDetails) ? 'ios-remove-circle-outline' : 'ios-add-circle-outline' "></ion-icon>
+            <!-- {{d.title}} -->
+            <h2>{{stuAssessment.studentName}}</h2>
+            <p> #{{stuAssessment.studentRollNumber}}</p>
+          </ion-list-header>
+    <div *ngIf="!stuAssessment.showDetails"  text-wrap>
+        <div *ngFor="let assessement of stuAssessment.assessements">
+            <!-- <ion-item> -->
+              <div class="assassment-list">
+                <h4 *ngIf="assessement.childs.length==0" item-start>{{assessement.name}}</h4> 
+                <rating item-right  [(ngModel)]="assessement.rating" 
+                max="5" 
+                emptyStarIconName="star-outline" 
+                halfStarIconName="star-half" 
+                starIconName="star"
+                nullable="false"
+                 *ngIf="assessement.childs.length==0"> 
+              </rating>  
+                <h4 class="sub-subjects" *ngIf="assessement.childs.length>0">{{assessement.name}}</h4> 
+                <div class="sub-subjects"  *ngFor="let child of assessement.childs">
                     
-                   {{assessement.name}}  <rating [(ngModel)]="assessement.rating" 
-                    max="5" 
-                    emptyStarIconName="star-outline" 
-                    halfStarIconName="star-half" 
-                    starIconName="star"
-                    nullable="false"
-                     *ngIf="assessement.childs.length==0"> 
-                  </rating>  
-                  <ul>
-                    <li *ngFor="let child of assessement.childs">
-                          {{child.name}}  <rating [(ngModel)]="child.rating" 
-                          max="5" 
-                          emptyStarIconName="star-outline" 
-                          halfStarIconName="star-half" 
-                          starIconName="star"
-                          nullable="false"> 
-                        </rating>  
-                     </li> 
-                  </ul>
-                </li>
-              </ul>
-
-            -->
-
-            <div   text-wrap>
-                <div *ngFor="let assessement of stuAssessment.assessements">
-                    <ion-item >
+                  <div>
                         
-                        <h4 *ngIf="assessement.childs.length==0" item-start>{{assessement.name}}</h4> 
-                        <rating item-right  [(ngModel)]="assessement.rating" 
-                        max="5" 
-                        emptyStarIconName="star-outline" 
-                        halfStarIconName="star-half" 
-                        starIconName="star"
-                        nullable="false"
-                         *ngIf="assessement.childs.length==0"> 
-                      </rating>  
-                          <h4 *ngIf="assessement.childs.length>0">{{assessement.name}}</h4> 
-                        <div  *ngFor="let child of assessement.childs">
-                            
-                          <ion-item >
-                                
-                          <h4 item-start>{{child.name}}</h4>  
-                              <rating item-right  [(ngModel)]="child.rating" 
-                              max="5" 
-                              emptyStarIconName="star-outline" 
-                              halfStarIconName="star-half" 
-                              starIconName="star"
-                              nullable="false"> 
-                            </rating>  
-                            </ion-item>
-                         </div> 
-                    </ion-item>
+                  <h4 item-start>{{child.name}}</h4>  
+                      <rating item-right  [(ngModel)]="child.rating" 
+                      max="5" 
+                      emptyStarIconName="star-outline" 
+                      halfStarIconName="star-half" 
+                      starIconName="star"
+                      nullable="false"> 
+                    </rating>  
                   </div>
-            </div>
-          
-          
-                
-        </ion-card-content>
-  </ion-card>
-  <br/>
-</ion-content>
+                 </div> 
+                </div>  
+            <!-- </ion-item> -->
+          </div>
+    </div>
+  </div>
+  <div class="list-bottom-margin"></div>   
+  <!-- <ion-card *ngFor="let stuAssessment of studentAssessment.studentAssessements; let count = index">
+      <ion-item>
+        <ion-avatar item-start>
+            <img  class="profile-image" src="assets/img/student-m.png">
+        </ion-avatar>
+        <h2>{{stuAssessment.studentName}}</h2>
+        <p> #{{stuAssessment.studentRollNumber}}</p>
+      </ion-item>
+      <ion-card-content>
+        
+          <div   text-wrap>
+              <div *ngFor="let assessement of stuAssessment.assessements">
+                  <ion-item >
+                      <h4 *ngIf="assessement.childs.length==0" item-start>{{assessement.name}}</h4> 
+                      <rating item-right  [(ngModel)]="assessement.rating" 
+                      max="5" 
+                      emptyStarIconName="star-outline" 
+                      halfStarIconName="star-half" 
+                      starIconName="star"
+                      nullable="false"
+                       *ngIf="assessement.childs.length==0"> 
+                    </rating>  
+                        <h4 *ngIf="assessement.childs.length>0">{{assessement.name}}</h4> 
+                      <div  *ngFor="let child of assessement.childs">
+                          
+                        <ion-item >
+                              
+                        <h4 item-start>{{child.name}}</h4>  
+                            <rating item-right  [(ngModel)]="child.rating" 
+                            max="5" 
+                            emptyStarIconName="star-outline" 
+                            halfStarIconName="star-half" 
+                            starIconName="star"
+                            nullable="false"> 
+                          </rating>  
+                          </ion-item>
+                       </div> 
+                  </ion-item>
+                </div>
+          </div>
+        
+        
+              
+      </ion-card-content>
+</ion-card>
+<br/> -->
+  </ion-content>
 <ion-footer *ngIf="studentAssessment.studentAssessements!=0">
   <ion-row class="social">
     <ion-col>
