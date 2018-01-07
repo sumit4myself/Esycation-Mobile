@@ -74,7 +74,7 @@ export class PrivilageService{
                       component:'ResultEntiryViewComponent'
                       },
                       {
-                        name:'Assassment',
+                        name:'Assessment',
                         component:'AssassmentViewComponent'
                       }
                     ]

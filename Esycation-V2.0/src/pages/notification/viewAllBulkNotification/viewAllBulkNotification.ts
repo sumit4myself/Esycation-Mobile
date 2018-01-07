@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage,Nav} from 'ionic-angular';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {BulkNotificationService} from '../../../providers/service/notification/bulk.notification.service';
+import {CommonServices} from '../../../providers/service/common/common.service';
+
 @IonicPage()
 @Component({
   selector: 'view-all-bulk-notification',
@@ -13,13 +15,15 @@ export class ViewAllBulkNotificationComponent {
      constructor(
          private session:UserSessionService,
          private nav:Nav,
-         private bulkNotificationService:BulkNotificationService ) {
+         private bulkNotificationService:BulkNotificationService,
+         private commonServices:CommonServices ) {
         
          console.log("ViewAllBulkNotificationComponent==",this.session);
       }
 
     ionViewDidLoad(){
 
+        this.commonServices.onLoader();
         this.bulkNotificationService.manage().subscribe(data=>{
             this.notifications = data.contents;
             if(this.notifications.length>0){
@@ -29,7 +33,11 @@ export class ViewAllBulkNotificationComponent {
                 }
                 //console.log("notifications==",JSON.stringify(this.notifications));
             }
-        });
+            this.commonServices.onDismissAll();
+        },error=>{
+            console.error(error);
+            this.commonServices.onDismissAll();
+       });  
     }
 
     onAddNew(){

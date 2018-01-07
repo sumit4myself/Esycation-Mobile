@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController,LoadingController, Loading} from 'ionic-angular';
+import { IonicPage,NavController} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {BulkNotificationService} from '../../../providers/service/notification/bulk.notification.service';
@@ -21,6 +21,7 @@ import {Group} from '../../../providers/model/group/model.group';
 import {BaseComponent} from '../../baseComponent/base.component';
 import * as moment from 'moment';
 
+import {CommonServices} from '../../../providers/service/common/common.service';
 
 @IonicPage()
 @Component({
@@ -38,7 +39,7 @@ export class BulkNotificationComponent extends BaseComponent {
     staffs:Array<Staff>=new Array<Staff>();
     groups:Array<Group> = new Array<Group>();
     comMode:any;
-    loading: Loading;
+    mode:string=null;
     selectOptionStyle : any={};  
 
      constructor(private session:UserSessionService,
@@ -50,7 +51,7 @@ export class BulkNotificationComponent extends BaseComponent {
                  private departmentService:DepartmentService, 
                  private staffService:StaffService,
                  protected navControl:NavController,
-                 private loadingCtrl: LoadingController ) {
+                 private commonServices:CommonServices    ) {
 
             super(session,navControl)
            // console.log(this.session);
@@ -59,8 +60,7 @@ export class BulkNotificationComponent extends BaseComponent {
             mode :'ios',
             cssClass: 'remove-ok'
           }        
-
-             this.buildForm();  
+        this.buildForm();  
     }
 
     
@@ -91,19 +91,18 @@ export class BulkNotificationComponent extends BaseComponent {
     }
 
     onCommunication(mode:string){
-
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
+        this.mode=mode;
+        this.commonServices.onLoader();
        this.bulkNotificationService.findTemplateByMode(mode).subscribe(data=>{
            
             for(let template of data.contents){
                 let obj = Object.assign({},template);
                 this.templates.push(obj);
             }     
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
        },error=>{
             console.error(error);
+            this.commonServices.onDismissAll();
        });     
     }
 
@@ -124,63 +123,52 @@ export class BulkNotificationComponent extends BaseComponent {
 
     findAllCources(){
 
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
+        this.commonServices.onLoader();
         this.cources=[];
         this.courceService.findAllcourses("Course.NameId").subscribe(data=>{
            for(let cource of data.contents){
                 let obj = Object.assign({},cource);
                 this.cources.push(obj);
            }
-            //console.log("Cources==",JSON.stringify(this.cources));
-           this.loading.dismissAll();
+           this.commonServices.onDismissAll();
         },error=>{
             console.error(error);
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
         });
     }
 
     findBatchByCourseIds(id:number){
        
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
-        //this.batchs=[];
+        this.commonServices.onLoader();
         this.batchService.findBatchByCourseIds(id,"Batch.NameId").subscribe(data=>{
             for(let batch of data.contents){
                 let obj = Object.assign({},batch);
                 this.batchs.push(obj);
             }
-            //console.log("Batch==",JSON.stringify(this.batchs));
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
         },error=>{
             console.error(error);
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
        });
     }
     findStudentByBatchId(batchId:number){
 
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
+        this.commonServices.onLoader();
         this.studentService.findByBatchIds(batchId,"Student.MinDetails").subscribe(data=>{
             for(let student of data.contents){
                 let obj = Object.assign({},student);
                 this.students.push(obj);
             }
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
         },error=>{
             console.error(error);
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
        });
     }
 
     onDepartment(branchId:number){
 
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
+        this.commonServices.onLoader();
         this.departments=[];
         this.departmentService.findByBranchIds(branchId,"Department.NameId").subscribe(
             data=>{
@@ -188,18 +176,16 @@ export class BulkNotificationComponent extends BaseComponent {
                 let obj = Object.assign({},department);
                 this.departments.push(obj);
             } 
-           this.loading.dismissAll(); 
+            this.commonServices.onDismissAll();
         },error=>{
             console.error(error);
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
        });
     }
 
     onStaff(departmentId:number){
 
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
+        this.commonServices.onLoader();
         this.staffs=[];
         this.staffService.findByDepartmentIds(departmentId,"Staff.MinDetails").subscribe(
             data=>{
@@ -207,40 +193,38 @@ export class BulkNotificationComponent extends BaseComponent {
                    let obj = Object.assign({},staff);
                    this.staffs.push(obj); 
                 }
-               this.loading.dismissAll();
+                this.commonServices.onDismissAll();
             },error=>{
                 console.error(error);
-                this.loading.dismissAll();
+                this.commonServices.onDismissAll();
            });
     }
 
     onSave({value,valid}:{value:BulkNotificationForm,valid:boolean}){
 
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
+        this.commonServices.onLoader("saving..");
         let data = this.prepareData(value);
         console.log(JSON.stringify(data));
         if(valid){
            
             this.bulkNotificationService.saveBulkNotification(data).subscribe(data=>{
                 console.log("data==",data);
-                this.loading.dismissAll();
+                this.commonServices.onDismissAll();
+                this.commonServices.presentToast("Data saved successfully",null,"success");
                 this.navControl.setRoot("ViewAllBulkNotificationComponent");
             },error=>{
-                this.loading.dismissAll();
+                this.commonServices.onDismissAll();
                 console.error("ERROR :",error);
             });
             
         }else{
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
         }
     }
 
     onGroup(){
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present(); 
+
+        this.commonServices.onLoader();
         this.groups=[];
         this.bulkNotificationService.findGroup(this.session.findUserId(),"Group.Details").subscribe(
             data=>{
@@ -248,10 +232,10 @@ export class BulkNotificationComponent extends BaseComponent {
                  let obj = Object.assign({},group);
                  this.groups.push(obj);
              }
-             this.loading.dismissAll();  
+             this.commonServices.onDismissAll();
         },error=>{
             console.error(error);
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
        });
     }
 
@@ -264,7 +248,11 @@ export class BulkNotificationComponent extends BaseComponent {
         //template.content = form.content;
         template.mode = form.mode;
         template.subject = form.subject;
-        template.htmlContent = form.content
+        if(form.mode=='SMS'){
+            template.content=form.content;
+        }else{
+            template.htmlContent = form.content;
+        }
         form.staffs=form.staffs.toString();
         form.courses=form.courses.toString();
         form.batches=form.batches.toString();

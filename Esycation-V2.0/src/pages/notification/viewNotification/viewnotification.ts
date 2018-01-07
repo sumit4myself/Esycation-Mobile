@@ -3,7 +3,7 @@ import { IonicPage, NavParams} from 'ionic-angular';
 //import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {NotificationService} from '../../../providers/service/notification/notification.service';
 import {NotificationDetails} from '../../../providers/model/notification/notification.model';
-
+import {CommonServices} from '../../../providers/service/common/common.service';
 
 @IonicPage()
 @Component({
@@ -16,18 +16,20 @@ export class ViewNotificationComponent {
     
      notificationCount:any=0;
      constructor(private notificationService:NotificationService,
-         private navParams:NavParams   ) {
+         private navParams:NavParams,
+         private commonServices:CommonServices) {
       }
 
       
       ionViewDidLoad(){
-
+        this.commonServices.onLoader();
         this.notificationService.findById(this.navParams.get("id")).subscribe(data=>{
 
           let b = Object.assign({},data);
           this.notification=b;
-
+          this.commonServices.onDismissAll();
          },error=>{
+          this.commonServices.onDismissAll();
              console.log(error);
          });
       }

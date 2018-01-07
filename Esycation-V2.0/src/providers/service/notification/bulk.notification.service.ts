@@ -42,7 +42,7 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
 
   public manage():Observable<any>{
 
-    let data ={"totalElements":0,"filteredElements":0,"size":10,"page":1,"totalPages":0};
+    let data ={"totalElements":0,"filteredElements":0,"size":500,"page":1,"totalPages":0};
     let url: string = ServerConfig.getPath() 
     +"bulkNotifications/search?RESPONSE_VIEW=Notification.Summary"; 
 

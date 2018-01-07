@@ -124,7 +124,7 @@ export class MyApp {
  }
 
  onHome1(){
-  this.nav.setRoot("HomeComponent");
+  this.nav.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
  }
 
 
@@ -148,15 +148,15 @@ export class MyApp {
           pushObject.on('notification').subscribe((notification: any) => {
   
             if(notification.additionalData.foreground){
-              //this.commonServices.presentToast(notification);
-              this.commonServices.showAlert("Notification",JSON.stringify(notification));
+              this.commonServices.presentToast("You have new notification.");
+              //this.commonServices.showAlert("Notification",JSON.stringify(notification));
               var notificationCount=Number(localStorage.getItem("notificationCount"));
               var count = notificationCount+1;
               localStorage.setItem("notificationCount",count+"");
             }
           });
           pushObject.on('registration').subscribe((registration: any) => {
-            this.commonServices.showAlert("Notification",JSON.stringify(registration.registrationId));
+            //this.commonServices.showAlert("Notification",JSON.stringify(registration.registrationId));
             localStorage.setItem("registrationId",registration.registrationId);
             
           });

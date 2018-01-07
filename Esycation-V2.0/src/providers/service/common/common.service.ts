@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from 'ionic-angular';
+import { AlertController, ToastController ,Loading,LoadingController} from 'ionic-angular';
 //import { Observable } from 'rxjs/Observable';
+
 
 
 @Injectable()
 export class CommonServices {
 
+    loading: Loading;
     constructor(
         private alertCtrl: AlertController,
         private toastCtrl: ToastController,
+        private loadingCtrl:LoadingController
     ) { }
 
   
@@ -82,4 +85,36 @@ export class CommonServices {
         alert.present();
     }
 
+    onLoader(Content?:string):void{
+        !Content ? Content = "Loading.." : null;
+        this.loading = this.loadingCtrl.create({
+            content: Content
+        }); 
+        this.loading.present(); 
+    }
+    
+    onDismissAll():void{
+        this.loading.dismissAll();
+    }
+
+    /*
+    presentLoadingCustom() {
+        let loading = this.loadingCtrl.create({
+          spinner: 'hide',
+          content: `
+            <div class="custom-spinner-container">
+              <div class="custom-spinner-box">
+                loading..
+              </div>
+            </div>`,
+          duration: 5000
+        });
+      
+        loading.onDidDismiss(() => {
+          console.log('Dismissed loading');
+        });
+      
+        loading.present();
+      }
+*/
 }

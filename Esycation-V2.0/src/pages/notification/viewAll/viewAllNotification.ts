@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, LoadingController, Loading, Nav } from 'ionic-angular';
+import { IonicPage, Nav } from 'ionic-angular';
 import { UserSessionService } from '../../../providers/service/core/user.session.service';
 import { NotificationService } from '../../../providers/service/notification/notification.service';
 import { NotificationDetails } from '../../../providers/model/notification/notification.model';
-//import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
+import {CommonServices} from '../../../providers/service/common/common.service';
 
 @IonicPage()
 @Component({
@@ -13,16 +13,15 @@ import { NotificationDetails } from '../../../providers/model/notification/notif
 export class ViewAllNotificationComponent {
 
     public notifications = new Array<NotificationDetails>();
-    loading: Loading;
     remoteId: number;
     module: string;
     shownDetail = null;
     notificationCount: any = 0;
     constructor(
-        private loadingCtrl: LoadingController,
         private session: UserSessionService,
         private notificationService: NotificationService,
-        private nav: Nav) {
+        private nav: Nav,
+        private commonServices:CommonServices) {
 
         this.remoteId = this.session.findRemote();
         this.module = this.session.findModule();
@@ -32,9 +31,7 @@ export class ViewAllNotificationComponent {
 
     findAllNotifications(remoteId: number, module: string) {
 
-        this.loading = this.loadingCtrl.create({
-            content: 'Loading..'
-        }); this.loading.present();
+        this.commonServices.onLoader();
         this.notificationService.findAllByRemoteIdAndModule(remoteId, module).subscribe(data => {
 
             for (let notification of data.contents) {
@@ -47,18 +44,16 @@ export class ViewAllNotificationComponent {
                 }
             }
             localStorage.setItem("notificationCount", this.notificationCount);
-
-            this.loading.dismissAll();
-            console.log("notifications===", this.notifications);
-
+            this.commonServices.onDismissAll();
 
         }, error => {
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
             console.log(error);
         });
     }
 
     onRead(id: number) {
+        this.commonServices.onLoader();
         this.onView(id);
         this.notificationService.readMessage(id).subscribe(data => {
             console.error(data);
@@ -69,9 +64,10 @@ export class ViewAllNotificationComponent {
                     localStorage.setItem("notificationCount", this.notificationCount);
                 }
             }
+            this.commonServices.onDismissAll();
         },error=>{
             console.error(error);
-            this.loading.dismissAll();
+            this.commonServices.onDismissAll();
        });
     }
 

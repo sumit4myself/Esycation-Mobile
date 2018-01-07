@@ -15,7 +15,7 @@
                 <ion-img class="profile-image" src="assets/img/default.png"></ion-img>
             </p>
             <p *ngIf="imageId!=null">
-                <ion-img class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{imageId}}"></ion-img>
+                <ion-img class="profile-image" src="{{imagePath}}/{{imageId}}"></ion-img>
             </p>
             <!-- <ion-segment mode="md" [(ngModel)]="segmentView" color="blue2">
                 <ion-segment-button value="one">

@@ -24,10 +24,10 @@
       <a *ngIf="profile.imageId==null">
         <img src="assets/img/default.png"> </a>
       <a *ngIf="profile.imageId!=null">
-        <img class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{profile.imageId}}">
+        <img class="profile-image" src="{{imagePath}}/{{profile.imageId}}">
 
       </a>
-      <h2 id="profile2-name">{{profile.name}}</h2>
+      <h2 id="profile2-name">{{profile.name}} </h2>
     </header>
   </aside>
 
