@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,ModalController,Events } from 'ionic-angular';
+import { Nav, Platform,ModalController,Events,AlertController } from 'ionic-angular';
 
 //***********  ionic-native **************/
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,7 +23,27 @@ export class MyApp {
   pages: Array<any>;
   userPrefernce:UserPrefernce;//=UserPrefernce.getInstance();
   loginUsers:Array<any>;
+  showedAlert: boolean;
   userShow:boolean=false;
+  confirmAlert = this.alertCtrl.create({
+    title: "Exit App",
+    message: "Are you sure to exit?",
+    buttons: [
+        {
+            text: 'No',
+            handler: () => {
+                this.showedAlert = false;
+                return;
+            }
+        },
+        {
+            text: 'Yes',
+            handler: () => {
+                this.platform.exitApp();
+            }
+        }
+    ]
+});
   icon:string="ios-add-outline"
   constructor(public platform: Platform, 
               public statusBar: StatusBar, 
@@ -34,6 +54,7 @@ export class MyApp {
               private events:Events,
               private commonServices:CommonServices,
               private push:Push,
+              public alertCtrl: AlertController,
               private deviceService:DeviceService) {
         this.initializeApp();
 
@@ -62,15 +83,29 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.pushNotificationSetup();
-      
+      this.showedAlert = false;
+      this.platform.registerBackButtonAction(() => {
+        if (this.nav.length() == 1) {
+            if (!this.showedAlert) {
+                this.confirmExitApp();
+            } else {
+                this.showedAlert = false;
+                this.confirmAlert.dismiss();
+            }
+        }
+        this.nav.pop();
+    });
     });
   }
+
+  confirmExitApp() {
+    this.showedAlert = true;
+    this.confirmAlert.present();
+}
+
   toggleDetails(menu) {
     if (menu.showDetails) {
         menu.showDetails = false;
@@ -129,13 +164,13 @@ export class MyApp {
 
 
     pushNotificationSetup() {
-  
+    
           const options: PushOptions = {
               android: {
               sound: true,
               vibrate:true,
               iconColor:"#f53d3d",
-  
+              senderID : ""
               },
               ios: {
                   alert: 'true',

@@ -75,7 +75,7 @@
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <allow-navigation href="http://192.168.0.101:8100" />
