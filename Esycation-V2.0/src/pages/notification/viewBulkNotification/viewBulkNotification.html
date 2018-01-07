@@ -18,32 +18,51 @@
       </ion-header>
       <ion-content>
         <ion-list no-lines class="notification-list" *ngIf="viewMode==='first'">
-          <ion-item >
-            name
-            <p>
-              <span class="small">
-                email
-              </span>
-              <span>&nbsp;|</span>
-              <span class="small">987654356</span>
-            </p>
-            <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
-          </ion-item>
+            <ion-item *ngFor="let stuGaurd of studentGuardians">
+                    <ion-avatar item-left *ngIf="stuGaurd.imageId!=null">
+                        <img  class="profile-image" src="{{imagePath}}/{{stuGaurd.imageId}}">
+                    </ion-avatar> 
+                    <ion-avatar item-start *ngIf="stuGaurd.imageId==null">
+                        <img class="profile-image" src="assets/img/student-m.png">
+                    </ion-avatar>
+                    {{stuGaurd.name}}
+                    <p>
+                        <span class="small" *ngIf="stuGaurd.email!=null">
+                                <ion-icon name="mail"></ion-icon> {{stuGaurd.email}}
+                        </span>
+                        <span  *ngIf="stuGaurd.email!=null">&nbsp;|</span>
+                        <span class="small">  
+                                <ion-icon name="call"></ion-icon> {{stuGaurd.mobile}}
+                        </span>
+                    </p>
+            </ion-item>  
+          <p *ngIf="studentDetailsNotFound!=null" text-center class="app-error">
+                <ion-icon name="ios-alert-outline"></ion-icon> {{studentDetailsNotFound}}
+        </p>
         </ion-list>
       
         <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">
-                <ion-item >
-                        name
-                        <p>
-                          <span class="small">
-                            email
-                          </span>
-                          <span>&nbsp;|</span>
-                          <span class="small">987654356</span>
-                        </p>
-                        <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
-                      </ion-item>
-                    
+            <ion-item *ngFor="let staff of staffs">
+                <ion-avatar item-left *ngIf="staff.imageId!=null">
+                    <img  class="profile-image" src="{{imagePath}}/{{staff.imageId}}">
+                </ion-avatar> 
+                <ion-avatar item-start *ngIf="staff.imageId==null">
+                    <img class="profile-image" src="assets/img/student-m.png">
+                </ion-avatar>
+                {{staff.name}}
+                <p>
+                    <span class="small" *ngIf="staff.email!=null">
+                            <ion-icon name="mail"></ion-icon> {{staff.email}}
+                    </span>
+                    <span *ngIf="staff.email!=null">&nbsp;|</span>
+                    <span class="small">  
+                            <ion-icon name="call"></ion-icon> {{staff.mobile}}
+                    </span>
+                </p>
+            </ion-item>    
+            <p *ngIf="staffDetailsNotFound!=null" text-center class="app-error">
+                <ion-icon name="ios-alert-outline"></ion-icon> {{staffDetailsNotFound}}
+            </p>
         </ion-list>
       
       </ion-content>

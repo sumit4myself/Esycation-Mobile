@@ -1,54 +1,48 @@
 <ion-header>
-  <ion-navbar color="ios-blue">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-buttons end>
-        <button icon-only ion-button  (click)="onNotification()" >
-          <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
-          <span *ngIf="notificationCount!='0'" class="notification">    
-              <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
-           </span>
+    <ion-navbar color="ios-blue">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-buttons end>
+          <button icon-only ion-button  (click)="onNotification()" >
+            <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
+            <span *ngIf="notificationCount!='0'" class="notification">    
+                <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
+             </span>
+          </button>
+      </ion-buttons>
+      <ion-title>Student Result</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+    <ion-list >
+      <ion-item *ngFor="let student of resultDetails.studentResults; let count = index" >
+        <ion-avatar item-start *ngIf="student.studentImageId==null">
+          <img class="profile-image" src="assets/img/student-m.png">
+        </ion-avatar>
+        <ion-avatar item-start *ngIf="student.studentImageId!=null">
+          <img  class="profile-image" src="{{imagePath}}/{{student.studentImageId}}">
+        </ion-avatar>
+        <h2>{{student.studentName}}</h2>
+        <h3>#{{student.studentRollNumber}}</h3>
+        <input item-right type="number" class="inputStyle" [(ngModel)]="student.marks" placeholder="Marks">
+        </ion-item>
+      <p *ngIf="dataNotfound!=null" text-center class="app-error"> <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
+    </ion-list>
+  </ion-content>
+  <ion-footer >
+    <ion-row class="social" >
+      <ion-col>
+        <button ion-button color="orange" block block (click)="onDraft()">
+          Draft
         </button>
-    </ion-buttons>
-    <ion-title>Student Result</ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content>
-  <ion-list >
-    <ion-item *ngFor="let student of resultDetails.studentResults; let count = index" >
-      <ion-avatar item-left *ngIf="student.studentImageId==null">
-        <img class="profile-image" src="assets/img/student-m.png">
-      </ion-avatar>
-      <ion-avatar item-left *ngIf="student.studentImageId!=null">
-        <img  class="profile-image" src="{{imagePath}}/{{student.studentImageId}}">
-      </ion-avatar>
-      <ion-grid>
-          <ion-row>
-            <ion-col col-8>
-                {{student.studentName}}
-                <p> #{{student.studentRollNumber}}</p>  
-            </ion-col>
-            <ion-col col-4>
-                <input type="number" class="inputStyle" [(ngModel)]="student.marks" placeholder="Marks">
-            </ion-col>
-          </ion-row>
-        </ion-grid>    
-    </ion-item>
-    <p *ngIf="dataNotfound!=null" text-center class="app-error"> <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
-  </ion-list>
-</ion-content>
-<ion-footer >
-  <ion-row class="social" >
-    <ion-col>
-      <button ion-button color="orange" block block (click)="onDraft()">
-        Draft
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button color="secondary" block (click)="onPublish()">
-        Publish
-      </button>
-    </ion-col>
-  </ion-row>   
-</ion-footer>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="secondary" block (click)="onPublish()">
+          Publish
+        </button>
+      </ion-col>
+    </ion-row>   
+  </ion-footer>
+  
+  

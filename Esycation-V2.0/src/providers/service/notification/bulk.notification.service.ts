@@ -63,4 +63,13 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
     return this.search(url,data);
   }
 
+  public findSend(model:string,viewName):Observable<any>{
+
+    let data ={"totalElements":0,"filteredElements":0,"size":500,"page":1,"totalPages":0};
+    let url: string = ServerConfig.getPath() 
+    +""+model+"/search?RESPONSE_VIEW="+viewName+""; 
+
+    return this.search(url,data);
+  }
+
 }

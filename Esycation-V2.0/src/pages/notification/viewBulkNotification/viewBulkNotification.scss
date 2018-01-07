@@ -1,32 +1,41 @@
 view-bulk-notification-p {
- 
-    .form-item-rounder-items{
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        border-radius: 5px; 
-        -khtml-border-radius: 5px; 
-      }
-    
-      .bulkNotificationFormList ion-row{
-        margin-bottom: 5px;
-    }
 
-    .stacked-lable{
-        font-size: 16px !important;
-        
-    }
-
-    .list-item-header{
-        margin-bottom:2px;margin-top:15px;
-        color: #0f0f0f !important;
-        text-align:left;
+        .item-md ion-icon[item-left] + .item-inner, 
+        .item-md ion-icon[item-left] + .item-input, 
+        .item-md ion-icon[item-start] + .item-inner, 
+        .item-md ion-icon[item-start] + .item-input {
+          margin-left: 8px  !important;
       }
-
-      .list-item-header p{
-        font-size:16px !important;
-        // color: white !important;
+      
+      .item-md{
+          padding-left: 15px  !important;
       }
-  
-        
+      
+      .item-padding{
+          padding : 1rem;
+      }
+      
+      .notification-list ion-item{
+          border-top: 1px solid #dedede !important;  
+      }
+      
+      .small{
+          font-size: 1rem;
+      }
+      .serial{
+        padding-top: 10%;
+        font-size: 20px;
+        color: #fff;
+        background-color: red;
+        display: inline-block;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+       }
+      
+       .text-flot-right{
+          float: right
+       }
+      
 }

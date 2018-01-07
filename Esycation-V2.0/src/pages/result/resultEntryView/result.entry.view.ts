@@ -71,11 +71,10 @@ export class ResultEntiryViewComponent extends BaseComponent {
 
   ploatPendingResultData(data: any) {
 
-    let resultDetail = new ResultDetails();
+    let resultDetail = new Array<ResultDetails>();
     resultDetail = Object.assign(resultDetail, data);
-   // console.log("ploatPendingResultData==",JSON.stringify(resultDetail));
-    if (resultDetail[0]) {
-      let results = resultDetail[0];
+  // console.log("ploatPendingResultData==",JSON.stringify(resultDetail));
+    for(let results of resultDetail) {
       for (let result of results.subjectResults) {
         for (let batch of result.batchResults) {
           let pendingResult = new ManageResult();
@@ -95,10 +94,9 @@ export class ResultEntiryViewComponent extends BaseComponent {
 
   ploatMarksEntryData(data: any) {
 
-    let resultDetail = new ResultDetails();
+    let resultDetail = new Array<ResultDetails>();
     resultDetail = Object.assign(resultDetail, data);
-    if (resultDetail[0]) {
-      let results = resultDetail[0];
+    for(let results of  resultDetail) {
       for (let result of results.subjectResults) {
         for (let batch of result.batchResults) {
           let pendingResult = new ManageResult();

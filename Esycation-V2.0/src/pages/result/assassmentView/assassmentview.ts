@@ -70,41 +70,44 @@ export class AssassmentViewComponent extends BaseComponent {
 
   convertToFlatData(data: any) {
 
-    let studentAssessmentDetail = new StudentAssessmentDetails();
-    studentAssessmentDetail = Object.assign(studentAssessmentDetail, data);
+    let s = new Array<StudentAssessmentDetails>();
+   let assessmentDetails = Object.assign(s, data);
 
-    for (let subjectAssessment of studentAssessmentDetail[0].subjectAssessements) {
+    for(let studentAssessmentDetail of assessmentDetails){
+      for (let subjectAssessment of studentAssessmentDetail.subjectAssessements) {
 
-      for (let batchAssessement of subjectAssessment.batchAssessements) {
-
-         let assessment = new  ManageAssessment();
-         assessment.assassmentDate=studentAssessmentDetail[0].assassmentDate;
-         assessment.batchAssessementId=batchAssessement.id;
-         assessment.batchName=batchAssessement.batchName;
-         assessment.courseName=studentAssessmentDetail[0].assessmentConfigurationDetails.courseName;
-         assessment.resultStatus=batchAssessement.resultStatus;
-         assessment.subjectName = subjectAssessment.assessmentConfiguration.subjectName;
-         this.manageAssessments.push(assessment);
+        for (let batchAssessement of subjectAssessment.batchAssessements) {
+  
+           let assessment = new  ManageAssessment();
+           assessment.assassmentDate=studentAssessmentDetail.assassmentDate;
+           assessment.batchAssessementId=batchAssessement.id;
+           assessment.batchName=batchAssessement.batchName;
+           assessment.courseName=studentAssessmentDetail.assessmentConfigurationDetails.courseName;
+           assessment.resultStatus=batchAssessement.resultStatus;
+           assessment.subjectName = subjectAssessment.assessmentConfiguration.subjectName;
+           this.manageAssessments.push(assessment);
+        }
+  
       }
-
     }
+    
   }
 
    platDataCompletedAssessments(data: any) {
     
 
-        let d = new StudentAssessmentDetails();
-       let studentAssessmentDetail = Object.assign(d, data);
-        if(studentAssessmentDetail[0].id!=null){
-          for (let subjectAssessment of studentAssessmentDetail[0].subjectAssessements) {
+        let d = new Array<StudentAssessmentDetails>();
+       let studentAssessmentDetails = Object.assign(d, data);
+        for(let assessmentDetail of studentAssessmentDetails){
+          for (let subjectAssessment of assessmentDetail.subjectAssessements) {
             
                   for (let batchAssessement of subjectAssessment.batchAssessements) {
             
                      let assessment = new  ManageAssessment();
-                     assessment.assassmentDate=studentAssessmentDetail[0].assassmentDate;
+                     assessment.assassmentDate=assessmentDetail.assassmentDate;
                      assessment.batchAssessementId=batchAssessement.id;
                      assessment.batchName=batchAssessement.batchName;
-                     assessment.courseName=studentAssessmentDetail[0].assessmentConfigurationDetails.courseName;
+                     assessment.courseName=assessmentDetail.assessmentConfigurationDetails.courseName;
                      assessment.resultStatus=batchAssessement.resultStatus;
                      assessment.subjectName = subjectAssessment.assessmentConfiguration.subjectName;
                      this.completedAssessments.push(assessment);
