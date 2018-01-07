@@ -40,6 +40,20 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
     return this.findAll(url);
   }
 
+  public findPending(userId:number):Observable<any>{
+
+    let url: string = ServerConfig.getPath() 
+    +"/approvals/requests/"+userId+"?suppressError=true&page=1&size=50"; 
+    return this.findAll(url);
+  }
+
+  public findMyRequests(userId:number):Observable<any>{
+
+    let url: string = ServerConfig.getPath() 
+    +"/approvals/myRequests/"+userId+"?suppressError=true&page=1&size=50";
+    return this.findAll(url);
+  }
+
   public manage():Observable<any>{
 
     let data ={"totalElements":0,"filteredElements":0,"size":500,"page":1,"totalPages":0};
