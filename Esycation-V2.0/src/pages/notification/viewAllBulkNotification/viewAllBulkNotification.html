@@ -21,7 +21,7 @@
             <span class="small"><ion-icon name="contact"></ion-icon> {{notification.createdBy}} </span>
             <span>&nbsp;</span>
             <span class="small text-flot-right">
-             <ion-icon name="time"></ion-icon> <small>{{notification.updatedOn}}</small>
+             <ion-icon name="time"></ion-icon> <small>{{notification.pushTime}}</small>
           </span>
         </p> 
     </ion-item>
@@ -34,7 +34,7 @@
           <ion-icon name="ios-create"></ion-icon>
           Edit
         </button>
-        <button ion-button color="danger" (click)="onDelete(notification.id)">
+        <button *ngIf="notification.restricted==false" ion-button color="danger" (click)="onDelete(notification.id)">
           <ion-icon name="trash"></ion-icon>
           Delete
         </button>

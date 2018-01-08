@@ -72,7 +72,7 @@ export abstract class BaseService<T> {
   }
 
 
-  public find<T>(url: string, id: number): Observable<T> {
+  public find<T>(url: string, id?: number): Observable<T> {
     console.log(id);
     let requestBody: any = {};
     let result = this.request("GET", url, requestBody).map((response: any) => {

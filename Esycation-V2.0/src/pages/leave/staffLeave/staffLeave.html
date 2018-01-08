@@ -3,47 +3,51 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    
+    <ion-buttons end>
+      <button icon-only ion-button (click)="onNotification()">
+        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+        <span *ngIf="notificationCount!='0'" class="notification">
+          <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+        </span>
+      </button>
+    </ion-buttons>
     <ion-title>Apply Leave</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-    <form [formGroup]="leaveForm">
-      <ion-list no-line class="leave-list item-borderless">
-          <ion-item no-lines>
-              <ion-label class="leave-list-item" color="darkGray" stacked>Leave Type *
-                  <!-- <p class="error" *ngIf="!profileForm.controls['bloodGroup'].valid">This field is required *</p> -->
-              </ion-label>
-              <ion-select [selectOptions]="mySelectOptions">
-                  <ion-option value="S">Sick Leave</ion-option>
-                  <ion-option value="C">Casual Leave</ion-option>
-                  <ion-option value="O">Others</ion-option>
-              </ion-select>
-          </ion-item>
-        
-        <ion-row>
-          <ion-col no-padding>
-            <ion-item no-lines>
-              <ion-label class="leave-list-item" color="darkGray" stacked>From </ion-label>
-              <ion-datetime formControlName="fromDate"
-                pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
-              </ion-datetime>
-            </ion-item>
-          </ion-col>
-          <ion-col no-padding>
-            <ion-item no-lines>
-              <ion-label class="leave-list-item" color="darkGray" stacked>To</ion-label>
-              <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
-                displayFormat="DD/MM/YYYY" >
-              </ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-item no-lines>
-            <ion-label class="leave-list-item" color="darkGray" stacked>Comment</ion-label>
-            <ion-textarea formControlName="comment" type="text" rows="5"></ion-textarea>
+  <form [formGroup]="leaveForm">
+    <ion-list no-line class="staff-leave-list" no-padding>
+      <ion-item>
+        <ion-label color="darkGray" stacked>Leave Type *
+          <!-- <p class="error" *ngIf="!profileForm.controls['bloodGroup'].valid">This field is required *</p> -->
+        </ion-label>
+        <ion-select [selectOptions]="mySelectOptions">
+          <ion-option value="S">Sick Leave</ion-option>
+          <ion-option value="C">Casual Leave</ion-option>
+          <ion-option value="O">Others</ion-option>
+        </ion-select>
       </ion-item>
-        <!-- <div formArrayName="staffLeaves" >
+      <ion-item>
+
+        <ion-label color="darkGray" stacked>From </ion-label>
+        <ion-datetime formControlName="fromDate" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
+        </ion-datetime>
+
+      </ion-item>
+      <ion-item>
+
+        <ion-label class="leave-list-item" color="darkGray" stacked>To</ion-label>
+        <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate" displayFormat="DD/MM/YYYY">
+        </ion-datetime>
+
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label class="leave-list-item" color="darkGray" stacked>Remarks</ion-label>
+        <ion-textarea formControlName="comment" type="text" rows="8"></ion-textarea>
+      </ion-item>
+      <!-- <div formArrayName="staffLeaves" >
           <ion-card *ngFor="let staffLeave of leaveForm.controls.staffLeaves.controls; let i=index"
                     [formGroupName]="i">
               <ion-card-header color="secondary">
@@ -85,14 +89,14 @@
               </ion-card-content>
           </ion-card>
        </div> -->
-        
-      </ion-list>
-    </form>
-  </ion-content>
-  <ion-footer>
-      <ion-row >
-          <ion-col>
-              <button ion-button block color="secondary" (click)="onApply(leaveForm)" >Apply</button>
-          </ion-col>  
-      </ion-row>   
-  </ion-footer>
+
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="secondary" (click)="onApply(leaveForm)">Apply</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -28,6 +28,15 @@ leave-page{
     -khtml-border-radius: 5px; 
   }
 
+  .student-leave-list ion-label{
+    font-size:12px !important;
+    color: gray;
+}
+
+.student-leave-list ion-input, ion-select, ion-datetime {
+    font-size:16px !important;
+    color: black;
+}
   
     
 }

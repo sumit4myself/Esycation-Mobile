@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="lightblue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+        <button icon-only ion-button (click)="onNotification()">
+          <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+          <span *ngIf="notificationCount!='0'" class="notification">
+            <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+          </span>
+        </button>
+    </ion-buttons>
+    <ion-title>Approve Leave</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+   
+  <ion-card>
+      <ion-item>
+          <ion-avatar item-start>
+              <img class="profile-image" src="assets/img/student-m.png">
+          </ion-avatar>
+         {{requestDetails.requestor.name}}
+          <p>
+            <span class="small">
+                <small><ion-icon name="mail"></ion-icon>{{requestDetails.requestor.email}}</small>
+              </span>
+          </p>  
+        </ion-item>
+        <ion-card-content>
+            {{requestDetails.message}}
+        </ion-card-content>
+        <ion-item >
+            <ion-label color="darkGray" stacked>Comment*</ion-label>
+            <ion-textarea  name="comment" rows="10" cols="40" [(ngModel)]="comment"
+            ></ion-textarea>
+      </ion-item>
+    </ion-card>
+</ion-content>
+<ion-footer >
+    <ion-row >
+      <ion-col>
+        <button ion-button color="secondary" block block (click)="onApprove()">
+          Approve
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="orange" block (click)="onReject()">
+          Reject
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>

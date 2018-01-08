@@ -43,4 +43,9 @@ export class LeaveService  extends BaseService<LeaveModel> {
     return this.findAll(url);
   }
 
+  public findRequest(taskId:number):Observable<any>{
+    let url:string = ServerConfig.getPath() +"/approvals/requests/"+taskId + "/task";
+    return this.findAll(url);
+  }
+
 }

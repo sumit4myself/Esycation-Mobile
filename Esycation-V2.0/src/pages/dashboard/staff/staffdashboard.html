@@ -3,6 +3,16 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
+        <ion-buttons end>
+                <button icon-only ion-button (click)="onNotification()">
+                    <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+                    <span *ngIf="notificationCount!='0'" class="notification">
+                        <small>
+                            <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+                        </small>
+                    </span>
+                </button>
+            </ion-buttons>
         <ion-title>
             EducoreSystems 
         </ion-title>
@@ -114,7 +124,7 @@
                 <div *ngIf="!isPendingRequestLoaded" align="center"><ion-spinner name="bubbles"></ion-spinner></div> 
                 <ion-list *ngIf="isPendingRequestLoaded">
                         <div *ngFor="let _mypenreq of mypendingrequest;let iPending=index">
-                        <ion-item *ngIf="iPending<5">
+                        <ion-item *ngIf="iPending<5" (click)="onPendingRequest(_mypenreq.module,_mypenreq.taskId)">
                             <h4>{{_mypenreq.message}}</h4>
                             <h5 class="req-details">Requestor - {{_mypenreq.requestor.name}}</h5>
                             <ion-grid no-padding class="req-footers">
@@ -141,7 +151,7 @@
                                     <p>No My Request</p>
                                 </div>
                                 <div *ngFor="let _myreq of myrequest;let i=index">
-                                        <ion-item *ngIf="i<5">
+                                        <ion-item *ngIf="i<5" >
                                                 <h4>{{_myreq.message}}</h4>
                                                 <h5 class="req-details">Approver- {{_myreq.requestor.name}}</h5>
                                                 <ion-grid no-padding class="req-footers">

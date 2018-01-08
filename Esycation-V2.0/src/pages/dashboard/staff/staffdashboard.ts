@@ -4,8 +4,8 @@ import {UserSessionService} from '../../../providers/service/core/user.session.s
 import {ProfileService} from '../../../providers/service/profile/profile.service';
 import {Profile} from '../../../providers/model/profile/model.profile';
 import {ServerConfig} from '../../../providers/config'; 
-import {BulkNotificationService} from '../../../providers/service/notification/bulk.notification.service';
-
+import {BaseComponent} from '../../baseComponent/base.component';
+import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
 
 
 @IonicPage()
@@ -13,7 +13,7 @@ import {BulkNotificationService} from '../../../providers/service/notification/b
     selector: 'staffdashboard-page',
     templateUrl: 'staffdashboard.html'
 })
-export class StaffDashboardComponent {
+export class StaffDashboardComponent extends BaseComponent {
 
     isLoaded:boolean=false;
     
@@ -25,19 +25,19 @@ export class StaffDashboardComponent {
     profile:Profile=Profile.getInstance()
     imagePath:String=ServerConfig.imagePath();
    
-    constructor(private navContrle:NavController,
-        private session:UserSessionService,
-        private bulkNotificationService:BulkNotificationService,
+    constructor(protected navControl:NavController,
+        protected session:UserSessionService,
+        private approvelService:ApprovelService,
         private profileService:ProfileService )
         {
-        
+            super(session,navControl)
       }
 
 
     fetchPendingRequests(){
         this.isPendingRequestLoaded=false;
         this.mypendingrequest = [];
-        this.bulkNotificationService.findPending(this.session.findUserId()).subscribe(
+        this.approvelService.findPending(this.session.findUserId()).subscribe(
             data=>{
              for(let group of data.contents) {
                  let obj = Object.assign({},group);
@@ -54,7 +54,7 @@ export class StaffDashboardComponent {
     fetchMyRequests(){
         this.myrequest = [];
         this.isMyRequestLoaded=false;
-        this.bulkNotificationService.findMyRequests(this.session.findUserId()).subscribe(
+        this.approvelService.findMyRequests(this.session.findUserId()).subscribe(
             data=>{
              for(let group of data.contents) {
                  let obj = Object.assign({},group);
@@ -79,7 +79,15 @@ export class StaffDashboardComponent {
 
     onView(viewName:string){
 
-        this.navContrle.setRoot(viewName);
+        this.navControl.setRoot(viewName);
+   }
+
+   onPendingRequest(model,id){
+           
+    if(model=="STUDENT_LEAVE"){
+        this.navControl.push("ApproveStudentLeaveComponent",{id:id});
+    }
+    
    }
 
 }

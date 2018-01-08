@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import {StaffDashboardComponent} from '../staff/staffdashboard';
-import {ProfileService} from '../../../providers/service/profile/profile.service';
-import {BulkNotificationService} from '../../../providers/service/notification/bulk.notification.service';
+import {ProfileService} from '../../../providers/service/profile/profile.service';;
+import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
 
 @NgModule({
     imports: [
@@ -10,6 +10,6 @@ import {BulkNotificationService} from '../../../providers/service/notification/b
     ],
     exports: [StaffDashboardComponent ],
     declarations: [StaffDashboardComponent],
-    providers: [ProfileService,BulkNotificationService],
+    providers: [ProfileService,ApprovelService],
 })
 export class StaffDashboardModule { }

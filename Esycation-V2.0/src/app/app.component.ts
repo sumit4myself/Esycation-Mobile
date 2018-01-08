@@ -170,7 +170,7 @@ export class MyApp {
               sound: true,
               vibrate:true,
               iconColor:"#f53d3d",
-              senderID : ""
+             // senderID : ""
               },
               ios: {
                   alert: 'true',
@@ -183,7 +183,7 @@ export class MyApp {
           pushObject.on('notification').subscribe((notification: any) => {
   
             if(notification.additionalData.foreground){
-              this.commonServices.presentToast("You have new notification.");
+              this.commonServices.presentToast("You have new notification.",null,"info");
               //this.commonServices.showAlert("Notification",JSON.stringify(notification));
               var notificationCount=Number(localStorage.getItem("notificationCount"));
               var count = notificationCount+1;

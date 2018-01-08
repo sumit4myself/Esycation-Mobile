@@ -1,29 +1,38 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController,LoadingController, Loading} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {LeaveService} from '../../../providers/service/leave/leave.service';
 import {Leave} from '../../../providers/model/leave/model.leave'
 import * as moment from 'moment';
 import {UserSessionService} from "../../../providers/service/core/user.session.service";
 import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
+import {BaseComponent} from '../../baseComponent/base.component';
+import {CommonServices} from '../../../providers/service/common/common.service';
+
 @IonicPage()
 @Component({
   selector: 'leave-page',
   templateUrl: 'leave.html'
 })
-export class LeaveComponent {
+export class LeaveComponent extends BaseComponent{
 
  leaveForm: FormGroup;
- loading: Loading;
+ mySelectOptions : any={};  
  students:PagedResponse= PagedResponse.getInstance();
  constructor(
-    private navCtrl: NavController,
+    protected navCtrl: NavController,
     private formBuilder:FormBuilder,
     private leaveService:LeaveService,
-    private loadingCtrl:LoadingController,
-    private session:UserSessionService) {
+    private session:UserSessionService,
+    private commonServices:CommonServices) {
 
+      super(session,navCtrl);
       this.buildForm();  
+
+      this.mySelectOptions = {
+        mode :'ios',
+        cssClass: 'remove-ok'
+      }
     }
  
   
@@ -39,9 +48,6 @@ export class LeaveComponent {
 
       this.leaveService.findStudentByGuardianIds(this.session.findRemote()).subscribe(data=>{
         this.students = Object.assign(this.students,data);
-
-        console.log("this.students.contents.length==",this.students.contents.length);
-
         if(this.students.contents.length==1){
           this.leaveForm.setValue({
             fromDate: null,
@@ -59,10 +65,7 @@ export class LeaveComponent {
 
       
       console.log("valid==",valid)
-      
-      this.loading = this.loadingCtrl.create({
-        content: 'Saving..'
-      }); this.loading.present();
+      this.commonServices.onLoader();
       value.status=null;
       value.studentId=value.studentId;
       value.fromDate=moment(value.fromDate).format("MM/DD/YYYY");
@@ -70,15 +73,16 @@ export class LeaveComponent {
       value.totalLeave = moment(value.toDate).diff(moment(value.fromDate),'days');
 
       console.log("Leave==",JSON.stringify(value));
-
       this.leaveService.saveLeave(value).subscribe(data=>{
+        this.commonServices.presentToast("Data saved successfully",null,"success");
+        this.commonServices.onDismissAll();
         if(data){
           console.log("Leave Service Save :",data);
         }
-        this.loading.dismissAll();
-        this.navCtrl.setRoot("HomeComponent");
+        this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
       },error=>{
-        console.log("Error :",error);
+        console.error("Error :",error);
+        this.commonServices.onDismissAll();
       });
     }
 

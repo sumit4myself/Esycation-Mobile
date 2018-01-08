@@ -1,29 +1,31 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController,LoadingController, Loading} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {LeaveService} from '../../../providers/service/leave/leave.service';
 import {StaffLeaveDetailsInterface,StaffLeave,StaffLeaveDetails} from '../../../providers/model/leave/model.staffLeave';
 import * as moment from 'moment';
 import {UserSessionService} from "../../../providers/service/core/user.session.service";
+import {BaseComponent} from '../../baseComponent/base.component';
+import {CommonServices} from '../../../providers/service/common/common.service';
+
 @IonicPage()
 @Component({
   selector: 'staffleave-page',
   templateUrl: 'staffLeave.html'
 })
-export class StaffLeaveComponent {
+export class StaffLeaveComponent extends BaseComponent {
 
  leaveForm: FormGroup;
- loading: Loading;
  leaveTypes:any;
  mySelectOptions : any={};  
  constructor(
-    private navCtrl: NavController,
+    protected navCtrl: NavController,
     private formBuilder:FormBuilder,
     private leaveService:LeaveService,
-    private loadingCtrl:LoadingController,
-    
-    private session:UserSessionService) {
+    protected session:UserSessionService,
+    private commonServices:CommonServices) {
 
+      super(session,navCtrl);
       this.buildForm();  
       this.mySelectOptions = {
         mode :'ios',
@@ -53,18 +55,16 @@ export class StaffLeaveComponent {
         const leaveType = this.formBuilder.array(t);
         this.leaveForm.setControl('staffLeaves', leaveType);
         this.leaveTypes = types;
+      },error=>{
+        console.error("Error :",error);
       });
-
     
     }
     
     onApply({value,valid}:{value:StaffLeaveDetailsInterface,valid:boolean}){
 
-      console.log("valid==",valid)
-      
-      this.loading = this.loadingCtrl.create({
-        content: 'Saving..'
-      }); this.loading.present();
+      console.log("valid==",valid);
+      this.commonServices.onLoader();
       value.approvalStatus=null;
       value.staffId = this.session.findRemote();
       value.fromDate=moment(value.fromDate).format("MM/DD/YYYY");
@@ -76,17 +76,18 @@ export class StaffLeaveComponent {
           leave.toDate = moment(leave.toDate).format("MM/DD/YYYY");
         }
       }
-      
       console.log("Staff==",JSON.stringify(this.PrepareData(value)));
 
       this.leaveService.saveStaffLeave(this.PrepareData(value)).subscribe(data=>{
+        this.commonServices.presentToast("Data saved successfully",null,"success");
+        this.commonServices.onDismissAll();
         if(data){
           console.log("Leave Service Save :",data);
         }
-        this.loading.dismissAll();
-        this.navCtrl.setRoot("HomeComponent");
+        this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
       },error=>{
-        console.log("Error :",error);
+        this.commonServices.onDismissAll();
+        console.error("Error :",error);
       });
 
     }

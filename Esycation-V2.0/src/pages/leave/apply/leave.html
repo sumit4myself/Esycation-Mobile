@@ -3,69 +3,44 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-buttons end>
+        <button icon-only ion-button (click)="onNotification()">
+          <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+          <span *ngIf="notificationCount!='0'" class="notification">
+            <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+          </span>
+        </button>
+    </ion-buttons>
     <ion-title>Apply Leave</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="leaveForm">
-    <ion-list no-lines>
-
-      <ion-row class="form-item-margin">
-
-        <ion-col>
-          <ion-item no-lines item-content class="form-items-padding form-item-rounder-items">
-            <ion-label color="darkGray">
-              <ion-icon class="form-icons-size" name="man">
-              </ion-icon>
-              <span class="form-lable-size">Select Student</span>
-            </ion-label>
-            <ion-select formControlName="studentId">
-              <ion-option *ngFor="let student of students.contents" value="{{student.id}}">{{student.name}}
+    <ion-list no-line class="student-leave-list" no-padding>
+      <ion-item>
+            <ion-label color="darkGray" stacked>Student* </ion-label>
+            <ion-select formControlName="studentId" [selectOptions]="mySelectOptions">
+              <ion-option *ngFor="let student of students.contents" 
+                value="{{student.id}}">{{student.name}}
               </ion-option>
             </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-
-      <ion-row class="form-item-margin">
-
-        <ion-col>
-          <ion-item no-lines item-content class="form-items-padding form-item-rounder-items">
-            <ion-label color="darkGray">
-              <ion-icon class="form-icons-size" name="calendar">
-              </ion-icon>
-              <span class="form-lable-size">From</span>
-            </ion-label>
-            <ion-datetime formControlName="fromDate" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
-            </ion-datetime>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item no-lines class="form-items-padding form-item-rounder-items">
-            <ion-label color="darkGray">
-              <ion-icon class="form-icons-size" name="calendar">
-              </ion-icon>
-              <span class="form-lable-size">To</span>
-            </ion-label>
-            <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate" displayFormat="DD/MM/YYYY">
-            </ion-datetime>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row  class="form-item-margin">
-        <ion-col>
-          <ion-item no-lines item-content class="form-items-padding form-item-rounder-items">
-            <ion-label color="darkGray" >
-              <ion-icon class="form-icons-size" name="clipboard">
-              </ion-icon>
-              <span class="form-lable-size">Comment</span>
-            </ion-label>
-            <ion-textarea formControlName="comment" type="text" rows="5"></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+      </ion-item>
+      <ion-item>
+          <ion-label color="darkGray" stacked>From *</ion-label>
+          <ion-datetime formControlName="fromDate" pickerFormat="DD/MM/YYYY" 
+              displayFormat="DD/MM/YYYY">
+          </ion-datetime>
+      </ion-item>
+      <ion-item>
+          <ion-label color="darkGray" stacked> To *</ion-label>
+          <ion-datetime pickerFormat="DD/MM/YYYY" 
+              formControlName="toDate" displayFormat="DD/MM/YYYY">
+          </ion-datetime>
+      </ion-item>
+      <ion-item>
+          <ion-label color="darkGray" stacked>Comment </ion-label>
+          <ion-textarea formControlName="comment" type="text" rows="8"></ion-textarea>
+        </ion-item>
     </ion-list>
   </form>
 </ion-content>

@@ -40,20 +40,6 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
     return this.findAll(url);
   }
 
-  public findPending(userId:number):Observable<any>{
-
-    let url: string = ServerConfig.getPath() 
-    +"/approvals/requests/"+userId+"?suppressError=true&page=1&size=50"; 
-    return this.findAll(url);
-  }
-
-  public findMyRequests(userId:number):Observable<any>{
-
-    let url: string = ServerConfig.getPath() 
-    +"/approvals/myRequests/"+userId+"?suppressError=true&page=1&size=50";
-    return this.findAll(url);
-  }
-
   public manage():Observable<any>{
 
     let data ={"totalElements":0,"filteredElements":0,"size":500,"page":1,"totalPages":0};
@@ -65,11 +51,17 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
 
   public findSend(model:string,viewName):Observable<any>{
 
-    let data ={"totalElements":0,"filteredElements":0,"size":500,"page":1,"totalPages":0};
+    let data ={"totalElements":0,"filteredElements":0,"size":100,"page":1,"totalPages":0};
     let url: string = ServerConfig.getPath() 
     +""+model+"/search?RESPONSE_VIEW="+viewName+""; 
 
     return this.search(url,data);
+  }
+
+  public deleteBulkNotification(id:number):Observable<any>{
+
+    let url: string = ServerConfig.getPath()+"/"+id; 
+    return this.delete(url,null);
   }
 
 }
