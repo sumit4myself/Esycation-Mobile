@@ -25,11 +25,12 @@ export class NotificationService extends BaseService<PagedResponse> {
     ) {
         super(http, errorHandler);
 
+        /*
         this.events.subscribe("notification:updateCount", (registrationId)=>{
-            
-            console.log("REGISTER_DEVICE..!",JSON.stringify(registrationId));
-                      
+            console.log("REGISTER_DEVICE..!",JSON.stringify(registrationId));           
         });
+
+        */
     }
 
     public findAllByRemoteIdAndModule(remoteId: number, module: string): Observable<PagedResponse> {
@@ -40,10 +41,12 @@ export class NotificationService extends BaseService<PagedResponse> {
         return this.findAll(url);
     }
 
-    public countAllByRemoteIdAndModule(remoteId: number, module: string): Observable<any> {
+    public countAllByRemoteIdAndModule(remoteId: number, module: string): void {
         let url: string = ServerConfig.getPath() +
             "/notifications/receivers/" + module + "/" + remoteId + "/count?mode=PUSH_MESSAGE&readStatus=UNREAD";
-        return this.findAll(url);
+         this.find(url).subscribe(count=>{
+            this.events.publish("notification:updateCount", count);
+         });
     }
 
 
