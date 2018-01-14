@@ -52,7 +52,7 @@ export class ApproveStudentLeaveComponent extends BaseComponent {
       this.approvelService.approve(this.requestDetails.taskId,this.comment).subscribe(data=>{
         console.log(data);
         this.commonServices.presentToast("Data saved successfully",null,"success");
-        this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));  
+        this.navCtrl.push(UserSessionService.findDashBoardByModule(this.session.findModule()));  
       },error=>{
         console.error("ERROR :",error);
       });
@@ -69,7 +69,7 @@ export class ApproveStudentLeaveComponent extends BaseComponent {
       this.approvelService.reject(this.requestDetails.taskId,this.comment).subscribe(data=>{
         console.log(data);
         this.commonServices.presentToast("Data saved successfully",null,"success");
-        this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));  
+        this.navCtrl.push(UserSessionService.findDashBoardByModule(this.session.findModule()));  
       },error=>{
         console.error("ERROR :",error);
       });

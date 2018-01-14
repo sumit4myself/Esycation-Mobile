@@ -55,7 +55,7 @@ export class ResultEntiryComponent extends BaseComponent {
       console.log(data);
       this.commonServices.onDismissAll();
       this.commonServices.presentToast("Result draft successfully",null,"success");
-      this.navCtrl.setRoot("ResultEntiryViewComponent");
+      this.navCtrl.push("ResultEntiryViewComponent");
     },error => {
       console.error(error);
       this.commonServices.onDismissAll();
@@ -72,7 +72,7 @@ export class ResultEntiryComponent extends BaseComponent {
       console.log(data);
       this.commonServices.onDismissAll();
       this.commonServices.presentToast("Result publish successfully",null,"success");
-      this.navCtrl.setRoot("ResultEntiryViewComponent");
+      this.navCtrl.push("ResultEntiryViewComponent");
     },error => {
       console.error(error);
       this.commonServices.onDismissAll();

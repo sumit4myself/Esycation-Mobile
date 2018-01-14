@@ -16,7 +16,7 @@
 </ion-header>
 <ion-content>
    
-  <ion-card>
+  <ion-list no-lines class="app-student-list">
       <ion-item>
           <ion-avatar item-start>
               <img class="profile-image" src="assets/img/student-m.png">
@@ -28,15 +28,15 @@
               </span>
           </p>  
         </ion-item>
-        <ion-card-content>
+        <ion-item *ngIf="requestDetails.message" text-wrap>
             {{requestDetails.message}}
-        </ion-card-content>
-        <ion-item >
+        </ion-item>
+        <ion-item>
             <ion-label color="darkGray" stacked>Comment*</ion-label>
             <ion-textarea  name="comment" rows="10" cols="40" [(ngModel)]="comment"
             ></ion-textarea>
       </ion-item>
-    </ion-card>
+    </ion-list>
 </ion-content>
 <ion-footer >
     <ion-row >

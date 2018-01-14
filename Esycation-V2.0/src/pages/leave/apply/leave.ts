@@ -79,7 +79,7 @@ export class LeaveComponent extends BaseComponent{
         if(data){
           console.log("Leave Service Save :",data);
         }
-        this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
+        this.navCtrl.push(UserSessionService.findDashBoardByModule(this.session.findModule()));
       },error=>{
         console.error("Error :",error);
         this.commonServices.onDismissAll();

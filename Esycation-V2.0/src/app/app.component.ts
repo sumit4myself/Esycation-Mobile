@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,ModalController,Events,AlertController } from 'ionic-angular';
+import { Nav, Platform,ModalController,Events,AlertController,ToastController } from 'ionic-angular';
 
 //***********  ionic-native **************/
 import { StatusBar } from '@ionic-native/status-bar';
@@ -44,6 +44,8 @@ export class MyApp {
         }
     ]
 });
+
+
   icon:string="ios-add-outline"
   constructor(public platform: Platform, 
               public statusBar: StatusBar, 
@@ -55,6 +57,7 @@ export class MyApp {
               private commonServices:CommonServices,
               private push:Push,
               public alertCtrl: AlertController,
+              private toastCtrl: ToastController,
               private deviceService:DeviceService) {
         this.initializeApp();
 
@@ -87,16 +90,24 @@ export class MyApp {
       this.splashScreen.hide();
       this.pushNotificationSetup();
       this.showedAlert = false;
+      var lastTimeBackPress = 0;
+      var timePeriodToExit  = 2000;
       this.platform.registerBackButtonAction(() => {
-        if (this.nav.length() == 1) {
-            if (!this.showedAlert) {
-                this.confirmExitApp();
+            if (this.nav.length() == 1) {
+                if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+                    this.platform.exitApp();
+                } else {
+                    let toast = this.toastCtrl.create({
+                        message:  'Press back again to exit App?',
+                        duration: 3000,
+                        position: 'bottom'
+                    });
+                    toast.present();
+                    lastTimeBackPress = new Date().getTime();
+                }
             } else {
-                this.showedAlert = false;
-                this.confirmAlert.dismiss();
+                this.nav.pop({});
             }
-        }
-        this.nav.pop();
     });
     });
   }
@@ -136,7 +147,8 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     // page.component = item array.component --> 
     //this.nav.setRoot(page.component);
-    this.nav.setRoot(page.component).catch(err => console.error(err));
+    // this.nav.setRoot(page.component).catch(err => console.error(err));
+    this.nav.push(page.component).catch(err => console.error(err));
   }
 
  onAddAccount(){
@@ -155,7 +167,7 @@ export class MyApp {
   this.nav.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
  }
  onViewProfile(){
-  this.nav.setRoot("ViewProfileComponent");
+  this.nav.push("ViewProfileComponent");
  }
 
  onHome1(){
@@ -170,7 +182,7 @@ export class MyApp {
               sound: true,
               vibrate:true,
               iconColor:"#f53d3d",
-             // senderID : ""
+             senderID : ""
               },
               ios: {
                   alert: 'true',

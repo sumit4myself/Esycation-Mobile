@@ -211,7 +211,7 @@ export class BulkNotificationComponent extends BaseComponent {
                 console.log("data==",data);
                 this.commonServices.onDismissAll();
                 this.commonServices.presentToast("Data saved successfully",null,"success");
-                this.navControl.setRoot("ViewAllBulkNotificationComponent");
+                this.navControl.push("ViewAllBulkNotificationComponent");
             },error=>{
                 this.commonServices.onDismissAll();
                 console.error("ERROR :",error);

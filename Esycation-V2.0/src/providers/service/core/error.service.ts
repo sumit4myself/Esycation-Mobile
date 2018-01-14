@@ -21,10 +21,10 @@ export class CostumErrorHandler {
     if(responseJson.exception == 'com.webientsoft.esycation.common.exception.EsycationException'){
       this.commonServices.presentToast(responseJson.message,"","error");
     }else{
-      this.commonServices.showAlert("","Either server is not responding or you don't have intrenet connection","OK");
+      this.commonServices.presentToast("Either server is not responding or you don't have intrenet connection","","error");
+      // this.commonServices.showAlert("","Either server is not responding or you don't have intrenet connection","OK");
     }
     console.log("ERROR :",responseJson);
-    
     return Observable.throw(error.json().error || 'Server error');
   }
 }
