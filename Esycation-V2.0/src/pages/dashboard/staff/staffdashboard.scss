@@ -475,6 +475,11 @@ staffdashboard-page {
   font-size: 13px;
   color: #777777;
  }
+
+ .simple-text{
+  color: #213F48;
+ }
+
  .my-class-item{
   padding-bottom:8px;
  }
@@ -495,6 +500,91 @@ staffdashboard-page {
   border-color: #213F48;
   
  }
+
+ .dashboard-request{
+   height: 350px!important;
+   min-height: 350px !important;
+   max-height: 350px !important;
+   overflow-y: scroll;
+ }
+
+
+ 
+ .item[no-lines].bottom-border { 
+  border-bottom: 1px solid #F4F4F4; 
+ }
+ 
+ .top-border{
+  border-top: 1px solid #F4F4F4; 
+ }
+ 
+ .right-border{
+  border-right: 1px solid #F4F4F4; 
+ }
+ 
+ .label-md {
+  margin: 13px 8px 0px 0!important; 
+ }
+ 
+ .list-class{
+  padding-bottom: 10px;
+ }
+ 
+ .medium{
+  font-size: 18px;
+  color: #8f8f8f;
+ }
+
+ 
+
+ .no-card-padding{
+   padding: 0px !important;
+   margin: 0px !important;
+ }
+
+ .small{
+  font-size: 14px;
+  color: #8f8f8f;
+ }
+ 
+ .req-small{
+  font-size: 12px;
+  color: #8f8f8f;
+ }
+ 
+ .req-footer-row{
+  padding-top: 3px;
+ }
+ 
+ .req-footers{
+  padding-bottom: 5px!important;
+ }
+ 
+ .req-details{
+  font-size: 13px;
+  color: #777777;
+ }
+ .my-class-item{
+  padding-bottom:8px;
+ }
+ 
+ 
+ 
+ .requests-title{
+  font-weight: 50;
+  font-size: 15px;
+  color: #213F48;
+ }
+ 
+ .segment-md .segment-button {
+  color: #213F48;
+ }
+ 
+ .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+  border-color: #213F48;
+  
+ }
+ 
  
 
   }

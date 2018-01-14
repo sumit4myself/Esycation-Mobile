@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar color="ios-blue">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-buttons end>
+          <button icon-only ion-button  (click)="onNotification()" >
+            <ion-icon ios="ios-notifications" md="md-notifications" ></ion-icon> 
+            <span *ngIf="notificationCount!='0'" class="notification">    
+                <small><ion-badge color="ios-red">{{notificationCount}}</ion-badge></small>  
+             </span>
+          </button>
+      </ion-buttons>
+      <ion-title>TimeTable</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+    <div *ngIf="timetable && timetable.courseId && timetable.courseId.name" style="background:white;">
+      <div padding>
+        <h5>{{timetable.courseId.name}} - {{timetable.batchId.name}}</h5>
+      </div>
+    </div>
+      <ion-item-group *ngFor="let _timetableDays of timetable.timetableDays;let iIn=index">
+          <ion-item-divider class="list-class" color="light">{{_timetableDays.dayName}}</ion-item-divider>
+          <ion-item *ngFor="let period of _timetableDays.periods;" class="my-class-list" no-lines class="bottom-border">
+  
+              <h4 class="my-class-item">{{period.subjectId.name}}</h4>
+              
+              <ion-grid class="top-border">
+                  <ion-row>
+                      <ion-col class="right-border">
+                          <div align="center" class="small">{{period.start}}</div>
+                      </ion-col>
+                      <ion-col>
+                          <div align="center" class="small">{{period.end}}</div>
+                      </ion-col>
+                  </ion-row>
+  
+              </ion-grid>
+          </ion-item>
+      </ion-item-group> 
+      <div style="height:100px;"></div>
+  </ion-content>
+  

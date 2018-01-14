@@ -129,7 +129,7 @@ export class StudentAttendanceComponent  extends BaseComponent{
         console.log(data);
         this.commonServices.onDismissAll();
         this.commonServices.presentToast("Data save successfully",null,"success");
-        this.navCtrl.setRoot("ManageAttendanceComponent");
+        this.navCtrl.push("ManageAttendanceComponent");
       },
       error=>{
         console.log(error);
@@ -146,7 +146,7 @@ export class StudentAttendanceComponent  extends BaseComponent{
         console.log(data);
         this.commonServices.onDismissAll();
         this.commonServices.presentToast("Data update successfully",null,"success");
-        this.navCtrl.setRoot("ManageAttendanceComponent");
+        this.navCtrl.push("ManageAttendanceComponent");
       },error=>{
         console.log(error);
         this.commonServices.onDismissAll();

@@ -9,7 +9,7 @@ import {LeaveModel} from '../../model/leave/model.leave';
 @Injectable()
 export class LeaveService  extends BaseService<LeaveModel> {
 
-    
+
   constructor(@Inject(Http) protected http: Http,
       @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
       ){
@@ -34,7 +34,7 @@ export class LeaveService  extends BaseService<LeaveModel> {
   public saveStaffLeave(data:any):Observable<any>{
 
     let url: string = ServerConfig.getPath() +"/staffLeaves";
-    
+
     return this.save(url,data);
   }
 

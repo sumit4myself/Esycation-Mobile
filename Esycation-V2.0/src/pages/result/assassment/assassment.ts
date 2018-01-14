@@ -54,7 +54,7 @@ export class AssassmentComponent extends BaseComponent {
       console.log("data==", data);
       this.commonServices.presentToast("Assessment publish successfully",null,"success");
       this.commonServices.onDismissAll();
-      this.navCtrl.setRoot("AssassmentViewComponent");
+      this.navCtrl.push("AssassmentViewComponent");
     }, error => {
       console.error(error);
       this.commonServices.onDismissAll();
@@ -69,7 +69,7 @@ export class AssassmentComponent extends BaseComponent {
       console.log("data==", data);
       this.commonServices.presentToast("Assessment draft successfully",null,"success");
       this.commonServices.onDismissAll();
-      this.navCtrl.setRoot("AssassmentViewComponent");
+      this.navCtrl.push("AssassmentViewComponent");
     }, error => {
       console.error(error);
       this.commonServices.onDismissAll();

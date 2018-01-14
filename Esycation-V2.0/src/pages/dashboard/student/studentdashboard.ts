@@ -78,7 +78,7 @@ export class StudentDashboardComponent {
 
     onView(viewName:string){
 
-        this.navContrle.setRoot(viewName);
+        this.navContrle.push(viewName);
    }
 
 }
