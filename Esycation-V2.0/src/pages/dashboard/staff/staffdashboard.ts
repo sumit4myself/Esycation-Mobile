@@ -7,13 +7,14 @@ import {ServerConfig} from '../../../providers/config';
 import {BaseComponent} from '../../baseComponent/base.component';
 import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
 import * as moment from 'moment';
-import { toArray } from 'rxjs/operator/toArray';
+// import { toArray } from 'rxjs/operator/toArray';
 
 @IonicPage()
 @Component({
     selector: 'staffdashboard-page',
     templateUrl: 'staffdashboard.html'
 })
+
 export class StaffDashboardComponent extends BaseComponent {
 
     isLoaded:boolean=false;
@@ -66,7 +67,8 @@ export class StaffDashboardComponent extends BaseComponent {
         protected session:UserSessionService,
         private approvelService:ApprovelService,
         
-        private profileService:ProfileService )
+        public profileService:ProfileService 
+    )
         {
             super(session,navControl)
       }
@@ -121,7 +123,8 @@ export class StaffDashboardComponent extends BaseComponent {
                         series.push(seriesObj);
                     }
                 }
-                if(legend&&legend.length>0&&xAxes&&xAxes.length>0&&series&&series.length>0){
+         
+           if(legend&&legend.length>0&&xAxes&&xAxes.length>0&&series&&series.length>0){
                     this.teachersAttendanceStatOptions.legend.data = legend;
                     this.teachersAttendanceStatOptions.xAxis[0].data = xAxes;
                     this.teachersAttendanceStatOptions.series = series;
@@ -133,6 +136,7 @@ export class StaffDashboardComponent extends BaseComponent {
             }
         },error=>{
             this.attendanceStatReady = false;
+            console.log(error)
        });
       }
 
@@ -173,6 +177,7 @@ export class StaffDashboardComponent extends BaseComponent {
             this.isPendingRequestLoaded=true;
         },error=>{
             this.isPendingRequestLoaded=true;
+            console.log(error)
        });
     }  
 
