@@ -16,7 +16,7 @@ import * as moment from 'moment';
 })
 
 export class StaffDashboardComponent extends BaseComponent {
-
+    currentDay:string="";
     isLoaded:boolean=false;
     isMyClassesLoaded:boolean=false;
     errorMessageMyClass:string="";
@@ -70,7 +70,8 @@ export class StaffDashboardComponent extends BaseComponent {
         public profileService:ProfileService 
     )
         {
-            super(session,navControl)
+            super(session,navControl);
+            this.currentDay= moment(new Date()).format('dddd');
       }
 
 
@@ -159,6 +160,7 @@ export class StaffDashboardComponent extends BaseComponent {
             for (const key of Object.keys(newData)) {
                 this.timeTableDataModel.push({id:key,data:newData[key]});
             }
+    
         },error=>{
             this.errorMessageMyClass = "Unable to connect. Please try after some time. [ "+error+" ]";
             this.isMyClassesLoaded = true;

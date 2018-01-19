@@ -23,8 +23,17 @@
       <ion-item-group *ngFor="let _timetableDays of timetable.timetableDays;let iIn=index">
           <ion-item-divider class="list-class" color="light">{{_timetableDays.dayName}}</ion-item-divider>
           <ion-item *ngFor="let period of _timetableDays.periods;" class="my-class-list" no-lines class="bottom-border">
-  
-              <h4 class="my-class-item">{{period.subjectId.name}}</h4>
+                <ion-grid>
+                        <ion-row>
+                            <ion-col text-left text-wrap col-6>
+                                <h4 class="my-class-item">{{period.subjectId.name}}</h4>
+                            </ion-col>
+                            <ion-col text-right text-wrap col-6>
+                                <p>{{period.start | slice:0:5}} - {{period.end | slice:0:5}}</p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+              <!-- <h4 class="my-class-item">{{period.subjectId.name}}</h4>
               
               <ion-grid class="top-border">
                   <ion-row>
@@ -36,7 +45,7 @@
                       </ion-col>
                   </ion-row>
   
-              </ion-grid>
+              </ion-grid> -->
           </ion-item>
       </ion-item-group> 
       <div style="height:100px;"></div>

@@ -346,6 +346,18 @@ guardiandashboard-page {
   color: #213F48;
   margin-bottom: 20px;
 }
+.item[no-lines].bottom-border { 
+  border-bottom: 1px solid #F4F4F4; 
+ }
+
+.head-font{
+  font-weight: 20 !important; 
+  font-size: 18px !important;
+  padding-left: 20px;
+  text-align: left !important;
+  color: #213F48 !important;
+  margin-bottom: 15px !important;
+}
 
 .performance{
   margin-bottom:20px;

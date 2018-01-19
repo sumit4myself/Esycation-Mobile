@@ -126,20 +126,31 @@
     <div *ngIf="timeTable&&timeTable.timetableDays&&timeTable.timetableDays.length>0" class="performance">
                 
             <ion-row>
-                    <ion-col>
-                        <div><h3>Time Table </h3></div>
+                    <ion-col class="head-font">
+                            Time Table
+                        <!-- <div><h3> </h3></div> -->
                     </ion-col>
                     <ion-col text-right>
-                            <p (click)=onTimeTableDetails(timeTable) class="simple-text">More... </p>
+                            <a (click)="onTimeTableDetails(timeTable)">All Weeks...</a>
+                            <!-- <p (click)=onTimeTableDetails(timeTable) class="simple-text">More... </p> -->
                     </ion-col>
                 </ion-row>
             <div>
                 <ion-item-group  *ngFor="let _timetableDays of timeTable.timetableDays;let iIn=index">
                     <div *ngIf="currentDay === _timetableDays.dayName">
                     <ion-item-divider class="list-class" color="light">{{_timetableDays.dayName}}</ion-item-divider>
-                    <ion-item *ngFor="let period of _timetableDays.periods;" class="my-class-list" no-lines class="bottom-border">
-        
-                        <h4 class="my-class-item">{{period.subjectId.name}}</h4>
+                    <ion-item *ngFor="let period of _timetableDays.periods;" class="my-class-list bottom-border" no-lines>
+                            <ion-grid>
+                                    <ion-row>
+                                        <ion-col text-left text-wrap col-6>
+                                            <h4 class="my-class-item">{{period.subjectId.name}}</h4>
+                                        </ion-col>
+                                        <ion-col text-right text-wrap col-6>
+                                            <p>{{period.start | slice:0:5}} - {{period.end | slice:0:5}}</p>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                        <!-- <h4 class="my-class-item">{{period.subjectId.name}}</h4>
         
                         <ion-grid class="top-border">
                             <ion-row>
@@ -151,7 +162,7 @@
                                 </ion-col>
                             </ion-row>
         
-                        </ion-grid>
+                        </ion-grid> -->
                     </ion-item>
                 </div>
                 </ion-item-group>

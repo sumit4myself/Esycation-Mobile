@@ -117,7 +117,7 @@
 
 
     <div class="performance">
-            <h3>My Classes</h3>
+            <h3>Time Table</h3>
             
         <div *ngIf="!isMyClassesLoaded && errorMessageMyClass.length<=0"  align="center">
                 <ion-spinner name="bubbles"></ion-spinner>   
@@ -130,49 +130,44 @@
             </div>
             <div *ngIf="isMyClassesLoaded && errorMessageMyClass.length<=0">
             <p *ngIf="timeTableDataModel.length == 0" class="simple-text">Not Found</p>
-            <ion-item-group *ngFor="let _tt of timeTableDataModel;let iIn=index">
+            <div *ngFor="let _tt of timeTableDataModel;let iIn=index">
                     <ion-item-divider class="list-class" color="light">{{_tt.id}}</ion-item-divider>
-                    <ion-item *ngFor="let __tt of _tt.data;" class="my-class-list" no-lines class="bottom-border">
-            
-                        <h4 class="my-class-item">{{__tt.courseId.name}}</h4>
+                    <div align="left" style="padding:0px !important;" *ngFor="let __tt of _tt.data;" class="bottom-border my-class-list" no-lines>
+                            <ion-grid>
+                                    <ion-row>
+                                        <ion-col text-left text-wrap col-6>
+                                                {{__tt.courseId.name}}
+                                        </ion-col>
+                                        <ion-col text-right text-wrap col-6>
+                                            <a (click)="onTimeTable(__tt)">All Weeks...</a>
+                                        </ion-col>
+                                    </ion-row>
+                
+                                </ion-grid>
                         
-                        <ion-grid class="top-border">
-                            <ion-row>
-                                <ion-col class="right-border">
-                                    <div (click)="onTimeTable(__tt)" align="center" class="small">Time Table</div>
-                                </ion-col>
-                                <!-- <ion-col>
-                                    <div align="center" class="small">Attendence</div>
-                                </ion-col> -->
-                            </ion-row>
-            
-                        </ion-grid>
-                    </ion-item>
-                   
-                </ion-item-group>
-
-       
-        
-    </div>
-    </div>
-
-    <!-- <div class="performance">
-        <h3>My Reporting Manager</h3>
-        <div class="expandUp top-container" style="background-color:#FFFCE9 !important;">
-            <div class="head-img" style="text-align:left !important;">
-                <div class="circular--portrait">
-                    <img src="https://www.brainpickings.org/wp-content/uploads/2014/03/georgelucas.jpg" />
+                        <div  *ngFor="let _timetableDays of __tt.timetableDays;let iIn=index">
+                            <div *ngIf="currentDay === _timetableDays.dayName">
+                            <strong class="simple-text my-class-item no-left-padding">{{currentDay}}</strong>
+                            <ion-item *ngFor="let period of _timetableDays.periods;" class="my-class-list" no-lines class="bottom-border">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col text-left text-wrap col-6>
+                                            <h4 class="my-class-item">{{period.subjectId.name}}</h4>
+                                        </ion-col>
+                                        <ion-col text-right text-wrap col-6>
+                                            <p>{{period.start | slice:0:5}} - {{period.end | slice:0:5}}</p>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-item> 
+                        </div>
+                    </div>
+                    </div>
                 </div>
-            </div>
-    
-            <div class="head" style="background-color:#FFFCE9 !important;">
-                <h4 class="medium no-card-padding" >Name</h4>
-                <h4 class="small no-card-padding">Reporting Manager</h4>
-                <h4 class="small no-card-padding">Address</h4>
-                <a href="tel:{{profile.mobile}}" class="small">Mobile</a> | <a href="mailto:{{profile.email}}" class="small">Email</a>
-            </div>
-        </div>
-    </div> -->
+    </div>
+    </div>
+
+
 
     <div class="performance">
             <h3>Requests </h3> 
