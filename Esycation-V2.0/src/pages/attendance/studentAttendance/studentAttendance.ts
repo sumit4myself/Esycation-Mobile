@@ -10,6 +10,7 @@ import {PagedResponse} from '../../../providers/model/common/PaggedResponse';
 import {BaseComponent} from '../../baseComponent/base.component';
 import * as moment from 'moment';
 import {CommonServices} from '../../../providers/service/common/common.service';
+import {ServerConfig} from '../../../providers/config';
 
 @IonicPage()
 @Component({
@@ -30,6 +31,8 @@ export class StudentAttendanceComponent  extends BaseComponent{
   attendance:Attendance=new Attendance();
   students:Array<AttendanceModel>=new Array<AttendanceModel>();
   dataNotfound:string=null;
+  imagePath:String=ServerConfig.imagePath();
+
   constructor( 
     protected navCtrl: NavController,
     private navParam:NavParams,

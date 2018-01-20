@@ -20,15 +20,11 @@
         <img *ngIf="student.gender=='Female' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
       </ion-avatar>
       <ion-avatar item-left *ngIf="student.imageId!=null">
-        <img  class="profile-image" src="http://demo.educoresystems.com/api-v1.0/zuul/files/browse/{{student.imageId}}">
+        <img  class="profile-image" src="{{imagePath}}/{{student.imageId}}">
       </ion-avatar>
-        
             {{student.name}}
-        
         <p>
-         
-                #{{student.admissionId.registrations[0].rollNumber}}
-         
+            #{{student.admissionId.registrations[0].rollNumber}}
         </p>  
        
         <ion-note item-right ion-text color="stable">
