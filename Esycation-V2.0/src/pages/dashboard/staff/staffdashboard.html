@@ -1,248 +1,243 @@
 <ion-header>
-    <ion-navbar color="ios-blue">
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-buttons end>
-                <button icon-only ion-button (click)="onNotification()">
-                    <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-                    <span *ngIf="notificationCount!='0'" class="notification">
-                        <small>
-                            <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
-                        </small>
-                    </span>
-                </button>
-            </ion-buttons>
-        <ion-title>
-            EducoreSystems 
-        </ion-title>
-    </ion-navbar>
-</ion-header>
-<ion-content>
-    <div *ngIf="!isLoaded && errorMessage.length<=0" align="center" padding>
-            <ion-spinner name="bubbles"></ion-spinner>
-    </div>
-    <!-- <h1>{{isLoaded}} - {{errorMessage.length}}</h1> -->
-    <div *ngIf="isLoaded && errorMessage.length>0" align="center">
-        <div padding>
-            
-            <p class="inline-error-message"><ion-icon class="inline-error-icon" name="alert"></ion-icon> {{errorMessage}}</p>
+        <ion-navbar color="ios-blue">
+            <button ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+            <ion-buttons end>
+                    <button icon-only ion-button (click)="onNotification()">
+                        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+                        <span *ngIf="notificationCount!='0'" class="notification">
+                            <small>
+                                <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
+                            </small>
+                        </span>
+                    </button>
+                </ion-buttons>
+            <ion-title>
+                EducoreSystems 
+            </ion-title>
+        </ion-navbar>
+    </ion-header>
+    <ion-content>
+        <div *ngIf="!isLoaded && errorMessage.length<=0" align="center" padding>
+                <ion-spinner name="bubbles"></ion-spinner>
         </div>
-    </div>
-    <div *ngIf="isLoaded && errorMessage.length<=0">
-    <div class="expandUp top-container" style="background-color:#FFFCE9 !important;">
-        <div class="head-img" style="text-align:left !important;">
-            <div class="circular--portrait"> 
-                <span *ngIf="profile.imageId==null || profile.imageId=='undefined' "><img  src="assets/img/default.png" ></span>
-                <span *ngIf="profile.imageId!=null && profile.imageId!='undefined'">
-                    <img  src="{{imagePath}}/{{profile.imageId}}">
-                </span>
-            </div>
-        </div>  
-        <div class="head" style="background-color:#FFFCE9 !important;">
-            <h1>{{profile.name}}</h1> 
-            <h3>{{profile.email}} </h3>
-            </div>
-            <div class="foot">
-            <a href="mailto:{{profile.email}}" class="footItem1">
-                <ion-icon name="ios-mail-outline"></ion-icon>
-                <i></i></a><a href="tel:{{profile.mobile}}" class="footItem3">
-               <ion-icon  name="ios-call-outline"></ion-icon><i></i></a>
-        </div>
-    </div>
-    <ion-grid style="margin-top:40px;">
-            <ion-row class="rowItems">
-              <ion-col>
-                  <div class="rowItemsCol" align="center" (click)="onView('ManageAttendanceComponent')">
-                        <div class="round-item">
-                        <ion-icon class="round-item-icon" name="ios-clipboard"></ion-icon>
-                      </div>
-                      <h3>Attendance</h3>
-                </div>
-              </ion-col>
-              <ion-col>
-                  <div class="rowItemsCol" align="center" (click)="onView('StaffLeaveComponent')">
-                      <div class="round-item">
-                      <ion-icon class="round-item-icon" name="ios-analytics"></ion-icon>
-                    </div>
-                    <h3>Apply Leaves</h3>
-                  </div>
-              </ion-col>
-              <ion-col>
-                  <div class="rowItemsCol" align="center" (click)="onView('ViewAllNotificationComponent')">
-                      <div class="round-item">
-                      <ion-icon class="round-item-icon" name="ios-notifications"></ion-icon>
-                    </div>
-                    <h3>Notifications</h3>
-                  </div>
+        <!-- <h1>{{isLoaded}} - {{errorMessage.length}}</h1> -->
+        <div *ngIf="isLoaded && errorMessage.length>0" align="center">
+            <div padding>
                 
-              </ion-col>
-            </ion-row>
-            <ion-row class="rowItems">
-              <ion-col>
-                  <div class="rowItemsCol" align="center" (click)="onView('ViewAllBulkNotificationComponent')">
-                      <div class="round-item">
-                      <ion-icon class="round-item-icon" name="ios-bookmarks"></ion-icon>
-                    </div>
-                    <h3>Bulk Notifications</h3>
-                  </div>
-                  
-              </ion-col>
-              <ion-col>
-                  <div class="rowItemsCol" align="center" (click)="onView('ResultEntiryViewComponent')">
-                      <div class="round-item">
-                      <ion-icon class="round-item-icon" name="ios-book-outline"></ion-icon>
-                    </div>
-                    <h3>Result</h3>
-                  </div>
-                 
-              </ion-col>
-              <ion-col>
-                  <div class="rowItemsCol" align="center" (click)="onView('AssassmentViewComponent')">
-                      <div class="round-item">
-                            <ion-icon class="round-item-icon" name="ios-book-outline"></ion-icon>
-                    </div>
-                    <h3>Assessment</h3>
-                  </div>
-                 
-              </ion-col>
-            </ion-row>
-    </ion-grid>
-
-
-    <div *ngIf="attendanceStatReady" class="performance">
-        <h3>Attendance Statistics</h3>
-        <div echarts style="height:280px; width:90%;" [options]="teachersAttendanceStatOptions" class="performance-chart"></div>
-    </div>
-
-
-    <div class="performance">
-            <h3>My Classes</h3>
-            
-        <div *ngIf="!isMyClassesLoaded && errorMessageMyClass.length<=0"  align="center">
-                <ion-spinner name="bubbles"></ion-spinner>   
-        </div>
-        <div *ngIf="isMyClassesLoaded && errorMessageMyClass.length>0" align="center">
-                <div padding>
-                    
-                    <p class="inline-error-message"><ion-icon class="inline-error-icon" name="alert"></ion-icon> {{errorMessageMyClass}}</p>
-                </div>
+                <p class="inline-error-message"><ion-icon class="inline-error-icon" name="alert"></ion-icon> {{errorMessage}}</p>
             </div>
-            <div *ngIf="isMyClassesLoaded && errorMessageMyClass.length<=0">
-            <p *ngIf="timeTableDataModel.length == 0" class="simple-text">Not Found</p>
-            <ion-item-group *ngFor="let _tt of timeTableDataModel;let iIn=index">
-                    <ion-item-divider class="list-class" color="light">{{_tt.id}}</ion-item-divider>
-                    <ion-item *ngFor="let __tt of _tt.data;" class="my-class-list" no-lines class="bottom-border">
-            
-                        <h4 class="my-class-item">{{__tt.courseId.name}}</h4>
-                        
-                        <ion-grid class="top-border">
-                            <ion-row>
-                                <ion-col class="right-border">
-                                    <div (click)="onTimeTable(__tt)" align="center" class="small">Time Table</div>
-                                </ion-col>
-                                <!-- <ion-col>
-                                    <div align="center" class="small">Attendence</div>
-                                </ion-col> -->
-                            </ion-row>
-            
-                        </ion-grid>
-                    </ion-item>
-                   
-                </ion-item-group>
-
-       
-        
-    </div>
-    </div>
-
-    <!-- <div class="performance">
-        <h3>My Reporting Manager</h3>
+        </div>
+        <div *ngIf="isLoaded && errorMessage.length<=0">
         <div class="expandUp top-container" style="background-color:#FFFCE9 !important;">
             <div class="head-img" style="text-align:left !important;">
-                <div class="circular--portrait">
-                    <img src="https://www.brainpickings.org/wp-content/uploads/2014/03/georgelucas.jpg" />
+                <div class="circular--portrait"> 
+                    <span *ngIf="profile.imageId==null || profile.imageId=='undefined' "><img  src="assets/img/default.png" ></span>
+                    <span *ngIf="profile.imageId!=null && profile.imageId!='undefined'">
+                        <img  src="{{imagePath}}/{{profile.imageId}}">
+                    </span>
                 </div>
-            </div>
-    
+            </div>  
             <div class="head" style="background-color:#FFFCE9 !important;">
-                <h4 class="medium no-card-padding" >Name</h4>
-                <h4 class="small no-card-padding">Reporting Manager</h4>
-                <h4 class="small no-card-padding">Address</h4>
-                <a href="tel:{{profile.mobile}}" class="small">Mobile</a> | <a href="mailto:{{profile.email}}" class="small">Email</a>
+                <h1>{{profile.name}}</h1> 
+                <h3>{{profile.email}} </h3>
+                </div>
+                <div class="foot">
+                <a href="mailto:{{profile.email}}" class="footItem1">
+                    <ion-icon name="ios-mail-outline"></ion-icon>
+                    <i></i></a><a href="tel:{{profile.mobile}}" class="footItem3">
+                   <ion-icon  name="ios-call-outline"></ion-icon><i></i></a>
             </div>
         </div>
-    </div> -->
-
-    <div class="performance">
-            <h3>Requests </h3> 
-            <div>
-                <ion-segment padding [(ngModel)]="myrequests">
-                    <ion-segment-button (click)="fetchPendingRequests()" class="requests-title" value="pendings">
-                        Pendings
-                    </ion-segment-button>
-                    <ion-segment-button (click)="fetchMyRequests()" class="requests-title" value="requests">
-                        My Requests
-                    </ion-segment-button>
-                </ion-segment>
-            </div>
-
-            <div class="dashboard-request"  [ngSwitch]="myrequests">
-                <div *ngSwitchCase="'pendings'">
-                <div *ngIf="!isPendingRequestLoaded" align="center"><ion-spinner name="bubbles"></ion-spinner></div> 
-                <ion-list *ngIf="isPendingRequestLoaded" (click)="onPendingItemClick()">
-                        <p *ngIf="mypendingrequest.length==0" class="simple-text">No Pending Request</p>     
-                        <div *ngFor="let _mypenreq of mypendingrequest;let iPending=index">
-                            <ion-item (click)="onPendingRequest(_mypenreq.module,_mypenreq.taskId)">
-                            <h4>{{_mypenreq.message}}</h4>
-                            <h5 class="req-details">Requestor - {{_mypenreq.requestor.name}}</h5>
-                            <ion-grid no-padding class="req-footers">
-                                <ion-row class="req-footer-row">
-                                    <ion-col>
-                                        <div align="left" class="req-small">{{_mypenreq.currentStatus}}</div>
-                                    </ion-col>
-                                    <ion-col>
-                                        <div align="right" class="req-small">{{_mypenreq.startedOn}}</div>
-                                    </ion-col>
-                                </ion-row>
-                            </ion-grid>
-                        </ion-item>
-                        
+        <ion-grid style="margin-top:40px;">
+                <ion-row class="rowItems">
+                  <ion-col>
+                      <div class="rowItemsCol" align="center" (click)="onView('ManageAttendanceComponent')">
+                            <div class="round-item">
+                            <ion-icon class="round-item-icon" name="ios-clipboard"></ion-icon>
+                          </div>
+                          <h3>Attendance</h3>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                      <div class="rowItemsCol" align="center" (click)="onView('StaffLeaveComponent')">
+                          <div class="round-item">
+                          <ion-icon class="round-item-icon" name="ios-analytics"></ion-icon>
                         </div>
-                    </ion-list>
-                </div>
-                
-                <div class="dashboard-request" *ngSwitchCase="'requests'">
-                        <div *ngIf="!isMyRequestLoaded" align="center"><ion-spinner name="bubbles"></ion-spinner></div> 
-                        <ion-list class="dashboard-request" *ngIf="isMyRequestLoaded">
-                                
-                                    <p *ngIf="myrequest.length==0" class="simple-text">No My Request</p>
-                                
-                                <div *ngFor="let _myreq of myrequest;let i=index">
-                                                <ion-item>
-                                                <h4>{{_myreq.message}}</h4>
-                                                <h5 class="req-details">Approver- {{_myreq.requestor.name}}</h5>
-                                                <ion-grid no-padding class="req-footers">
-                                                    <ion-row class="req-footer-row">
-                                                        <ion-col>
-                                                            <div align="left" class="req-small">{{_myreq.currentStatus}} </div>
-                                                        </ion-col>
-                                                        <ion-col>
-                                                            <div align="right" class="req-small">{{_myreq.startedOn}} - {{_myreq.completedOn}}</div>
-                                                        </ion-col>
-                                                    </ion-row>
-                                                </ion-grid>
-                                            </ion-item>
-                                </div>
-                                
-                              
-            
-                            </ion-list>
-                </div>
-                
-            </div>
+                        <h3>Apply Leaves</h3>
+                      </div>
+                  </ion-col>
+                  <ion-col>
+                      <div class="rowItemsCol" align="center" (click)="onView('ViewAllNotificationComponent')">
+                          <div class="round-item">
+                          <ion-icon class="round-item-icon" name="ios-notifications"></ion-icon>
+                        </div>
+                        <h3>Notifications</h3>
+                      </div>
+                    
+                  </ion-col>
+                </ion-row>
+                <ion-row class="rowItems">
+                  <ion-col>
+                      <div class="rowItemsCol" align="center" (click)="onView('ViewAllBulkNotificationComponent')">
+                          <div class="round-item">
+                          <ion-icon class="round-item-icon" name="ios-bookmarks"></ion-icon>
+                        </div>
+                        <h3>Bulk Notifications</h3>
+                      </div>
+                      
+                  </ion-col>
+                  <ion-col>
+                      <div class="rowItemsCol" align="center" (click)="onView('ResultEntiryViewComponent')">
+                          <div class="round-item">
+                          <ion-icon class="round-item-icon" name="ios-book-outline"></ion-icon>
+                        </div>
+                        <h3>Result</h3>
+                      </div>
+                     
+                  </ion-col>
+                  <ion-col>
+                      <div class="rowItemsCol" align="center" (click)="onView('AssassmentViewComponent')">
+                          <div class="round-item">
+                                <ion-icon class="round-item-icon" name="ios-book-outline"></ion-icon>
+                        </div>
+                        <h3>Assessment</h3>
+                      </div>
+                     
+                  </ion-col>
+                </ion-row>
+        </ion-grid>
+    
+    
+        <div *ngIf="attendanceStatReady" class="performance">
+            <h3>Attendance Statistics</h3>
+            <div echarts style="height:280px; width:90%;" [options]="teachersAttendanceStatOptions" class="performance-chart"></div>
         </div>
-        <div style="height:100px;"></div>
-</div> 
-</ion-content>
-
+    
+    
+        <div class="performance">
+                <h3>Time Table</h3>
+                
+            <div *ngIf="!isMyClassesLoaded && errorMessageMyClass.length<=0"  align="center">
+                    <ion-spinner name="bubbles"></ion-spinner>   
+            </div>
+            <div *ngIf="isMyClassesLoaded && errorMessageMyClass.length>0" align="center">
+                    <div padding>
+                        
+                        <p class="inline-error-message"><ion-icon class="inline-error-icon" name="alert"></ion-icon> {{errorMessageMyClass}}</p>
+                    </div>
+                </div>
+                <div *ngIf="isMyClassesLoaded && errorMessageMyClass.length<=0">
+                <p *ngIf="timeTableDataModel.length == 0" class="simple-text">Not Found</p>
+                <div *ngFor="let _tt of timeTableDataModel;let iIn=index">
+                        <ion-item-divider class="list-class" color="light">{{_tt.id}}</ion-item-divider>
+                        <div align="left" style="padding:0px !important;" *ngFor="let __tt of _tt.data;" class="bottom-border my-class-list" no-lines>
+                                <ion-grid>
+                                        <ion-row>
+                                            <ion-col text-left text-wrap col-6>
+                                                    {{__tt.courseId.name}}
+                                            </ion-col>
+                                            <ion-col text-right text-wrap col-6>
+                                                <a (click)="onTimeTable(__tt)">All Weeks...</a>
+                                            </ion-col>
+                                        </ion-row>
+                    
+                                    </ion-grid>
+                            
+                            <div  *ngFor="let _timetableDays of __tt.timetableDays;let iIn=index">
+                                <div *ngIf="currentDay === _timetableDays.dayName">
+                                <strong class="simple-text my-class-item no-left-padding">{{currentDay}}</strong>
+                                <ion-item *ngFor="let period of _timetableDays.periods;" class="my-class-list" no-lines class="bottom-border">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col text-left text-wrap col-6>
+                                                <h4 class="my-class-item">{{period.subjectId.name}}</h4>
+                                            </ion-col>
+                                            <ion-col text-right text-wrap col-6>
+                                                <p>{{period.start | slice:0:5}} - {{period.end | slice:0:5}}</p>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </ion-item> 
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+        </div>
+        </div>
+    
+    
+    
+        <div class="performance">
+                <h3>Requests </h3> 
+                <div>
+                    <ion-segment padding [(ngModel)]="myrequests">
+                        <ion-segment-button (click)="fetchPendingRequests()" class="requests-title" value="pendings">
+                            Pendings
+                        </ion-segment-button>
+                        <ion-segment-button (click)="fetchMyRequests()" class="requests-title" value="requests">
+                            My Requests
+                        </ion-segment-button>
+                    </ion-segment>
+                </div>
+    
+                <div class="dashboard-request"  [ngSwitch]="myrequests">
+                    <div *ngSwitchCase="'pendings'">
+                    <div *ngIf="!isPendingRequestLoaded" align="center"><ion-spinner name="bubbles"></ion-spinner></div> 
+                    <ion-list *ngIf="isPendingRequestLoaded" (click)="onPendingItemClick()">
+                            <p *ngIf="mypendingrequest.length==0" class="simple-text">No Pending Request</p>     
+                            <div *ngFor="let _mypenreq of mypendingrequest;let iPending=index">
+                                <ion-item (click)="onPendingRequest(_mypenreq.module,_mypenreq.taskId)">
+                                <h4>{{_mypenreq.message}}</h4>
+                                <h5 class="req-details">Requestor - {{_mypenreq.requestor.name}}</h5>
+                                <ion-grid no-padding class="req-footers">
+                                    <ion-row class="req-footer-row">
+                                        <ion-col>
+                                            <div align="left" class="req-small">{{_mypenreq.currentStatus}}</div>
+                                        </ion-col>
+                                        <ion-col>
+                                            <div align="right" class="req-small">{{_mypenreq.startedOn}}</div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-item>
+                            
+                            </div>
+                        </ion-list>
+                    </div>
+                    
+                    <div class="dashboard-request" *ngSwitchCase="'requests'">
+                            <div *ngIf="!isMyRequestLoaded" align="center"><ion-spinner name="bubbles"></ion-spinner></div> 
+                            <ion-list class="dashboard-request" *ngIf="isMyRequestLoaded">
+                                    
+                                        <p *ngIf="myrequest.length==0" class="simple-text">No My Request</p>
+                                    
+                                    <div *ngFor="let _myreq of myrequest;let i=index">
+                                                    <ion-item>
+                                                    <h4>{{_myreq.message}}</h4>
+                                                    <h5 class="req-details">Approver- {{_myreq.requestor.name}}</h5>
+                                                    <ion-grid no-padding class="req-footers">
+                                                        <ion-row class="req-footer-row">
+                                                            <ion-col>
+                                                                <div align="left" class="req-small">{{_myreq.currentStatus}} </div>
+                                                            </ion-col>
+                                                            <ion-col>
+                                                                <div align="right" class="req-small">{{_myreq.startedOn}} - {{_myreq.completedOn}}</div>
+                                                            </ion-col>
+                                                        </ion-row>
+                                                    </ion-grid>
+                                                </ion-item>
+                                    </div>
+                                    
+                                  
+                
+                                </ion-list>
+                    </div>
+                    
+                </div>
+            </div>
+            <div style="height:100px;"></div>
+    </div> 
+    </ion-content>
+    

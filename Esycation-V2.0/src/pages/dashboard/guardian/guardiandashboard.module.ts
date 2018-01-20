@@ -3,12 +3,15 @@ import { IonicPageModule } from 'ionic-angular';
 import {GuardianDashboardComponent} from '../guardian/guardiandashboard';
 import {ProfileService} from '../../../providers/service/profile/profile.service';
 import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
+import {LeaveService} from '../../../providers/service/leave/leave.service';
+import {NgxEchartsModule} from 'ngx-echarts';
 @NgModule({
     imports: [
         IonicPageModule.forChild(GuardianDashboardComponent),
+        NgxEchartsModule
     ],
     exports: [GuardianDashboardComponent ],
     declarations: [GuardianDashboardComponent],
-    providers: [ProfileService,ApprovelService],
+    providers: [ProfileService,ApprovelService,LeaveService],
 })
 export class GuardianDashboardModule { }

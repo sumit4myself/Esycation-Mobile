@@ -9,6 +9,19 @@ guardiandashboard-page {
     padding-top: 10vh;
     
   }
+
+  .simple-text{
+    color: #213F48;
+   }
+
+   .dashboard-request{
+    height: 350px!important;
+    min-height: 350px !important;
+    max-height: 350px !important;
+    overflow-y: scroll;
+  }
+
+  
   .swiper-pagination-bullet-active {
     background: #ffeb3b;
   }
@@ -242,7 +255,15 @@ guardiandashboard-page {
   }
 }
 
-
+.top-container-student {
+  width: 95%;
+  background-color: white;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 0px 0px 5px 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+}
 
 .top-container {
   width: 95%;
@@ -292,6 +313,10 @@ guardiandashboard-page {
 
 }
 
+.text-capitalize{
+  
+  text-transform: capitalize;
+}
 
 // .head:before {
 //   content: "";
@@ -320,6 +345,18 @@ guardiandashboard-page {
   text-align: left;
   color: #213F48;
   margin-bottom: 20px;
+}
+.item[no-lines].bottom-border { 
+  border-bottom: 1px solid #F4F4F4; 
+ }
+
+.head-font{
+  font-weight: 20 !important; 
+  font-size: 18px !important;
+  padding-left: 20px;
+  text-align: left !important;
+  color: #213F48 !important;
+  margin-bottom: 15px !important;
 }
 
 .performance{

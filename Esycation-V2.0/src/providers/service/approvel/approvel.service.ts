@@ -33,6 +33,18 @@ export class ApprovelService extends BaseService<any> {
         +"/attendances/report/statistics/"+userId+"/STAFF?suppressError=true&fromDate="+fromDate+"&toDate="+toDate; 
         return this.findAll(url);
       }
+
+      public findStudentAttendanceStatistic(studentId:number,fromDate:string,toDate:string):Observable<any>{
+        let url: string = ServerConfig.getPath() 
+        +"/attendances/report/statistics/"+studentId+"/STUDENT?fromDate="+fromDate+"&toDate="+toDate; 
+        return this.findAll(url);
+      }
+
+      public findStudentResultStatistic(studentId:number):Observable<any>{
+        let url: string = ServerConfig.getPath() 
+        +"/results/report/statistics/exam/"+studentId; 
+        return this.findAll(url);
+      }
     
     public findMyRequests(userId:number):Observable<any>{
     

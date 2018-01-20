@@ -508,7 +508,10 @@ staffdashboard-page {
    overflow-y: scroll;
  }
 
-
+.no-left-padding{
+  padding: 0px 0px 0px 15px !important
+  
+}
  
  .item[no-lines].bottom-border { 
   border-bottom: 1px solid #F4F4F4; 

@@ -31,6 +31,27 @@ export class LeaveService  extends BaseService<LeaveModel> {
     return this.findAll(url);
   }
 
+
+  public findStudentListByGuardianIds(remoteId:number):Observable<any>{
+
+    let url:string =ServerConfig.getPath()+"/students/findByGuardianIdsWithCourseAndBatch/"+remoteId+"?RESPONSE_VIEW=Student.MinDetails";
+
+    return this.findAll(url);
+  }
+
+  public findTeacherDetailsByStudentId(studentId:number):Observable<any>{
+    let url:string =ServerConfig.getPath()+"/staffs/findClassTeacherByStudentId/"+studentId+"?RESPONSE_VIEW=Staff.MinDetails";
+    return this.findAll(url);
+  }
+
+  public findTimeTableByStudentId(studentId:number):Observable<any>{
+    
+    // /staffs/findClassTeacherByStudentId/{studentId}/?RESPONSE_VIEW=Staff.MinDetails
+    let url:string =ServerConfig.getPath()+"/batchTimetables/findByStudentId/"+studentId+"?RESPONSE_VIEW=BatchTimetable.Details";
+
+    return this.findAll(url);
+  }
+
   public saveStaffLeave(data:any):Observable<any>{
 
     let url: string = ServerConfig.getPath() +"/staffLeaves";
