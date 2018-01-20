@@ -73,13 +73,11 @@
       <p>Address</p>
       <h2>
         {{profile.address1}}
-        <span *ngIf="profile.address2!='-'">
+        <span *ngIf="profile.address2 && profile.address2!='-'">
             ,{{profile.address2}}
           </span>
-          <span>,
-            City: {{profile.city}},
-            State : {{profile.state}} - {{profile.pinCode}}
-          </span>
+          <span *ngIf="profile.city">,City: {{profile.city}}</span>
+          <span *ngIf="profile.state">,State : {{profile.state}} - {{profile.pinCode}}</span>
       </h2>
       
     </ion-item>

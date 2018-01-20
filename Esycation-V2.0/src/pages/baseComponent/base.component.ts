@@ -9,7 +9,7 @@ export abstract class BaseComponent {
     constructor(protected service:UserSessionService,
                 protected navCtrl:NavController){
       this.notificationCount=localStorage.getItem("notificationCount");      
-         
+              
     }
 
     onNotification(){

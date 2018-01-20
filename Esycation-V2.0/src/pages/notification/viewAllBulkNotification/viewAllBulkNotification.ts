@@ -43,6 +43,18 @@ export class ViewAllBulkNotificationComponent {
        });  
     }
 
+
+    /*
+    doInfinite(infiniteScroll){
+
+        console.log("event==",event);
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            infiniteScroll.complete();
+          }, 500);
+    }
+    */
+
     onAddNew(){
         this.nav.push("BulkNotificationComponent");
     }

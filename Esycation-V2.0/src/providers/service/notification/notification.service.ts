@@ -9,7 +9,6 @@ import { UserSessionService } from '../../service/core/user.session.service'
 import { PagedResponse } from '../../model/common/PaggedResponse';
 import { NotificationDetails } from '../../model/notification/notification.model';
 import { CommonServices } from '../common/common.service';
-import { Events } from 'ionic-angular';
 
 @Injectable()
 export class NotificationService extends BaseService<PagedResponse> {
@@ -19,18 +18,9 @@ export class NotificationService extends BaseService<PagedResponse> {
     constructor( @Inject(Http) protected http: Http,
         @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler,
         @Inject(UserSessionService) protected userSessionService: UserSessionService,
-        @Inject(CommonServices) protected commonServices: CommonServices,
-        @Inject(Events) private events:Events
-        //  protected push:Push
-    ) {
+        @Inject(CommonServices) protected commonServices: CommonServices) {
         super(http, errorHandler);
 
-        /*
-        this.events.subscribe("notification:updateCount", (registrationId)=>{
-            console.log("REGISTER_DEVICE..!",JSON.stringify(registrationId));           
-        });
-
-        */
     }
 
     public findAllByRemoteIdAndModule(remoteId: number, module: string): Observable<PagedResponse> {
@@ -41,12 +31,10 @@ export class NotificationService extends BaseService<PagedResponse> {
         return this.findAll(url);
     }
 
-    public countAllByRemoteIdAndModule(remoteId: number, module: string): void {
+    public countAllByRemoteIdAndModule(remoteId: number, module: string): Observable<any> {
         let url: string = ServerConfig.getPath() +
             "/notifications/receivers/" + module + "/" + remoteId + "/count?mode=PUSH_MESSAGE&readStatus=UNREAD";
-         this.find(url).subscribe(count=>{
-            this.events.publish("notification:updateCount", count);
-         });
+         return this.find(url);
     }
 
 

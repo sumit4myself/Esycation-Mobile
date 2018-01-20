@@ -7,6 +7,7 @@ import {AuthService} from '../core/auth.service';
 export class UserSessionService{
 
     protected userPrefernce:UserPrefernce;
+    protected notificationCount:number=0;
 
     constructor(@Inject(AuthService) protected authService:AuthService){
         this.userPrefernce = authService.findCurrentUserDetails();
@@ -61,5 +62,12 @@ export class UserSessionService{
         else{
             return "HomeComponent";
         }
+    }
+
+    public setNotificationCount(count:number){
+        this.notificationCount=count;
+    }
+    public findNotificationCount():number{
+        return this.notificationCount;
     }
 }

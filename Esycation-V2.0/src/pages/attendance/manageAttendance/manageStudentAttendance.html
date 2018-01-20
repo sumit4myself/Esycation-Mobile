@@ -1,21 +1,16 @@
 <ion-header>
-  <ion-navbar color="ios-blue">
-    <button ion-button menuToggle>
+  <ion-navbar color="ios-blue" >
+    <button ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-      <button icon-only ion-button (click)="onNotification()">
-        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-        <span *ngIf="notificationCount!='0'" class="notification">
-          <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
-        </span>
-      </button>
+        <button icon-only ion-button (click)="onNotification()">
+          <notification-counter></notification-counter>
+        </button>
     </ion-buttons>
-    <ion-title>Attendance</ion-title>
+    <ion-title>Attendance </ion-title>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content>
     
     <ion-list no-lines class="attendance-list">

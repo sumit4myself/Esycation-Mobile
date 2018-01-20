@@ -7,7 +7,7 @@ import {ServerConfig} from '../../../providers/config';
 import {BaseComponent} from '../../baseComponent/base.component';
 import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
 import * as moment from 'moment';
-import { toArray } from 'rxjs/operator/toArray';
+
 
 @IonicPage()
 @Component({
@@ -132,6 +132,7 @@ export class StaffDashboardComponent extends BaseComponent {
                 this.attendanceStatReady = false;
             }
         },error=>{
+            console.error(error);
             this.attendanceStatReady = false;
        });
       }
@@ -172,6 +173,7 @@ export class StaffDashboardComponent extends BaseComponent {
              }
             this.isPendingRequestLoaded=true;
         },error=>{
+            console.error(error);
             this.isPendingRequestLoaded=true;
        });
     }  

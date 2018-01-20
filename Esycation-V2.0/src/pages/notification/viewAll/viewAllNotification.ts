@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, Nav } from 'ionic-angular';
+import { IonicPage, Nav,Events } from 'ionic-angular';
 import { UserSessionService } from '../../../providers/service/core/user.session.service';
 import { NotificationService } from '../../../providers/service/notification/notification.service';
 import { NotificationDetails } from '../../../providers/model/notification/notification.model';
@@ -21,7 +21,8 @@ export class ViewAllNotificationComponent {
         private session: UserSessionService,
         private notificationService: NotificationService,
         private nav: Nav,
-        private commonServices:CommonServices) {
+        private commonServices:CommonServices,
+        private events:Events) {
 
         this.remoteId = this.session.findRemote();
         this.module = this.session.findModule();
@@ -53,10 +54,12 @@ export class ViewAllNotificationComponent {
     }
 
     onRead(id: number) {
-        this.commonServices.onLoader();
+    
         this.onView(id);
+        this.events.publish('notification:updateCount');
         this.notificationService.readMessage(id).subscribe(data => {
-            console.error(data);
+            console.log(data);
+
             for (let notification of this.notifications) {
                 if (id == notification.id && notification.readStatus == 'UNREAD') {
                     notification.readStatus = "READ";
@@ -64,10 +67,9 @@ export class ViewAllNotificationComponent {
                     localStorage.setItem("notificationCount", this.notificationCount);
                 }
             }
-            this.commonServices.onDismissAll();
+           
         },error=>{
             console.error(error);
-            this.commonServices.onDismissAll();
        });
     }
 

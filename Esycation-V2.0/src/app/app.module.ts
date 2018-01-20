@@ -20,7 +20,6 @@ import { Push } from '@ionic-native/push';
 import { NotificationService } from '../providers/service/notification/notification.service';
 import { DeviceService } from '../providers/service/notification/device.service';
 
-
 @NgModule({
   declarations: [
     MyApp,
@@ -29,7 +28,7 @@ import { DeviceService } from '../providers/service/notification/device.service'
     BrowserModule, HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

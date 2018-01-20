@@ -11,6 +11,7 @@ import {UserSessionService} from '../providers/service/core/user.session.service
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import {CommonServices} from '../providers/service/common/common.service';
 import {DeviceService} from '../providers/service/notification/device.service';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -59,6 +60,7 @@ export class MyApp {
               public alertCtrl: AlertController,
               private toastCtrl: ToastController,
               private deviceService:DeviceService) {
+
         this.initializeApp();
 
         this.userPrefernce = this.session.findUserDetails();
@@ -147,8 +149,8 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     // page.component = item array.component --> 
     //this.nav.setRoot(page.component);
-    // this.nav.setRoot(page.component).catch(err => console.error(err));
-    this.nav.push(page.component).catch(err => console.error(err));
+   this.nav.setRoot(page.component).catch(err => console.error(err));
+    //this.nav.push(page.component).catch(err => console.error(err));
   }
 
  onAddAccount(){
@@ -181,8 +183,7 @@ export class MyApp {
               android: {
               sound: true,
               vibrate:true,
-              iconColor:"#f53d3d",
-             senderID : ""
+              iconColor:"#f53d3d"
               },
               ios: {
                   alert: 'true',
@@ -200,6 +201,8 @@ export class MyApp {
               var notificationCount=Number(localStorage.getItem("notificationCount"));
               var count = notificationCount+1;
               localStorage.setItem("notificationCount",count+"");
+
+              this.events.publish('notification:updateCount');
             }
           });
           pushObject.on('registration').subscribe((registration: any) => {
