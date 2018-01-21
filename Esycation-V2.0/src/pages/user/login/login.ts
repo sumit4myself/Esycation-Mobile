@@ -17,6 +17,8 @@ import {UserSessionService} from '../../../providers/service/core/user.session.s
 export class LoginComponent {
   
   loginForm: FormGroup;
+  passwordAsToggle:string= 'password';
+  pwdIcon: string = "md-eye-off";
   pagedResponse=PagedResponse.getInstance();
   branchs:Array<Branch>=new Array<Branch>();
   branch:Branch=new Branch();
@@ -67,6 +69,16 @@ export class LoginComponent {
     this.commonServices.onDismissAll();
   });
     
+  }
+
+  showHidePassword(){
+    if(this.passwordAsToggle === 'password'){
+        this.passwordAsToggle = "text";
+        this.pwdIcon = 'md-eye';
+      } else {
+        this.passwordAsToggle = "password";
+        this.pwdIcon = 'md-eye-off';
+      }
   }
   
   login({ value, valid }: { value: Login, valid: boolean }){

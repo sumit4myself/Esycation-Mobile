@@ -16,15 +16,19 @@
       </ion-item>
       
       <ion-item>
-        <ion-label floating>Username</ion-label>
+        <ion-label stacked>Username</ion-label>
         <ion-input tappable color="light"  
           type="text" formControlName="userName" >
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>Password  <ion-icon name="eye"></ion-icon></ion-label>
-        <ion-input tappable #password type="password" formControlName="password">
+        <ion-label stacked>Password  
+       </ion-label>
+        <button ion-button="" icon-only="" clear="" color="light" item-right="" (click)="showHidePassword()"> 
+            <ion-icon [name]="pwdIcon"></ion-icon>
+        </button>
+        <ion-input tappable #password [type]="passwordAsToggle" formControlName="password">
         </ion-input>
        
       </ion-item>

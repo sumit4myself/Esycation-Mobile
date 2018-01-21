@@ -29,7 +29,7 @@
         <ion-icon  *ngIf="assessment.resultStatus=='CREATED'"  item-start  color="tertiary" name="ios-timer-outline"></ion-icon>
         <ion-icon  *ngIf="assessment.resultStatus!='CREATED'"  item-start  color="yellow" name="ios-timer-outline"></ion-icon>
         {{assessment.courseName}}
-        <p>
+        <!-- <p>
           <span class="small" >
             <ion-icon name="time"></ion-icon> {{assessment.assassmentDate}} 
           </span>
@@ -37,7 +37,21 @@
           <span class="small" >{{assessment.batchName}}</span>
           <span >&nbsp;| </span>
           <span class="small" ><ion-icon name="book" ></ion-icon> {{assessment.subjectName}}</span> 
-        </p>
+        </p> -->
+        <ion-grid>
+            <ion-row>
+              <ion-col col-4 text-wrap>
+                <p class="medium"><ion-icon name="time"></ion-icon> {{assessment.assassmentDate}} </p>
+              </ion-col>
+              <ion-col col-4 text-wrap>
+                <p class="medium">{{assessment.batchName}}</p>
+              </ion-col>
+              <ion-col col-4 text-wrap>
+                <p class="medium">
+                    <ion-icon name="book" ></ion-icon> {{assessment.subjectName}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
           <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
       </ion-item>
       <p *ngIf="assessmentEntryNotfound!=null" text-center class="app-error">
@@ -51,7 +65,7 @@
       
           <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
         {{assessment.courseName}}
-        <p>
+        <!-- <p>
           <span class="small" >
             <ion-icon name="time"></ion-icon> {{assessment.assassmentDate}} 
           </span>
@@ -59,7 +73,21 @@
           <span class="small" >{{assessment.batchName}}</span>
           <span >&nbsp;| </span>
           <span class="small" ><ion-icon name="book" ></ion-icon> {{assessment.subjectName}}</span> 
-        </p>
+        </p> -->
+        <ion-grid>
+            <ion-row>
+              <ion-col col-4 text-wrap>
+                <p class="medium"><ion-icon name="time"></ion-icon> {{assessment.assassmentDate}} </p>
+              </ion-col>
+              <ion-col col-4 text-wrap>
+                <p class="medium">{{assessment.batchName}}</p>
+              </ion-col>
+              <ion-col col-4 text-wrap>
+                <p class="medium">
+                    <ion-icon name="book" ></ion-icon> {{assessment.subjectName}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
           <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
       </ion-item>
       <p  *ngIf="dataNotfound!=null" text-center class="app-error"> 
