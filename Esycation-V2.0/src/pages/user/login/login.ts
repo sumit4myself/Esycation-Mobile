@@ -21,6 +21,7 @@ export class LoginComponent {
   branchs:Array<Branch>=new Array<Branch>();
   branch:Branch=new Branch();
   userId:number;
+  selectStyle : any={};  
   public backgroundImage: any = "./assets/bg1.jpg";
   public imgLogo: any = "./assets/medium_150.70391061453px_1202562_easyicon.net.png";
 
@@ -32,14 +33,17 @@ export class LoginComponent {
     private commonServices:CommonServices,
     private breanchService:BreanchService,
     private session:UserSessionService) 
-    {        
+    {  
+      
+      this.selectStyle = {
+        mode :'ios',
+        cssClass: 'remove-ok'
+      }  
       this.loginForm = this.formBuilder.group({
         userName: ['', [<any>Validators.required]],
         password: ['', [<any>Validators.required]],
         branchId:   ['',[]]
       });
-      console.log(this.session.findUserId());
-      
       this.userId = this.session.findUserId();
       if(this.userId){
         this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));

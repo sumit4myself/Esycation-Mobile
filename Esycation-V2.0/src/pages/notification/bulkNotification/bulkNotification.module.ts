@@ -7,9 +7,12 @@ import {CourceService} from '../../../providers/service/cource/cource.service';
 import {StudentService} from '../../../providers/service/student/student.service'; 
 import {DepartmentService} from '../../../providers/service/department/department.service';
 import {StaffService} from '../../../providers/service/staff/staff.service';
+import {PushCounterModule} from '../../notification/pushcounter/pushcounter.module';
 @NgModule({
     imports: [
         IonicPageModule.forChild(BulkNotificationComponent),
+        
+        PushCounterModule
     ],
     exports: [BulkNotificationComponent ],
     declarations: [BulkNotificationComponent],

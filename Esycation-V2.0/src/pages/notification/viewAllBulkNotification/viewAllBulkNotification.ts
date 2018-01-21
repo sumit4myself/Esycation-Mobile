@@ -13,6 +13,8 @@ import * as moment from 'moment';
 export class ViewAllBulkNotificationComponent {
   
     notifications:Array<any>;
+    page:number=1
+    size:number=10
      constructor(
          private session:UserSessionService,
          private nav:Nav,
@@ -25,7 +27,7 @@ export class ViewAllBulkNotificationComponent {
     ionViewDidLoad(){
 
         this.commonServices.onLoader();
-        this.bulkNotificationService.manage().subscribe(data=>{
+        this.bulkNotificationService.manage(this.page,this.size).subscribe(data=>{
             this.notifications = data.contents;
             if(this.notifications.length>0){
                 for(let notification of this.notifications){
@@ -44,8 +46,8 @@ export class ViewAllBulkNotificationComponent {
     }
 
 
-    /*
-    doInfinite(infiniteScroll){
+    
+    onLoad(infiniteScroll){
 
         console.log("event==",event);
         setTimeout(() => {
@@ -53,7 +55,7 @@ export class ViewAllBulkNotificationComponent {
             infiniteScroll.complete();
           }, 500);
     }
-    */
+    
 
     onAddNew(){
         this.nav.push("BulkNotificationComponent");

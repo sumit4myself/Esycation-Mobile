@@ -5,10 +5,7 @@
     </button>
     <ion-buttons end>
       <button icon-only ion-button (click)="onNotification()">
-        <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-        <span *ngIf="notificationCount!='0'" class="notification">
-          <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
-        </span>
+          <notification-counter></notification-counter>
       </button>
     </ion-buttons>
     <ion-title>Apply Leave</ion-title>

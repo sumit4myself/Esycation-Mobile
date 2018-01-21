@@ -3,7 +3,14 @@
           <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
           </button>
-          <ion-title>Bulk Notification</ion-title>
+          <ion-buttons end>
+                <button icon-only ion-button  (click)="onNotification()" >
+                    <notification-counter></notification-counter>
+                </button>
+            </ion-buttons>
+          <ion-title>
+              Notification Recievers
+        </ion-title>
         </ion-navbar>
         <ion-toolbar no-border-top color="lightblue">
           <ion-segment [(ngModel)]="viewMode" color="light">
@@ -19,22 +26,34 @@
       <ion-content>
         <ion-list no-lines class="notification-list" *ngIf="viewMode==='first'">
             <ion-item *ngFor="let stuGaurd of studentGuardians">
-                    <ion-avatar item-left *ngIf="stuGaurd.imageId!=null">
-                        <img  class="profile-image" src="{{imagePath}}/{{stuGaurd.imageId}}">
-                    </ion-avatar> 
-                    <ion-avatar item-start *ngIf="stuGaurd.imageId==null">
-                        <img class="profile-image" src="assets/img/student-m.png">
-                    </ion-avatar>
-                    {{stuGaurd.name}}
-                    <p>
-                        <span class="small" *ngIf="stuGaurd.email!=null">
-                                <ion-icon name="mail"></ion-icon> {{stuGaurd.email}}
-                        </span>
-                        <span  *ngIf="stuGaurd.email!=null">&nbsp;|</span>
-                        <span class="small">  
-                                <ion-icon name="call"></ion-icon> {{stuGaurd.mobile}}
-                        </span>
-                    </p>
+                
+                <p *ngIf="stuGaurd.recieverName!=null">
+                    <span *ngIf="stuGaurd.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
+                    <span>{{stuGaurd.recieverName}}</span>
+                 </p>
+                 <p *ngIf="stuGaurd.recieverName==null">
+                    <span *ngIf="stuGaurd.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
+                    <span>N/A</span>
+                   </p>
+                <ion-grid no-padding >
+                    <ion-row >
+                        <ion-col *ngIf="stuGaurd.email!=null">
+                            <div align="left" class="small"><ion-icon name="mail"></ion-icon>
+                                    {{stuGaurd.email}} </div>
+                        </ion-col>
+                        <ion-col>
+                            <div align="left" class="small"><ion-icon name="call"></ion-icon>
+                                {{stuGaurd.mobile}}</div>
+                        </ion-col>
+                        <ion-col>
+                            <div align="right" class="small">
+                                <ion-icon *ngIf="stuGaurd.notificationStatus=='SENT'" color="secondary" name="checkmark-circle-outline"></ion-icon>
+                                <ion-icon *ngIf="stuGaurd.notificationStatus!='SENT'" color="danger" name="ios-close-circle-outline"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>       
+
             </ion-item>  
           <p *ngIf="studentDetailsNotFound!=null" text-center class="app-error">
                 <ion-icon name="ios-alert-outline"></ion-icon> {{studentDetailsNotFound}}
@@ -43,22 +62,31 @@
       
         <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">
             <ion-item *ngFor="let staff of staffs">
-                <ion-avatar item-left *ngIf="staff.imageId!=null">
-                    <img  class="profile-image" src="{{imagePath}}/{{staff.imageId}}">
-                </ion-avatar> 
-                <ion-avatar item-start *ngIf="staff.imageId==null">
-                    <img class="profile-image" src="assets/img/student-m.png">
-                </ion-avatar>
-                {{staff.name}}
-                <p>
-                    <span class="small" *ngIf="staff.email!=null">
-                            <ion-icon name="mail"></ion-icon> {{staff.email}}
-                    </span>
-                    <span *ngIf="staff.email!=null">&nbsp;|</span>
-                    <span class="small">  
-                            <ion-icon name="call"></ion-icon> {{staff.mobile}}
-                    </span>
+               
+               <p *ngIf="staff.recieverName!=null">
+                   <span *ngIf="staff.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
+                   <span>{{staff.recieverName}}</span>
                 </p>
+                <p *ngIf="staff.recieverName==null">
+                  <span *ngIf="staff.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
+                  <span>N/A</span>
+                </p>
+                <ion-grid no-padding >
+                        <ion-row >
+                            <ion-col *ngIf="staff.email!=null">
+                                <div align="left" class="small"><ion-icon name="mail"></ion-icon> {{staff.email}} </div>
+                            </ion-col>
+                            <ion-col>
+                                <div align="left" class="small"><ion-icon name="call"></ion-icon> {{staff.mobile}}</div>
+                            </ion-col>
+                            <ion-col>
+                                <div align="right" class="small">
+                                    <ion-icon *ngIf="staff.notificationStatus=='SENT'" color="secondary" name="checkmark-circle-outline"></ion-icon>
+                                    <ion-icon *ngIf="staff.notificationStatus!='SENT'" color="danger" name="ios-close-circle-outline"></ion-icon>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
             </ion-item>    
             <p *ngIf="staffDetailsNotFound!=null" text-center class="app-error">
                 <ion-icon name="ios-alert-outline"></ion-icon> {{staffDetailsNotFound}}

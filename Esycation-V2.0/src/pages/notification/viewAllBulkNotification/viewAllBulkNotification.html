@@ -3,6 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-buttons end>
+        <button icon-only ion-button  (click)="onNotification()" >
+            <notification-counter></notification-counter>
+        </button>
+    </ion-buttons>
     <ion-title>Bulk Notification</ion-title>
   </ion-navbar>
 </ion-header>
@@ -43,14 +48,13 @@
     </ion-item-sliding> 
   </ion-list>
   
-  <!--
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll (ionInfinite)="onLoad($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
         loadingText="Loading more data...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-  -->
+
   <ion-fab bottom right (click)="onAddNew()">
       <button ion-fab>
           <ion-icon name="ios-add-outline" color="white"></ion-icon>  

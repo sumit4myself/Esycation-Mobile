@@ -27,13 +27,13 @@ export class NotificationService extends BaseService<PagedResponse> {
 
         this.notifications = new Array<NotificationDetails>();
         let url: string = ServerConfig.getPath() +
-            "/notifications/receivers/" + module + "/" + remoteId + "?mode=PUSH_MESSAGE&RESPONSE_VIEW=NotificationReceiver.Details";
+            "/notificationReceivers/" + remoteId + "/" + module+ "?mode=PUSH_MESSAGE&RESPONSE_VIEW=NotificationReceiver.Details";
         return this.findAll(url);
     }
 
     public countAllByRemoteIdAndModule(remoteId: number, module: string): Observable<any> {
         let url: string = ServerConfig.getPath() +
-            "/notifications/receivers/" + module + "/" + remoteId + "/count?mode=PUSH_MESSAGE&readStatus=UNREAD";
+            "/notificationReceivers/" + remoteId + "/" +  module+ "/count?mode=PUSH_MESSAGE&readStatus=UNREAD";
          return this.find(url);
     }
 
@@ -41,14 +41,14 @@ export class NotificationService extends BaseService<PagedResponse> {
     public findById(id: number): Observable<any> {
 
         let url: string = ServerConfig.getPath() +
-            "/notifications/receivers/" + id + "/?RESPONSE_VIEW=NotificationReceiver.Details";
+            "/notificationReceivers/" + id + "/?RESPONSE_VIEW=NotificationReceiver.Details";
         return this.find(url, id);
     }
 
     public readMessage(id: number): Observable<any> {
 
         let url: string = ServerConfig.getPath() +
-            "/notifications/receivers/" + id + "/changeStatus/?RESPONSE_VIEW=NotificationReceiver.Details&status=READ";
+            "/notificationReceivers/" + id + "/changeStatus/?RESPONSE_VIEW=NotificationReceiver.Details&status=READ";
 
         return this.changeStatus(url);
     }

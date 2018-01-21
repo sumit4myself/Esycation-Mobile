@@ -1,0 +1,28 @@
+view-bulk-message{
+ 
+  .noti-header{
+      margin: 0px;
+      padding : 10px;
+      background: white;
+      font-size: 19px;
+      padding: 5px; 
+      border-bottom: 1px solid #d5dae2;   
+      text-transform: capitalize;    
+  }
+
+  .noti-header h5{
+    font-size: 16px;
+  }
+
+
+  .noti-content{
+    // padding: 5px;
+    margin: 0px;
+    padding : 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    // letter-spacing: 1px;
+  }
+
+
+}

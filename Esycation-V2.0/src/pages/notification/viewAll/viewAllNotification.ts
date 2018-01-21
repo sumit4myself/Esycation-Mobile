@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, Nav,Events } from 'ionic-angular';
+import { IonicPage, Nav, Events } from 'ionic-angular';
 import { UserSessionService } from '../../../providers/service/core/user.session.service';
 import { NotificationService } from '../../../providers/service/notification/notification.service';
 import { NotificationDetails } from '../../../providers/model/notification/notification.model';
-import {CommonServices} from '../../../providers/service/common/common.service';
+import { CommonServices } from '../../../providers/service/common/common.service';
 
 @IonicPage()
 @Component({
@@ -16,13 +16,12 @@ export class ViewAllNotificationComponent {
     remoteId: number;
     module: string;
     shownDetail = null;
-    notificationCount: any = 0;
     constructor(
         private session: UserSessionService,
         private notificationService: NotificationService,
         private nav: Nav,
-        private commonServices:CommonServices,
-        private events:Events) {
+        private commonServices: CommonServices,
+        private events: Events) {
 
         this.remoteId = this.session.findRemote();
         this.module = this.session.findModule();
@@ -40,11 +39,8 @@ export class ViewAllNotificationComponent {
                 b.styleColor = this.findColor(b.notificationId.type);
                 b.typeInfo = this.findInfo(b.notificationId.type);
                 this.notifications.push(b);
-                if (b.readStatus == 'UNREAD') {
-                    this.notificationCount++;
-                }
+
             }
-            localStorage.setItem("notificationCount", this.notificationCount);
             this.commonServices.onDismissAll();
 
         }, error => {
@@ -54,23 +50,19 @@ export class ViewAllNotificationComponent {
     }
 
     onRead(id: number) {
-    
+
         this.onView(id);
-        this.events.publish('notification:updateCount');
         this.notificationService.readMessage(id).subscribe(data => {
             console.log(data);
-
             for (let notification of this.notifications) {
                 if (id == notification.id && notification.readStatus == 'UNREAD') {
                     notification.readStatus = "READ";
-                    this.notificationCount = this.notificationCount - 1;
-                    localStorage.setItem("notificationCount", this.notificationCount);
                 }
             }
-           
-        },error=>{
+            this.events.publish('notification:updateCount');
+        }, error => {
             console.error(error);
-       });
+        });
     }
 
     toggleDetail(group) {
