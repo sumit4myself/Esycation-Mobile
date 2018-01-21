@@ -55,7 +55,10 @@ export class AddAccountComponent {
             this.commonServices.onDismissAll();
             this.events.publish('LOGIN_USER_EVENT');   
             this.events.publish('user:loggedin',data);
+            this.navCtrl.popToRoot();
             this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule())); 
+            window.location.reload();
+            
           },error=>{
             this.commonServices.onDismissAll();
             console.log(error)
