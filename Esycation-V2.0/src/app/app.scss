@@ -30,7 +30,7 @@
     background-size: cover;
     // background-color: color($colors, blue2);
     background-color: #2AACD8 !important;
-    
+
     color: white;
     .name {
       font-weight: 400;
@@ -69,7 +69,7 @@
     // padding: 5px 15px;
     padding: 5px 5px;
     background-color: #2AACD8 !important;;
-    
+
     color:#ffffff;
     .name {
       margin-top:8px;
@@ -140,7 +140,7 @@
   border-radius: 50%;
 }
 .notification{
-  
+
   position: absolute;
   top: -11px;
   right: -15px;
@@ -175,7 +175,7 @@
 }
 
 .menu-pages-items{
-  border-top: 1px solid #dedede !important;  
+  border-top: 1px solid #dedede !important;
 }
 
 // primary:    #488aff,
@@ -220,10 +220,41 @@
   text-transform: capitalize;
 }
 
-
-
 .inline-error-icon{
   color: rgb(156, 154, 154);
   font-size: 18px;
 }
 
+
+.vertical-align-content > * {
+  align-items: center;
+}
+
+
+.promise-overlay {
+	display: none;
+	position: absolute; /* Sit on top of the page content */
+	width: 100%; /* Full width (cover the whole page) */
+	height: 100%; /* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.3 );
+	z-index: 5;
+}
+
+.promise-overlay.show {
+	display: block;
+}
+
+
+.height-300x{
+  height: 300px !important;
+}
+.height-450x{
+  height: 450px !important;
+}
+.height-600x{
+  height: 600px !important;
+}

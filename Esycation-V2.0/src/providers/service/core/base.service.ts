@@ -1,23 +1,19 @@
 /* tslint:disable */
-import { Injectable, Inject, Optional } from '@angular/core';
-import { Http, Headers, Request } from '@angular/http';
-import { CostumErrorHandler } from './error.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-
-
+import { Injectable, Inject, Optional } from "@angular/core";
+import { Http, Headers, Request } from "@angular/http";
+import { CostumErrorHandler } from "./error.service";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
 
 @Injectable()
 export abstract class BaseService<T> {
-
   constructor(
     @Inject(Http) protected http: Http,
-    @Optional() @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler) {
-
-
-
-  }
+    @Optional()
+    @Inject(CostumErrorHandler)
+    protected errorHandler: CostumErrorHandler
+  ) {}
 
   public request(
     method: string,
@@ -28,15 +24,15 @@ export abstract class BaseService<T> {
     console.log("URL", url);
 
     let headers: Headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
+    headers.append("Content-Type", "application/json");
     headers.append("USER_ID", localStorage.getItem("userId"));
     headers.append("SCHOOL_ID", localStorage.getItem("schoolId"));
     headers.append("SESSION_YEAR_ID", localStorage.getItem("sessionYearId"));
     headers.append("BRANCH_ID", localStorage.getItem("branchId"));
 
     let body: any;
-    let postBodyKeys = typeof postBody === 'object' ? Object.keys(postBody) : []
+    let postBodyKeys =
+      typeof postBody === "object" ? Object.keys(postBody) : [];
     if (postBodyKeys.length === 1) {
       body = postBody[postBodyKeys[0]];
     } else {
@@ -48,13 +44,13 @@ export abstract class BaseService<T> {
       url: url,
       body: body ? JSON.stringify(body) : undefined
     });
-    return this.http.request(request)
-      .map((res: any) => (res.text() != "" ? res.json() as T : {}))
-      .catch((e) => this.errorHandler.handleError(e));
+    return this.http
+      .request(request)
+      .map((res: any) => (res.text() != "" ? (res.json() as T) : {}))
+      .catch(e => this.errorHandler.handleError(e));
   }
 
   public save<T>(url: string, data: T): Observable<T> {
-
     let requestBody: any = { data };
     let result = this.request("POST", url, requestBody).map((response: any) => {
       return response;
@@ -63,14 +59,12 @@ export abstract class BaseService<T> {
   }
 
   public update<T>(url: string, data: T): Observable<T> {
-
     let requestBody: any = { data };
     let result = this.request("PUT", url, requestBody).map((response: any) => {
       return response;
     });
     return result;
   }
-
 
   public find<T>(url: string, id?: number): Observable<T> {
     console.log(id);
@@ -82,7 +76,6 @@ export abstract class BaseService<T> {
   }
 
   public findAll(url: string): Observable<any> {
-
     let requestBody: any = {};
     let result = this.request("GET", url, requestBody).map((response: any) => {
       return response;
@@ -91,30 +84,30 @@ export abstract class BaseService<T> {
   }
 
   public changeStatus(url: string): Observable<T> {
-
     let requestBody: any = {};
-    let result = this.request("PATCH", url, requestBody).map((response: any) => {
-      return response;
-    });
+    let result = this.request("PATCH", url, requestBody).map(
+      (response: any) => {
+        return response;
+      }
+    );
     return result;
-
   }
 
   public delete(url: string, data: T): Observable<T> {
     let requestBody: any = { data };
-    let result = this.request("DELETE", url, requestBody).map((response: any) => {
-      return response;
-    });
+    let result = this.request("DELETE", url, requestBody).map(
+      (response: any) => {
+        return response;
+      }
+    );
     return result;
   }
 
   public search<T>(url: string, data: T): Observable<T> {
-
     let requestBody: any = { data };
     let result = this.request("POST", url, requestBody).map((response: any) => {
       return response;
     });
     return result;
   }
-
 }
