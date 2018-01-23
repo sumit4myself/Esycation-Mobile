@@ -9,7 +9,7 @@ import {
   DayTimetable,
   TimetableDetails,
   Timetable
-} from "../../model/Timetable/model.timetable";
+} from "../../model/timetable/model.timetable";
 import * as moment from "moment";
 
 @Injectable()
