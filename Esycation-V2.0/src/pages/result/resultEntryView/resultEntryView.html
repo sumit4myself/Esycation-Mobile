@@ -28,16 +28,29 @@
       <ion-icon *ngIf="result.resultStatus=='CREATED'" item-start color="tertiary" name="ios-timer-outline"></ion-icon>
       <ion-icon *ngIf="result.resultStatus!='CREATED'" item-start color="yellow" name="ios-timer-outline"></ion-icon>
       {{result.courseName}}
-      <p>
+      <!-- <p>
         <span class="small">
           {{result.examName}}
         </span>
         <span>&nbsp;|</span>
         <span class="small">{{result.batchName}}</span>
         <span>&nbsp;| </span>
-        <span class="small">
-          <ion-icon name="book"></ion-icon> {{result.subjectName}}</span>
-      </p>
+        <span class="small"><ion-icon name="book"></ion-icon> {{result.subjectName}}</span>
+      </p> -->
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4 text-wrap>
+            <p class="medium">{{result.examName}}</p>
+          </ion-col>
+          <ion-col col-4 text-wrap>
+            <p class="medium">{{result.batchName}}</p>
+          </ion-col>
+          <ion-col col-4 text-wrap>
+            <p class="medium">
+              <ion-icon class="medium" name="book"></ion-icon> {{result.subjectName}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
     </ion-item>
     <p *ngIf="resultEntryNotfound!=null" text-center class="app-error">
@@ -51,7 +64,7 @@
         <ion-icon   item-start  color="stable" name="checkmark-circle-outline"></ion-icon>
         
       {{result.courseName}}
-      <p>
+      <!-- <p>
         <span class="small">
           {{result.examName}}
         </span>
@@ -60,7 +73,21 @@
         <span>&nbsp;| </span>
         <span class="small">
           <ion-icon name="book"></ion-icon> {{result.subjectName}}</span>
-      </p>
+      </p> -->
+      <ion-grid>
+          <ion-row>
+            <ion-col col-4 text-wrap>
+              <p class="medium">{{result.examName}}</p>
+            </ion-col>
+            <ion-col col-4 text-wrap>
+              <p class="medium">{{result.batchName}}</p>
+            </ion-col>
+            <ion-col col-4 text-wrap>
+              <p class="medium">
+                <ion-icon class="medium" name="book"></ion-icon> {{result.subjectName}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       <ion-icon color="lightGray" item-end small name="ios-arrow-forward-outline"></ion-icon>
     </ion-item>
     <p *ngIf="dataNotfound!=null" text-center class="app-error">

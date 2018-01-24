@@ -19,6 +19,7 @@ import { LocalStorage } from '../providers/storage/local.storage';
 import { Push } from '@ionic-native/push';
 import { NotificationService } from '../providers/service/notification/notification.service';
 import { DeviceService } from '../providers/service/notification/device.service';
+import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DeviceService } from '../providers/service/notification/device.service'
     MyApp,
   ],
   providers: [
+    FCM,
     StatusBar,
     SplashScreen, CommonServices, PrivilageService, CostumErrorHandler, Push, NotificationService, DeviceService,
     AuthService, UserSessionService, LocalStorage,

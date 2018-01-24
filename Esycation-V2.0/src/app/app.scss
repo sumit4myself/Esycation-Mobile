@@ -30,7 +30,7 @@
     background-size: cover;
     // background-color: color($colors, blue2);
     background-color: #2AACD8 !important;
-    
+
     color: white;
     .name {
       font-weight: 400;
@@ -69,7 +69,7 @@
     // padding: 5px 15px;
     padding: 5px 5px;
     background-color: #2AACD8 !important;;
-    
+
     color:#ffffff;
     .name {
       margin-top:8px;
@@ -140,7 +140,7 @@
   border-radius: 50%;
 }
 .notification{
-  
+
   position: absolute;
   top: -11px;
   right: -15px;
@@ -175,7 +175,7 @@
 }
 
 .menu-pages-items{
-  border-top: 1px solid #dedede !important;  
+  border-top: 1px solid #dedede !important;
 }
 
 // primary:    #488aff,
@@ -220,10 +220,236 @@
   text-transform: capitalize;
 }
 
-
-
 .inline-error-icon{
   color: rgb(156, 154, 154);
   font-size: 18px;
 }
 
+
+.vertical-align-content > * {
+  align-items: center;
+}
+
+
+.promise-overlay {
+	display: none;
+	position: absolute; /* Sit on top of the page content */
+	width: 100%; /* Full width (cover the whole page) */
+	height: 100%; /* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.3 );
+	z-index: 5;
+}
+
+.promise-overlay.show {
+	display: block;
+}
+
+
+.height-300x{
+  height: 300px !important;
+}
+.height-450x{
+  height: 450px !important;
+}
+.height-600x{
+  height: 600px !important;
+}
+
+
+/* Margin
+ ========================================================================== */
+/*
+ * Create a block with the same margin of a paragraph
+ * Add margin if adjacent element
+ */
+ .margin {
+  margin-bottom: 15px;
+}
+* + .margin {
+  margin-top: 15px;
+}
+.margin-top {
+  margin-top: 15px !important;
+}
+.margin-bottom {
+  margin-bottom: 15px !important;
+}
+.margin-left {
+  margin-left: 15px !important;
+}
+.margin-right {
+  margin-right: 15px !important;
+}
+.margin-small-vertical {
+  margin-right: 15px !important;
+  margin-left: 15px !important;
+}
+.margin-small-horizontal {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+/*
+ * Larger margins
+ */
+.margin-large {
+  margin-bottom: 30px;
+}
+* + .margin-large {
+  margin-top: 30px;
+}
+.margin-large-top {
+  margin-top: 30px !important;
+}
+.margin-large-bottom {
+  margin-bottom: 30px !important;
+}
+.margin-large-left {
+  margin-left: 30px !important;
+}
+.margin-large-right {
+  margin-right: 30px !important;
+}
+.margin-small-vertical {
+  margin-right: 30px !important;
+  margin-left: 30px !important;
+}
+.margin-small-horizontal {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}
+/*
+ * Smaller margins
+ */
+.margin-small {
+  margin-bottom: 5px;
+}
+* + .margin-small {
+  margin-top: 5px;
+}
+.margin-small-top {
+  margin-top: 5px !important;
+}
+.margin-small-bottom {
+  margin-bottom: 5px !important;
+}
+.margin-small-left {
+  margin-left: 5px !important;
+}
+.margin-small-right {
+  margin-right: 5px !important;
+}
+.margin-small-vertical {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+.margin-small-horizontal {
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}
+
+/*
+ * Remove margins
+ */
+.margin-remove {
+  margin: 0 !important;
+}
+.margin-top-remove {
+  margin-top: 0 !important;
+}
+.margin-bottom-remove {
+  margin-bottom: 0 !important;
+}
+.margin-left-remove {
+  margin-left: 0 !important;
+}
+.margin-right-remove {
+  margin-right: 0 !important;
+}
+.margin-vertical-remove {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+.margin-horizontal-remove {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Padding
+ ========================================================================== */
+.padding-remove {
+  padding: 0 !important;
+}
+.padding-top-remove {
+  padding-top: 0 !important;
+}
+.padding-bottom-remove {
+  padding-bottom: 0 !important;
+}
+
+.padding-bottom-left {
+  padding-left: 0 !important;
+}
+
+.padding-bottom-right {
+  padding-right: 0 !important;
+}
+
+.padding-vertical-remove {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.padding-horizontal-remove {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ========================================================================
+  Text
+ ========================================================================== */
+/* Size modifiers
+ ========================================================================== */
+ .text-small {
+  font-size: 1.2rem !important;
+}
+.text-xsmall {
+ font-size: 1.1rem !important;
+}
+.text-large {
+ font-size: 1.5rem !important;
+ font-weight: normal !important;
+}
+.text-large {
+  font-size: 1.0rem !important;
+  font-weight: normal !important;
+ }
+
+/* Weight modifiers
+ ========================================================================== */
+.text-bold {
+  font-weight: bold !important;
+}
+/* Color modifiers
+ ========================================================================== */
+.text-muted {
+  color: #999999 !important;
+}
+.text-primary {
+  color: #488aff !important;
+}
+.text-success {
+  color: #32db64 !important;
+}
+.text-warning {
+  color: #e28327 !important;
+}
+.text-danger {
+  color: #f53d3d !important;
+}
+.text-contrast {
+  color: #ffffff !important;
+}

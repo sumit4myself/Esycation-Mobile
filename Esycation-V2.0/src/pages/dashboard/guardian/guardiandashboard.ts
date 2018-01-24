@@ -3,7 +3,7 @@ import { IonicPage, NavController,Slides } from 'ionic-angular';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 // import {ProfileService} from '../../../providers/service/profile/profile.service';
 import {Profile} from '../../../providers/model/profile/model.profile';
-import {ServerConfig} from '../../../providers/config'; 
+import {ServerConfig} from '../../../providers/config';
 import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
 import {LeaveService} from '../../../providers/service/leave/leave.service';
 import * as moment from 'moment';
@@ -32,8 +32,8 @@ export class GuardianDashboardComponent {
     studentResultOptions = {
         tooltip : {
             trigger: 'axis',
-            axisPointer : {            
-                type : 'shadow'        
+            axisPointer : {
+                type : 'shadow'
             }
         },
         legend: {
@@ -61,8 +61,8 @@ export class GuardianDashboardComponent {
     studentAttendanceStatOptions = {
         tooltip : {
             trigger: 'axis',
-            axisPointer : {            
-                type : 'shadow'        
+            axisPointer : {
+                type : 'shadow'
             }
         },
         legend: {
@@ -89,7 +89,7 @@ export class GuardianDashboardComponent {
     };
     profile:Profile=Profile.getInstance()
     imagePath:String=ServerConfig.imagePath();
-   
+
     constructor(private navContrle:NavController,
         private session:UserSessionService,
         // private profileService:ProfileService,
@@ -97,7 +97,7 @@ export class GuardianDashboardComponent {
         private approvelService:ApprovelService )
         {
             this.currentDay= moment(new Date()).format('dddd');
-            
+
       }
 
       onTimeTableDetails(items){
@@ -146,11 +146,11 @@ export class GuardianDashboardComponent {
                                 }
                             }
                         }
-                        seriesObj['data'] = dataArray; 
+                        seriesObj['data'] = dataArray;
                         series.push(seriesObj);
                     }
                 }
-         
+
            if(legend&&legend.length>0&&xAxes&&xAxes.length>0&&series&&series.length>0){
                     this.studentResultOptions.legend.data = legend;
                     this.studentResultOptions.xAxis[0].data = xAxes;
@@ -207,11 +207,11 @@ export class GuardianDashboardComponent {
                                 }
                             }
                         }
-                        seriesObj['data'] = dataArray; 
+                        seriesObj['data'] = dataArray;
                         series.push(seriesObj);
                     }
                 }
-         
+
            if(legend&&legend.length>0&&xAxes&&xAxes.length>0&&series&&series.length>0){
                     this.studentAttendanceStatOptions.legend.data = legend;
                     this.studentAttendanceStatOptions.xAxis[0].data = xAxes;
@@ -231,7 +231,7 @@ export class GuardianDashboardComponent {
       fetchPendingRequests(){
         this.isPendingRequestLoaded=false;
         this.mypendingrequest = [];
-        this.approvelService.findPending(this.session.findUserId()).subscribe(
+        this.approvelService.findRequests(this.session.findUserId()).subscribe(
             data=>{
              for(let group of data.contents) {
                  let obj = Object.assign({},group);
@@ -243,7 +243,7 @@ export class GuardianDashboardComponent {
             console.error(error);
             this.isPendingRequestLoaded=true;
        });
-    }  
+    }
 
     fetchMyRequests(){
 
@@ -260,7 +260,7 @@ export class GuardianDashboardComponent {
             console.error(error);
             this.isMyRequestLoaded=true;
        });
-    }  
+    }
 
 
 
@@ -296,11 +296,11 @@ export class GuardianDashboardComponent {
                     this.currentSelectedStudent = data.contents[0].id;
                     this.currentSelectedStudentName = data.contents[0].name;
                     this.setUpDashboard();
-                    
+
                 }
-                    
-            } 
-            
+
+            }
+
           });
     }
 
@@ -328,7 +328,7 @@ export class GuardianDashboardComponent {
     }
 
     ionViewDidLoad(){
-        
+
         this.findStudentListBasedOnGuardianId();
         // this.profileService.findProfileDetails(this.session.findRemote(),this.session.findModule())
         // .subscribe(data=>{

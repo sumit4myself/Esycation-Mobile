@@ -3,7 +3,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import {UserSessionService} from '../../../providers/service/core/user.session.service';
 import {ProfileService} from '../../../providers/service/profile/profile.service';
 import {Profile} from '../../../providers/model/profile/model.profile';
-import {ServerConfig} from '../../../providers/config'; 
+import {ServerConfig} from '../../../providers/config';
 import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
 
 @IonicPage()
@@ -12,10 +12,10 @@ import {ApprovelService} from '../../../providers/service/approvel/approvel.serv
     templateUrl: 'studentdashboard.html'
 })
 export class StudentDashboardComponent {
-   
+
     profile:Profile=Profile.getInstance()
     imagePath:String=ServerConfig.imagePath();
-   
+
     isLoaded:boolean=false;
     isMyRequestLoaded:boolean=false;
     isPendingRequestLoaded:boolean=false;
@@ -28,9 +28,9 @@ export class StudentDashboardComponent {
         private profileService:ProfileService,
         private approvelService:ApprovelService )
         {
-          
+
         }
-      
+
     ionViewDidLoad(){
         this.profileService.findProfileDetails(this.session.findRemote(),this.session.findModule())
         .subscribe(data=>{
@@ -44,7 +44,7 @@ export class StudentDashboardComponent {
     fetchPendingRequests(){
         this.isPendingRequestLoaded=false;
         this.mypendingrequest = [];
-        this.approvelService.findPending(this.session.findUserId()).subscribe(
+        this.approvelService.findRequests(this.session.findUserId()).subscribe(
             data=>{
              for(let group of data.contents) {
                  let obj = Object.assign({},group);
@@ -56,7 +56,7 @@ export class StudentDashboardComponent {
             console.error(error);
             this.isPendingRequestLoaded=true;
        });
-    }  
+    }
 
     fetchMyRequests(){
 
@@ -73,8 +73,8 @@ export class StudentDashboardComponent {
             console.error(error);
             this.isMyRequestLoaded=true;
        });
-    }  
- 
+    }
+
 
     onView(viewName:string){
 
