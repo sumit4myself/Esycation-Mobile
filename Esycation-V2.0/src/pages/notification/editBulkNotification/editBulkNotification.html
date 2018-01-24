@@ -4,14 +4,9 @@
                 <ion-icon name="menu"></ion-icon>
             </button>
             <ion-buttons end>
-                <button icon-only ion-button (click)="onNotification()">
-                    <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
-                    <span *ngIf="notificationCount!='0'" class="notification">
-                        <small>
-                            <ion-badge color="ios-red">{{notificationCount}}</ion-badge>
-                        </small>
-                    </span>
-                </button>
+                    <button icon-only ion-button  (click)="onNotification()" >
+                        <notification-counter></notification-counter>
+                    </button>
             </ion-buttons>
             <ion-title>Bulk Notifications</ion-title>
         </ion-navbar>
@@ -20,7 +15,7 @@
         <form [formGroup]="bulkNotificationForm">
             <ion-list no-liness class="bulk-notification-list" no-padding>
                 <ion-item>
-                    <ion-label color="darkGray" stacked>Receiver Type *</ion-label>
+                    <ion-label color="darkGray" >Receiver Type *</ion-label>
                     <ion-select formControlName="receiverType" 
                             (ngModelChange)="onReceiverType($event)" 
                             [selectOptions]="selectOptionStyle">
@@ -39,9 +34,19 @@
                             <ion-option value="PUSH_MESSAGE">PUSH_MESSAGE</ion-option>
                         </ion-select>
                 </ion-item>
+                <ion-item>
+                    <ion-label color="darkGray">Notification Type * </ion-label>
+                    <ion-select formControlName="type" 
+                                [selectOptions]="selectOptionStyle">
+                        <ion-option value="INFORMATIVE">INFORMATIVE</ion-option>
+                        <ion-option value="URGENT">URGENT</ion-option>
+                        <ion-option value="HOMEWORK">HOMEWORK</ion-option>
+                    </ion-select>
+                </ion-item>
                 <ion-item >
                         <ion-label color="darkGray">Date*</ion-label>
-                        <ion-datetime formControlName="date" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
+                        <ion-datetime formControlName="date" pickerFormat="DD/MM/YYYY" 
+                        displayFormat="DD/MM/YYYY">
                         </ion-datetime>
                 </ion-item>
                 <ion-item >
@@ -117,7 +122,7 @@
                 <ion-list-header color="ios-light-gray" class="list-item-header" >
                     <p>Message</p>
                 </ion-list-header>
-                <ion-item >
+                <ion-item *ngIf="mode!=null && mode!='SMS' ">
                         <ion-label color="darkGray" stacked>Subject*</ion-label>
                         <ion-input formControlName="subject" type="text"></ion-input>
                 </ion-item>
@@ -130,6 +135,6 @@
     </ion-content>
     <ion-footer no-border>
         <ion-toolbar transparent>
-            <button padding color="stable" class="form-item-rounder-items" (click)="onSave(bulkNotificationForm)" ion-button full text-uppercase>Update</button>
+            <button padding color="stable" class="form-item-rounder-items" (click)="onUpdate(bulkNotificationForm)" ion-button full text-uppercase>Update</button>
         </ion-toolbar>
     </ion-footer>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import {StaffLeaveComponent} from '../staffLeave/staffLeave'
-import {LeaveService} from '../../../providers/service/leave/leave.service';
+import {StaffLeaveService} from '../../../providers/service/leave/staff.leave.service';
 import {PushCounterModule} from '../../notification/pushcounter/pushcounter.module';
 
 @NgModule({
@@ -12,6 +12,6 @@ import {PushCounterModule} from '../../notification/pushcounter/pushcounter.modu
     ],
     exports: [StaffLeaveComponent ],
     declarations: [StaffLeaveComponent],
-    providers: [LeaveService],
+    providers: [StaffLeaveService],
 })
 export class StaffLeaveModule { }

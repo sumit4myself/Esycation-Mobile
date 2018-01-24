@@ -3,10 +3,34 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Notification</ion-title>
+    <ion-title>Message</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  message
-
+    <ion-card>
+      <ion-item>
+          <ion-avatar no-padding item-start >
+              <span class="serial" [style.background-color]="notification.iconColor"> 
+                {{notification.iconTitle}}</span>
+          </ion-avatar>
+          {{notification.template.mode}}
+          <ion-grid no-padding >
+              <ion-row >
+                  <ion-col >
+                     <div align="left" class="small"> 
+                      {{notification.template.subject}}
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                      <div align="right" class="small"> <ion-icon name="time"></ion-icon> 
+                        {{notification.pushTime}} 
+                      </div>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>       
+      </ion-item>  
+        <ion-card-content>
+            <p [innerHTML]="message"></p>
+        </ion-card-content>
+      </ion-card>
 </ion-content>

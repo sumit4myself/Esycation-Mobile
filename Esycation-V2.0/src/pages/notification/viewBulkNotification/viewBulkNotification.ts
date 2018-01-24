@@ -35,7 +35,6 @@ export class ViewBulkNotificationsComponent extends BaseComponent {
 
   ionViewDidLoad() {
 
-
     let notificationId =this.navParams.get("id");
     this.bulkNotificationService.findByNotificationId(notificationId, "STAFF", this.page, this.size).subscribe(data => {
 

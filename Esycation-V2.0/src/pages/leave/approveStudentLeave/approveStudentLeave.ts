@@ -31,7 +31,6 @@ export class ApproveStudentLeaveComponent extends BaseComponent {
   ionViewDidLoad() {
   
     let id = this.navParam.get("id");
-    console.log("targetId===", id);
     this.commonServices.onLoader();
     this.approvelService.findRequest(id).subscribe(data=>{
       let d = Object.assign({}, data);

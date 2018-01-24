@@ -33,6 +33,13 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
     return this.save(url, data);
   }
 
+  public updateBulkNotification(data: any): Observable<any> {
+
+    let url: string = ServerConfig.getPath() + "/bulkNotifications/"+data.id;
+
+    return this.update(url, data);
+  }
+
   public findGroup(userId: number, viewName: string): Observable<any> {
 
     let url: string = ServerConfig.getPath()
@@ -49,13 +56,12 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
     return this.search(url, data);
   }
 
-  public findSend(model: string, viewName): Observable<any> {
+  public findById(id: number): Observable<any> {
 
-    let data = { "totalElements": 0, "filteredElements": 0, "size": 100, "page": 1, "totalPages": 0 };
     let url: string = ServerConfig.getPath()
-      + "" + model + "/search?RESPONSE_VIEW=" + viewName + "";
+      + "bulkNotifications/" + id + "?RESPONSE_VIEW=Notification.Summary";
 
-    return this.search(url, data);
+    return this.find(url);
   }
 
   public findByNotificationId(id: number, module: string, page: number, size: number): Observable<any> {
@@ -69,8 +75,16 @@ export class BulkNotificationService extends BaseService<NotificationDetails>{
 
   public deleteBulkNotification(id: number): Observable<any> {
 
-    let url: string = ServerConfig.getPath() + "/" + id;
+    let url: string = ServerConfig.getPath() + "/bulkNotifications/" + id;
     return this.delete(url, null);
   }
+
+  public withSelections(id: number): Observable<any> {
+
+    let url: string = ServerConfig.getPath() + "bulkNotifications/" + id + "/withSelections";
+
+    return this.findAll(url);
+  }
+
 
 }

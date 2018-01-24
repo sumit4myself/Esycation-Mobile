@@ -198,10 +198,6 @@ export class MyApp {
             if(notification.additionalData.foreground){
               this.commonServices.presentToast("You have new notification.",null,"info");
               //this.commonServices.showAlert("Notification",JSON.stringify(notification));
-              var notificationCount=Number(localStorage.getItem("notificationCount"));
-              var count = notificationCount+1;
-              localStorage.setItem("notificationCount",count+"");
-
               this.events.publish('notification:updateCount');
             }
           });

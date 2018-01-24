@@ -16,12 +16,10 @@
     <ion-list no-line class="staff-leave-list" no-padding>
       <ion-item>
         <ion-label color="darkGray" stacked>Leave Type *
-          <!-- <p class="error" *ngIf="!profileForm.controls['bloodGroup'].valid">This field is required *</p> -->
         </ion-label>
-        <ion-select [selectOptions]="mySelectOptions">
-          <ion-option value="S">Sick Leave</ion-option>
-          <ion-option value="C">Casual Leave</ion-option>
-          <ion-option value="O">Others</ion-option>
+        <ion-select formControlName="type" [selectOptions]="mySelectOptions">
+          <ion-option  *ngFor="let l of leaveType.leaves"  value="{{l.id}}">
+           {{l.type.name}} </ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

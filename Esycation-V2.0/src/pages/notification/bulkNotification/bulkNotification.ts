@@ -86,6 +86,7 @@ export class BulkNotificationComponent extends BaseComponent {
         subject:'',
         htmlContent:'',
         content:'',
+        type: ['INFORMATIVE', [<any>Validators.required]] 
         });
         
     }
@@ -265,6 +266,7 @@ export class BulkNotificationComponent extends BaseComponent {
         notification.approved=true;
         notification.receivers=null;
         notification.template=template;
+        notification.type=form.type;
 
         
         return notification;

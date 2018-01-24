@@ -31,11 +31,15 @@
         </p> 
     </ion-item>
     <ion-item-options>
-        <button ion-button color="secondary" (click)="onView(notification.id)">
-          <ion-icon name="ios-eye-outline"></ion-icon>
-          View
+        <button ion-button color="primary" (click)="onViewMessage(notification.id)">
+            <ion-icon name="ios-eye-outline"></ion-icon>
+            Message
         </button>
-        <button ion-button color="dark" (click)="onEdit(notification.id)">
+        <button ion-button color="secondary" (click)="onViewRecievers(notification.id)">
+          <ion-icon name="ios-people-outline"></ion-icon>
+          Recievers
+        </button>
+        <button *ngIf="notification.restricted==false"  ion-button color="dark" (click)="onEdit(notification.id)">
           <ion-icon name="ios-create"></ion-icon>
           Edit
         </button>
@@ -48,8 +52,8 @@
     </ion-item-sliding> 
   </ion-list>
   
-  <ion-infinite-scroll (ionInfinite)="onLoad($event)">
-      <ion-infinite-scroll-content
+  <ion-infinite-scroll (ionInfinite)="onLoad($event)" >
+      <ion-infinite-scroll-content  
         loadingSpinner="bubbles"
         loadingText="Loading more data...">
       </ion-infinite-scroll-content>

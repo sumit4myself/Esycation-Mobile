@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams} from 'ionic-angular';
-import {BulkNotificationService} from '../../../providers/service/notification/bulk.notification.service';
-import {NotificationDetails} from '../../../providers/model/notification/notification.model';
-import {CommonServices} from '../../../providers/service/common/common.service';
+import { IonicPage, NavParams } from 'ionic-angular';
+import { BulkNotificationService } from '../../../providers/service/notification/bulk.notification.service';
+import { CommonServices } from '../../../providers/service/common/common.service';
+import { BulkNotificationView } from '../../../providers/model/notification/bulk.notification.view.model';
 
 @IonicPage()
 @Component({
@@ -11,19 +11,47 @@ import {CommonServices} from '../../../providers/service/common/common.service';
 })
 export class ViewBulkMessageComponent {
 
-     notification:NotificationDetails=new NotificationDetails();
-     isLoaded:boolean=false;
-     
-     constructor(private service:BulkNotificationService,
-         private navParams:NavParams,
-         private commonServices:CommonServices) {
+  notification: BulkNotificationView = new BulkNotificationView();
+  message:string=null;
+  constructor(private service: BulkNotificationService,
+    private navParams: NavParams,
+    private commonServices: CommonServices) {
 
-          console.log(this.service,this.navParams,this.commonServices);
-      }
+    console.log("ViewBulkMessageComponent=",this.commonServices);
+  }
 
+  ionViewDidLoad() {
+    let id = this.navParams.get("id");
+    this.service.findById(id).subscribe(data => {
 
-      ionViewDidLoad(){
-       
-      }
+      this.notification = Object.assign({}, data);
+      this.notification.iconTitle=this.findFirstLatter(this.notification.template.mode);
+      this.notification.iconColor=this.findColor(this.notification.template.mode);
+      this.message=this.notification.receivers[0].message;
+  
+    }, error => {
+      console.error(error);
+    })
+  }
+
+  findColor(title: string): string {
+
+    let type = title.substring(0, 1);
+    if (type == 'S')
+        return "#EA1E63";
+    else if (type == 'O')
+        return "#0059B2";
+    else if (type == 'E')
+        return "#8dc34b";
+    else if (type == 'P')
+        return "#ff9800";
+    else
+        return "#9e9e9e";
+}
+
+findFirstLatter(title: string): string {
+
+    return title.substring(0, 1);
+}
 
 }

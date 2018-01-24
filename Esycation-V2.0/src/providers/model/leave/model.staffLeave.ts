@@ -1,3 +1,5 @@
+import {Type} from '../leave/model.staff.leave.defination'; 
+
 export interface StaffLeaveDetailsInterface{
   
     id:number;
@@ -8,11 +10,11 @@ export interface StaffLeaveDetailsInterface{
     totalLeave:number;
     approvalStatus:string;
     approverComment:string;
-    staffLeaves:Array<StaffLeave>;
+    type:any;
 
 }
 
-export class StaffLeaveDetails implements StaffLeaveDetailsInterface{
+export class StaffLeaveDetails {
   
     id:number=null;
     staffId:number=null;
@@ -22,20 +24,11 @@ export class StaffLeaveDetails implements StaffLeaveDetailsInterface{
     totalLeave:number=null;
     approvalStatus:string=null;
     approverComment:string=null;
-    staffLeaves:Array<StaffLeave>=new Array<StaffLeave>();
+    type:Type=new Type();
 
     public static getInstance():StaffLeaveDetails{
         return new StaffLeaveDetails();
     }
 }
 
-export class StaffLeave{
 
-    id:number=null;
-    type:String=null;
-    fromDate:string=null;
-    toDate:string=null;
-    totalLeave:number=null;
-    remainingLeave:number=null;
-
-}

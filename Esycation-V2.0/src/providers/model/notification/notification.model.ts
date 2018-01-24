@@ -44,7 +44,7 @@ export class Notification{
   expiryTime:string=null;
   selections:any=null;
   approved:boolean=false;
-  bulk:boolean=false;
+  bulk:boolean=true;
   receivers:Receivers=new Receivers();
 
 }

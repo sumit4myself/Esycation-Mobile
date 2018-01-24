@@ -1,28 +1,19 @@
 view-bulk-message{
  
-  .noti-header{
-      margin: 0px;
-      padding : 10px;
-      background: white;
-      font-size: 19px;
-      padding: 5px; 
-      border-bottom: 1px solid #d5dae2;   
-      text-transform: capitalize;    
-  }
+  .serial{
+    padding-top: 10%;
+    font-size: 20px;
+    color: #fff;
+    background-color: red;
+    display: inline-block;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+   }
 
-  .noti-header h5{
-    font-size: 16px;
-  }
-
-
-  .noti-content{
-    // padding: 5px;
-    margin: 0px;
-    padding : 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    // letter-spacing: 1px;
-  }
-
-
+   
+.small{
+  font-size: 1rem;
+}
 }

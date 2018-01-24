@@ -34,6 +34,15 @@
                         <ion-option value="PUSH_MESSAGE">PUSH_MESSAGE</ion-option>
                     </ion-select>
             </ion-item>
+            <ion-item>
+                <ion-label color="darkGray">Notification Type * </ion-label>
+                <ion-select formControlName="type" 
+                            [selectOptions]="selectOptionStyle">
+                    <ion-option value="INFORMATIVE">INFORMATIVE</ion-option>
+                    <ion-option value="URGENT">URGENT</ion-option>
+                    <ion-option value="HOMEWORK">HOMEWORK</ion-option>
+                </ion-select>
+            </ion-item>
             <ion-item >
                     <ion-label color="darkGray">Date*</ion-label>
                     <ion-datetime formControlName="date" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
