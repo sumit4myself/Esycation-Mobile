@@ -25,6 +25,7 @@
     "@angular/platform-browser": "4.4.4",
     "@angular/platform-browser-dynamic": "4.4.4",
     "@ionic-native/core": "^4.3.1",
+    "@ionic-native/fcm": "^4.5.2",
     "@ionic-native/in-app-browser": "^4.3.1",
     "@ionic-native/push": "^4.4.2",
     "@ionic-native/splash-screen": "^4.3.1",
@@ -33,9 +34,11 @@
     "angular2-moment": "^1.7.0",
     "chart.js": "^2.7.1",
     "cordova-android": "6.2.3",
-    "cordova-ios": "^4.5.2",
+    "cordova-browser": "5.0.3",
+    "cordova-ios": "4.5.4",
     "cordova-plugin-crosswalk-webview": "^2.3.0",
     "cordova-plugin-device": "^1.1.7",
+    "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -49,7 +52,6 @@
     "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
     "ngx-echarts": "^2.0.1",
-    "phonegap-plugin-push": "^2.1.2",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18"
@@ -65,6 +67,7 @@
   "cordova": {
     "platforms": [
       "android",
+      "browser",
       "ios"
     ],
     "plugins": {
@@ -82,9 +85,7 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-ionic-keyboard": {},
-      "phonegap-plugin-push": {
-        "SENDER_ID": "856903207514"
-      }
+      "cordova-plugin-fcm": {}
     }
   }
 }

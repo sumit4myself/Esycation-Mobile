@@ -15,9 +15,10 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { PrivilageService } from "../providers/service/core/privilage.service";
 import { UserPrefernce } from "../providers/model/common/UserPrefernce";
 import { UserSessionService } from "../providers/service/core/user.session.service";
-import { Push } from "@ionic-native/push";
+// import { Push } from "@ionic-native/push";
 import { CommonServices } from "../providers/service/common/common.service";
 import { DeviceService } from "../providers/service/notification/device.service";
+import { FCM } from '@ionic-native/fcm';
 
 @Component({
   templateUrl: "app.html"
@@ -62,10 +63,11 @@ export class MyApp {
     private modal: ModalController,
     private events: Events,
     private commonServices: CommonServices,
-    private push: Push,
+    // private push: Push,
     public alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    public fcm: FCM
   ) {
     this.initializeApp();
 
@@ -183,43 +185,31 @@ export class MyApp {
   }
 
   pushNotificationSetup() {
-    const options: any = {
-      android: {
-        sound: true,
-        vibrate: true,
-        iconColor: "#f53d3d"
-      },
-      ios: {
-        alert: "true",
-        badge: true,
-        sound: "false"
-      },
-      windows: {}
-    };
-    const pushObject: any = this.push.init(options);
-    pushObject.on("notification").subscribe((notification: any) => {
-      if (notification.additionalData.foreground) {
+    this.fcm.subscribeToTopic('education');
+    this.fcm.getToken().then(token=>{
+        if(token&&token.length>0)
+          localStorage.setItem("registrationId", token);
+    });
+    this.fcm.onNotification().subscribe(data=>{
+      if(data.wasTapped){
+      } else {
         this.commonServices.presentToast(
           "You have new notification.",
           null,
           "info"
         );
-        //this.commonServices.showAlert("Notification",JSON.stringify(notification));
         var notificationCount = Number(
           localStorage.getItem("notificationCount")
         );
         var count = notificationCount + 1;
         localStorage.setItem("notificationCount", count + "");
-
         this.events.publish("notification:updateCount");
-      }
+      };
     });
-    pushObject.on("registration").subscribe((registration: any) => {
-      //this.commonServices.showAlert("Notification",JSON.stringify(registration.registrationId));
-      localStorage.setItem("registrationId", registration.registrationId);
-    });
-    pushObject
-      .on("error")
-      .subscribe(error => alert("Error with Push plugin" + error));
+    this.fcm.onTokenRefresh().subscribe(token=>{
+      if(token&&token.length>0)
+        localStorage.setItem("registrationId", token);
+    })
+    
   }
 }

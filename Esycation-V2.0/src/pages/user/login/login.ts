@@ -48,6 +48,7 @@ export class LoginComponent {
       });
       this.userId = this.session.findUserId();
       if(this.userId){
+        
         this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
       }
 
