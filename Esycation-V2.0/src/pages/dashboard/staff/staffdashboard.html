@@ -20,8 +20,6 @@
 </ion-header>
 <ion-content>
 
-
-
   <ion-card>
     <ion-card-content>
       <ion-row>
@@ -39,9 +37,8 @@
     </ion-card-content>
   </ion-card>
 
-
   <!--*********** attendance Segement ***********-->
-  <ion-card class="card card-md">
+  <ion-card>
     <ion-card-content>
       <ion-segment [(ngModel)]="attendanceSegement" color="dark">
         <ion-segment-button value="weekAttendance" (click)="onWeekAttendanceClicked()">
@@ -53,7 +50,7 @@
       </ion-segment>
 
       <!--***********  Pending Requests Segement ***********-->
-      <ion-grid *ngIf="attendanceSegement === 'weekAttendance'">
+      <ion-grid *ngIf="attendanceSegement === 'weekAttendance'" class="padding-vertical-remove">
         <div echarts [options]="options" class="demo-chart"></div>
       </ion-grid>
 
@@ -81,16 +78,70 @@
       </ion-segment>
 
       <!--***********  Pending Requests Segement ***********-->
-      <ion-grid *ngIf="approvalSegement === 'pendingRequests'">
-        Pending Requests
-
+      <ion-grid *ngIf="approvalSegement === 'pendingRequests'" class="padding-vertical-remove">
+        <ion-item *ngIf="approvalRequests == null">
+          <ion-grid>
+            <ion-row>
+              <ion-col align="center">
+                <ion-icon name="happy" color="orange" large></ion-icon> Ohh.. You are free today. </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <span *ngIf="approvalRequests != null">
+          <ion-scroll scrollY="true" class="height-300x">
+            <ion-item *ngFor="let request of approvalRequests.contents" class="padding-vertical-remove">
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col>
+                    <div class="text-normal" align="left">{{request.message}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h6 class="text-xsmall text-muted" align="left">{{request.currentStatus}} </h6>
+                  </ion-col>
+                  <ion-col>
+                    <h6 class="text-xsmall text-muted" align="right">{{request.requestor.name}}</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-scroll>
+        </span>
       </ion-grid>
 
       <!--***********   My Requests  Segement  ***********-->
-      <div *ngIf="approvalSegement === 'myRequests'">
-        My Requests
-
-      </div>
+      <ion-grid *ngIf="approvalSegement === 'myRequests'" class="padding-vertical-remove">
+        <ion-item *ngIf="myApprovalRequests == null">
+          <ion-grid>
+            <ion-row>
+              <ion-col align="center">
+                <ion-icon name="happy" color="orange" large></ion-icon> Ohh.. You are free today. </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <span *ngIf="myApprovalRequests != null">
+          <ion-scroll scrollY="true" class="height-300x">
+            <ion-item *ngFor="let request of myApprovalRequests.contents" class="padding-vertical-remove">
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col>
+                    <div class="text-normal" align="left">{{request.message}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <h6 class="text-xsmall text-muted" align="left">{{request.currentStatus}}</h6>
+                  </ion-col>
+                  <ion-col>
+                    <h6 class="text-xsmall text-muted" align="right">{{request.currentApprovers}}</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-scroll>
+        </span>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
   <!--*********** end Approval Segement ***********-->
@@ -108,7 +159,7 @@
       </ion-segment>
 
       <!--***********  todayTimetable Segement ***********-->
-      <div *ngIf="timetableSegement === 'todayTimetable'">
+      <ion-grid *ngIf="timetableSegement === 'todayTimetable'" class="padding-vertical-remove">
         <ion-list>
           <ion-item *ngIf="todayTimetable == null">
             <ion-grid>
@@ -120,22 +171,22 @@
           </ion-item>
           <span *ngIf="todayTimetable != null">
             <ion-scroll scrollY="true" class="height-300x">
-              <ion-item *ngFor="let timetable of todayTimetable.timetables">
+              <ion-item *ngFor="let timetable of todayTimetable.timetables" class="padding-vertical-remove">
                 <ion-grid no-padding>
                   <ion-row>
                     <ion-col>
-                      <div align="left">{{timetable.course}}</div>
+                      <div class="text-normal" align="left">{{timetable.course}}</div>
                     </ion-col>
                     <ion-col>
-                      <div align="right">{{timetable.batch}}</div>
+                      <div class="text-normal" align="right">{{timetable.batch}}</div>
                     </ion-col>
                   </ion-row>
                   <ion-row>
                     <ion-col>
-                      <h6 align="left">{{timetable.subject}} </h6>
+                      <h6 class="text-xsmall text-muted" align="left">{{timetable.subject}} </h6>
                     </ion-col>
                     <ion-col>
-                      <h6 align="right">{{timetable.duration}}</h6>
+                      <h6 class="text-xsmall text-muted" align="right">{{timetable.duration}}</h6>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -143,10 +194,10 @@
             </ion-scroll>
           </span>
         </ion-list>
-      </div>
+      </ion-grid>
 
       <!--***********    weekTimetable Segement  ***********-->
-      <div *ngIf="timetableSegement === 'weekTimetable'">
+      <ion-grid *ngIf="timetableSegement === 'weekTimetable'">
         <ion-list>
           <ion-item *ngIf="weekTimetable == null">
             <ion-grid>
@@ -159,25 +210,25 @@
           <span *ngIf="weekTimetable != null">
             <ion-scroll scrollY="true" class="height-300x">
               <span *ngFor="let dayTimetable of weekTimetable.dayTimetables">
-                <ion-list-header>
+                <ion-list-header class="padding-vertical-remove">
                   {{dayTimetable.dayName}}
                 </ion-list-header>
-                <ion-item *ngFor="let timetable of dayTimetable.timetables">
+                <ion-item *ngFor="let timetable of dayTimetable.timetables" class="padding-vertical-remove">
                   <ion-grid no-padding>
                     <ion-row>
                       <ion-col>
-                        <div align="left">{{timetable.course}}</div>
+                        <div class="text-normal" align="left">{{timetable.course}}</div>
                       </ion-col>
                       <ion-col>
-                        <div align="right">{{timetable.batch}}</div>
+                        <div class="text-normal" align="right">{{timetable.batch}}</div>
                       </ion-col>
                     </ion-row>
                     <ion-row>
                       <ion-col>
-                        <h6 align="left">{{timetable.subject}} </h6>
+                        <h6 class="text-xsmall text-muted" align="left">{{timetable.subject}} </h6>
                       </ion-col>
                       <ion-col>
-                        <h6 align="right">{{timetable.duration}}</h6>
+                        <h6 class="text-xsmall text-muted" align="right">{{timetable.duration}}</h6>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
@@ -186,7 +237,7 @@
             </ion-scroll>
           </span>
         </ion-list>
-      </div>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
   <!--*********** Timetable Segement end ***********-->

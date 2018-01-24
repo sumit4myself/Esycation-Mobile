@@ -1,4 +1,4 @@
-import { Component ,OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
 import { UserSessionService } from "../../../providers/service/core/user.session.service";
 import { ProfileService } from "../../../providers/service/profile/profile.service";
@@ -6,7 +6,7 @@ import { Profile } from "../../../providers/model/profile/model.profile";
 import { ServerConfig } from "../../../providers/config";
 import { BaseComponent } from "../../baseComponent/base.component";
 import { ApprovelService } from "../../../providers/service/approvel/approvel.service";
-import {TimetableService} from "../../../providers/service/timetable/timetable.service";
+import { TimetableService } from "../../../providers/service/timetable/timetable.service";
 import * as moment from "moment";
 // import { toArray } from 'rxjs/operator/toArray';
 
@@ -15,17 +15,18 @@ import * as moment from "moment";
   selector: "staffdashboard-page",
   templateUrl: "staffdashboard.html"
 })
-export class StaffDashboardComponent extends BaseComponent  implements OnInit {
+export class StaffDashboardComponent extends BaseComponent implements OnInit {
   approvalSegement: string = "pendingRequests";
   attendanceSegement: string = "weekAttendance";
 
-
-
-
-//Time table section model
+  //Time table section model
   timetableSegement: string = "todayTimetable";
   todayTimetable: any = null;
   weekTimetable: any = null;
+
+  myApprovalRequests: any = null;
+  approvalRequests: any = null;
+
   options: any;
 
   currentDay: string = "";
@@ -80,7 +81,7 @@ export class StaffDashboardComponent extends BaseComponent  implements OnInit {
     protected session: UserSessionService,
     private approvelService: ApprovelService,
     public profileService: ProfileService,
-    private timetableService :TimetableService
+    private timetableService: TimetableService
   ) {
     super(session, navControl);
     this.currentDay = moment(new Date()).format("dddd");
@@ -216,30 +217,6 @@ export class StaffDashboardComponent extends BaseComponent  implements OnInit {
       );
   }
 
-  fetchPendingRequests() {
-    this.isPendingRequestLoaded = false;
-    this.mypendingrequest = [];
-    this.approvelService.findPending(this.session.findUserId()).subscribe(
-      data => {
-        for (let group of data.contents) {
-          let obj = Object.assign({}, group);
-          this.mypendingrequest.push(obj);
-        }
-        this.isPendingRequestLoaded = true;
-      },
-      error => {
-        this.isPendingRequestLoaded = true;
-        console.log(error);
-      }
-    );
-  }
-
-  onTimeTable(items) {
-    this.navCtrl.push("TimeTableComponent", {
-      timeTable: items
-    });
-  }
-
   fetchMyRequests() {
     this.myrequest = [];
     this.isMyRequestLoaded = false;
@@ -268,11 +245,6 @@ export class StaffDashboardComponent extends BaseComponent  implements OnInit {
         data => {
           this.profile = Object.assign(this.profile, data);
           this.isLoaded = true;
-
-          this.fetchMyClasses();
-          this.fetchAttendanceStats();
-          this.fetchPendingRequests();
-          this.fetchMyRequests();
         },
         error => {
           this.errorMessage =
@@ -292,38 +264,43 @@ export class StaffDashboardComponent extends BaseComponent  implements OnInit {
     }
   }
 
-  onPendingRequestClicked() {}
-  onMyRequestClicked() {}
+  onPendingRequestClicked() {
+    this.initApprovalRequests();
+  }
+  onMyRequestClicked() {
+    this.initMyApprovalRequests();
+  }
 
   onTodayTimetableClicked() {
-    this.timetableService.findTodayTimetableByTeacherId(1).subscribe(data => {
-      this.todayTimetable  = data;
-     })
+    this.initTodayTimetable();
   }
   onWeekTimetableClicked() {
-    this.timetableService.findWeekTimetableByTeacherId(1).subscribe(data => {
-      this.weekTimetable  = data;
-    })
+    this.initWeekTimetable();
   }
 
   onMonthAttendanceClicked() {}
   onWeekAttendanceClicked() {}
 
   ngOnInit() {
+
+
+    this.initTodayTimetable();
+    this.initApprovalRequests();
+
     let xAxisData = [];
     let data1 = [];
     let data2 = [];
 
     for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
+      xAxisData.push("category" + i);
       data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
       data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
     }
 
     this.options = {
       legend: {
-        data: ['bar', 'bar2'],
-        align: 'left'
+        data: ["bar", "bar2"],
+        align: "left"
       },
       tooltip: {},
       xAxis: {
@@ -333,27 +310,53 @@ export class StaffDashboardComponent extends BaseComponent  implements OnInit {
           show: false
         }
       },
-      yAxis: {
-      },
-      series: [{
-        name: 'bar',
-        type: 'bar',
-        data: data1,
-        animationDelay: function (idx) {
-          return idx * 10;
+      yAxis: {},
+      series: [
+        {
+          name: "bar",
+          type: "bar",
+          data: data1,
+          animationDelay: function(idx) {
+            return idx * 10;
+          }
+        },
+        {
+          name: "bar2",
+          type: "bar",
+          data: data2,
+          animationDelay: function(idx) {
+            return idx * 10 + 100;
+          }
         }
-      }, {
-        name: 'bar2',
-        type: 'bar',
-        data: data2,
-        animationDelay: function (idx) {
-          return idx * 10 + 100;
-        }
-      }],
-      animationEasing: 'elasticOut',
-      animationDelayUpdate: function (idx) {
+      ],
+      animationEasing: "elasticOut",
+      animationDelayUpdate: function(idx) {
         return idx * 5;
       }
     };
+  }
+
+  initMyApprovalRequests() {
+    this.approvelService.findMyRequests(6).subscribe(data => {
+      this.myApprovalRequests = data;
+    });
+  }
+
+  initApprovalRequests() {
+    this.approvelService.findRequests(5).subscribe(data => {
+      this.approvalRequests = data;
+    });
+  }
+
+  initTodayTimetable() {
+    this.timetableService.findTodayTimetableByTeacherId(1).subscribe(data => {
+      this.todayTimetable = data;
+    });
+  }
+
+  initWeekTimetable() {
+    this.timetableService.findWeekTimetableByTeacherId(1).subscribe(data => {
+      this.weekTimetable = data;
+    });
   }
 }
