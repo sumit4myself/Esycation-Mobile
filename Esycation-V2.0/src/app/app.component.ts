@@ -97,6 +97,17 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.pushNotificationSetup();
+
+      /*
+      if(this.platform.is('cordova')){
+        
+      }
+      else{
+        console.log("web View..");
+      }
+      */
+
+      
       this.showedAlert = false;
       var lastTimeBackPress = 0;
       var timePeriodToExit = 2000;
@@ -198,11 +209,6 @@ export class MyApp {
           null,
           "info"
         );
-        var notificationCount = Number(
-          localStorage.getItem("notificationCount")
-        );
-        var count = notificationCount + 1;
-        localStorage.setItem("notificationCount", count + "");
         this.events.publish("notification:updateCount");
       };
     });

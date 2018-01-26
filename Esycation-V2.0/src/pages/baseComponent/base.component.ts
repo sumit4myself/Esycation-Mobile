@@ -14,7 +14,7 @@ export abstract class BaseComponent {
 
     onNotification(){
         
-        this.navCtrl.push('ViewAllNotificationComponent');
+        this.navCtrl.push('ManageNotificationComponent');
     }
     
 

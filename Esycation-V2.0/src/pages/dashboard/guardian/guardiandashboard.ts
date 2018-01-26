@@ -5,7 +5,7 @@ import {UserSessionService} from '../../../providers/service/core/user.session.s
 import {Profile} from '../../../providers/model/profile/model.profile';
 import {ServerConfig} from '../../../providers/config';
 import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
-import {LeaveService} from '../../../providers/service/leave/leave.service';
+import {StudentLeaveService} from '../../../providers/service/leave/student.leave.service';
 import * as moment from 'moment';
 @IonicPage()
 @Component({
@@ -93,7 +93,7 @@ export class GuardianDashboardComponent {
     constructor(private navContrle:NavController,
         private session:UserSessionService,
         // private profileService:ProfileService,
-        private leaveService:LeaveService,
+        private leaveService:StudentLeaveService,
         private approvelService:ApprovelService )
         {
             this.currentDay= moment(new Date()).format('dddd');

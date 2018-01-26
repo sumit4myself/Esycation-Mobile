@@ -21,6 +21,7 @@ export class PrivilageService {
     }
   }
 
+
   findStaffRole(): Array<any> {
     this.menu = [
       {
@@ -47,11 +48,11 @@ export class PrivilageService {
         items: [
           {
             name: "Notification",
-            component: "ViewAllNotificationComponent"
+            component: "ManageNotificationComponent"
           },
           {
             name: "Bulk Notification",
-            component: "ViewAllBulkNotificationComponent"
+            component: "ManageBulkNotificationComponent"
           }
         ]
       },
@@ -86,7 +87,7 @@ export class PrivilageService {
         items: [
           {
             name: "Notification",
-            component: "ViewAllNotificationComponent"
+            component: "ManageNotificationComponent"
           }
         ]
       },
@@ -116,7 +117,7 @@ export class PrivilageService {
         items: [
           {
             name: "Notification",
-            component: "ViewAllNotificationComponent"
+            component: "ManageNotificationComponent"
           }
         ]
       },

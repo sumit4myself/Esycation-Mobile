@@ -1,0 +1,39 @@
+manage-bulk-notification{
+  .item-md ion-icon[item-left] + .item-inner, 
+  .item-md ion-icon[item-left] + .item-input, 
+  .item-md ion-icon[item-start] + .item-inner, 
+  .item-md ion-icon[item-start] + .item-input {
+    margin-left: 8px  !important;
+}
+
+.item-md{
+    padding-left: 15px  !important;
+}
+
+.item-padding{
+    padding : 1rem;
+}
+
+.notification-list ion-item{
+    border-top: 1px solid #dedede !important;  
+}
+
+.small{
+    font-size: 1rem;
+}
+.serial{
+  padding-top: 10%;
+  font-size: 20px;
+  color: #fff;
+  background-color: red;
+  display: inline-block;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+ }
+
+ .text-flot-right{
+    float: right
+ }
+}

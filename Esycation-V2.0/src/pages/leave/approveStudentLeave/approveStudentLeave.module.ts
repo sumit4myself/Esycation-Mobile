@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import {ApproveStudentLeaveComponent} from '../approveStudentLeave/approveStudentLeave';
-import {LeaveService} from '../../../providers/service/leave/leave.service';
-import {ApprovelService} from '../../../providers/service/approvel/approvel.service'; 
-import {PushCounterModule} from '../../notification/pushcounter/pushcounter.module';
+import { ApproveStudentLeaveComponent } from '../approveStudentLeave/approveStudentLeave';
+import { StudentLeaveService } from '../../../providers/service/leave/student.leave.service';
+import { ApprovelService } from '../../../providers/service/approvel/approvel.service';
+import { PushCounterModule } from '../../notifications/pushcounter/pushcounter.module';
 @NgModule({
     imports: [
         IonicPageModule.forChild(ApproveStudentLeaveComponent),
-        
+
         PushCounterModule
     ],
-    exports: [ApproveStudentLeaveComponent ],
+    exports: [ApproveStudentLeaveComponent],
     declarations: [ApproveStudentLeaveComponent],
-    providers: [LeaveService,ApprovelService],
+    providers: [StudentLeaveService, ApprovelService],
 })
 export class ApproveStudentLeaveModule { }

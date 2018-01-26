@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import {ResultEntiryComponent} from '../resultEnter/result.entry';
-import {ResultEntryService} from '../../../providers/service/resultEntry/result.entry.service';
-import {PushCounterModule} from '../../notification/pushcounter/pushcounter.module';
+import { ResultEntiryComponent } from '../resultEnter/result.entry';
+import { ResultEntryService } from '../../../providers/service/resultEntry/result.entry.service';
+import { PushCounterModule } from '../../notifications/pushcounter/pushcounter.module';
 
 @NgModule({
     imports: [
         IonicPageModule.forChild(ResultEntiryComponent),
         PushCounterModule
     ],
-    exports: [ResultEntiryComponent ],
+    exports: [ResultEntiryComponent],
     declarations: [ResultEntiryComponent],
     providers: [ResultEntryService],
 })
