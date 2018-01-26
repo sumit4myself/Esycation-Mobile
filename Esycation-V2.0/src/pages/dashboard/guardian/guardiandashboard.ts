@@ -1,116 +1,17 @@
-<<<<<<< HEAD
-import { Component,ViewChild} from '@angular/core';
-import { IonicPage, NavController,Slides } from 'ionic-angular';
-import {UserSessionService} from '../../../providers/service/core/user.session.service';
-// import {ProfileService} from '../../../providers/service/profile/profile.service';
-import {Profile} from '../../../providers/model/profile/model.profile';
-import {ServerConfig} from '../../../providers/config';
-import {ApprovelService} from '../../../providers/service/approvel/approvel.service';
-import {StudentLeaveService} from '../../../providers/service/leave/student.leave.service';
-import * as moment from 'moment';
-=======
 import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, Slides } from "ionic-angular";
 import { UserSessionService } from "../../../providers/service/core/user.session.service";
 import { Profile } from "../../../providers/model/profile/model.profile";
 import { ServerConfig } from "../../../providers/config";
 import { ApprovalService } from "../../../providers/service/approvel/approvel.service";
-import { LeaveService } from "../../../providers/service/leave/leave.service";
+import { StudentLeaveService } from "../../../providers/service/leave/student.leave.service";
 import * as moment from "moment";
->>>>>>> 9c2d2572864381fe086f576ba00d49271e1a8c7a
 @IonicPage()
 @Component({
   selector: "guardiandashboard-page",
   templateUrl: "guardiandashboard.html"
 })
 export class GuardianDashboardComponent {
-<<<<<<< HEAD
-
-    @ViewChild('slides') slides: Slides;
-    isLoaded:boolean=false;
-    resultStatReady:boolean=false;
-    currentDay:string="";
-    currentSelectedStudent:number;
-    currentSelectedStudentName:string;
-    reportingTeacher:any;
-    timeTable:any;
-    attendanceStatReady:boolean=false;
-    isMyRequestLoaded:boolean=false;
-    isPendingRequestLoaded:boolean=false;
-    studentListBasedonGuardian:Array<any> = [];
-    mypendingrequest:Array<Object> = new Array<Object>();
-    myrequest:Array<Object> = new Array<Object>();
-    myrequests: string = "pendings";
-    studentResultOptions = {
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
-            }
-        },
-        legend: {
-            data:[]
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : []
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : []
-    };
-    studentAttendanceStatOptions = {
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
-            }
-        },
-        legend: {
-            data:[]
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : []
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : []
-    };
-    profile:Profile=Profile.getInstance()
-    imagePath:String=ServerConfig.imagePath();
-
-    constructor(private navContrle:NavController,
-        private session:UserSessionService,
-        // private profileService:ProfileService,
-        private leaveService:StudentLeaveService,
-        private approvelService:ApprovelService )
-        {
-            this.currentDay= moment(new Date()).format('dddd');
-
-=======
   @ViewChild("slides") slides: Slides;
   isLoaded: boolean = false;
   resultStatReady: boolean = false;
@@ -160,7 +61,6 @@ export class GuardianDashboardComponent {
       trigger: "axis",
       axisPointer: {
         type: "shadow"
->>>>>>> 9c2d2572864381fe086f576ba00d49271e1a8c7a
       }
     },
     legend: {
@@ -192,7 +92,7 @@ export class GuardianDashboardComponent {
     private navContrle: NavController,
     private session: UserSessionService,
     // private profileService:ProfileService,
-    private leaveService: LeaveService,
+    private leaveService: StudentLeaveService,
     private approvalService: ApprovalService
   ) {
     this.currentDay = moment(new Date()).format("dddd");

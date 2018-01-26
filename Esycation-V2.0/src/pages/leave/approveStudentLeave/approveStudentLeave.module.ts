@@ -9,11 +9,10 @@ import { ApprovalService } from "../../../providers/service/approvel/approvel.se
 @NgModule({
     imports: [
         IonicPageModule.forChild(ApproveStudentLeaveComponent),
-
         PushCounterModule
     ],
     exports: [ApproveStudentLeaveComponent],
     declarations: [ApproveStudentLeaveComponent],
     providers: [StudentLeaveService, ApprovalService],
 })
-export class ApproveStudentLeaveModule {}
+export class ApproveStudentLeaveModule { }
