@@ -6,7 +6,7 @@ import { Observable } from "rxjs/Rx";
 import { BaseService } from "../core/base.service";
 
 @Injectable()
-export class ApprovelService extends BaseService<any> {
+export class ApprovalService extends BaseService<any> {
   constructor(
     @Inject(Http) protected http: Http,
     @Inject(CostumErrorHandler) protected errorHandler: CostumErrorHandler

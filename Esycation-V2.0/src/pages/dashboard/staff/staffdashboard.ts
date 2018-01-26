@@ -5,10 +5,10 @@ import { ProfileService } from "../../../providers/service/profile/profile.servi
 import { Profile } from "../../../providers/model/profile/model.profile";
 import { ServerConfig } from "../../../providers/config";
 import { BaseComponent } from "../../baseComponent/base.component";
-import { ApprovelService } from "../../../providers/service/approvel/approvel.service";
+import { ApprovalService } from "../../../providers/service/approvel/approvel.service";
 import { TimetableService } from "../../../providers/service/timetable/timetable.service";
+import { Observable } from "rxjs/Rx";
 import * as moment from "moment";
-// import { toArray } from 'rxjs/operator/toArray';
 
 @IonicPage()
 @Component({
@@ -16,19 +16,25 @@ import * as moment from "moment";
   templateUrl: "staffdashboard.html"
 })
 export class StaffDashboardComponent extends BaseComponent implements OnInit {
-  approvalSegement: string = "pendingRequests";
+  _this = this;
+
+  //profile section model
+  profileObservable: Observable<any>;
+
   attendanceSegement: string = "weekAttendance";
 
   //Time table section model
+  timetableObservable: Observable<any>;
   timetableSegement: string = "todayTimetable";
   todayTimetable: any = null;
   weekTimetable: any = null;
 
+  approvalObservable: Observable<any>;
+  approvalSegement: string = "pendingRequests";
   myApprovalRequests: any = null;
   approvalRequests: any = null;
 
   options: any;
-
   currentDay: string = "";
   isLoaded: boolean = false;
   isMyClassesLoaded: boolean = false;
@@ -79,7 +85,7 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   constructor(
     protected navControl: NavController,
     protected session: UserSessionService,
-    private approvelService: ApprovelService,
+    private approvalService: ApprovalService,
     public profileService: ProfileService,
     private timetableService: TimetableService
   ) {
@@ -92,166 +98,10 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
     // this.navContrle.push(reqLeavePage);
   }
 
-  fetchAttendanceStats() {
-    //fetch for last 3 months
-    this.attendanceStatReady = false;
-    let toDate = moment(new Date()).format("DD/MM/YYYY");
-    var fromDate = moment(new Date())
-      .subtract(3, "months")
-      .date(1)
-      .format("DD/MM/YYYY");
-    this.approvelService
-      .findTeachersAttendanceStatistic(
-        this.session.findRemote(),
-        fromDate,
-        toDate
-      )
-      .subscribe(
-        data => {
-          try {
-            if (
-              data &&
-              data.count &&
-              data.count.length > 0 &&
-              data.data &&
-              data.data.length > 0
-            ) {
-              let legend = [];
-              let xAxes = [];
-              let series = [];
-              for (let i = 0; i < data.data.length; i++) {
-                if (
-                  data.data[i] &&
-                  data.data[i].name &&
-                  data.data[i].name.length > 0
-                ) {
-                  xAxes.push(data.data[i].name);
-                }
-                if (
-                  i == 0 &&
-                  data.data[i] &&
-                  data.data[i].data &&
-                  data.data[i].data.length > 0
-                ) {
-                  for (let j = 0; j < data.data[i].data.length; j++) {
-                    legend.push(data.data[i].data[j].name);
-                  }
-                }
-              }
-              if (legend && legend.length > 0) {
-                for (let k = 0; k < legend.length; k++) {
-                  let seriesObj = {};
-                  seriesObj["name"] = legend[k];
-                  seriesObj["type"] = "bar";
-                  seriesObj["stack"] = "stack";
-                  let dataArray = [];
-                  for (let ii = 0; ii < data.data.length; ii++) {
-                    if (
-                      data.data[ii] &&
-                      data.data[ii].data &&
-                      data.data[ii].data.length > 0
-                    ) {
-                      for (let jj = 0; jj < data.data[ii].data.length; jj++) {
-                        if (legend[k] === data.data[ii].data[jj].name) {
-                          dataArray.push(data.data[ii].data[jj].data);
-                        }
-                      }
-                    }
-                  }
-                  seriesObj["data"] = dataArray;
-                  series.push(seriesObj);
-                }
-              }
-
-              if (
-                legend &&
-                legend.length > 0 &&
-                xAxes &&
-                xAxes.length > 0 &&
-                series &&
-                series.length > 0
-              ) {
-                this.teachersAttendanceStatOptions.legend.data = legend;
-                this.teachersAttendanceStatOptions.xAxis[0].data = xAxes;
-                this.teachersAttendanceStatOptions.series = series;
-                this.attendanceStatReady = true;
-              }
-            }
-          } catch (e) {
-            this.attendanceStatReady = false;
-          }
-        },
-        error => {
-          this.attendanceStatReady = false;
-          console.log(error);
-        }
-      );
-  }
-
-  fetchMyClasses() {
-    this.isMyClassesLoaded = false;
-    this.errorMessageMyClass = "";
-    this.approvelService
-      .findTeachersClasses(this.session.findRemote())
-      .subscribe(
-        data => {
-          this.isMyClassesLoaded = true;
-          this.staffTimeTable = data.timetables;
-          let _data = data.timetables;
-          var newData = {};
-          newData = _data.reduce(function(result, current) {
-            result[current.batchId.name] = result[current.batchId.name] || [];
-            result[current.batchId.name].push(current);
-            newData = result;
-            return result;
-          }, {});
-          for (const key of Object.keys(newData)) {
-            this.timeTableDataModel.push({ id: key, data: newData[key] });
-          }
-        },
-        error => {
-          this.errorMessageMyClass =
-            "Unable to connect. Please try after some time. [ " + error + " ]";
-          this.isMyClassesLoaded = true;
-        }
-      );
-  }
-
-  fetchMyRequests() {
-    this.myrequest = [];
-    this.isMyRequestLoaded = false;
-    this.approvelService.findMyRequests(this.session.findUserId()).subscribe(
-      data => {
-        for (let group of data.contents) {
-          let obj = Object.assign({}, group);
-          this.myrequest.push(obj);
-        }
-        this.isMyRequestLoaded = true;
-      },
-      error => {
-        console.error(error);
-        this.isMyRequestLoaded = true;
-      }
-    );
-  }
-
   ionViewDidLoad() {
-    this.isLoaded = false;
-    this.attendanceStatReady = false;
-    this.errorMessage = "";
-    this.profileService
-      .findProfileDetails(this.session.findRemote(), this.session.findModule())
-      .subscribe(
-        data => {
-          this.profile = Object.assign(this.profile, data);
-          this.isLoaded = true;
-        },
-        error => {
-          this.errorMessage =
-            "Unable to connect. Please try after some time. [ " + error + " ]";
-          this.isLoaded = false;
-        }
-      );
+    this.initProfile();
+    this.initApprovalRequests();
+    this.initTodayTimetable();
   }
 
   onView(viewName: string) {
@@ -265,9 +115,11 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   }
 
   onPendingRequestClicked() {
+    console.log("onPendingRequestClicked");
     this.initApprovalRequests();
   }
   onMyRequestClicked() {
+    console.log("onMyRequestClicked");
     this.initMyApprovalRequests();
   }
 
@@ -282,11 +134,6 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   onWeekAttendanceClicked() {}
 
   ngOnInit() {
-
-
-    this.initTodayTimetable();
-    this.initApprovalRequests();
-
     let xAxisData = [];
     let data1 = [];
     let data2 = [];
@@ -336,27 +183,93 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
     };
   }
 
+  initProfile() {
+    this.profileObservable = Observable.create(observer => {
+      this.profileService
+        .findProfileDetails(
+          this.session.findRemote(),
+          this.session.findModule()
+        )
+        .subscribe(
+          data => {
+            this.profile = Object.assign(this.profile, data);
+            observer.next(data);
+            observer.complete();
+          },
+          error => {
+            this.errorMessage =
+              "Unable to connect. Please try after some time. [ " +
+              error +
+              " ]";
+            this.isLoaded = false;
+            observer.next(null);
+            observer.complete();
+          }
+        );
+    });
+  }
+
   initMyApprovalRequests() {
-    this.approvelService.findMyRequests(6).subscribe(data => {
-      this.myApprovalRequests = data;
+    this.approvalObservable = Observable.create(observer => {
+      this.approvalService
+        .findMyRequests(this.session.findUserId())
+        .subscribe(data => {
+          if (data.contents && data.contents.length) {
+            this.myApprovalRequests = data.contents;
+          } else {
+            this.myApprovalRequests = null;
+          }
+          observer.next(data);
+          observer.complete();
+        });
     });
   }
 
   initApprovalRequests() {
-    this.approvelService.findRequests(5).subscribe(data => {
-      this.approvalRequests = data;
+    this.approvalObservable = Observable.create(observer => {
+      this.approvalService
+        .findRequests(this.session.findUserId())
+        .subscribe(data => {
+          if (data.contents && data.contents.length) {
+            this.approvalRequests = data.contents;
+          } else {
+            this.approvalRequests = null;
+          }
+          observer.next(data);
+          observer.complete();
+        });
     });
   }
 
   initTodayTimetable() {
-    this.timetableService.findTodayTimetableByTeacherId(1).subscribe(data => {
-      this.todayTimetable = data;
+    this.timetableObservable = Observable.create(observer => {
+      this.timetableService
+        .findTodayTimetableByTeacherId(this.session.findRemote())
+        .subscribe(data => {
+          if (data.contents && data.contents.length) {
+            this.todayTimetable = data.contents;
+          } else {
+            this.todayTimetable = null;
+          }
+          observer.next(data);
+          observer.complete();
+        });
     });
   }
 
   initWeekTimetable() {
-    this.timetableService.findWeekTimetableByTeacherId(1).subscribe(data => {
-      this.weekTimetable = data;
+    this.timetableObservable = Observable.create(observer => {
+      this.timetableService
+        .findWeekTimetableByTeacherId(this.session.findRemote())
+        .subscribe(data => {
+          if (data.contents && data.contents.length) {
+            this.weekTimetable = data.contents;
+          } else {
+            this.weekTimetable = null;
+          }
+          observer.next(data);
+          observer.complete();
+        });
     });
   }
 }

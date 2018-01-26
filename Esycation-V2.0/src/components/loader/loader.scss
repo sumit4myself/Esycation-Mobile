@@ -1,0 +1,22 @@
+
+ion-card {
+  position: relative;
+}
+
+.observable-overlay {
+  position: absolute; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page or section) */
+  height: 100%; /* Full height (cover the whole page or section) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.582);
+  z-index: 5;
+}
+
+.observable-overlay  > .spinner {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
