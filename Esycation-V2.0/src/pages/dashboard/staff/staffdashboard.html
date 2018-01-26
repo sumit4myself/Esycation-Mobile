@@ -22,6 +22,7 @@
 
   <ion-card>
     <ion-card-content>
+      <observable-loader [observable]="profileObservable"></observable-loader>
       <ion-row>
         <ion-col col-3>
           <ion-avatar item-start>
@@ -62,9 +63,6 @@
   </ion-card>
   <!--*********** end attendance Segement ***********-->
 
-
-
-
   <!--*********** Approval Segement ***********-->
   <ion-card>
     <ion-card-content>
@@ -77,19 +75,21 @@
         </ion-segment-button>
       </ion-segment>
 
+      <observable-loader [observable]="approvalObservable"></observable-loader>
+
       <!--***********  Pending Requests Segement ***********-->
       <ion-grid *ngIf="approvalSegement === 'pendingRequests'" class="padding-vertical-remove">
         <ion-item *ngIf="approvalRequests == null">
           <ion-grid>
             <ion-row>
               <ion-col align="center">
-                <ion-icon name="happy" color="orange" large></ion-icon> Ohh.. You are free today. </ion-col>
+                Pending requets not found </ion-col>
             </ion-row>
           </ion-grid>
         </ion-item>
         <span *ngIf="approvalRequests != null">
           <ion-scroll scrollY="true" class="height-300x">
-            <ion-item *ngFor="let request of approvalRequests.contents" class="padding-vertical-remove">
+            <ion-item *ngFor="let request of approvalRequests" class="padding-vertical-remove">
               <ion-grid no-padding>
                 <ion-row>
                   <ion-col>
@@ -116,13 +116,13 @@
           <ion-grid>
             <ion-row>
               <ion-col align="center">
-                <ion-icon name="happy" color="orange" large></ion-icon> Ohh.. You are free today. </ion-col>
+                Pending requets not found. </ion-col>
             </ion-row>
           </ion-grid>
         </ion-item>
         <span *ngIf="myApprovalRequests != null">
           <ion-scroll scrollY="true" class="height-300x">
-            <ion-item *ngFor="let request of myApprovalRequests.contents" class="padding-vertical-remove">
+            <ion-item *ngFor="let request of myApprovalRequests" class="padding-vertical-remove">
               <ion-grid no-padding>
                 <ion-row>
                   <ion-col>
@@ -130,11 +130,17 @@
                   </ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col>
+                  <ion-col col-3>
                     <h6 class="text-xsmall text-muted" align="left">{{request.currentStatus}}</h6>
                   </ion-col>
-                  <ion-col>
-                    <h6 class="text-xsmall text-muted" align="right">{{request.currentApprovers}}</h6>
+                  <ion-col col-9 *ngIf="request.currentApprovers != null">
+                    <ion-row *ngFor="let currentApprover of request.currentApprovers">
+                      <ion-col align="left">
+                        <h6 class="text-xsmall text-muted" align="right">{{currentApprover.name}}</h6>
+                        <h6 class="text-xsmall text-muted" align="right">{{currentApprover.email}}</h6>
+                        <h6 class="text-xsmall text-muted" align="right">{{currentApprover.mobile}}</h6>
+                      </ion-col>
+                    </ion-row>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -158,6 +164,7 @@
         </ion-segment-button>
       </ion-segment>
 
+      <observable-loader [observable]="timetableObservable"></observable-loader>
       <!--***********  todayTimetable Segement ***********-->
       <ion-grid *ngIf="timetableSegement === 'todayTimetable'" class="padding-vertical-remove">
         <ion-list>
@@ -165,7 +172,7 @@
             <ion-grid>
               <ion-row>
                 <ion-col align="center">
-                  <ion-icon name="happy" color="orange" large></ion-icon> Ohh.. You are free today. </ion-col>
+                  <ion-icon name="happy" color="orange" large></ion-icon> Enjoy.. You are free today. </ion-col>
               </ion-row>
             </ion-grid>
           </ion-item>
@@ -203,7 +210,7 @@
             <ion-grid>
               <ion-row>
                 <ion-col align="center">
-                  <ion-icon name="happy" color="orange" large></ion-icon> Ohh.. You are free this week. </ion-col>
+                  <ion-icon name="happy" color="orange" large></ion-icon> Enjoy.. You are free this week. </ion-col>
               </ion-row>
             </ion-grid>
           </ion-item>

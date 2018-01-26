@@ -2,17 +2,20 @@ import { NgModule } from "@angular/core";
 import { IonicPageModule } from "ionic-angular";
 import { StaffDashboardComponent } from "../staff/staffdashboard";
 import { ProfileService } from "../../../providers/service/profile/profile.service";
-import { ApprovelService } from "../../../providers/service/approvel/approvel.service";
+import { ApprovalService } from "../../../providers/service/approvel/approvel.service";
 import { TimetableService } from "../../../providers/service/timetable/timetable.service";
 import { NgxEchartsModule } from "ngx-echarts";
+
+import { LoaderModule } from "../../../components/loader/loader.module";
 
 @NgModule({
   imports: [
     IonicPageModule.forChild(StaffDashboardComponent),
-    NgxEchartsModule
+    NgxEchartsModule,
+    LoaderModule
   ],
   exports: [StaffDashboardComponent],
   declarations: [StaffDashboardComponent],
-  providers: [ProfileService, ApprovelService, TimetableService]
+  providers: [ProfileService, ApprovalService, TimetableService]
 })
 export class StaffDashboardModule {}
