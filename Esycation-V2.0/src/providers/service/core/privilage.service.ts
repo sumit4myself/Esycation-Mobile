@@ -98,7 +98,7 @@ export class PrivilageService {
         items: [
           {
             name: "Apply",
-            component: "LeaveComponent"
+            component: "StudentLeaveComponent"
           }
         ]
       }
@@ -128,7 +128,7 @@ export class PrivilageService {
         items: [
           {
             name: "Apply",
-            component: "LeaveComponent"
+            component: "StudentLeaveComponent"
           }
         ]
       }
