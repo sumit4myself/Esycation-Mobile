@@ -27,11 +27,11 @@
         <ion-list no-lines class="notification-list" *ngIf="viewMode==='first'">
             <ion-item *ngFor="let stuGaurd of studentGuardians">
                 
-                <p *ngIf="stuGaurd.recieverName!=null">
+                <p *ngIf="stuGaurd.receiverName!=null">
                     <span *ngIf="stuGaurd.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
-                    <span>{{stuGaurd.recieverName}}</span>
+                    <span>{{stuGaurd.receiverName}}</span>
                  </p>
-                 <p *ngIf="stuGaurd.recieverName==null">
+                 <p *ngIf="stuGaurd.receiverName==null">
                     <span *ngIf="stuGaurd.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
                     <span>N/A</span>
                    </p>
@@ -63,11 +63,11 @@
         <ion-list no-lines class="result-list" *ngIf="viewMode==='secand'">
             <ion-item *ngFor="let staff of staffs">
                
-               <p *ngIf="staff.recieverName!=null">
+               <p *ngIf="staff.receiverName!=null">
                    <span *ngIf="staff.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
-                   <span>{{staff.recieverName}}</span>
+                   <span>{{staff.receiverName}}</span>
                 </p>
-                <p *ngIf="staff.recieverName==null">
+                <p *ngIf="staff.receiverName==null">
                   <span *ngIf="staff.readStatus=='UNREAD'" class="unread-notification">&#9679;</span> 
                   <span>N/A</span>
                 </p>

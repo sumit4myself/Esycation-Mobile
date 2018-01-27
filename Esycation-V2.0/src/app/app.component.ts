@@ -96,18 +96,13 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.pushNotificationSetup();
-
-      /*
+      
       if(this.platform.is('cordova')){
-        
+        this.pushNotificationSetup();
       }
       else{
         console.log("web View..");
-      }
-      */
-
-      
+      }    
       this.showedAlert = false;
       var lastTimeBackPress = 0;
       var timePeriodToExit = 2000;

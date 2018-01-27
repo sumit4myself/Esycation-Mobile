@@ -19,16 +19,26 @@ export class ViewBulkMessageComponent {
 
   ionViewDidLoad() {
     let id = this.navParams.get("id");
-    this.service.findById(id).subscribe(data => {
 
+    /*
+    this.service.findById(id).subscribe(data => {
       this.notification = Object.assign({}, data);
-      this.notification.iconTitle = this.findFirstLatter(this.notification.template.mode);
-      this.notification.iconColor = this.findColor(this.notification.template.mode);
       this.message = this.notification.receivers[0].message;
 
     }, error => {
       console.error(error);
     })
+    */
+
+    this.service.withSelections(id).subscribe(data => {
+      this.notification = Object.assign({},data);
+      this.notification.iconTitle = this.findFirstLatter(this.notification.template.mode);
+      this.notification.iconColor = this.findColor(this.notification.template.mode);
+
+    }, error => {
+        console.error(error);
+    })
+
   }
 
   findColor(title: string): string {

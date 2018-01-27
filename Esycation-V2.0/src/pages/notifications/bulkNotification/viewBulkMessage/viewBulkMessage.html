@@ -30,7 +30,8 @@
           </ion-grid>       
       </ion-item>  
         <ion-card-content>
-            <p [innerHTML]="message"></p>
+          <p *ngIf="notification.template.mode!='SMS'"  [innerHTML]="notification.template.htmlContent"></p>
+          <p *ngIf="notification.template.mode=='SMS'">{{notification.template.content}}</p>
         </ion-card-content>
       </ion-card>
 </ion-content>

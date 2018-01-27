@@ -1,7 +1,7 @@
 export class NotificationReciever{
 
     id:number=null;
-    recieverName:string=null;
+    receiverName:string=null;
     gender:string=null;
 	mobile:string=null;
     email:string=null;

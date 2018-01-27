@@ -246,8 +246,8 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
       this.timetableService
         .findTodayTimetableByTeacherId(this.session.findRemote())
         .subscribe(data => {
-          if (data.contents && data.contents.length) {
-            this.todayTimetable = data.contents;
+          if (data) {
+            this.todayTimetable = data;
           } else {
             this.todayTimetable = null;
           }
@@ -262,8 +262,8 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
       this.timetableService
         .findWeekTimetableByTeacherId(this.session.findRemote())
         .subscribe(data => {
-          if (data.contents && data.contents.length) {
-            this.weekTimetable = data.contents;
+          if (data) {
+            this.weekTimetable = data;
           } else {
             this.weekTimetable = null;
           }
