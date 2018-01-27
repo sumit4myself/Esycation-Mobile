@@ -108,10 +108,11 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
     this.navControl.push(viewName);
   }
 
-  onPendingRequest(model, id) {
-    if (model == "STUDENT_LEAVE") {
-      this.navControl.push("ApproveStudentLeaveComponent", { id: id });
+  onPendingRequest(module, taskId) {
+    if (module == "STUDENT_LEAVE") {
+      this.navControl.push("ApproveStudentLeaveComponent", { taskId: taskId });
     }
+
   }
 
   onPendingRequestClicked() {

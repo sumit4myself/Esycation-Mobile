@@ -27,7 +27,7 @@ export class ApproveStudentLeaveComponent extends BaseComponent {
   }
 
   ionViewDidLoad() {
-    let id = this.navParam.get("id");
+    let id = this.navParam.get("taskId");
     this.commonServices.onLoader();
     this.approvalService.findRequest(id).subscribe(
       data => {
@@ -54,7 +54,7 @@ export class ApproveStudentLeaveComponent extends BaseComponent {
               null,
               "success"
             );
-            this.navCtrl.push(
+            this.navCtrl.setRoot(
               UserSessionService.findDashBoardByModule(
                 this.session.findModule()
               )
@@ -81,7 +81,7 @@ export class ApproveStudentLeaveComponent extends BaseComponent {
               null,
               "success"
             );
-            this.navCtrl.push(
+            this.navCtrl.setRoot(
               UserSessionService.findDashBoardByModule(
                 this.session.findModule()
               )
