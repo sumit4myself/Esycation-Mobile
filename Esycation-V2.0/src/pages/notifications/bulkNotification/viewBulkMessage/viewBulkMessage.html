@@ -31,7 +31,152 @@
       </ion-item>  
         <ion-card-content>
           <p *ngIf="notification.template.mode!='SMS'"  [innerHTML]="notification.template.htmlContent"></p>
-          <p *ngIf="notification.template.mode=='SMS'">{{notification.template.content}}</p>
+          <p *ngIf="notification.template.mode=='SMS'">{{notification.template.content}}</p> 
         </ion-card-content>
       </ion-card>
+
+      <!--************* Staff Details ************* -->
+      <ion-card class="card card-md" *ngIf="comMode=='STAFF'">
+        <ion-card-content>
+          <ion-segment [(ngModel)]="staffSegment" color="dark">
+            <ion-segment-button value="departmentSelection" >
+               Department
+            </ion-segment-button>
+            <ion-segment-button value="staffSelection">
+              Staff
+            </ion-segment-button>
+          </ion-segment>
+          <!--***********  Department Segement ***********-->
+          <ion-grid *ngIf="staffSegment === 'departmentSelection'" class="padding-vertical-remove">
+            <ion-list>
+              <ion-item *ngIf="notification == null">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col align="center">
+                      <ion-icon name="happy" color="orange" large></ion-icon> 
+                      Data not found. </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <span *ngIf="notification != null">
+                <ion-scroll scrollY="true" class="height-300x">
+                  <ion-item *ngFor="let department of notification.selectionValues.departments" class="padding-vertical-remove">
+                    <ion-grid no-padding>
+                      <ion-row>
+                        <ion-col>
+                          <div class="text-xsmall" align="left">{{department.name}}</div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-scroll>
+              </span>
+            </ion-list>
+          </ion-grid>
+          <!--***********    Staff Segement  ***********-->
+          <ion-grid *ngIf="staffSegment === 'staffSelection'">
+            <ion-list>
+              <ion-item *ngIf="notification == null">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col align="center">
+                      <ion-icon name="happy" color="orange" large></ion-icon> 
+                      Data not found..! </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <span *ngIf="notification != null">
+                <ion-scroll scrollY="true" class="height-300x">
+                  <ion-item *ngFor="let staff of notification.selectionValues.staffs" class="padding-vertical-remove">
+                    <div class="text-xsmall" align="left">{{staff.name}}</div>
+                  </ion-item>
+                </ion-scroll>
+              </span>
+            </ion-list>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+       <!--************* Staff Details ************* -->
+       <ion-card class="card card-md" *ngIf="comMode=='STUDENT'">
+        <ion-card-content>
+          <ion-segment [(ngModel)]="studentSegment" color="dark">
+            <ion-segment-button value="classSelection" >
+              Class
+            </ion-segment-button>
+            <ion-segment-button value="sectionSelection">
+              Section
+            </ion-segment-button>
+            <ion-segment-button value="studentSelection">
+              Student
+            </ion-segment-button>
+          </ion-segment>
+          <!--***********  Class Segement ***********-->
+          <observable-loader [observable]="dataObservable"></observable-loader>
+          <ion-grid *ngIf="studentSegment === 'classSelection'" class="padding-vertical-remove">
+            <ion-list>
+              <ion-item *ngIf="notification == null">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col align="center">
+                      <ion-icon name="happy" color="orange" large></ion-icon> 
+                      Data not found. </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <span *ngIf="notification != null">
+                <ion-scroll scrollY="true" class="height-300x">
+                  <ion-item *ngFor="let course of notification.selectionValues.courses" class="padding-vertical-remove">
+                    <div class="text-xsmall" align="left">{{course.name}}</div>
+                  </ion-item>
+                </ion-scroll>
+              </span>
+            </ion-list>
+          </ion-grid>
+          <!--***********    Staff Segement  ***********-->
+          <ion-grid *ngIf="studentSegment === 'sectionSelection'">
+            <ion-list>
+              <ion-item *ngIf="notification == null">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col align="center">
+                      <ion-icon name="happy" color="orange" large></ion-icon> 
+                      Data not found..! </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <span *ngIf="notification != null">
+                <ion-scroll scrollY="true" class="height-300x">
+                  <ion-item *ngFor="let batche of notification.selectionValues.batches" class="padding-vertical-remove">
+                    <div class="text-xsmall" align="left">{{batche.name}}</div>
+                  </ion-item>
+                </ion-scroll>
+              </span>
+            </ion-list>
+          </ion-grid>
+           <!--***********    Student Segement  ***********-->
+           <ion-grid *ngIf="studentSegment === 'studentSelection'">
+            <ion-list>
+              <ion-item *ngIf="notification == null">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col align="center">
+                      <ion-icon name="happy" color="orange" large></ion-icon> 
+                      Data not found..! </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <span *ngIf="notification != null">
+                <ion-scroll scrollY="true" class="height-300x">
+                  <ion-item *ngFor="let student of notification.selectionValues.students" class="padding-vertical-remove">
+                    <div class="text-xsmall" align="left">{{student.name}}</div>
+                  </ion-item>
+                </ion-scroll>
+              </span>
+            </ion-list>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+
 </ion-content>

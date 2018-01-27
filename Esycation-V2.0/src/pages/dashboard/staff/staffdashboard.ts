@@ -248,7 +248,7 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
         .findTodayTimetableByTeacherId(this.session.findRemote())
         .subscribe(data => {
           if (data) {
-            this.todayTimetable = data;
+            this.todayTimetable =data;
           } else {
             this.todayTimetable = null;
           }
