@@ -43,6 +43,165 @@ export class EchartOptionBuilder {
     };
     return defaultOption;
   }
+
+  buildSeriesChart : function(dom, chartData, option) {
+    for (var i = 0; i < option.chartConfigurations.length; i++) {
+      for (var j = 0; j < chartData.data.length; j++) {
+        if (option.chartConfigurations[i].name == chartData.data[j].name) {
+          var series = option.chartConfigurations[i];
+          series.data = chartData.data[j].data;
+          chartData.data[j] = series;
+        }
+      }
+    }
+    var chart = echarts.init(dom);
+    var tOption = {
+      title : {
+        text : option.title,
+        subtext : option.subTitle
+      },
+      tooltip : {
+        trigger : 'axis',
+        axisPointer : {
+          type : 'shadow' // 'line' | 'shadow'
+        }
+      },
+      legend : {
+        x : "right",
+        data : chartData.legends
+      },
+      color : (option.color ? option.color : [ '#f4511e', '#ffb300', '#00897b', '#7CB342', '#708090' ]),
+      grid : {
+        left : '35',
+        right : '15',
+        bottom : '25',
+        containLabel : true
+      },
+      xAxis : [
+        {
+          type : 'category',
+          data : chartData.xAxis
+        }
+      ],
+      yAxis : [
+        {
+          type : 'value'
+        }
+      ],
+      series : option.chartConfigurations,
+    }
+    if (chartData.xAxis.length > 20) {
+      tOption.grid.bottom = '45';
+      tOption.dataZoom = [
+        {
+          type : 'inside',
+          start : 0,
+          end : 20
+        },
+        {
+          show : true,
+          height : 17,
+          type : 'slider',
+          top : '90%',
+          xAxisIndex : [ 0 ],
+          start : 0,
+          end : 20,
+          realtime : true,
+          handleIcon : 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+          handleSize : '120%',
+          handleStyle : {
+            color : '#009688',
+            shadowBlur : 3,
+            shadowColor : 'rgba(0, 0, 0, 0.6)',
+            shadowOffsetX : 2,
+            shadowOffsetY : 2
+          }
+        } ];
+    }
+    chart.setOption(tOption, true);
+    return chart;
+  },
+
+  build3DChart : function(dom, chartData, option) {
+    for (var i = 0; i < option.chartConfigurations.length; i++) {
+      for (var j = 0; j < chartData.data.length; j++) {
+        if (option.chartConfigurations[i].name == chartData.data[j].name) {
+          var series = option.chartConfigurations[i];
+          series.data = chartData.data[j].data;
+          chartData.data[j] = series;
+        }
+      }
+    }
+    var chart = echarts.init(dom);
+    var tOption = {
+      title : {
+        text : option.title,
+        subtext : option.subTitle
+      },
+      tooltip : {
+        trigger : 'axis',
+        axisPointer : {
+          type : 'shadow' // 'line' | 'shadow'
+        }
+      },
+      legend : {
+        x : "right",
+        data : chartData.legends
+      },
+      color : (option.color ? option.color : [ '#f4511e', '#ffb300', '#00897b', '#7CB342', '#708090' ]),
+      grid : {
+        left : '35',
+        right : '15',
+        bottom : '25',
+        containLabel : true
+      },
+      xAxis : [
+        {
+          type : 'category',
+          data : chartData.xAxis
+        }
+      ],
+      yAxis : [
+        {
+          type : 'value'
+        }
+      ],
+      series : option.chartConfigurations,
+    }
+    if (chartData.xAxis.length > 20) {
+      tOption.grid.bottom = '45';
+      tOption.dataZoom = [
+        {
+          type : 'inside',
+          start : 0,
+          end : 20
+        },
+        {
+          show : true,
+          height : 17,
+          type : 'slider',
+          top : '90%',
+          xAxisIndex : [ 0 ],
+          start : 0,
+          end : 20,
+          realtime : true,
+          handleIcon : 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+          handleSize : '120%',
+          handleStyle : {
+            color : '#009688',
+            shadowBlur : 3,
+            shadowColor : 'rgba(0, 0, 0, 0.6)',
+            shadowOffsetX : 2,
+            shadowOffsetY : 2
+          }
+        } ];
+    }
+    chart.setOption(tOption, true);
+    return chart;
+  }
+}
+
+
 }
 
 export class EchartDataTrnsformer {
@@ -99,66 +258,35 @@ export class EchartDataTrnsformer {
   }
 
   public static transformFor3DChart(originalData) {
-    let finalData = {
-      xAxis: [],
-      timeline: [],
-      legends: [],
-      data: [],
-      count: []
+    var finalData = {
+      "xAxis" : [],
+      "legends" : [],
+      "data" : [],
+      "count" : []
     };
-    for (let i = 0; i < originalData.data.length; i++) {
-      finalData.timeline.push(originalData.data[i].name);
-      for (let j = 0; j < originalData.data[i].data.length; j++) {
-        if (finalData.xAxis.indexOf(originalData.data[i].data[j].name) < 0) {
-          finalData.xAxis.push(originalData.data[i].data[j].name);
+    angular.forEach(originalData.data, function(category) {
+      finalData.xAxis.push(category.name);
+      angular.forEach(category.data, function(series) {
+        if (finalData.legends.indexOf(series.name) < 0) {
+          finalData.legends.push(series.name);
         }
-        if (finalData.legends.length == 0) {
-          for (let k = 0; k < originalData.data[i].data[j].data.length; k++) {
-            finalData.legends.push(originalData.data[i].data[j].data[k].name);
-          }
-        }
-      }
-    }
-    for (let i = 0; i < originalData.data.length; i++) {
-      let data = {};
-      data["title"] = {
-        text: originalData.data[i].name + " Statistics"
-      };
-      finalData.data.push(data);
-      data["series"] = [];
-      for (let j = 0; j < finalData.legends.length; j++) {
-        let seriesData = {};
-        data["series"].push(seriesData);
-        seriesData["data"] = [];
-        for (let k = 0; k < originalData.data[i].data.length; k++) {
-          seriesData["data"].push({
-            name: originalData.data[i].data[k].name,
-            value: originalData.data[i].data[k].data[j].data
-          });
-        }
-      }
-      if (originalData.data[i].additionalData) {
-        let temp = [];
-        for (let l = 0; l < originalData.data[i].additionalData.length; l++) {
-          temp.push({
-            name: originalData.data[i].additionalData[l].name,
-            value: originalData.data[i].additionalData[l].data
-          });
-        }
-        data["series"].push({
-          data: temp
-        });
-      }
-    }
+      })
+    })
 
-    if (originalData.count) {
-      for (let l = 0; l < originalData.count.length; l++) {
-        finalData.count.push({
-          name: originalData.count[l].name,
-          value: originalData.count[l].data
-        });
+    angular.forEach(finalData.legends, function(legend) {
+      var temp = {
+        name : legend,
+        data : []
       }
-    }
+      angular.forEach(originalData.data, function(category) {
+        angular.forEach(category.data, function(data) {
+          if (legend == data.name) {
+            temp.data.push(data.data);
+          }
+        })
+      })
+      finalData.data.push(temp);
+    })
     return finalData;
   }
 }
