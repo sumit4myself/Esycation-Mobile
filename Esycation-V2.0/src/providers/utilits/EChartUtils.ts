@@ -44,85 +44,8 @@ export class EchartOptionBuilder {
     return defaultOption;
   }
 
-  buildSeriesChart : function(dom, chartData, option) {
-    for (var i = 0; i < option.chartConfigurations.length; i++) {
-      for (var j = 0; j < chartData.data.length; j++) {
-        if (option.chartConfigurations[i].name == chartData.data[j].name) {
-          var series = option.chartConfigurations[i];
-          series.data = chartData.data[j].data;
-          chartData.data[j] = series;
-        }
-      }
-    }
-    var chart = echarts.init(dom);
-    var tOption = {
-      title : {
-        text : option.title,
-        subtext : option.subTitle
-      },
-      tooltip : {
-        trigger : 'axis',
-        axisPointer : {
-          type : 'shadow' // 'line' | 'shadow'
-        }
-      },
-      legend : {
-        x : "right",
-        data : chartData.legends
-      },
-      color : (option.color ? option.color : [ '#f4511e', '#ffb300', '#00897b', '#7CB342', '#708090' ]),
-      grid : {
-        left : '35',
-        right : '15',
-        bottom : '25',
-        containLabel : true
-      },
-      xAxis : [
-        {
-          type : 'category',
-          data : chartData.xAxis
-        }
-      ],
-      yAxis : [
-        {
-          type : 'value'
-        }
-      ],
-      series : option.chartConfigurations,
-    }
-    if (chartData.xAxis.length > 20) {
-      tOption.grid.bottom = '45';
-      tOption.dataZoom = [
-        {
-          type : 'inside',
-          start : 0,
-          end : 20
-        },
-        {
-          show : true,
-          height : 17,
-          type : 'slider',
-          top : '90%',
-          xAxisIndex : [ 0 ],
-          start : 0,
-          end : 20,
-          realtime : true,
-          handleIcon : 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-          handleSize : '120%',
-          handleStyle : {
-            color : '#009688',
-            shadowBlur : 3,
-            shadowColor : 'rgba(0, 0, 0, 0.6)',
-            shadowOffsetX : 2,
-            shadowOffsetY : 2
-          }
-        } ];
-    }
-    chart.setOption(tOption, true);
-    return chart;
-  },
+  public static buildSeriesChart(chartData, option): any {
 
-  build3DChart : function(dom, chartData, option) {
     for (var i = 0; i < option.chartConfigurations.length; i++) {
       for (var j = 0; j < chartData.data.length; j++) {
         if (option.chartConfigurations[i].name == chartData.data[j].name) {
@@ -132,77 +55,157 @@ export class EchartOptionBuilder {
         }
       }
     }
-    var chart = echarts.init(dom);
-    var tOption = {
-      title : {
-        text : option.title,
-        subtext : option.subTitle
+    let defaultOption = {
+      title: {
+        text: option.title,
+        subtext: option.subTitle
       },
-      tooltip : {
-        trigger : 'axis',
-        axisPointer : {
-          type : 'shadow' // 'line' | 'shadow'
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow' // 'line' | 'shadow'
         }
       },
-      legend : {
-        x : "right",
-        data : chartData.legends
+      legend: {
+        x: "right",
+        data: chartData.legends
       },
-      color : (option.color ? option.color : [ '#f4511e', '#ffb300', '#00897b', '#7CB342', '#708090' ]),
-      grid : {
-        left : '35',
-        right : '15',
-        bottom : '25',
-        containLabel : true
+      color: (option.color ? option.color : ['#f4511e', '#ffb300', '#00897b', '#7CB342', '#708090']),
+      grid: {
+        left: '35',
+        right: '15',
+        bottom: '25',
+        containLabel: true
       },
-      xAxis : [
+      xAxis: [
         {
-          type : 'category',
-          data : chartData.xAxis
+          type: 'category',
+          data: chartData.xAxis
         }
       ],
-      yAxis : [
+      yAxis: [
         {
-          type : 'value'
+          type: 'value'
         }
       ],
-      series : option.chartConfigurations,
-    }
+      series: option.chartConfigurations,
+      dataZoom: []
+    };
     if (chartData.xAxis.length > 20) {
-      tOption.grid.bottom = '45';
-      tOption.dataZoom = [
+      defaultOption.grid.bottom = '45';
+      defaultOption.dataZoom = [
         {
-          type : 'inside',
-          start : 0,
-          end : 20
+          type: 'inside',
+          start: 0,
+          end: 20
         },
         {
-          show : true,
-          height : 17,
-          type : 'slider',
-          top : '90%',
-          xAxisIndex : [ 0 ],
-          start : 0,
-          end : 20,
-          realtime : true,
-          handleIcon : 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-          handleSize : '120%',
-          handleStyle : {
-            color : '#009688',
-            shadowBlur : 3,
-            shadowColor : 'rgba(0, 0, 0, 0.6)',
-            shadowOffsetX : 2,
-            shadowOffsetY : 2
+          show: true,
+          height: 17,
+          type: 'slider',
+          top: '90%',
+          xAxisIndex: [0],
+          start: 0,
+          end: 20,
+          realtime: true,
+          handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+          handleSize: '120%',
+          handleStyle: {
+            color: '#009688',
+            shadowBlur: 3,
+            shadowColor: 'rgba(0, 0, 0, 0.6)',
+            shadowOffsetX: 2,
+            shadowOffsetY: 2
           }
-        } ];
+        }];
     }
-    chart.setOption(tOption, true);
-    return chart;
+    return defaultOption;
   }
+
+  public static build3DChart(chartData, option): any {
+
+    for (var i = 0; i < option.chartConfigurations.length; i++) {
+      for (var j = 0; j < chartData.data.length; j++) {
+        if (option.chartConfigurations[i].name == chartData.data[j].name) {
+          var series = option.chartConfigurations[i];
+          series.data = chartData.data[j].data;
+          chartData.data[j] = series;
+        }
+      }
+    }
+    let defaultOption = {
+      title: {
+        text: option.title,
+        subtext: option.subTitle
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow' // 'line' | 'shadow'
+        }
+      },
+      legend: {
+        x: "center",
+        y: "bottom",
+        data: chartData.legends
+      },
+      color: (option.color ? option.color : ['#f4511e', '#ffb300', '#00897b', '#7CB342', '#708090']),
+      grid: {
+        left: '0',
+        right: '0',
+        top: '10',
+        bottom: '30',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: chartData.xAxis
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: option.chartConfigurations,
+      dataZoom: [],
+    }
+    if (chartData.xAxis.length > 20) {
+      defaultOption.grid.bottom = '45';
+      defaultOption.dataZoom = [
+        {
+          type: 'inside',
+          start: 0,
+          end: 20
+        },
+        {
+          show: true,
+          height: 17,
+          type: 'slider',
+          top: '90%',
+          xAxisIndex: [0],
+          start: 0,
+          end: 20,
+          realtime: true,
+          handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+          handleSize: '120%',
+          handleStyle: {
+            color: '#009688',
+            shadowBlur: 3,
+            shadowColor: 'rgba(0, 0, 0, 0.6)',
+            shadowOffsetX: 2,
+            shadowOffsetY: 2
+          }
+        }];
+    }
+
+    return defaultOption;
+  }
+
 }
 
-
-}
 
 export class EchartDataTrnsformer {
   public static transformForPieChart(originalData) {
@@ -220,7 +223,7 @@ export class EchartDataTrnsformer {
     return finalData;
   }
 
-  public static transformFor2DChart(originalData) {
+  public static transformFor2DChart(originalData): any {
     let finalData = {
       xAxis: [],
       legends: [],
@@ -257,36 +260,32 @@ export class EchartDataTrnsformer {
     return finalData;
   }
 
-  public static transformFor3DChart(originalData) {
+  public static transformFor3DChart(originalData): any {
     var finalData = {
-      "xAxis" : [],
-      "legends" : [],
-      "data" : [],
-      "count" : []
+      "xAxis": [],
+      "legends": [],
+      "data": [],
+      "count": []
     };
-    angular.forEach(originalData.data, function(category) {
+    for (let category of originalData.data) {
       finalData.xAxis.push(category.name);
-      angular.forEach(category.data, function(series) {
+      for (let series of category.data) {
         if (finalData.legends.indexOf(series.name) < 0) {
           finalData.legends.push(series.name);
         }
-      })
-    })
-
-    angular.forEach(finalData.legends, function(legend) {
-      var temp = {
-        name : legend,
-        data : []
       }
-      angular.forEach(originalData.data, function(category) {
-        angular.forEach(category.data, function(data) {
+    }
+    for (let legend of finalData.legends) {
+      var temp = { name: legend, data: [] }
+      for (let category of originalData.data) {
+        for (let data of category.data) {
           if (legend == data.name) {
             temp.data.push(data.data);
           }
-        })
-      })
-      finalData.data.push(temp);
-    })
+        }
+      }
+    }
+    finalData.data.push(temp);
     return finalData;
   }
 }

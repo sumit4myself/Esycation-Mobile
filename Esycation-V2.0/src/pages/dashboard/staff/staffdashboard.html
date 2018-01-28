@@ -42,22 +42,25 @@
   <ion-card>
     <ion-card-content>
       <ion-segment [(ngModel)]="attendanceSegement" color="dark">
-        <ion-segment-button value="weekAttendance" (click)="onWeekAttendanceClicked()">
-          Week Attendance
+        <ion-segment-button value="monthWiseAttendance" (click)="onMonthAttendanceClicked()">
+          Month Wise Attendance
         </ion-segment-button>
-        <ion-segment-button value="monthAttendance" (click)="onMonthAttendanceClicked()">
-          Month Attendance
+        <ion-segment-button value="currentMonthAttendance" (click)="onCurrentMonnthAttendanceClicked()">
+          Current Month Attendance
         </ion-segment-button>
       </ion-segment>
-
-      <!--***********  Pending Requests Segement ***********-->
-      <ion-grid *ngIf="attendanceSegement === 'weekAttendance'" class="padding-vertical-remove">
-        <div echarts [options]="options" class="demo-chart"></div>
-      </ion-grid>
-
-      <!--***********   My Requests  Segement  ***********-->
-      <ion-grid *ngIf="attendanceSegement === 'monthAttendance'">
-
+      <!--***********  Month Wise Attendance Segement ***********-->
+      <observable-loader [observable]="monthWiseAttendanceObservable"></observable-loader>
+        <ion-grid  *ngIf="attendanceSegement === 'monthWiseAttendance'" class="height-200x padding-vertical-remove">
+          <div echarts [options]="options" class="demo-chart"></div>
+        </ion-grid>
+      <!--***********  Current Month  Segement  ***********-->
+      <ion-grid *ngIf="attendanceSegement === 'currentMonthAttendance'" 
+            class="height-300x padding-vertical-remove">
+          <calendar  [eventSource]="eventSource" 
+                  [calendarMode]="calendar.mode" 
+                  [currentDate]="calendar.currentDate" step="30">
+          </calendar>
       </ion-grid>
     </ion-card-content>
   </ion-card>

@@ -7,12 +7,12 @@ import { TimetableService } from "../../../providers/service/timetable/timetable
 import { NgxEchartsModule } from "ngx-echarts";
 import { LoaderModule } from "../../../components/loader/loader.module";
 import { AttendanceService } from '../../../providers/service/attendance/attendance.service';
-
+import { NgCalendarModule } from 'ionic2-calendar';
 @NgModule({
   imports: [
     IonicPageModule.forChild(StaffDashboardComponent),
     NgxEchartsModule,
-    LoaderModule
+    LoaderModule,NgCalendarModule
   ],
   exports: [StaffDashboardComponent],
   declarations: [StaffDashboardComponent],

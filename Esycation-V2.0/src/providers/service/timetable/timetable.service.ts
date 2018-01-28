@@ -27,8 +27,7 @@ export class TimetableService extends BaseService<Timetable> {
     let observable = Observable.create(observer => {
       this.findAll(url).subscribe(
         data => {
-          let day = 1;
-          moment().day();
+          let day = moment().day();
           observer.next(TimetableTransormer.transformToDayTimetable(data, day));
           observer.complete();
         },

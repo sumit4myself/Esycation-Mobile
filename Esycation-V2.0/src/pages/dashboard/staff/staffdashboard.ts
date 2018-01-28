@@ -10,6 +10,7 @@ import { TimetableService } from "../../../providers/service/timetable/timetable
 import { AttendanceService } from '../../../providers/service/attendance/attendance.service';
 import { Observable } from "rxjs/Rx";
 import * as moment from "moment";
+import { EchartOptionBuilder, EchartDataTrnsformer } from '../../../providers/utilits/EChartUtils';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,7 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   //profile section model
   profileObservable: Observable<any>;
 
-  attendanceSegement: string = "weekAttendance";
+  attendanceSegement: string = "monthWiseAttendance";
 
   //Time table section model
   timetableObservable: Observable<any>;
@@ -31,6 +32,7 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   weekTimetable: any = null;
 
   approvalObservable: Observable<any>;
+  monthWiseAttendanceObservable: Observable<any>;
   approvalSegement: string = "pendingRequests";
   myApprovalRequests: any = null;
   approvalRequests: any = null;
@@ -50,6 +52,12 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   profile: Profile = Profile.getInstance();
   imagePath: String = ServerConfig.imagePath();
   attendanceStatReady: boolean = false;
+  eventSource;
+  calendar = {
+    mode: 'month',
+    currentDate: new Date()
+  }; 
+
   teachersAttendanceStatOptions = {
     tooltip: {
       trigger: "axis",
@@ -93,8 +101,8 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   ) {
     super(session, navControl);
     this.currentDay = moment(new Date()).format("dddd");
-
-    console.log("attendanceService==", this.attendanceService);
+    this.attendanceSegement= "monthWiseAttendance";
+  
   }
 
   onPendingItemClick() {
@@ -106,6 +114,8 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
     this.initProfile();
     this.initApprovalRequests();
     this.initTodayTimetable();
+    this.initMonthWiseAttendance();
+
   }
 
   onView(viewName: string) {
@@ -138,65 +148,32 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
   onMonthAttendanceClicked() {
     let startOfMonth = moment().startOf('month').format('DD/MM/YYYY');
     let endOfMonth = moment().endOf('month').format('DD/MM/YYYY');
-    this.attendanceService.attendanceStatistics(this.session.findRemote(),
+    this.monthWiseAttendanceObservable= Observable.create(observer => {
+      this.attendanceService.attendanceStatistics(this.session.findRemote(),
       this.session.findModule(), startOfMonth, endOfMonth)
       .subscribe(data => {
-        console.log(data);
-      })
-
-
+        this.options = EchartOptionBuilder.
+        build3DChart(EchartDataTrnsformer.transformFor3DChart(data), 
+        this.monthWiseAtttendanceOptions());     
+        observer.next(data);
+        observer.complete();
+      });
+    });
+   
   }
 
-  onWeekAttendanceClicked() { }
+  onCurrentMonnthAttendanceClicked() { 
+
+    console.log("onCurrentMonnthAttendanceClicked..");
+   // this.eventSource =  this.createRandomEvents(); 
+  }
 
   ngOnInit() {
-    let xAxisData = [];
-    let data1 = [];
-    let data2 = [];
+   
+  }
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push("category" + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
-    }
-
-    this.options = {
-      legend: {
-        data: ["bar", "bar2"],
-        align: "left"
-      },
-      tooltip: {},
-      xAxis: {
-        data: xAxisData,
-        silent: false,
-        splitLine: {
-          show: false
-        }
-      },
-      yAxis: {},
-      series: [
-        {
-          name: "bar",
-          type: "bar",
-          data: data1,
-          animationDelay: function (idx) {
-            return idx * 10;
-          }
-        },
-        {
-          name: "bar2",
-          type: "bar",
-          data: data2,
-          animationDelay: function (idx) {
-            return idx * 10 + 100;
-          }
-        }
-      ],
-      animationEasing: "elasticOut",
-      animationDelayUpdate: function (idx) {
-        return idx * 5;
-      }
-    };
+  initMonthWiseAttendance(){
+    this.onMonthAttendanceClicked();
   }
 
   initProfile() {
@@ -288,4 +265,90 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
         });
     });
   }
+
+
+  monthWiseAtttendanceOptions():any{
+
+    let chartConfiguration = {
+          yAxis : "Count",
+          color : [ '#00897b','#f4511e','#ffb300', '#00acc1', '#8bc34a' ],
+          chartConfigurations : [
+            {
+              name : 'PRESENT',
+              type : 'bar',
+              stack : 'stack',
+              barWidth : 10,
+            },
+            {
+              name : 'ABSENT',
+              type : 'bar',
+              stack : 'stack',
+              barWidth : 10,
+            },
+            {
+              name : 'LEAVE',
+              type : 'bar',
+              stack : 'stack',
+              barWidth : 10,
+            },
+            {
+              name : 'HOLIDAY',
+              type : 'bar',
+              stack : 'stack',
+              barWidth : 10,
+            },
+            {
+              name : 'WORKING_DAYS',
+              type : 'bar',
+              barWidth : 10,
+            }
+          ]
+        };
+       return chartConfiguration;
+  }
+
+  createRandomEvents():any {
+    var events = [];
+
+    
+    for (var i = 0; i < 5; i += 1) {
+        var date = new Date();
+        var eventType = Math.floor(Math.random() * 2);
+        var startDay = Math.floor(Math.random() * 90) - 45;
+        var endDay = Math.floor(Math.random() * 2) + startDay;
+        var startTime;
+        var endTime;
+
+        //console.log("eventType==",eventType,"startDay==",startDay,"endDay=",endDay,"startTime=",startTime,"endTime==",endTime);
+        if (eventType === 0) {
+            startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
+            if (endDay === startDay) {
+                endDay += 1;
+            }
+            endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
+            events.push({
+                title: 'All Day - ' + i,
+                startTime: startTime,
+                endTime: endTime,
+                allDay: true
+            });
+        } else {
+            var startMinute = Math.floor(Math.random() * 24 * 60);
+            var endMinute = Math.floor(Math.random() * 180) + startMinute;
+            startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
+            endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
+            events.push({
+                title: 'Event - ' + i,
+                startTime: startTime,
+                endTime: endTime,
+                allDay: false
+            });
+        }
+    }
+
+    console.log(JSON.stringify(events));
+
+    return events;
+}
+
 }

@@ -63,4 +63,12 @@ export class AttendanceService extends BaseService<StudentAttendanceDetails>{
       + "/attendances/report/statistics/" + remoteId + "/" + module + "?fromDate=" + fromDate + "&toDate=" + toDate + "";
     return this.findAll(url);
   }
+
+  public attendanceReportDateWise(remoteId: number, module: string, fromDate: string, toDate: string): Observable<any> {
+
+    let url: string = ServerConfig.getPath()
+      + "/attendances/report/" + remoteId + "/" + module + "?fromDate=" + fromDate + "&toDate=" + toDate + "";
+    return this.findAll(url);
+
+  }
 }      
