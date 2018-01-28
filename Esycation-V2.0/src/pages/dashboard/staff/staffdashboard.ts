@@ -7,6 +7,7 @@ import { ServerConfig } from "../../../providers/config";
 import { BaseComponent } from "../../baseComponent/base.component";
 import { ApprovalService } from "../../../providers/service/approvel/approvel.service";
 import { TimetableService } from "../../../providers/service/timetable/timetable.service";
+import { AttendanceService } from '../../../providers/service/attendance/attendance.service';
 import { Observable } from "rxjs/Rx";
 import * as moment from "moment";
 
@@ -87,10 +88,13 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
     protected session: UserSessionService,
     private approvalService: ApprovalService,
     public profileService: ProfileService,
-    private timetableService: TimetableService
+    private timetableService: TimetableService,
+    private attendanceService: AttendanceService
   ) {
     super(session, navControl);
     this.currentDay = moment(new Date()).format("dddd");
+
+    console.log("attendanceService==", this.attendanceService);
   }
 
   onPendingItemClick() {
@@ -131,8 +135,19 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
     this.initWeekTimetable();
   }
 
-  onMonthAttendanceClicked() {}
-  onWeekAttendanceClicked() {}
+  onMonthAttendanceClicked() {
+    let startOfMonth = moment().startOf('month').format('DD/MM/YYYY');
+    let endOfMonth = moment().endOf('month').format('DD/MM/YYYY');
+    this.attendanceService.attendanceStatistics(this.session.findRemote(),
+      this.session.findModule(), startOfMonth, endOfMonth)
+      .subscribe(data => {
+        console.log(data);
+      })
+
+
+  }
+
+  onWeekAttendanceClicked() { }
 
   ngOnInit() {
     let xAxisData = [];
@@ -164,7 +179,7 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
           name: "bar",
           type: "bar",
           data: data1,
-          animationDelay: function(idx) {
+          animationDelay: function (idx) {
             return idx * 10;
           }
         },
@@ -172,13 +187,13 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
           name: "bar2",
           type: "bar",
           data: data2,
-          animationDelay: function(idx) {
+          animationDelay: function (idx) {
             return idx * 10 + 100;
           }
         }
       ],
       animationEasing: "elasticOut",
-      animationDelayUpdate: function(idx) {
+      animationDelayUpdate: function (idx) {
         return idx * 5;
       }
     };
@@ -188,24 +203,24 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
     this.profileObservable = Observable.create(observer => {
       this.profileService
         .findProfileDetails(
-          this.session.findRemote(),
-          this.session.findModule()
+        this.session.findRemote(),
+        this.session.findModule()
         )
         .subscribe(
-          data => {
-            this.profile = Object.assign(this.profile, data);
-            observer.next(data);
-            observer.complete();
-          },
-          error => {
-            this.errorMessage =
-              "Unable to connect. Please try after some time. [ " +
-              error +
-              " ]";
-            this.isLoaded = false;
-            observer.next(null);
-            observer.complete();
-          }
+        data => {
+          this.profile = Object.assign(this.profile, data);
+          observer.next(data);
+          observer.complete();
+        },
+        error => {
+          this.errorMessage =
+            "Unable to connect. Please try after some time. [ " +
+            error +
+            " ]";
+          this.isLoaded = false;
+          observer.next(null);
+          observer.complete();
+        }
         );
     });
   }
@@ -248,7 +263,7 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
         .findTodayTimetableByTeacherId(this.session.findRemote())
         .subscribe(data => {
           if (data) {
-            this.todayTimetable =data;
+            this.todayTimetable = data;
           } else {
             this.todayTimetable = null;
           }

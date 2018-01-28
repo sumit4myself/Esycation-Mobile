@@ -300,6 +300,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
                 let stu = Object.assign({}, student);
                 this.students.push(stu);
             }
+            
         }
         if (this.notification.selectionValues.batches) {
             for (let batche of this.notification.selectionValues.batches) {

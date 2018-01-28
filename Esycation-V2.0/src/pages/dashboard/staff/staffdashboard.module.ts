@@ -5,8 +5,8 @@ import { ProfileService } from "../../../providers/service/profile/profile.servi
 import { ApprovalService } from "../../../providers/service/approvel/approvel.service";
 import { TimetableService } from "../../../providers/service/timetable/timetable.service";
 import { NgxEchartsModule } from "ngx-echarts";
-
 import { LoaderModule } from "../../../components/loader/loader.module";
+import { AttendanceService } from '../../../providers/service/attendance/attendance.service';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { LoaderModule } from "../../../components/loader/loader.module";
   ],
   exports: [StaffDashboardComponent],
   declarations: [StaffDashboardComponent],
-  providers: [ProfileService, ApprovalService, TimetableService]
+  providers: [ProfileService, ApprovalService, TimetableService, AttendanceService]
 })
-export class StaffDashboardModule {}
+export class StaffDashboardModule { }
