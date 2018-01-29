@@ -145,7 +145,7 @@ export class EchartOptionBuilder {
         }
       },
       legend: {
-        x: "center",
+        x: "left",
         y: "bottom",
         data: chartData.legends
       },
@@ -153,8 +153,8 @@ export class EchartOptionBuilder {
       grid: {
         left: '0',
         right: '0',
-        top: '10',
-        bottom: '30',
+        top: '20',
+        bottom: '50',
         containLabel: true
       },
       xAxis: [
