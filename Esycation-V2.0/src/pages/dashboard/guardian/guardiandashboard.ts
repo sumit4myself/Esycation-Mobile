@@ -209,7 +209,7 @@ export class GuardianDashboardComponent {
               chartConfiguration.chartConfigurations.push({
                 name: legend,
                 type: 'bar',
-                barWidth: 10,
+                //barWidth: 10,
               });
             }
             this.examWiswResultOption = EchartOptionBuilder.
