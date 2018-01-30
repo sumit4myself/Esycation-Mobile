@@ -18,11 +18,13 @@
                     <ion-row>
                         <ion-col col-3>
                             <ion-avatar item-start>
-                                <img [src]="student.imageId == null ? 'assets/img/student-f.png' : imagePath +'/'+ student.imageId" />
+                                <img *ngIf="student.gender=='Female' || student.gender=='F'"  [src]="student.imageId == null ? 'assets/img/student-f.png' : imagePath +'/'+ student.imageId" />
+                                <img *ngIf="student.gender==null || student.gender=='Male' || student.gender=='M'"  [src]="student.imageId == null ? 'assets/img/student-m.png' : imagePath +'/'+ student.imageId" />
                             </ion-avatar>
                         </ion-col>
                         <ion-col col-9 text-left>
-                            <h1>{{student.name}}</h1>
+                            <p>{{student.name}} </p>
+                            <p>RollNumber : {{student.admissionId.registrations[0].rollNumber}} </p>
                         </ion-col>
                     </ion-row>
                 </ion-slide>
@@ -40,8 +42,9 @@
                     </ion-avatar>
                 </ion-col>
                 <ion-col col-9 text-left>
-                    <h1>{{teacher.name}} | {{teacher.designationId.name}} </h1>
-                    <h4>{{teacher.mobile}} </h4>
+                    <p>{{teacher.name}} </p>
+                    <p>Designation : {{teacher.designationId.name}} </p>
+                    <p><ion-icon ios="ios-call" md="md-call"></ion-icon> {{teacher.mobile}} </p>
                 </ion-col>
             </ion-row>
         </ion-card-content>
@@ -57,9 +60,6 @@
       <ion-segment-button value="currentMonthAttendance" (click)="onCurrentMonnthAttendanceClicked()">
         Current Month Attendance
       </ion-segment-button>
-      <ion-segment-button value="result" (click)="onResultlicked()">
-        Result Statistics
-      </ion-segment-button>
     </ion-segment>
     <!--$$$$$$$$$$$$$ Month Wise Attendance Segement $$$$$$$$$$$$$$$-->
     <observable-loader [observable]="monthWiseAttendanceObservable"></observable-loader>
@@ -74,29 +74,50 @@
                 [currentDate]="calendar.currentDate" step="30">
         </calendar>
     </ion-grid>
-     <!--$$$$$$$$$$$$$ Result Segement $$$$$$$$$$$$$$$-->
-     <observable-loader [observable]="resultObservable"></observable-loader>
-     <ion-grid  *ngIf="attendanceSegement === 'result'" class="height-200x padding-vertical-remove">
-       <div echarts [options]="options" class="demo-chart"></div>
-     </ion-grid>
   </ion-card-content>
 </ion-card>
 <!--*********** end attendance Segement ***********-->
+<!--*********** Result Segement ***********-->
+<ion-card>
+    <ion-card-content>
+      <ion-segment [(ngModel)]="resultSegement" color="dark">
+        <ion-segment-button value="examWiseResult" (click)="onExamWiseResultClick()">
+            Exam wise Result
+        </ion-segment-button>
+        <ion-segment-button value="termWiseResult" (click)="onTermwiseResultClick()">
+            Term wise Result
+        </ion-segment-button>
+      </ion-segment>
+      <!--$$$$$$$$$$$$$ Month Wise Attendance Segement $$$$$$$$$$$$$$$-->
+      <observable-loader [observable]="examWiseResultObservable"></observable-loader>
+        <ion-grid  *ngIf="resultSegement === 'examWiseResult'" class="height-200x padding-vertical-remove">
+          <div echarts [options]="examWiswResultOption" class="demo-chart"></div>
+        </ion-grid>
+       <!--$$$$$$$$$$$$$ Result Segement $$$$$$$$$$$$$$$-->
+       <observable-loader [observable]="termWiseResultObservable"></observable-loader>
+       <ion-grid  *ngIf="resultSegement === 'termWiseResult'" class="height-200x padding-vertical-remove">
+         <div echarts [options]="termWiswResultOption" class="demo-chart"></div>
+       </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!--*********** end Result Segement ***********-->
+
+
 
    <!--*********** Approval Segement ***********-->
   <ion-card>
         <ion-card-content>
           <ion-segment [(ngModel)]="approvalSegement" color="dark">
-            <ion-segment-button value="pendingRequests" (click)="onPendingRequestClicked()">
-              Pending Requests
-            </ion-segment-button>
             <ion-segment-button value="myRequests" (click)="onMyRequestClicked()">
               My Requests
             </ion-segment-button>
+            <ion-segment-button value="studentRequests" (click)="onStudentRequestClicked()">
+                {{studentName}} Requests
+            </ion-segment-button>
           </ion-segment>
-          <observable-loader [observable]="approvalObservable"></observable-loader>
+          <observable-loader [observable]="requestObservable"></observable-loader>
           <!--***********  Pending Requests Segement ***********-->
-          <ion-grid *ngIf="approvalSegement === 'pendingRequests'" class="padding-vertical-remove">
+          <ion-grid *ngIf="approvalSegement === 'studentRequests'" class="padding-vertical-remove">
             <ion-item *ngIf="approvalRequests == null">
               <ion-grid>
                 <ion-row>

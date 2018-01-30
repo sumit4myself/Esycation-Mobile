@@ -20,25 +20,33 @@ import { EchartOptionBuilder, EchartDataTrnsformer } from '../../../providers/ut
 export class GuardianDashboardComponent {
 
   @ViewChild("slides") slides: Slides;
-  approvalSegement: string = "pendingRequests";
+  approvalSegement: string = "myRequests";
   attendanceSegement: string = "monthWiseAttendance";
+  resultSegement: string = "examWiseResult";
   imagePath: String = ServerConfig.imagePath();
   studentId: number;
   studentObservable: Observable<any>;
   reportingTeacherObservable: Observable<any>;
-  approvalObservable: Observable<any>;
+  requestObservable: Observable<any>;
   monthWiseAttendanceObservable: Observable<any>;
-  resultObservable: Observable<any>;
+
+  examWiseResultObservable: Observable<any>;
+  termWiseResultObservable: Observable<any>;
+
   students: Array<Student> = new Array<Student>();
   teacher: Staff = new Staff();
   myApprovalRequests: any = null;
   approvalRequests: any = null;
+  results: any = null;
   options: any;
+  examWiswResultOption: any = null;
+  termWiswResultOption: any = null;
   eventSource;
+  studentName: string;
   calendar = {
     mode: 'month',
     currentDate: new Date()
-  }; 
+  };
 
   constructor(
     private navContrle: NavController,
@@ -48,13 +56,22 @@ export class GuardianDashboardComponent {
     private staffService: StaffService,
     private attendanceService: AttendanceService) {
     let currentDay = moment(new Date()).format("dddd");
-    console.log(this.navContrle, this.approvalService);
+
     console.log("currentDay==", currentDay);
   }
 
   ionViewDidLoad() {
 
     this.initStudents();
+    this.onMyRequestClicked();
+    this.onMonthAttendanceClicked();
+  }
+
+  onPendingRequest(module, taskId) {
+    console.log("taskId==", taskId);
+    if (module == "STUDENT_LEAVE") {
+      //this.navContrle.push("ApproveStudentLeaveComponent", { taskId: taskId });
+    }
   }
 
   onStudentSlide(studentId: number) {
@@ -62,12 +79,12 @@ export class GuardianDashboardComponent {
     console.log("studentId===", studentId);
   }
 
-  onPendingRequestClicked() {
-    this.initApprovalRequests(this.studentId);
+  onStudentRequestClicked() {
+    this.initStudentApprovalRequests(this.studentId);
   }
 
   onMyRequestClicked() {
-    this.initMyApprovalRequests(this.studentId);
+    this.initMyApprovalRequests();
   }
 
   onCurrentMonnthAttendanceClicked() {
@@ -76,7 +93,31 @@ export class GuardianDashboardComponent {
 
   }
 
-  onResultlicked() {
+  onStudentApprovalRequestsClicked() {
+
+  }
+
+  onTermwiseResultClick() {
+    this.initTermWiseResult(this.studentId);
+  }
+  onExamWiseResultClick() {
+    this.initExamWiseResult(this.studentId);
+  }
+
+  onMonthAttendanceClicked() {
+    let startOfMonth = moment().startOf('month').format('DD/MM/YYYY');
+    let endOfMonth = moment().endOf('month').format('DD/MM/YYYY');
+    this.monthWiseAttendanceObservable = Observable.create(observer => {
+      this.attendanceService.attendanceStatistics(this.session.findRemote(),
+        this.session.findModule(), startOfMonth, endOfMonth)
+        .subscribe(data => {
+          this.options = EchartOptionBuilder.
+            build3DChart(EchartDataTrnsformer.transformFor3DChart(data),
+            this.monthWiseAtttendanceOptions());
+          observer.next(data);
+          observer.complete();
+        });
+    });
 
   }
 
@@ -89,9 +130,12 @@ export class GuardianDashboardComponent {
             for (let student of data.contents) {
               this.students.push(Object.assign({}, student));
             }
-            this.initReportingTeacher(this.students[0].id);
-            this.initApprovalRequests(this.students[0].id);
             this.studentId = this.students[0].id;
+            this.studentName = this.students[0].name;
+            this.initReportingTeacher(this.studentId);
+            // this.initStudentApprovalRequests(this.studentId);
+            this.onExamWiseResultClick();
+            this.monthWiseAttendanceObservable
           }
           observer.next(data);
           observer.complete();
@@ -111,10 +155,10 @@ export class GuardianDashboardComponent {
 
   }
 
-  initMyApprovalRequests(studentId: number) {
-    this.approvalObservable = Observable.create(observer => {
+  initMyApprovalRequests() {
+    this.requestObservable = Observable.create(observer => {
       this.approvalService
-        .findMyRequests(studentId)
+        .findMyRequests(this.session.findUserId())
         .subscribe(data => {
           if (data.contents && data.contents.length) {
             this.myApprovalRequests = data.contents;
@@ -127,11 +171,12 @@ export class GuardianDashboardComponent {
     });
   }
 
-  initApprovalRequests(studentId: number) {
 
-    this.approvalObservable = Observable.create(observer => {
+  initStudentApprovalRequests(studentId: number) {
+
+    this.requestObservable = Observable.create(observer => {
       this.approvalService
-        .findRequests(studentId)
+        .findStudentApprovalRequests(studentId)
         .subscribe(data => {
           if (data.contents && data.contents.length) {
             this.approvalRequests = data.contents;
@@ -142,23 +187,76 @@ export class GuardianDashboardComponent {
           observer.complete();
         });
     });
+
   }
 
-  onMonthAttendanceClicked() {
-    let startOfMonth = moment().startOf('month').format('DD/MM/YYYY');
-    let endOfMonth = moment().endOf('month').format('DD/MM/YYYY');
-    this.monthWiseAttendanceObservable = Observable.create(observer => {
-      this.attendanceService.attendanceStatistics(this.session.findRemote(),
-        this.session.findModule(), startOfMonth, endOfMonth)
+
+  initExamWiseResult(studentId: number) {
+
+    this.examWiseResultObservable = Observable.create(observer => {
+      this.approvalService
+        .findStudentResultStatistic(studentId)
         .subscribe(data => {
-          this.options = EchartOptionBuilder.
-            build3DChart(EchartDataTrnsformer.transformFor3DChart(data),
-            this.monthWiseAtttendanceOptions());
+          if (data.data && data.data.length) {
+
+            var chartConfiguration = {
+              yAxis: "Percentage ( % )",
+              chartConfigurations: []
+            };
+
+            let tempData = EchartDataTrnsformer.transformFor3DChart(data);
+            for (let legend of tempData.legends) {
+              chartConfiguration.chartConfigurations.push({
+                name: legend,
+                type: 'bar',
+                barWidth: 10,
+              });
+            }
+            this.examWiswResultOption = EchartOptionBuilder.
+              build3DChart(tempData, chartConfiguration);
+          } else {
+            this.results = null;
+          }
           observer.next(data);
           observer.complete();
         });
     });
 
+  }
+
+  initTermWiseResult(studentId: number) {
+
+    this.termWiseResultObservable = Observable.create(observer => {
+      this.approvalService
+        .findTermWiseResultStatistics(studentId)
+        .subscribe(data => {
+
+          if (data.data && data.data.length) {
+
+            var chartConfiguration = {
+              yAxis: "Percentage ( % )",
+              chartConfigurations: []
+            };
+
+            let tempData = EchartDataTrnsformer.transformFor3DChart(data);
+            for (let legend of tempData.legends) {
+              chartConfiguration.chartConfigurations.push({
+                name: legend,
+                type: 'bar',
+                barWidth: 10,
+              });
+            }
+            this.termWiswResultOption = EchartOptionBuilder.
+              build3DChart(tempData, chartConfiguration);
+          } else {
+            this.results = null;
+          }
+          observer.next(data);
+          observer.complete();
+
+
+        });
+    });
   }
 
 

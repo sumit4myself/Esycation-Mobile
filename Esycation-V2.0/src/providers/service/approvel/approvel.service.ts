@@ -59,6 +59,16 @@ export class ApprovalService extends BaseService<any> {
     return this.findAll(url);
   }
 
+
+  public findTermWiseResultStatistics(studentId: number): Observable<any> {
+    let url: string =
+      ServerConfig.getPath() + "/results/report/statistics/term/" + studentId;
+    return this.findAll(url);
+  }
+
+
+
+
   public approve(taskId: number, comment: string): Observable<any> {
     let url: string =
       ServerConfig.getPath() +
@@ -97,6 +107,15 @@ export class ApprovalService extends BaseService<any> {
       "/approvals/myRequests/" +
       userId +
       "?suppressError=true&page=1&size=50";
+    return this.findAll(url);
+  }
+
+  public findStudentApprovalRequests(studentId: number): Observable<any> {
+    let url: string =
+      ServerConfig.getPath() +
+      "/approvals/myRequests/" +
+      studentId +
+      "/STUDENT?suppressError=true&page=1&size=50";
     return this.findAll(url);
   }
 

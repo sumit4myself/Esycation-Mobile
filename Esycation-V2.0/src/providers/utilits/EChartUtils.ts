@@ -151,8 +151,8 @@ export class EchartOptionBuilder {
       },
       color: (option.color ? option.color : ['#f4511e', '#ffb300', '#00897b', '#7CB342', '#708090']),
       grid: {
-        left: '0',
-        right: '0',
+        // left: '0',
+        //right: '0',
         top: '20',
         bottom: '50',
         containLabel: true
@@ -276,7 +276,7 @@ export class EchartDataTrnsformer {
       }
     }
     for (let legend of finalData.legends) {
-      var temp = { name: legend, data: [] }
+      let temp = { name: legend, data: [] }
       for (let category of originalData.data) {
         for (let data of category.data) {
           if (legend == data.name) {
@@ -284,8 +284,9 @@ export class EchartDataTrnsformer {
           }
         }
       }
+      finalData.data.push(temp);
     }
-    finalData.data.push(temp);
+
     return finalData;
   }
 }
