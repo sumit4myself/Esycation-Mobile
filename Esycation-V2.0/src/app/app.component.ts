@@ -18,7 +18,7 @@ import { UserSessionService } from "../providers/service/core/user.session.servi
 // import { Push } from "@ionic-native/push";
 import { CommonServices } from "../providers/service/common/common.service";
 import { DeviceService } from "../providers/service/notification/device.service";
-import { FCM } from '@ionic-native/fcm';
+import { FCM } from "@ionic-native/fcm";
 
 @Component({
   templateUrl: "app.html"
@@ -96,13 +96,12 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      
-      if(this.platform.is('cordova')){
+
+      if (this.platform.is("cordova")) {
         this.pushNotificationSetup();
-      }
-      else{
+      } else {
         console.log("web View..");
-      }    
+      }
       this.showedAlert = false;
       var lastTimeBackPress = 0;
       var timePeriodToExit = 2000;
@@ -191,13 +190,13 @@ export class MyApp {
   }
 
   pushNotificationSetup() {
-    this.fcm.subscribeToTopic('education');
-    this.fcm.getToken().then(token=>{
-        if(token&&token.length>0)
-          localStorage.setItem("registrationId", token);
+    this.fcm.subscribeToTopic("education");
+    this.fcm.getToken().then(token => {
+      if (token && token.length > 0)
+        localStorage.setItem("registrationId", token);
     });
-    this.fcm.onNotification().subscribe(data=>{
-      if(data.wasTapped){
+    this.fcm.onNotification().subscribe(data => {
+      if (data.wasTapped) {
       } else {
         this.commonServices.presentToast(
           "You have new notification.",
@@ -205,11 +204,11 @@ export class MyApp {
           "info"
         );
         this.events.publish("notification:updateCount");
-      };
+      }
     });
-    this.fcm.onTokenRefresh().subscribe(token=>{
-      if(token&&token.length>0)
+    this.fcm.onTokenRefresh().subscribe(token => {
+      if (token && token.length > 0)
         localStorage.setItem("registrationId", token);
-    })
+    });
   }
 }
