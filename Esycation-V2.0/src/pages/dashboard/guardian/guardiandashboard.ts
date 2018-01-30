@@ -6,6 +6,7 @@ import { ApprovalService } from "../../../providers/service/approvel/approvel.se
 import { StudentService } from "../../../providers/service/student/student.service";
 import { StaffService } from "../../../providers/service/staff/staff.service";
 import { AttendanceService } from "../../../providers/service/attendance/attendance.service";
+import { BatchService } from "../../../providers/service/batch/batch.service";
 import * as moment from "moment";
 import { Observable } from "rxjs/Rx";
 import { Student } from '../../../providers/model/student/model.student';
@@ -23,12 +24,14 @@ export class GuardianDashboardComponent {
   approvalSegement: string = "myRequests";
   attendanceSegement: string = "monthWiseAttendance";
   resultSegement: string = "examWiseResult";
+  timeTableSegement : string = "timetable";
   imagePath: String = ServerConfig.imagePath();
   studentId: number;
   studentObservable: Observable<any>;
   reportingTeacherObservable: Observable<any>;
   requestObservable: Observable<any>;
   monthWiseAttendanceObservable: Observable<any>;
+  timeTableObservable: Observable<any>;
 
   examWiseResultObservable: Observable<any>;
   termWiseResultObservable: Observable<any>;
@@ -41,6 +44,7 @@ export class GuardianDashboardComponent {
   options: any;
   examWiswResultOption: any = null;
   termWiswResultOption: any = null;
+  timeTables: any = null;
   eventSource;
   studentName: string;
   calendar = {
@@ -54,10 +58,11 @@ export class GuardianDashboardComponent {
     private studentService: StudentService,
     private approvalService: ApprovalService,
     private staffService: StaffService,
-    private attendanceService: AttendanceService) {
+    private attendanceService: AttendanceService,
+    private batchService: BatchService) {
     let currentDay = moment(new Date()).format("dddd");
 
-    console.log("currentDay==", currentDay);
+    console.log("currentDay==", currentDay,this.navContrle);
   }
 
   ionViewDidLoad() {
@@ -104,6 +109,10 @@ export class GuardianDashboardComponent {
     this.initExamWiseResult(this.studentId);
   }
 
+  onTimeTableClick(){
+    this.initBatchTimeTable(this.studentId);
+  }
+
   onMonthAttendanceClicked() {
     let startOfMonth = moment().startOf('month').format('DD/MM/YYYY');
     let endOfMonth = moment().endOf('month').format('DD/MM/YYYY');
@@ -135,7 +144,7 @@ export class GuardianDashboardComponent {
             this.initReportingTeacher(this.studentId);
             // this.initStudentApprovalRequests(this.studentId);
             this.onExamWiseResultClick();
-            this.monthWiseAttendanceObservable
+            this.initBatchTimeTable(this.studentId);
           }
           observer.next(data);
           observer.complete();
@@ -259,6 +268,21 @@ export class GuardianDashboardComponent {
     });
   }
 
+  initBatchTimeTable(studentId: number) {
+
+    this.timeTableObservable = Observable.create(observer => {
+      this.batchService.findBatchTimetablesByStudentId(studentId)
+        .subscribe(data => {
+          if(data){
+            this.timeTables = data;
+          }else{
+            this.timeTables=null;
+          }
+          observer.next(data);
+          observer.complete();
+        });
+    });
+  }
 
   monthWiseAtttendanceOptions(): any {
 

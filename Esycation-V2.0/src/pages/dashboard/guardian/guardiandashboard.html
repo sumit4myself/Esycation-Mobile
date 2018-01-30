@@ -102,6 +102,49 @@
   </ion-card>
   <!--*********** end Result Segement ***********-->
 
+  <!--*********** Time Table Segement ***********-->
+<ion-card>
+  <ion-card-content>
+    <ion-segment [(ngModel)]="timeTableSegement" color="dark">
+      <ion-segment-button value="timetable" (click)="onTimeTableClick()">
+          Time Table
+      </ion-segment-button>
+    </ion-segment>
+    <observable-loader [observable]="timeTableObservable"></observable-loader>
+      <ion-grid  *ngIf="timeTableSegement === 'timetable'" class="height-200x padding-vertical-remove">
+        <ion-item *ngIf="timeTables == null">
+          <ion-grid>
+            <ion-row>
+              <ion-col align="center">
+                Time table not found </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <span *ngIf="timeTables != null">
+          <ion-scroll scrollY="true" class="height-300x">
+            <ion-item *ngFor="let timeTable of timeTables.timetableDays" class="padding-vertical-remove">
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col>
+                    <div class="text-normal" align="left">{{timeTable.dayName}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let period of timeTable.periods">
+                  <ion-col col-3>
+                    <h6 class="text-xsmall text-muted" align="left">{{period.subjectId.name}}</h6>
+                  </ion-col>
+                  <ion-col col-9 >
+                    <h6 class="text-xsmall text-muted" align="right">{{period.start}} - {{period.start}}</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-scroll>
+        </span>
+      </ion-grid>
+  </ion-card-content>
+</ion-card>
+<!--*********** end Time table Segement ***********-->
 
 
    <!--*********** Approval Segement ***********-->

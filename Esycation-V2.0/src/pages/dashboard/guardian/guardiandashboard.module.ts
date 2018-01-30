@@ -5,6 +5,7 @@ import { ApprovalService } from "../../../providers/service/approvel/approvel.se
 import { StudentService } from "../../../providers/service/student/student.service";
 import { StaffService } from "../../../providers/service/staff/staff.service";
 import { AttendanceService } from "../../../providers/service/attendance/attendance.service";
+import {BatchService} from "../../../providers/service/batch/batch.service";
 import { NgxEchartsModule } from "ngx-echarts";
 import { LoaderModule } from "../../../components/loader/loader.module";
 import { NgCalendarModule } from 'ionic2-calendar';
@@ -15,6 +16,6 @@ import { NgCalendarModule } from 'ionic2-calendar';
   ],
   exports: [GuardianDashboardComponent],
   declarations: [GuardianDashboardComponent],
-  providers: [StaffService, ApprovalService, StudentService, AttendanceService]
+  providers: [StaffService, ApprovalService, StudentService, AttendanceService,BatchService]
 })
 export class GuardianDashboardModule { }
