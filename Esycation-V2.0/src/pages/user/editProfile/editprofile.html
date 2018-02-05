@@ -47,7 +47,6 @@
                         <ion-input formControlName="name" type="text">
                         </ion-input>
                     </ion-item>
-
                     <ion-item>
                         <ion-label color="darkGray" stacked>Gender *
                             <p class="error" *ngIf="!profileForm.controls['gender'].valid">This field is required *</p>
@@ -62,7 +61,8 @@
                         <ion-label color="darkGray" stacked>Date Of Birth *
                             <p class="error" *ngIf="!profileForm.controls['dob'].valid">This field is required *</p>
                         </ion-label>
-                        <ion-datetime formControlName="dob" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
+                        <ion-datetime formControlName="dob" 
+                        pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
                         </ion-datetime>
                     </ion-item>
                     <ion-item>

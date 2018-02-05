@@ -67,8 +67,8 @@ export class AddBulkNotificationComponent extends BaseComponent {
     buildForm() {
 
         let currentTime = moment(new Date()).format("HH:mm");
-        let currentDate = moment(new Date()).format("DD/MM/YYYY");
-
+        let currentDate = moment(new Date()).format("YYYY-MM-DD");
+        
 
         this.bulkNotificationForm = this.formBuilder.group({
             receiverType: ['', [<any>Validators.required]],

@@ -14,45 +14,6 @@ export class ApprovalService extends BaseService<any> {
     super(http, errorHandler);
   }
 
-
-
-  public findTeachersClasses(userId: number): Observable<any> {
-    let url: string = ServerConfig.getPath() + "/teacherTimetables/" + userId;
-    return this.findAll(url);
-  }
-
-  public findTeachersAttendanceStatistic(
-    userId: number,
-    fromDate: string,
-    toDate: string
-  ): Observable<any> {
-    let url: string =
-      ServerConfig.getPath() +
-      "/attendances/report/statistics/" +
-      userId +
-      "/STAFF?suppressError=true&fromDate=" +
-      fromDate +
-      "&toDate=" +
-      toDate;
-    return this.findAll(url);
-  }
-
-  public findStudentAttendanceStatistic(
-    studentId: number,
-    fromDate: string,
-    toDate: string
-  ): Observable<any> {
-    let url: string =
-      ServerConfig.getPath() +
-      "/attendances/report/statistics/" +
-      studentId +
-      "/STUDENT?fromDate=" +
-      fromDate +
-      "&toDate=" +
-      toDate;
-    return this.findAll(url);
-  }
-
   public findStudentResultStatistic(studentId: number): Observable<any> {
     let url: string =
       ServerConfig.getPath() + "/results/report/statistics/exam/" + studentId;
@@ -65,10 +26,6 @@ export class ApprovalService extends BaseService<any> {
       ServerConfig.getPath() + "/results/report/statistics/term/" + studentId;
     return this.findAll(url);
   }
-
-
-
-
   public approve(taskId: number, comment: string): Observable<any> {
     let url: string =
       ServerConfig.getPath() +
@@ -86,6 +43,17 @@ export class ApprovalService extends BaseService<any> {
       "/approvals/requests/" +
       taskId +
       "/reject?comment=" +
+      comment;
+
+    return this.find(url);
+  }
+
+  public cancel(processInstanceId: number, comment: string): Observable<any> {
+    let url: string =
+      ServerConfig.getPath() +
+      "/approvals/requests/" +
+      processInstanceId +
+      "/cancel?comment=" +
       comment;
 
     return this.find(url);
@@ -122,6 +90,32 @@ export class ApprovalService extends BaseService<any> {
   public findRequest(taskId: number): Observable<any> {
     let url: string =
       ServerConfig.getPath() + "/approvals/requests/" + taskId + "/task";
+    return this.findAll(url);
+  }
+
+  public findMyRequest(request:any): Observable<any>{
+
+    let url:string =  ServerConfig.getPath() ;
+    let myRequesturl:string="";
+    if(request.module=='STAFF'){
+      myRequesturl = "/staffHistories/"+request.targetId;
+    }
+    else if(request.module=='GUARDIAN'){
+      myRequesturl = "/guardianHistories/"+request.targetId;
+    }
+    else if(request.module=='STUDENT'){
+      myRequesturl = "/studentHistories/"+request.targetId;
+    }
+    else if(request.module=='STAFF_LEAVE'){
+      myRequesturl = "/"+request.api+"/"+request.targetId+"?RESPONSE_VIEW=StaffLeave.Details";
+    }
+    else if(request.module=='STUDENT_LEAVE'){
+      myRequesturl = "/"+request.api+"/"+request.targetId+"?RESPONSE_VIEW=StudentLeave.Details";
+    }
+    else {
+      myRequesturl = "/"+request.api+"/"+request.targetId;
+    }
+    url=url+myRequesturl;
     return this.findAll(url);
   }
 }

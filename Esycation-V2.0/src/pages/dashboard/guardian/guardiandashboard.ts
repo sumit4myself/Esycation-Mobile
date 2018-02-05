@@ -8,6 +8,7 @@ import { StaffService } from "../../../providers/service/staff/staff.service";
 import { AttendanceService } from "../../../providers/service/attendance/attendance.service";
 import { BatchService } from "../../../providers/service/batch/batch.service";
 import * as moment from "moment";
+import { BaseComponent } from "../../baseComponent/base.component";
 import { Observable } from "rxjs/Rx";
 import { Student } from '../../../providers/model/student/model.student';
 import { Staff } from '../../../providers/model/staff/model.staff';
@@ -18,13 +19,13 @@ import { EchartOptionBuilder, EchartDataTrnsformer } from '../../../providers/ut
   templateUrl: "guardiandashboard.html"
 })
 
-export class GuardianDashboardComponent {
+export class GuardianDashboardComponent extends BaseComponent {
 
   @ViewChild("slides") slides: Slides;
   approvalSegement: string = "myRequests";
   attendanceSegement: string = "monthWiseAttendance";
   resultSegement: string = "examWiseResult";
-  timeTableSegement : string = "timetable";
+  timeTableSegement: string = "timetable";
   imagePath: String = ServerConfig.imagePath();
   studentId: number;
   studentObservable: Observable<any>;
@@ -32,6 +33,7 @@ export class GuardianDashboardComponent {
   requestObservable: Observable<any>;
   monthWiseAttendanceObservable: Observable<any>;
   timeTableObservable: Observable<any>;
+  todayTableObservable: Observable<any>;
 
   examWiseResultObservable: Observable<any>;
   termWiseResultObservable: Observable<any>;
@@ -45,6 +47,7 @@ export class GuardianDashboardComponent {
   examWiswResultOption: any = null;
   termWiswResultOption: any = null;
   timeTables: any = null;
+  todayTables: any = null;
   eventSource;
   studentName: string;
   calendar = {
@@ -53,16 +56,16 @@ export class GuardianDashboardComponent {
   };
 
   constructor(
-    private navContrle: NavController,
-    private session: UserSessionService,
+    protected navCtrl: NavController,
+    protected session: UserSessionService,
     private studentService: StudentService,
     private approvalService: ApprovalService,
     private staffService: StaffService,
     private attendanceService: AttendanceService,
     private batchService: BatchService) {
-    let currentDay = moment(new Date()).format("dddd");
 
-    console.log("currentDay==", currentDay,this.navContrle);
+    super(session, navCtrl);
+
   }
 
   ionViewDidLoad() {
@@ -72,16 +75,35 @@ export class GuardianDashboardComponent {
     this.onMonthAttendanceClicked();
   }
 
-  onPendingRequest(module, taskId) {
-    console.log("taskId==", taskId);
-    if (module == "STUDENT_LEAVE") {
-      //this.navContrle.push("ApproveStudentLeaveComponent", { taskId: taskId });
-    }
+  onMyRequest(module, processInstanceId, targetId, api) {
+
+    let myRequestDetails = {
+      module: module,
+      processInstanceId: processInstanceId,
+      targetId: targetId,
+      api: api
+    };
+    this.navCtrl.push("MyRequestComponent", { myRequestDetails: myRequestDetails });
+
+
   }
 
   onStudentSlide(studentId: number) {
 
-    console.log("studentId===", studentId);
+    console.log("onStudentSlide===", studentId);
+    if (studentId) {
+      this.studentId = studentId;
+      this.initReportingTeacher(this.studentId);
+      this.initExamWiseResult(this.studentId);
+      this.initBatchTimeTable(this.studentId);
+      for (let s of this.students) {
+        if (studentId == s.id) {
+          this.studentName = s.name;
+          break;
+        }
+      }
+    }
+
   }
 
   onStudentRequestClicked() {
@@ -109,8 +131,11 @@ export class GuardianDashboardComponent {
     this.initExamWiseResult(this.studentId);
   }
 
-  onTimeTableClick(){
+  onTimeTableClick() {
     this.initBatchTimeTable(this.studentId);
+  }
+  onTodayTimeTableClick() {
+    this.initTodayTimetable(this.studentId);
   }
 
   onMonthAttendanceClicked() {
@@ -142,8 +167,7 @@ export class GuardianDashboardComponent {
             this.studentId = this.students[0].id;
             this.studentName = this.students[0].name;
             this.initReportingTeacher(this.studentId);
-            // this.initStudentApprovalRequests(this.studentId);
-            this.onExamWiseResultClick();
+            this.initExamWiseResult(this.studentId);
             this.initBatchTimeTable(this.studentId);
           }
           observer.next(data);
@@ -273,10 +297,26 @@ export class GuardianDashboardComponent {
     this.timeTableObservable = Observable.create(observer => {
       this.batchService.findBatchTimetablesByStudentId(studentId)
         .subscribe(data => {
-          if(data){
+          if (data) {
             this.timeTables = data;
-          }else{
-            this.timeTables=null;
+          } else {
+            this.timeTables = null;
+          }
+          observer.next(data);
+          observer.complete();
+        });
+    });
+  }
+
+  initTodayTimetable(studentId: number) {
+
+    this.todayTableObservable = Observable.create(observer => {
+      this.batchService.findTodayBatchTimetablesByStudentId(studentId)
+        .subscribe(data => {
+          if (data) {
+            this.todayTables = data;
+          } else {
+            this.todayTables = null;
           }
           observer.next(data);
           observer.complete();

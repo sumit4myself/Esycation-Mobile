@@ -6,7 +6,8 @@ import { CostumErrorHandler } from '../core/error.service';
 import {BaseService} from '../core/base.service';
 import {CommonServices} from '../common/common.service';
 import {UserSessionService} from '../../service/core/user.session.service';
-import {Batch} from '../../model/batch/model.batch';
+import {Batch,TimetableTransormer} from '../../model/batch/model.batch';
+import * as moment from "moment";
 
 @Injectable()
 export class BatchService extends BaseService<Batch>{
@@ -37,5 +38,26 @@ export class BatchService extends BaseService<Batch>{
         let url: string = ServerConfig.getPath() 
         +"batchTimetables/findByStudentId/"+studentId+"?suppressError=true&RESPONSE_VIEW=BatchTimetable.Details"; 
         return this.findAll(url);
+    }
+
+    public findTodayBatchTimetablesByStudentId(studentId:number):Observable<any>{
+        
+        let url: string = ServerConfig.getPath() 
+        +"batchTimetables/findByStudentId/"+studentId+"?suppressError=true&RESPONSE_VIEW=BatchTimetable.Details"; 
+        let observable = Observable.create(observer => {
+            this.findAll(url).subscribe(
+              data => {
+                let day = moment().day();
+                observer.next(TimetableTransormer.transformToDayTimetable(data, day));
+                observer.complete();
+              },
+              error => {
+                observer.next(null);
+                observer.complete();
+                console.log(error);
+              }
+            );
+          });
+          return observable;
     }
 }

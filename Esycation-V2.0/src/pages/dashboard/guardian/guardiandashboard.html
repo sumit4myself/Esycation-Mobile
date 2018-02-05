@@ -3,6 +3,11 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
+        <ion-buttons end>
+          <button icon-only ion-button (click)="onNotification()">
+            <notification-counter></notification-counter>
+          </button>
+      </ion-buttons>
         <ion-title>
             EducoreSystems
         </ion-title>
@@ -109,6 +114,9 @@
       <ion-segment-button value="timetable" (click)="onTimeTableClick()">
           Time Table
       </ion-segment-button>
+      <ion-segment-button value="todayTimetable" (click)="onTodayTimeTableClick()">
+        Today Time Table
+      </ion-segment-button>
     </ion-segment>
     <observable-loader [observable]="timeTableObservable"></observable-loader>
       <ion-grid  *ngIf="timeTableSegement === 'timetable'" class="height-200x padding-vertical-remove">
@@ -123,6 +131,39 @@
         <span *ngIf="timeTables != null">
           <ion-scroll scrollY="true" class="height-300x">
             <ion-item *ngFor="let timeTable of timeTables.timetableDays" class="padding-vertical-remove">
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col>
+                    <div class="text-normal" align="left">{{timeTable.dayName}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let period of timeTable.periods">
+                  <ion-col col-3>
+                    <h6 class="text-xsmall text-muted" align="left">{{period.subjectId.name}}</h6>
+                  </ion-col>
+                  <ion-col col-9 >
+                    <h6 class="text-xsmall text-muted" align="right">{{period.start}} - {{period.start}}</h6>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-scroll>
+        </span>
+      </ion-grid>
+      <!--********************** Today Time table**************************** -->
+      <observable-loader [observable]="todayTableObservable"></observable-loader>
+      <ion-grid  *ngIf="timeTableSegement === 'todayTimetable'" class="height-200x padding-vertical-remove">
+        <ion-item *ngIf="todayTables == null">
+          <ion-grid>
+            <ion-row>
+              <ion-col align="center">
+                Today Time table not found </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <span *ngIf="todayTables != null">
+          <ion-scroll scrollY="true" class="height-300x">
+            <ion-item *ngFor="let timeTable of todayTables.timetableDays" class="padding-vertical-remove">
               <ion-grid no-padding>
                 <ion-row>
                   <ion-col>
@@ -172,10 +213,10 @@
             <span *ngIf="approvalRequests != null">
               <ion-scroll scrollY="true" class="height-300x">
                 <ion-item *ngFor="let request of approvalRequests" class="padding-vertical-remove">
-                  <ion-grid no-padding (click)="onPendingRequest(request.module, request.taskId)">
+                  <ion-grid no-padding (click)="onMyRequest(request.module, request.processInstanceId,request.targetId,request.api)">
                     <ion-row>
                       <ion-col>
-                        <div class="text-normal" align="left">{{request.message}}</div>
+                        <div class="text-normal" align="left">  {{request.message | slice:0:18}} ..</div>
                       </ion-col>
                     </ion-row>
                     <ion-row>

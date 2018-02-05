@@ -75,6 +75,9 @@ export class EditProfileComponent {
         this.commonServices.onDismissAll();
          this.profile = Object.assign(this.profile, data);
          this.profileForm.setValue(this.prepareData(this.profile));
+
+         console.log("this.profileForm==",this.profileForm);
+
          this.imageId = this.profile.imageId;
       },error=>{
         console.log("Error: ",error);
@@ -110,7 +113,7 @@ export class EditProfileComponent {
         name:profile.name,
         bloodGroup: profile.bloodGroup,
         gender: profile.gender,
-        dob: profile.dob,
+        dob: moment(profile.dob).format("YYYY-MM-DD"),
         mobile: profile.mobile,
         email:profile.email,
         adharNumber:profile.adharNumber,

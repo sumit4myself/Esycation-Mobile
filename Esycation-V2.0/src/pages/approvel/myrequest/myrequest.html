@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar color="lightblue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+        <button icon-only ion-button (click)="onNotification()">
+            <notification-counter></notification-counter>
+        </button>
+    </ion-buttons>
+    <ion-title>My Request</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+   
+  <ion-list no-lines class="app-student-list" *ngIf="leaveDetails!=null">
+        <ion-item *ngIf="leaveDetails.comment" text-wrap>
+            {{leaveDetails.comment}}
+        </ion-item>
+        <ion-item>
+            <ion-label color="darkGray" stacked>Comment*</ion-label>
+            <ion-textarea  name="comment" rows="10" cols="40" [(ngModel)]="comment"
+            ></ion-textarea>
+      </ion-item>
+    </ion-list>
+  
+
+</ion-content>
+<ion-footer >
+    <ion-row >
+      <ion-col>
+        <button ion-button color="danger" block (click)="onCancel()">
+          Reject
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>

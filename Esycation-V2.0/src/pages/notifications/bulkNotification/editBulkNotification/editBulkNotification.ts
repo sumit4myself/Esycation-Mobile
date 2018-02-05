@@ -331,7 +331,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
             id: this.notification.id,
             receiverType: this.notification.selections.receiverType,
             mode: this.notification.template.mode,
-            date: moment(this.notification.pushTime, "DD/MM/YYYY HH:mm:ss").format("DD/MM/YYYY"),
+            date: moment(this.notification.pushTime, "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD"),
             time: moment(this.notification.pushTime, "DD/MM/YYYY HH:mm:ss").format("HH:mm"),
             templateId: this.notification.template.id,
             groups: '',

@@ -96,7 +96,7 @@
               <ion-grid no-padding (click)="onPendingRequest(request.module, request.taskId)">
                 <ion-row>
                   <ion-col>
-                    <div class="text-normal" align="left">{{request.message}}</div>
+                    <div class="text-normal" align="left">{{request.message | slice:0:18}}..</div>
                   </ion-col>
                 </ion-row>
                 <ion-row>
@@ -129,7 +129,7 @@
               <ion-grid no-padding>
                 <ion-row>
                   <ion-col>
-                    <div class="text-normal" align="left">{{request.message}}</div>
+                    <div class="text-normal" align="left">{{request.message | slice:0:18}}..</div>
                   </ion-col>
                 </ion-row>
                 <ion-row>

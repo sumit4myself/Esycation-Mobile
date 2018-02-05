@@ -9,10 +9,11 @@ import {BatchService} from "../../../providers/service/batch/batch.service";
 import { NgxEchartsModule } from "ngx-echarts";
 import { LoaderModule } from "../../../components/loader/loader.module";
 import { NgCalendarModule } from 'ionic2-calendar';
+import { PushCounterModule } from '../../notifications/pushcounter/pushcounter.module';
 @NgModule({
   imports: [
     IonicPageModule.forChild(GuardianDashboardComponent),
-    NgxEchartsModule, NgCalendarModule, LoaderModule
+    NgxEchartsModule, NgCalendarModule, LoaderModule,PushCounterModule
   ],
   exports: [GuardianDashboardComponent],
   declarations: [GuardianDashboardComponent],
