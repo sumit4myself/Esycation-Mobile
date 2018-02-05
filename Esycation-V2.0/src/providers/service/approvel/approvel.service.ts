@@ -51,7 +51,7 @@ export class ApprovalService extends BaseService<any> {
   public cancel(processInstanceId: number, comment: string): Observable<any> {
     let url: string =
       ServerConfig.getPath() +
-      "/approvals/requests/" +
+      "/approvals/myRequests/" +
       processInstanceId +
       "/cancel?comment=" +
       comment;

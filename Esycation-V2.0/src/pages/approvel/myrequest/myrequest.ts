@@ -68,6 +68,7 @@ export class MyRequestComponent extends BaseComponent {
       if (data) {
         console.info(data);
       }
+      this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
       this.commonServices.onDismissAll();
     }, error => {
       this.commonServices.onDismissAll();
