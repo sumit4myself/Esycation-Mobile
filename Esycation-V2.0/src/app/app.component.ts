@@ -81,7 +81,7 @@ export class MyApp {
       this.loginUsers = this.session.findUsers();
       this.menu = this.privilageService.privilaged(this.userPrefernce.module);
 
-      console.log("LOGIN_USER_EVENT..!", JSON.stringify(this.userPrefernce));
+     // console.log("LOGIN_USER_EVENT..!", JSON.stringify(this.userPrefernce));
     });
     this.pages = [
       {

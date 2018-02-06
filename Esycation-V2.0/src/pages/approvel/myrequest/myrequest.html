@@ -23,14 +23,20 @@
             ></ion-textarea>
       </ion-item>
     </ion-list>
+
+    <ion-list no-lines class="app-student-list" *ngIf="profileDetails!=null">
+      <ion-item  text-wrap>
+         profile Details
+      </ion-item>
+    </ion-list>
   
 
 </ion-content>
-<ion-footer >
+<ion-footer *ngIf="myRequestDetails.cancelable==true">
     <ion-row >
       <ion-col>
         <button ion-button color="danger" block (click)="onCancel()">
-          Reject
+          Cancel Request
         </button>
       </ion-col>
     </ion-row>

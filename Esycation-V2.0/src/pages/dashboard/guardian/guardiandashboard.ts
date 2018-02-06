@@ -75,17 +75,17 @@ export class GuardianDashboardComponent extends BaseComponent {
     this.onMonthAttendanceClicked();
   }
 
-  onMyRequest(module, processInstanceId, targetId, api) {
+  onMyRequest(module, processInstanceId, targetId, api,cancelable) {
 
     let myRequestDetails = {
       module: module,
       processInstanceId: processInstanceId,
       targetId: targetId,
-      api: api
+      api: api,
+      cancelable:cancelable
     };
     this.navCtrl.push("MyRequestComponent", { myRequestDetails: myRequestDetails });
-
-
+    
   }
 
   onStudentSlide(studentId: number) {
