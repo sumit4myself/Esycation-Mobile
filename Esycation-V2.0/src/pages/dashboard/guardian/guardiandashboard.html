@@ -111,11 +111,11 @@
 <ion-card>
   <ion-card-content>
     <ion-segment [(ngModel)]="timeTableSegement" color="dark">
-      <ion-segment-button value="timetable" (click)="onTimeTableClick()">
-          Time Table
-      </ion-segment-button>
       <ion-segment-button value="todayTimetable" (click)="onTodayTimeTableClick()">
         Today Time Table
+      </ion-segment-button>
+      <ion-segment-button value="timetable" (click)="onTimeTableClick()">
+        Time Table
       </ion-segment-button>
     </ion-segment>
     <observable-loader [observable]="timeTableObservable"></observable-loader>
@@ -247,7 +247,8 @@
             <span *ngIf="myApprovalRequests != null">
               <ion-scroll scrollY="true" class="height-300x">
                 <ion-item *ngFor="let request of myApprovalRequests" class="padding-vertical-remove">
-                  <ion-grid no-padding>
+                  <ion-grid no-padding (click)="onMyRequest(request.module, 
+                  request.processInstanceId,request.targetId,request.api,request.cancelable)">
                     <ion-row>
                       <ion-col>
                         <div class="text-normal" align="left">{{request.message}}</div>

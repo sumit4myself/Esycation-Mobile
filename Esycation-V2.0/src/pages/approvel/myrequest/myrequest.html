@@ -17,7 +17,7 @@
         <ion-item *ngIf="leaveDetails.comment" text-wrap>
             {{leaveDetails.comment}}
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="myRequestDetails!=null && myRequestDetails.cancelable==true">
             <ion-label color="darkGray" stacked>Comment*</ion-label>
             <ion-textarea  name="comment" rows="10" cols="40" [(ngModel)]="comment"
             ></ion-textarea>
@@ -26,13 +26,102 @@
 
     <ion-list no-lines class="app-student-list" *ngIf="profileDetails!=null">
       <ion-item  text-wrap>
-         profile Details
+        <ion-grid no-padding >
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">Field</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">Old Value</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">Updated Value</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">Name</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.oldData.name}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.newData.name}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">Gender</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.oldData.gender}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.newData.gender}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">DOB</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.oldData.dob}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.newData.dob}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">Blood Group</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.oldData.bloodGroup}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.newData.bloodGroup}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">Email</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.oldData.email}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.newData.email}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">Mobile</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.oldData.mobile}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.newData.mobile}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="text-normal" align="left">Timing</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.oldData.inTime}} To {{profileDetails.oldData.outTime}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="text-normal" align="left">{{profileDetails.newData.inTime}} To {{profileDetails.newData.outTime}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
     </ion-list>
   
 
 </ion-content>
-<ion-footer *ngIf="myRequestDetails.cancelable==true">
+<ion-footer *ngIf="myRequestDetails!=null && myRequestDetails.cancelable==true">
     <ion-row >
       <ion-col>
         <button ion-button color="danger" block (click)="onCancel()">

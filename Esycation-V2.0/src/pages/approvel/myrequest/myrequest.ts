@@ -14,7 +14,7 @@ export class MyRequestComponent extends BaseComponent {
   comment: string = null;
   leaveDetails: Object = null;
   profileDetails: Object = null;
-  myRequestDetails: any;
+  myRequestDetails: any =null;
   constructor(
     protected navCtrl: NavController,
     private session: UserSessionService,

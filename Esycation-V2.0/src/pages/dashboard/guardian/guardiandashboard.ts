@@ -25,7 +25,7 @@ export class GuardianDashboardComponent extends BaseComponent {
   approvalSegement: string = "myRequests";
   attendanceSegement: string = "monthWiseAttendance";
   resultSegement: string = "examWiseResult";
-  timeTableSegement: string = "timetable";
+  timeTableSegement: string = "todayTimetable";
   imagePath: String = ServerConfig.imagePath();
   studentId: number;
   studentObservable: Observable<any>;
@@ -84,8 +84,9 @@ export class GuardianDashboardComponent extends BaseComponent {
       api: api,
       cancelable:cancelable
     };
+
     this.navCtrl.push("MyRequestComponent", { myRequestDetails: myRequestDetails });
-    
+
   }
 
   onStudentSlide(studentId: number) {
@@ -168,7 +169,8 @@ export class GuardianDashboardComponent extends BaseComponent {
             this.studentName = this.students[0].name;
             this.initReportingTeacher(this.studentId);
             this.initExamWiseResult(this.studentId);
-            this.initBatchTimeTable(this.studentId);
+           // this.initBatchTimeTable(this.studentId);
+            this.initTodayTimetable(this.studentId);
           }
           observer.next(data);
           observer.complete();
