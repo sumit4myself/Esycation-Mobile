@@ -15,7 +15,9 @@
   <form [formGroup]="leaveForm">
     <ion-list no-line class="student-leave-list" no-padding>
       <ion-item>
-            <ion-label color="darkGray" stacked>Student* </ion-label>
+            <ion-label color="darkGray" stacked>Student* 
+            <p class="error" *ngIf="!leaveForm.controls['studentId'].valid">This field is required *</p>
+            </ion-label>
             <ion-select formControlName="studentId" [selectOptions]="mySelectOptions">
               <ion-option *ngFor="let student of students.contents" 
                 value="{{student.id}}">{{student.name}}
@@ -23,19 +25,27 @@
             </ion-select>
       </ion-item>
       <ion-item>
-          <ion-label color="darkGray" stacked>From *</ion-label>
+          <ion-label color="darkGray" stacked>From *
+            <p class="error" *ngIf="!leaveForm.controls['fromDate'].valid">This field is required *</p>
+            <p class="error" *ngIf="totalLeaveError!=null">{{totalLeaveError}}</p>
+          </ion-label>
           <ion-datetime formControlName="fromDate" pickerFormat="DD/MM/YYYY" 
               displayFormat="DD/MM/YYYY">
           </ion-datetime>
       </ion-item>
       <ion-item>
-          <ion-label color="darkGray" stacked> To *</ion-label>
+          <ion-label color="darkGray" stacked> To *
+            <p class="error" *ngIf="!leaveForm.controls['toDate'].valid">This field is required *</p>
+            <p class="error" *ngIf="totalLeaveError!=null">{{totalLeaveError}}</p>
+          </ion-label>
           <ion-datetime pickerFormat="DD/MM/YYYY" 
               formControlName="toDate" displayFormat="DD/MM/YYYY">
           </ion-datetime>
       </ion-item>
       <ion-item>
-          <ion-label color="darkGray" stacked>Comment </ion-label>
+          <ion-label color="darkGray" stacked>Comment * 
+          <p class="error" *ngIf="!leaveForm.controls['comment'].valid">This field is required *</p>
+          </ion-label>
           <ion-textarea formControlName="comment" type="text" rows="8"></ion-textarea>
         </ion-item>
     </ion-list>

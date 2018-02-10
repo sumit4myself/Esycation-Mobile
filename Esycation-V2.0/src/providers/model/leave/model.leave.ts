@@ -19,6 +19,4 @@ export class LeaveModel implements Leave{
     totalLeave:number;
     status:string;
 
-    
-
 }

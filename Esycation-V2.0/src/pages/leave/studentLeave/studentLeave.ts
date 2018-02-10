@@ -19,6 +19,7 @@ export class StudentLeaveComponent extends BaseComponent {
   leaveForm: FormGroup;
   mySelectOptions: any = {};
   students: PagedResponse = PagedResponse.getInstance();
+  totalLeaveError: string = null;
   constructor(
     protected navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -43,7 +44,7 @@ export class StudentLeaveComponent extends BaseComponent {
       toDate: ['', [<any>Validators.required]],
       comment: ['', [<any>Validators.required]],
       studentId: ['', [<any>Validators.required]],
-      totalLeave: ['', [<any>Validators.required]],
+      totalLeave: '',
     });
 
     this.leaveService.findStudentByGuardianIds(this.session.findRemote()).subscribe(data => {
@@ -63,24 +64,44 @@ export class StudentLeaveComponent extends BaseComponent {
 
   onApply({ value, valid }: { value: Leave, valid: boolean }) {
 
-
-    console.log("valid==", valid)
+    let leaveDetails = this.preapreData(value);
     this.commonServices.onLoader();
-    value.status = null;
-    value.studentId = value.studentId;
-    value.fromDate = moment(value.fromDate).format("MM/DD/YYYY");
-    value.toDate = moment(value.toDate).format("MM/DD/YYYY");
-    value.totalLeave = moment(value.toDate).diff(moment(value.fromDate), 'days');
-    this.leaveService.saveLeave(value).subscribe(data => {
-      this.commonServices.presentToast("Data saved successfully", null, "success");
-      this.commonServices.onDismissAll();
-      if (data) {
-      }
-      this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
-    }, error => {
-      console.error("Error :", error);
-      this.commonServices.onDismissAll();
-    });
+    if (this.validate(valid, leaveDetails)) {
+      this.leaveService.saveLeave(leaveDetails).subscribe(data => {
+        this.commonServices.presentToast("Data saved successfully", null, "success");
+        this.commonServices.onDismissAll();
+        if (data) {
+        }
+        this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
+      }, error => {
+        console.error("Error :", error);
+        this.commonServices.onDismissAll();
+      });
+    }
+
+  }
+
+  preapreData(leave: Leave): Leave {
+
+    leave.status = null;
+    leave.studentId = leave.studentId;
+    leave.fromDate = moment(leave.fromDate).format("MM/DD/YYYY");
+    leave.toDate = moment(leave.toDate).format("MM/DD/YYYY");
+    leave.totalLeave = moment(leave.toDate).diff(moment(leave.fromDate), 'days');
+    return leave;
+  }
+
+  validate(validate: boolean, data: Leave): Boolean {
+
+    if (!validate)
+      return false;
+    else if (moment(data.toDate).diff(moment(data.fromDate), 'days') < 0) {
+      this.totalLeaveError = "Invalid date range."
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 }
