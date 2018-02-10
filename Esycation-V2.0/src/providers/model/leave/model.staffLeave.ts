@@ -31,4 +31,11 @@ export class StaffLeaveDetails {
     }
 }
 
+export class ErrorValidate{
+
+    type:string=null;
+    totalLeave:string=null;
+
+}
+
 

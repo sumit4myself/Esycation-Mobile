@@ -16,75 +16,40 @@
     <ion-list no-line class="staff-leave-list" no-padding>
       <ion-item>
         <ion-label color="darkGray" stacked>Leave Type *
+        <p class="error" *ngIf="!leaveForm.controls['type'].valid">This field is required *</p>
+        <p class="error" *ngIf="error.type!=null">{{error.type}}</p>
         </ion-label>
         <ion-select formControlName="type" [selectOptions]="mySelectOptions">
           <ion-option  *ngFor="let l of leaveType.leaves"  value="{{l.id}}">
-           {{l.type.name}} </ion-option>
+          <span> {{l.type.name}} </span>
+          <span> | Remaining : {{l.totalLeave}} </span>
+        </ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
 
-        <ion-label color="darkGray" stacked>From </ion-label>
+        <ion-label color="darkGray" stacked>From * 
+          <p class="error" *ngIf="!leaveForm.controls['fromDate'].valid">This field is required *</p>
+          <p class="error" *ngIf="error.totalLeave!=null">{{error.totalLeave}}</p>
+        </ion-label>
         <ion-datetime formControlName="fromDate" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
         </ion-datetime>
 
       </ion-item>
       <ion-item>
-
-        <ion-label class="leave-list-item" color="darkGray" stacked>To</ion-label>
+        <ion-label class="leave-list-item" color="darkGray" stacked>To *
+            <p class="error" *ngIf="!leaveForm.controls['toDate'].valid">This field is required *</p>
+            <p class="error" *ngIf="error.totalLeave!=null">{{error.totalLeave}}</p>
+        </ion-label>
         <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate" displayFormat="DD/MM/YYYY">
         </ion-datetime>
-
       </ion-item>
-
-
       <ion-item>
-        <ion-label class="leave-list-item" color="darkGray" stacked>Remarks</ion-label>
+        <ion-label class="leave-list-item" color="darkGray" stacked>Remarks *
+            <p class="error" *ngIf="!leaveForm.controls['comment'].valid">This field is required *</p>
+        </ion-label>
         <ion-textarea formControlName="comment" type="text" rows="8"></ion-textarea>
       </ion-item>
-      <!-- <div formArrayName="staffLeaves" >
-          <ion-card *ngFor="let staffLeave of leaveForm.controls.staffLeaves.controls; let i=index"
-                    [formGroupName]="i">
-              <ion-card-header color="secondary">
-                  <ion-input type="text" formControlName="type"></ion-input>
-              </ion-card-header>
-              <ion-card-content>
-                  <ion-row >
-                      <ion-col no-padding>
-                          <ion-item>
-                            <ion-label  floating>Total Leave </ion-label>
-                            <ion-input type="text" formControlName="totalLeave"></ion-input>
-                          </ion-item>
-                      </ion-col>
-                      <ion-col no-padding>
-                          <ion-item>
-                            <ion-label  floating>Remaining Leave </ion-label>
-                            <ion-input type="text" formControlName="remainingLeave"></ion-input>
-                          </ion-item>
-                      </ion-col>
-                  </ion-row>
-                  <ion-row >
-                      <ion-col no-padding>
-                          <ion-item>
-                            <ion-label  floating>From </ion-label>
-                            <ion-datetime formControlName="fromDate"
-                              pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
-                            </ion-datetime>
-                          </ion-item>
-                      </ion-col>
-                      <ion-col no-padding>
-                          <ion-item>
-                            <ion-label  floating>To</ion-label>
-                            <ion-datetime pickerFormat="DD/MM/YYYY" formControlName="toDate"
-                              displayFormat="DD/MM/YYYY" >
-                            </ion-datetime>
-                          </ion-item>
-                      </ion-col>
-                  </ion-row>
-              </ion-card-content>
-          </ion-card>
-       </div> -->
-
     </ion-list>
   </form>
 </ion-content>
