@@ -4,6 +4,10 @@ import { UserSessionService } from "../../../providers/service/core/user.session
 import { BaseComponent } from "../../baseComponent/base.component";
 import { CommonServices } from "../../../providers/service/common/common.service";
 import { ApprovalService } from "../../../providers/service/approvel/approvel.service";
+import { GuardianHistoryDetails } from '../../../providers/model/history/model.history.guardian';
+import { StaffHistoryDetails } from '../../../providers/model/history/model.history.staff';
+import { StudentHistoryDetails } from '../../../providers/model/history/model.history.student';
+import {ServerConfig} from '../../../providers/config';
 
 @IonicPage()
 @Component({
@@ -14,7 +18,11 @@ export class MyRequestComponent extends BaseComponent {
   comment: string = null;
   leaveDetails: Object = null;
   profileDetails: Object = null;
-  myRequestDetails: any =null;
+  myRequestDetails: any = null;
+  guardianHistoryDetails: GuardianHistoryDetails = null;
+  staffHistoryDetails: StaffHistoryDetails = null;
+  studentHistoryDetails: StudentHistoryDetails = null;
+  imagePath:String=ServerConfig.imagePath();
   constructor(
     protected navCtrl: NavController,
     private session: UserSessionService,
@@ -37,13 +45,22 @@ export class MyRequestComponent extends BaseComponent {
     this.approvalService.findMyRequest(this.myRequestDetails).subscribe(
       data => {
         if (this.myRequestDetails.module == 'STAFF') {
-          this.profileDetails = data;
+          let history = new StaffHistoryDetails();
+          history = Object.assign({}, data);
+          this.staffHistoryDetails = history;
+
+          console.log("this.staffHistoryDetails==",this.staffHistoryDetails);
+
         }
         else if (this.myRequestDetails.module == 'GUARDIAN') {
-          this.profileDetails = data;
+          let history = new GuardianHistoryDetails();
+          history = Object.assign({}, data);
+          this.guardianHistoryDetails = history;
         }
         else if (this.myRequestDetails.module == 'STUDENT') {
-          this.profileDetails = data;
+          let history = new StudentHistoryDetails();
+          history = Object.assign({}, data);
+          this.studentHistoryDetails = history;
         }
         else if (this.myRequestDetails.module == 'STAFF_LEAVE') {
           this.leaveDetails = data;

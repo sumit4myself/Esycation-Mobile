@@ -24,100 +24,545 @@
       </ion-item>
     </ion-list>
 
-    <ion-list no-lines class="app-student-list" *ngIf="profileDetails!=null">
+    <!--********************* Staff Profile history ******************************* -->
+    <ion-list no-lines class="app-student-list" *ngIf="staffHistoryDetails!=null">
       <ion-item  text-wrap>
         <ion-grid no-padding >
           <ion-row>
             <ion-col>
-              <div class="text-normal" align="left">Field</div>
+              <div class="small" align="left"><b>Field</b></div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">Old Value</div>
+              <div class="small" align="left"><b>Old Value</b></div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">Updated Value</div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <div class="text-normal" align="left">Name</div>
-            </ion-col>
-            <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.oldData.name}}</div>
-            </ion-col>
-            <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.newData.name}}</div>
+              <div class="small" align="left"><b>Updated Value</b></div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <div class="text-normal" align="left">Gender</div>
+              <div class="small" align="left">Name</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.oldData.gender}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.name}}</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.newData.gender}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.newData.name}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                <div class="small" align="left">Image</div>
+              </ion-col>
+              <ion-col>
+                <div  align="left">
+                  <ion-avatar item-left *ngIf="staffHistoryDetails.oldData.imageId==null">
+                      <img class="profile-image" src="assets/img/default.png">
+                  </ion-avatar>
+                  <ion-avatar item-left *ngIf="staffHistoryDetails.oldData.imageId!=null">
+                      <img  class="profile-image" src="{{imagePath}}/{{staffHistoryDetails.oldData.imageId}}">
+                  </ion-avatar>
+                </div>
+              </ion-col>
+              <ion-col>
+                <div  align="left">
+                    <ion-avatar item-left *ngIf="staffHistoryDetails.newData.imageId==null">
+                        <img class="profile-image" src="assets/img/default.png">
+                    </ion-avatar>
+                    <ion-avatar item-left *ngIf="staffHistoryDetails.newData.imageId!=null">
+                        <img  class="profile-image" src="{{imagePath}}/{{staffHistoryDetails.newData.imageId}}">
+                    </ion-avatar>
+                </div>
+              </ion-col>
+            </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="small" align="left">Gender</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.gender}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.newData.gender}}</div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <div class="text-normal" align="left">DOB</div>
+              <div class="small" align="left">DOB</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.oldData.dob}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.dob}}</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.newData.dob}}</div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <div class="text-normal" align="left">Blood Group</div>
-            </ion-col>
-            <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.oldData.bloodGroup}}</div>
-            </ion-col>
-            <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.newData.bloodGroup}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.newData.dob}}</div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <div class="text-normal" align="left">Email</div>
+              <div class="small" align="left">Blood Group</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.oldData.email}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.bloodGroup}}</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.newData.email}}</div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <div class="text-normal" align="left">Mobile</div>
-            </ion-col>
-            <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.oldData.mobile}}</div>
-            </ion-col>
-            <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.newData.mobile}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.newData.bloodGroup}}</div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <div class="text-normal" align="left">Timing</div>
+              <div class="small" align="left">Email</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.oldData.inTime}} To {{profileDetails.oldData.outTime}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.email}}</div>
             </ion-col>
             <ion-col>
-              <div class="text-normal" align="left">{{profileDetails.newData.inTime}} To {{profileDetails.newData.outTime}}</div>
+              <div class="small" align="left">{{staffHistoryDetails.newData.email}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="small" align="left">Mobile</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.mobile}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.newData.mobile}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="small" align="left">Adhar Number</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.adharNumber}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.newData.adharNumber}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="small" align="left">Address</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">
+                <p *ngIf="staffHistoryDetails.oldData.address1!=null">
+                  <span class="small">{{staffHistoryDetails.oldData.address1}}</span>
+                  <span class="small" *ngIf="staffHistoryDetails.oldData.address2!=null">
+                    , {{staffHistoryDetails.oldData.address2}}
+                  </span>
+                </p>
+                <p  *ngIf="staffHistoryDetails.oldData.city!=null">
+                    <span class="small">,{{staffHistoryDetails.oldData.city}}</span>
+                </p>
+                <p  *ngIf="staffHistoryDetails.oldData.state!=null">
+                   <span class="small">
+                     ,{{staffHistoryDetails.oldData.state}} - {{staffHistoryDetails.oldData.pinCode}} 
+                   </span>  
+                </p>
+              </div>
+            </ion-col>
+            <ion-col>
+                <div class="small" align="left">
+                    <p *ngIf="staffHistoryDetails.newData.address1!=null">
+                      <span class="small" >{{staffHistoryDetails.newData.address1}}</span>
+                      <span class="small" *ngIf="staffHistoryDetails.newData.address2!=null">
+                        , {{staffHistoryDetails.newData.address2}}
+                      </span>
+                    </p>
+                    <p *ngIf="staffHistoryDetails.newData.city!=null">
+                        <span class="small">,{{staffHistoryDetails.newData.city}}</span>
+                    </p>
+                    <p *ngIf="staffHistoryDetails.newData.state!=null">
+                        <span class="small">
+                          ,{{staffHistoryDetails.newData.state}} - {{staffHistoryDetails.newData.pinCode}} 
+                        </span>  
+                    </p>
+                  </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="small" align="left">Timing</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.oldData.inTime}} To {{staffHistoryDetails.oldData.outTime}}</div>
+            </ion-col>
+            <ion-col>
+              <div class="small" align="left">{{staffHistoryDetails.newData.inTime}} To {{staffHistoryDetails.newData.outTime}}</div>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>
     </ion-list>
+
+     <!--********************* Guardian Profile history ******************************* -->
+     <ion-list no-lines class="app-student-list" *ngIf="guardianHistoryDetails!=null">
+        <ion-item  text-wrap>
+          <ion-grid no-padding >
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left"><b>Field</b></div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left"><b>Old Value</b></div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left"><b>Updated Value</b></div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Name</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.oldData.name}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.newData.name}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <div class="small" align="left">Image</div>
+                </ion-col>
+                <ion-col>
+                  <div  align="left">
+                    <ion-avatar item-left *ngIf="guardianHistoryDetails.oldData.imageId==null">
+                        <img class="profile-image" src="assets/img/default.png">
+                    </ion-avatar>
+                    <ion-avatar item-left *ngIf="guardianHistoryDetails.oldData.imageId!=null">
+                        <img  class="profile-image" src="{{imagePath}}/{{guardianHistoryDetails.oldData.imageId}}">
+                    </ion-avatar>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div  align="left">
+                      <ion-avatar item-left *ngIf="guardianHistoryDetails.newData.imageId==null">
+                          <img class="profile-image" src="assets/img/default.png">
+                      </ion-avatar>
+                      <ion-avatar item-left *ngIf="guardianHistoryDetails.newData.imageId!=null">
+                          <img  class="profile-image" src="{{imagePath}}/{{guardianHistoryDetails.newData.imageId}}">
+                      </ion-avatar>
+                  </div>
+                </ion-col>
+              </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Gender</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.oldData.gender}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.newData.gender}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <div class="small" align="left">DOB</div>
+                </ion-col>
+                <ion-col>
+                  <div class="small" align="left">{{guardianHistoryDetails.oldData.dob}}</div>
+                </ion-col>
+                <ion-col>
+                  <div class="small" align="left">{{guardianHistoryDetails.newData.dob}}</div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="small" align="left">Blood Group</div>
+                </ion-col>
+                <ion-col>
+                  <div class="small" align="left">{{guardianHistoryDetails.oldData.bloodGroup}}</div>
+                </ion-col>
+                <ion-col>
+                  <div class="small" align="left">{{guardianHistoryDetails.newData.bloodGroup}}</div>
+                </ion-col>
+              </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Email</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.oldData.email}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.newData.email}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Mobile</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.oldData.mobile}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.newData.mobile}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Adhar Number</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.oldData.adharNumber}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.newData.adharNumber}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Occupation</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.oldData.occupation}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{guardianHistoryDetails.newData.occupation}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <div class="small" align="left">Address</div>
+                </ion-col>
+                <ion-col>
+                  <div class="small" align="left">
+                    <p *ngIf="guardianHistoryDetails.oldData.address1!=null">
+                      <span class="small">{{guardianHistoryDetails.oldData.address1}}</span>
+                      <span class="small" *ngIf="guardianHistoryDetails.oldData.address2!=null">
+                        , {{guardianHistoryDetails.oldData.address2}}
+                      </span>
+                    </p>
+                    <p  *ngIf="guardianHistoryDetails.oldData.city!=null">
+                        <span class="small">,{{guardianHistoryDetails.oldData.city}}</span>
+                    </p>
+                    <p  *ngIf="guardianHistoryDetails.oldData.state!=null">
+                       <span class="small">
+                         ,{{guardianHistoryDetails.oldData.state}} - {{guardianHistoryDetails.oldData.pinCode}} 
+                       </span>  
+                    </p>
+                  </div>
+                </ion-col>
+                <ion-col>
+                    <div class="small" align="left">
+                        <p *ngIf="guardianHistoryDetails.newData.address1!=null">
+                          <span class="small" >{{guardianHistoryDetails.newData.address1}}</span>
+                          <span class="small" *ngIf="guardianHistoryDetails.newData.address2!=null">
+                            , {{guardianHistoryDetails.newData.address2}}
+                          </span>
+                        </p>
+                        <p *ngIf="guardianHistoryDetails.newData.city!=null">
+                            <span class="small">,{{guardianHistoryDetails.newData.city}}</span>
+                        </p>
+                        <p *ngIf="guardianHistoryDetails.newData.state!=null">
+                            <span class="small">
+                              ,{{guardianHistoryDetails.newData.state}} - {{guardianHistoryDetails.newData.pinCode}} 
+                            </span>  
+                        </p>
+                      </div>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+       <!--********************* Student Profile history ******************************* -->
+    <ion-list no-lines class="app-student-list" *ngIf="studentHistoryDetails!=null">
+        <ion-item  text-wrap>
+          <ion-grid no-padding >
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left"><b>Field</b></div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left"><b>Old Value</b></div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left"><b>Updated Value</b></div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Name</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.oldData.name}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.newData.name}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <div class="small" align="left">Image</div>
+                </ion-col>
+                <ion-col>
+                  <div  align="left">
+                    <ion-avatar item-left *ngIf="studentHistoryDetails.oldData.imageId==null">
+                        <img class="profile-image" src="assets/img/default.png">
+                    </ion-avatar>
+                    <ion-avatar item-left *ngIf="studentHistoryDetails.oldData.imageId!=null">
+                        <img  class="profile-image" src="{{imagePath}}/{{studentHistoryDetails.oldData.imageId}}">
+                    </ion-avatar>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div  align="left">
+                      <ion-avatar item-left *ngIf="studentHistoryDetails.newData.imageId==null">
+                          <img class="profile-image" src="assets/img/default.png">
+                      </ion-avatar>
+                      <ion-avatar item-left *ngIf="studentHistoryDetails.newData.imageId!=null">
+                          <img  class="profile-image" src="{{imagePath}}/{{studentHistoryDetails.newData.imageId}}">
+                      </ion-avatar>
+                  </div>
+                </ion-col>
+              </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Gender</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.oldData.gender}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.newData.gender}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">DOB</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.oldData.dob}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.newData.dob}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Blood Group</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.oldData.bloodGroup}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.newData.bloodGroup}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Email</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.oldData.email}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.newData.email}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Mobile</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.oldData.mobile}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.newData.mobile}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Adhar Number</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.oldData.adharNumber}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">{{studentHistoryDetails.newData.adharNumber}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="small" align="left">Address</div>
+              </ion-col>
+              <ion-col>
+                <div class="small" align="left">
+                  <p *ngIf="studentHistoryDetails.oldData.address1!=null">
+                    <span class="small">{{studentHistoryDetails.oldData.address1}}</span>
+                    <span class="small" *ngIf="studentHistoryDetails.oldData.address2!=null">
+                      , {{studentHistoryDetails.oldData.address2}}
+                    </span>
+                  </p>
+                  <p  *ngIf="studentHistoryDetails.oldData.city!=null">
+                      <span class="small">,{{studentHistoryDetails.oldData.city}}</span>
+                  </p>
+                  <p  *ngIf="studentHistoryDetails.oldData.state!=null">
+                     <span class="small">
+                       ,{{studentHistoryDetails.oldData.state}} - {{studentHistoryDetails.oldData.pinCode}} 
+                     </span>  
+                  </p>
+                </div>
+              </ion-col>
+              <ion-col>
+                  <div class="small" align="left">
+                      <p *ngIf="studentHistoryDetails.newData.address1!=null">
+                        <span class="small" >{{studentHistoryDetails.newData.address1}}</span>
+                        <span class="small" *ngIf="studentHistoryDetails.newData.address2!=null">
+                          , {{studentHistoryDetails.newData.address2}}
+                        </span>
+                      </p>
+                      <p *ngIf="studentHistoryDetails.newData.city!=null">
+                          <span class="small">,{{studentHistoryDetails.newData.city}}</span>
+                      </p>
+                      <p *ngIf="studentHistoryDetails.newData.state!=null">
+                          <span class="small">
+                            ,{{studentHistoryDetails.newData.state}} - {{studentHistoryDetails.newData.pinCode}} 
+                          </span>  
+                      </p>
+                    </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <div class="small" align="left">Nationality</div>
+                </ion-col>
+                <ion-col>
+                  <div class="small" align="left">{{studentHistoryDetails.oldData.nationality}}</div>
+                </ion-col>
+                <ion-col>
+                  <div class="small" align="left">{{studentHistoryDetails.newData.nationality}}</div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                    <div class="small" align="left">Religion</div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="small" align="left">{{studentHistoryDetails.oldData.religion}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="small" align="left">{{studentHistoryDetails.newData.religion}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                      <div class="small" align="left">Mother Tongue</div>
+                    </ion-col>
+                    <ion-col>
+                      <div class="small" align="left">{{studentHistoryDetails.oldData.motherTongue}}</div>
+                    </ion-col>
+                    <ion-col>
+                      <div class="small" align="left">{{studentHistoryDetails.newData.motherTongue}}</div>
+                    </ion-col>
+                  </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
   
 
 </ion-content>
