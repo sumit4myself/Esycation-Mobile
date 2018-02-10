@@ -1,31 +1,41 @@
-
-<ion-header>
-  <ion-navbar color="ios-blue">
-    <ion-title (click)="onBack()"> <ion-icon name="arrow-round-back"></ion-icon> Add Acount</ion-title>
+<ion-header class="transparent-header">
+  <ion-navbar>
+    <ion-title (click)="onBack()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </ion-title>
   </ion-navbar>
 </ion-header>
+
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-  <div class="login-container">
-    <img class="logo" src="./assets/medium_150.70391061453px_1202562_easyicon.net.png" />
-    
-    <!--*********** Form ***********-->
-    <form [formGroup]="loginForm" novalidate>
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input tappable color="light"  
-          type="text" formControlName="userName" >
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input tappable #password type="password" formControlName="password">
-        </ion-input>
-      </ion-item>
-
-      <div class="submit-box">
-        <button ion-button block (click)="login(loginForm)" color="blue2">Add Account</button>
-      </div>
-    </form>
-  </div>
+  <form [formGroup]="loginForm" novalidate>
+    <div padding class="scroll-content">
+      <ion-row>
+        <ion-col>
+          <img class="logo" src="assets/icon-2.png" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list inset class="no-border">
+            <ion-item>
+              <ion-label>Username</ion-label>
+              <ion-input tappable type="text" formControlName="userName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Password</ion-label>
+              <button ion-button="" icon-only="" clear="" color="dark" item-right="" (click)="showHidePassword()">
+                <ion-icon [name]="pwdIcon"></ion-icon>
+              </button>
+              <ion-input tappable #password [type]="passwordAsToggle" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row padding>
+        <ion-col>
+          <button ion-button class="login-button" (click)="login(loginForm)">Add Account</button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </form>
 </ion-content>

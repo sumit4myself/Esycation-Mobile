@@ -1,41 +1,40 @@
-
-<ion-content class="login-content" [ngStyle]="{'background-image': 'url(' + backgroundImage +') !important;'}">
-  <div class="login-container">
-    <img class="logo" src="./assets/medium_150.70391061453px_1202562_easyicon.net.png" />
-    
-    <!--*********** Form ***********-->
-    <form [formGroup]="loginForm" novalidate>
-      
-      <ion-item>
-        <ion-label floating>Branch</ion-label>
-        <ion-select formControlName="branchId" 
-        okText="Okay" cancelText="Dismiss"  interface="popover">
-          <ion-option *ngFor="let b of branchs"  value="{{b.id}}">{{b.name}}</ion-option>
-        </ion-select> 
-
-      </ion-item>
-      
-      <ion-item>
-        <ion-label stacked>Username</ion-label>
-        <ion-input tappable color="light"  
-          type="text" formControlName="userName" >
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label stacked>Password  
-       </ion-label>
-        <button ion-button="" icon-only="" clear="" color="light" item-right="" (click)="showHidePassword()"> 
-            <ion-icon [name]="pwdIcon"></ion-icon>
-        </button>
-        <ion-input tappable #password [type]="passwordAsToggle" formControlName="password">
-        </ion-input>
-       
-      </ion-item>
-
-      <div class="submit-box">
-        <button ion-button block (click)="login(loginForm)" color="blue2">Log in</button>
-      </div>
-    </form>
-  </div>
-</ion-content>
+<ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+   <!--*********** Form ***********-->
+   <form [formGroup]="loginForm" novalidate>
+    <div padding class="scroll-content">
+      <ion-row>
+        <ion-col>
+          <img class="logo" src="assets/icon-2.png" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list inset class="no-border">
+            <ion-item>
+              <ion-label>Branch</ion-label>
+              <ion-select formControlName="branchId" okText="Ok" cancelText="Cancel">
+                <ion-option *ngFor="let b of branchs" value="{{b.id}}">{{b.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Username</ion-label>
+              <ion-input tappable type="text" formControlName="userName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Password</ion-label>
+              <button ion-button="" icon-only="" clear="" color="dark" item-right="" (click)="showHidePassword()">
+                <ion-icon [name]="pwdIcon"></ion-icon>
+              </button>
+              <ion-input tappable #password [type]="passwordAsToggle" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row padding>
+        <ion-col>
+          <button ion-button class="login-button" (click)="login(loginForm)" >Login</button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </form>
+  </ion-content>

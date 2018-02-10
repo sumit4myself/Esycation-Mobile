@@ -9,14 +9,14 @@ import {UserSessionService} from '../../../providers/service/core/user.session.s
 @Component({
   selector: 'addAccount-page',
   templateUrl: 'addAccount.html',
-   
+
 })
 export class AddAccountComponent {
-
+  passwordAsToggle: string = "password";
+  pwdIcon: string = "md-eye-off";
   loginForm: FormGroup;
   branchId:number;
-  public backgroundImage: any = "./assets/bg1.jpg";
-  public imgLogo: any = "./assets/medium_150.70391061453px_1202562_easyicon.net.png";
+  public backgroundImage: any = "./assets/school-bg15.jpg";
 
   constructor(
     private viewCtrl: ViewController,
@@ -25,8 +25,8 @@ export class AddAccountComponent {
     private events:Events,
     private authService:AuthService,
     private commonServices:CommonServices,
-    private session:UserSessionService,) 
-    {        
+    private session:UserSessionService,)
+    {
       this.loginForm = this.formBuilder.group({
         userName: ['', [<any>Validators.required]],
         password: ['', [<any>Validators.required]]
@@ -36,15 +36,14 @@ export class AddAccountComponent {
 
 
   login({ value, valid }: { value: Login, valid: boolean }){
-      
     if (valid) {
       this.commonServices.onLoader();
       this.authService.login(
-        { 
-          userName: value.userName, 
+        {
+          userName: value.userName,
           password: value.password,
           branchId:this.branchId
-          
+
         }).subscribe(
           data => {
             data={
@@ -53,12 +52,12 @@ export class AddAccountComponent {
             };
             data.registrationId =localStorage.getItem("registrationId");
             this.commonServices.onDismissAll();
-            this.events.publish('LOGIN_USER_EVENT');   
+            this.events.publish('LOGIN_USER_EVENT');
             this.events.publish('user:loggedin',data);
             this.navCtrl.popToRoot();
-            this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule())); 
+            this.navCtrl.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
             window.location.reload();
-            
+
           },error=>{
             this.commonServices.onDismissAll();
             console.log(error)
@@ -66,12 +65,22 @@ export class AddAccountComponent {
         );
     } else {
       this.commonServices.showAlert('Invalid Details', 'Enter a valid login ID and password to continue')
-    } 
-   
+    }
+
   }
 
   onBack(){
     this.viewCtrl.dismiss();
+  }
+
+  showHidePassword() {
+    if (this.passwordAsToggle === "password") {
+      this.passwordAsToggle = "text";
+      this.pwdIcon = "md-eye";
+    } else {
+      this.passwordAsToggle = "password";
+      this.pwdIcon = "md-eye-off";
+    }
   }
 }
 
