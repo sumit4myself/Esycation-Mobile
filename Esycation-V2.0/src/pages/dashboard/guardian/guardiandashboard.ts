@@ -75,19 +75,7 @@ export class GuardianDashboardComponent extends BaseComponent {
     this.onMonthAttendanceClicked();
   }
 
-  onMyRequest(module, processInstanceId, targetId, api,cancelable) {
-
-    let myRequestDetails = {
-      module: module,
-      processInstanceId: processInstanceId,
-      targetId: targetId,
-      api: api,
-      cancelable:cancelable
-    };
-
-    this.navCtrl.push("MyRequestComponent", { myRequestDetails: myRequestDetails });
-
-  }
+  
 
   onStudentSlide(studentId: number) {
 
@@ -151,6 +139,9 @@ export class GuardianDashboardComponent extends BaseComponent {
             this.monthWiseAtttendanceOptions());
           observer.next(data);
           observer.complete();
+        },error=>{
+          observer.next(error);
+          observer.complete();
         });
     });
 
@@ -174,6 +165,9 @@ export class GuardianDashboardComponent extends BaseComponent {
           }
           observer.next(data);
           observer.complete();
+        },error=>{
+          observer.next(error);
+          observer.complete();
         });
     });
   }
@@ -184,6 +178,9 @@ export class GuardianDashboardComponent extends BaseComponent {
       this.staffService.findClassTeacherByStudentId(studentId).subscribe(data => {
         this.teacher = Object.assign({}, data);
         observer.next(data);
+        observer.complete();
+      },error=>{
+        observer.next(error);
         observer.complete();
       });
     });
@@ -202,6 +199,9 @@ export class GuardianDashboardComponent extends BaseComponent {
           }
           observer.next(data);
           observer.complete();
+        },error=>{
+          observer.next(error);
+          observer.complete();
         });
     });
   }
@@ -219,6 +219,9 @@ export class GuardianDashboardComponent extends BaseComponent {
             this.approvalRequests = null;
           }
           observer.next(data);
+          observer.complete();
+        },error=>{
+          observer.next(error);
           observer.complete();
         });
     });
@@ -244,7 +247,7 @@ export class GuardianDashboardComponent extends BaseComponent {
               chartConfiguration.chartConfigurations.push({
                 name: legend,
                 type: 'bar',
-                //barWidth: 10,
+                barWidth: 5,
               });
             }
             this.examWiswResultOption = EchartOptionBuilder.
@@ -253,6 +256,9 @@ export class GuardianDashboardComponent extends BaseComponent {
             this.results = null;
           }
           observer.next(data);
+          observer.complete();
+        },error=>{
+          observer.next(error);
           observer.complete();
         });
     });
@@ -278,7 +284,7 @@ export class GuardianDashboardComponent extends BaseComponent {
               chartConfiguration.chartConfigurations.push({
                 name: legend,
                 type: 'bar',
-                barWidth: 10,
+                barWidth: 5,
               });
             }
             this.termWiswResultOption = EchartOptionBuilder.
@@ -288,8 +294,9 @@ export class GuardianDashboardComponent extends BaseComponent {
           }
           observer.next(data);
           observer.complete();
-
-
+        },error=>{
+          observer.next(error);
+          observer.complete();
         });
     });
   }
@@ -306,6 +313,9 @@ export class GuardianDashboardComponent extends BaseComponent {
           }
           observer.next(data);
           observer.complete();
+        },error=>{
+          observer.next(error);
+          observer.complete();
         });
     });
   }
@@ -321,6 +331,9 @@ export class GuardianDashboardComponent extends BaseComponent {
             this.todayTables = null;
           }
           observer.next(data);
+          observer.complete();
+        },error=>{
+          observer.next(error);
           observer.complete();
         });
     });

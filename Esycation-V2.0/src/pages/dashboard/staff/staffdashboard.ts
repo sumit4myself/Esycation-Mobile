@@ -157,6 +157,9 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
         this.monthWiseAtttendanceOptions());     
         observer.next(data);
         observer.complete();
+      },error=>{
+        observer.next(error);
+        observer.complete();
       });
     });
    
@@ -214,6 +217,9 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
           }
           observer.next(data);
           observer.complete();
+        },error=>{
+          observer.next(error);
+          observer.complete();
         });
     });
   }
@@ -229,6 +235,9 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
             this.approvalRequests = null;
           }
           observer.next(data);
+          observer.complete();
+        },error=>{
+          observer.next(error);
           observer.complete();
         });
     });
@@ -246,6 +255,9 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
           }
           observer.next(data);
           observer.complete();
+        },error=>{
+          observer.next(error);
+          observer.complete();
         });
     });
   }
@@ -261,6 +273,9 @@ export class StaffDashboardComponent extends BaseComponent implements OnInit {
             this.weekTimetable = null;
           }
           observer.next(data);
+          observer.complete();
+        },error=>{
+          observer.next(error);
           observer.complete();
         });
     });

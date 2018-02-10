@@ -38,9 +38,6 @@ export class MyRequestComponent extends BaseComponent {
   ionViewDidLoad() {
 
     this.myRequestDetails = this.navParam.get("myRequestDetails");
-
-    console.log("myRequestDetails==", this.myRequestDetails);
-
     this.commonServices.onLoader();
     this.approvalService.findMyRequest(this.myRequestDetails).subscribe(
       data => {

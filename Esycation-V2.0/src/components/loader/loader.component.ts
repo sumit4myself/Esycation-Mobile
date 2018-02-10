@@ -15,10 +15,15 @@ export class LoaderComponent {
     if (observable) {
       this.showLoader = true;
       observable.subscribe(data => {
-        console.log(data);
+        if(data==null){
+          this.showLoader = false;
+        }
         setTimeout(() => {
           this.showLoader = false;
         }, 500);
+      },error=>{
+        console.error("error==",error);
+        this.showLoader = false;
       });
     }
   }
