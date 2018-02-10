@@ -2,7 +2,6 @@ import { Component, ViewChild } from "@angular/core";
 import {
   Nav,
   Platform,
-  ModalController,
   Events,
   AlertController,
   ToastController
@@ -15,7 +14,6 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { PrivilageService } from "../providers/service/core/privilage.service";
 import { UserPrefernce } from "../providers/model/common/UserPrefernce";
 import { UserSessionService } from "../providers/service/core/user.session.service";
-// import { Push } from "@ionic-native/push";
 import { CommonServices } from "../providers/service/common/common.service";
 import { DeviceService } from "../providers/service/notification/device.service";
 import { FCM } from "@ionic-native/fcm";
@@ -60,7 +58,6 @@ export class MyApp {
     public splashScreen: SplashScreen,
     private privilageService: PrivilageService,
     private session: UserSessionService,
-    private modal: ModalController,
     private events: Events,
     private commonServices: CommonServices,
     // private push: Push,
@@ -81,7 +78,7 @@ export class MyApp {
       this.loginUsers = this.session.findUsers();
       this.menu = this.privilageService.privilaged(this.userPrefernce.module);
 
-     // console.log("LOGIN_USER_EVENT..!", JSON.stringify(this.userPrefernce));
+      // console.log("LOGIN_USER_EVENT..!", JSON.stringify(this.userPrefernce));
     });
     this.pages = [
       {
@@ -163,13 +160,7 @@ export class MyApp {
   }
 
   onAddAccount() {
-    let modal = this.modal.create("AddAccountComponent");
-    modal.onDidDismiss(isaddAccount => {
-      if (isaddAccount) {
-        this.nav.setRoot("AddAccountComponent");
-      }
-    });
-    modal.present();
+    this.nav.push("AddAccountComponent");
   }
 
   onSwitchAccount(userId: number) {

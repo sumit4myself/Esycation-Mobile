@@ -1,12 +1,8 @@
-<ion-header class="transparent-header">
-  <ion-navbar>
-    <ion-title (click)="onBack()">
-      <ion-icon name="arrow-round-back"></ion-icon>
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+<ion-content padding class="transparent-header" [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+    <ion-header>
+        <ion-navbar>
+        </ion-navbar>
+      </ion-header>
   <form [formGroup]="loginForm" novalidate>
     <div padding class="scroll-content">
       <ion-row>
