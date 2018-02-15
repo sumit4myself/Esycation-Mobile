@@ -72,17 +72,17 @@
         <div echarts [options]="options" class="demo-chart"></div>
       </ion-grid>
     <!--$$$$$$$$$$$$$  Current Month  Segement $$$$$$$$$$$$$$$$$$$$$$-->
-    <ion-grid *ngIf="attendanceSegement === 'currentMonthAttendance'" 
+    <ion-grid *ngIf="attendanceSegement === 'currentMonthAttendance'"
           class="height-300x padding-vertical-remove">
-        <calendar  [eventSource]="eventSource" 
-                [calendarMode]="calendar.mode" 
+        <calendar  [eventSource]="eventSource"
+                [calendarMode]="calendar.mode"
                 [currentDate]="calendar.currentDate" step="30">
         </calendar>
     </ion-grid>
   </ion-card-content>
 </ion-card>
 <!--*********** end attendance Segement ***********-->
-<!--*********** Result Segement ***********-->
+<!--*********** Result Segement ***********
 <ion-card>
     <ion-card-content>
       <ion-segment [(ngModel)]="resultSegement" color="dark">
@@ -93,21 +93,21 @@
             Term wise Result
         </ion-segment-button>
       </ion-segment>
-      <!--$$$$$$$$$$$$$ Month Wise Attendance Segement $$$$$$$$$$$$$$$-->
+      // Month Wise Attendance Segement
       <observable-loader [observable]="examWiseResultObservable"></observable-loader>
         <ion-grid  *ngIf="resultSegement === 'examWiseResult'" class="height-200x padding-vertical-remove">
           <div echarts [options]="examWiswResultOption" class="demo-chart"></div>
         </ion-grid>
-       <!--$$$$$$$$$$$$$ Result Segement $$$$$$$$$$$$$$$-->
+       // Result Segement
        <observable-loader [observable]="termWiseResultObservable"></observable-loader>
        <ion-grid  *ngIf="resultSegement === 'termWiseResult'" class="height-200x padding-vertical-remove">
          <div echarts [options]="termWiswResultOption" class="demo-chart"></div>
        </ion-grid>
     </ion-card-content>
-  </ion-card>
+  </ion-card>-->
   <!--*********** end Result Segement ***********-->
 
-  <!--*********** Time Table Segement ***********-->
+  <!--*********** Time Table Segement ***********
 <ion-card>
   <ion-card-content>
     <ion-segment [(ngModel)]="timeTableSegement" color="dark">
@@ -150,7 +150,7 @@
           </ion-scroll>
         </span>
       </ion-grid>
-      <!--********************** Today Time table**************************** -->
+      // ********************** Today Time table****************************
       <observable-loader [observable]="todayTableObservable"></observable-loader>
       <ion-grid  *ngIf="timeTableSegement === 'todayTimetable'" class="height-200x padding-vertical-remove">
         <ion-item *ngIf="todayTables == null">
@@ -184,7 +184,7 @@
         </span>
       </ion-grid>
   </ion-card-content>
-</ion-card>
+</ion-card>-->
 <!--*********** end Time table Segement ***********-->
 
 
@@ -213,7 +213,7 @@
             <span *ngIf="approvalRequests != null">
               <ion-scroll scrollY="true" class="height-300x">
                 <ion-item *ngFor="let request of approvalRequests" class="padding-vertical-remove">
-                  <ion-grid no-padding (click)="onMyRequest(request.module, 
+                  <ion-grid no-padding (click)="onMyRequest(request.module,
                         request.processInstanceId,request.targetId,request.api,request.cancelable)">
                     <ion-row>
                       <ion-col>
@@ -233,7 +233,7 @@
               </ion-scroll>
             </span>
           </ion-grid>
-    
+
           <!--***********   My Requests  Segement  ***********-->
           <ion-grid *ngIf="approvalSegement === 'myRequests'" class="padding-vertical-remove">
             <ion-item *ngIf="myApprovalRequests == null">
@@ -247,7 +247,7 @@
             <span *ngIf="myApprovalRequests != null">
               <ion-scroll scrollY="true" class="height-300x">
                 <ion-item *ngFor="let request of myApprovalRequests" class="padding-vertical-remove">
-                  <ion-grid no-padding (click)="onMyRequest(request.module, 
+                  <ion-grid no-padding (click)="onMyRequest(request.module,
                   request.processInstanceId,request.targetId,request.api,request.cancelable)">
                     <ion-row>
                       <ion-col>
@@ -276,5 +276,5 @@
         </ion-card-content>
       </ion-card>
     <!--*********** end Approval Segement ***********-->
-    
+
 </ion-content>
