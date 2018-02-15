@@ -3,14 +3,15 @@ export class NotificationUtils {
     public static findColor(title: string): string {
 
         let type = title.substring(0, 1);
-        if (type == 'S')
-            return "#EA1E63";
-        else if (type == 'O')
-            return "#0059B2";
-        else if (type == 'E')
-            return "#8dc34b";
-        else if (type == 'P')
-            return "#ff9800";
+        
+        if (type == 'I')
+            return "#488aff";
+        else if (type == 'U')
+            return "#f53d3d";
+        else if (type == 'A')
+            return "#ffeb3b";
+        else if (type == 'H')
+            return "#ff5722";
         else if (type == 'INFORMATIVE')
             return "#488aff";
         else if (type == 'URGENT')

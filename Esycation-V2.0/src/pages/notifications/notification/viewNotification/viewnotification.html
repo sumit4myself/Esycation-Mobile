@@ -31,15 +31,15 @@
         </ion-item>  
           <ion-card-content>
             <p  [innerHTML]="notification.message"></p>
-            <ion-grid no-padding *ngIf="notification.notificationId.resources">
-              <ion-row >
-                  <ion-col >
-                     <div align="left" class="small">
-                      <span *ngFor="let file  of files keys">
-                        <ion-icon name="attach"></ion-icon> 
-                          {{file}}== {{key}} === {{file.value}}
-                      </span>
-                    </div>
+            <ion-grid no-padding *ngIf="files!=null">
+              <ion-row > 
+                  <ion-col *ngFor="let file of files ">
+                      <p class="small" >
+                        <ion-icon name="document" color="red"></ion-icon>
+                        <file-download [fileId]="file.id"
+                                       [fileName]="file.name" >
+                          </file-download> 
+                        </p>
                   </ion-col>
               </ion-row>
           </ion-grid>   

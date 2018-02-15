@@ -9,6 +9,7 @@ export class ServerConfig {
       private static authPrefix: string = '';
       private static viewName :string ='?RESPONSE_VIEW=';
       private static imageView :string = "http://demo.educoresystems.com/api-v1.0/zuul/files/browse/";
+      private static downloadView :string = "http://demo.educoresystems.com/api-v1.0/zuul/files/download/";
 
       public static setApiVersion(version: string = 'api-v1.0'): void {
         ServerConfig.version = version;
@@ -49,6 +50,9 @@ export class ServerConfig {
 
       public static imagePath():string{
         return ServerConfig.imageView;
+      }
+      public static downLoadPath():string{
+        return ServerConfig.downloadView;
       }
 
     }
