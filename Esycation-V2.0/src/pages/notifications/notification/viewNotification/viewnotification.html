@@ -7,36 +7,43 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div *ngIf="isLoaded">
-  <div class="noti-header">
-    <h5> {{notification.notificationId.template.subject}} </h5>
-  </div>
-
-  <p class="noti-content" [innerHTML]="notification.message"></p>
-
-
-  <ion-list *ngIf=false>
-      <ion-item>
-        Doc 
-        <ion-icon name="leaf" item-end></ion-icon>
-         
-      </ion-item>
-      <ion-item>
-          Name 
-          <ion-icon name="leaf" item-end></ion-icon>
-           
-        </ion-item>
-    </ion-list>
-  </div>  
-  <!-- <ion-card >
-    
-    <ion-card-content>
-      <ion-card-title ion-button icon-left clear color="gray">
-        {{notification.notificationId.template.subject}}
-      </ion-card-title>
-      <p [innerHTML]="notification.message | slice:0:230"></p>
-    </ion-card-content>
-    
-  </ion-card> -->
-
+    <ion-card>
+        <ion-item>
+            <ion-avatar no-padding item-start >
+                <span class="serial" [style.background-color]="notification.notificationId.styleColor"> 
+                  {{notification.notificationId.typeInfo}}</span>
+            </ion-avatar>
+            {{notification.notificationId.type}}
+            <ion-grid no-padding >
+                <ion-row >
+                    <ion-col >
+                       <div align="left" class="small"> 
+                        {{notification.notificationId.template.subject}}
+                      </div>
+                    </ion-col>
+                    <ion-col>
+                        <div align="right" class="small"> <ion-icon name="time"></ion-icon> 
+                          {{notification.notificationId.pushTime}} 
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>       
+        </ion-item>  
+          <ion-card-content>
+            <p  [innerHTML]="notification.message"></p>
+            <ion-grid no-padding *ngIf="files!=null">
+              <ion-row > 
+                  <ion-col *ngFor="let file of files ">
+                      <p class="small" >
+                        <ion-icon name="document" color="red"></ion-icon>
+                        <file-download [fileId]="file.id"
+                                       [fileName]="file.name" >
+                          </file-download> 
+                        </p>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>   
+          </ion-card-content>
+        </ion-card>
+ 
 </ion-content>
