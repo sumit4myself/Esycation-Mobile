@@ -41,6 +41,7 @@ export class AddBulkNotificationComponent extends BaseComponent {
     comMode: any;
     mode: string = null;
     selectOptionStyle: any = {};
+    bulkForm:BulkNotificationForm=new BulkNotificationForm();
 
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
@@ -204,10 +205,10 @@ export class AddBulkNotificationComponent extends BaseComponent {
     onSave({ value, valid }: { value: BulkNotificationForm, valid: boolean }) {
 
         this.commonServices.onLoader("saving..");
-        let data = this.prepareData(value);
-        console.log(JSON.stringify(data));
-        if (valid) {
-
+        let isValid = this.bulkForm.validate(value,valid);
+        if (isValid) {
+            let data = this.prepareData(value);
+            console.log(JSON.stringify(data));
             this.bulkNotificationService.saveBulkNotification(data).subscribe(data => {
                 console.log("data==", data);
                 this.commonServices.onDismissAll();

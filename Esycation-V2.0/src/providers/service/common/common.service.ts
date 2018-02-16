@@ -89,8 +89,8 @@ export class CommonServices {
     this.loading.present();
 
     setTimeout(() => {
-      this.loading.dismiss();
-    }, 500);
+      this.loading.dismissAll();
+    }, 100);
     
   }
 

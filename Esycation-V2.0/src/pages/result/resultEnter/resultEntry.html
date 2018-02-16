@@ -13,7 +13,7 @@
   </ion-header>
   <ion-content>
     <ion-list >
-      <ion-item *ngFor="let student of resultDetails.studentResults; let count = index" >
+      <ion-item *ngFor="let student of resultDetails.studentResults; let indexNo = index" >
         <ion-avatar item-start *ngIf="student.studentImageId==null">
           <img class="profile-image" src="assets/img/student-m.png">
         </ion-avatar>
@@ -22,7 +22,9 @@
         </ion-avatar>
         <h2>{{student.studentName}}</h2>
         <h3>#{{student.studentRollNumber}}</h3>
-        <input item-right type="number" class="inputStyle" [(ngModel)]="student.marks" placeholder="Marks">
+        <input item-right type="number" (input)="onMarksValidate($event.target.value,indexNo)"  
+          class="inputStyle" [(ngModel)]="student.marks" placeholder="Marks" maxlength="3">
+        <p class="small error" *ngIf="student.error">{{student.error}}</p>  
         </ion-item>
       <p *ngIf="dataNotfound!=null" text-center class="app-error"> <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
     </ion-list>

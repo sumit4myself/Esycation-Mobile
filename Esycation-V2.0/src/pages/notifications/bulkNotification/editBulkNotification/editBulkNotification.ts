@@ -42,6 +42,8 @@ export class EditBulkNotificationComponent extends BaseComponent {
     notification: BulkNotificationView = new BulkNotificationView();
     selectOptionStyle: any = {};
     mode: string = null;
+    bulkForm:BulkNotificationForm=new BulkNotificationForm();
+
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
         private bulkNotificationService: BulkNotificationService,
@@ -104,8 +106,8 @@ export class EditBulkNotificationComponent extends BaseComponent {
     }
 
     onCommunication(mode: string) {
-
-        this.commonServices.onLoader();
+        console.log("onCommunication....!");
+       // this.commonServices.onLoader();
         this.bulkNotificationService.findTemplateByMode(mode).subscribe(data => {
 
             for (let template of data.contents) {
@@ -133,8 +135,8 @@ export class EditBulkNotificationComponent extends BaseComponent {
     }
 
     findAllCources() {
-
-        this.commonServices.onLoader();
+        console.log("findAllCources....!");
+       // this.commonServices.onLoader();
         this.cources = [];
         this.courceService.findAllcourses("Course.NameId").subscribe(data => {
             for (let cource of data.contents) {
@@ -150,7 +152,8 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     findBatchByCourseIds(id: number) {
 
-        this.commonServices.onLoader();
+        console.log("findBatchByCourseIds....!");
+       // this.commonServices.onLoader();
         this.batchService.findBatchByCourseIds(id, "Batch.NameId").subscribe(data => {
             for (let batch of data.contents) {
                 let obj = Object.assign({}, batch);
@@ -163,7 +166,9 @@ export class EditBulkNotificationComponent extends BaseComponent {
         });
     }
     findStudentByBatchId(batchId: number) {
-        this.commonServices.onLoader();
+
+        console.log("findStudentByBatchId....!");
+      //  this.commonServices.onLoader();
         this.studentService.findByBatchIds(batchId, "Student.MinDetails").subscribe(data => {
             for (let student of data.contents) {
                 let obj = Object.assign({}, student);
@@ -178,7 +183,8 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     onDepartment(branchId: number) {
 
-        this.commonServices.onLoader();
+        console.log("onDepartment....!");
+        //this.commonServices.onLoader();
         this.departments = [];
         this.departmentService.findByBranchIds(branchId, "Department.NameId").subscribe(
             data => {
@@ -195,7 +201,8 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     onStaff(departmentId: number) {
 
-        this.commonServices.onLoader();
+        console.log("onStaff....!");
+        //this.commonServices.onLoader();
         this.staffs = [];
         this.staffService.findByDepartmentIds(departmentId, "Staff.MinDetails").subscribe(
             data => {
@@ -209,7 +216,8 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     onGroup() {
 
-        this.commonServices.onLoader();
+        console.log("onGroup....!");
+        //this.commonServices.onLoader();
         this.groups = [];
         this.bulkNotificationService.findGroup(this.session.findUserId(), "Group.Details").subscribe(
             data => {
@@ -223,9 +231,11 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     onUpdate({ value, valid }: { value: BulkNotificationForm, valid: boolean }) {
 
-        let data = this.prepareData(value);
-        console.log("data==", JSON.stringify(data));
-        if (valid) {
+        this.commonServices.onLoader("Updating..");
+        let isValid = this.bulkForm.validate(value,valid);
+        if (isValid) {
+            let data = this.prepareData(value);
+            console.log("data==", JSON.stringify(data));
             this.bulkNotificationService.updateBulkNotification(data).subscribe(d => {
                 console.log(d);
                 this.commonServices.presentToast("Data update successfully", null, "success");
@@ -233,10 +243,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
             }, error => {
                 console.error("ERROR :", error);
             });
-        } else {
-
-        }
-
+        } 
     }
 
     private prepareData(form: BulkNotificationForm): Notification {

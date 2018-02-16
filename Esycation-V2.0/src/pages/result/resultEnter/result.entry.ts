@@ -48,35 +48,60 @@ export class ResultEntiryComponent extends BaseComponent {
   }
 
   onDraft() {
-    this.commonServices.onLoader();
-    this.resultDetails.resultStatus = "DRAFT";
-    console.log("Result onDraft===", JSON.stringify(this.resultDetails));
-    this.resultEntryService.draft(this.resultDetails).subscribe(data => {
-      console.log(data);
-      this.commonServices.onDismissAll();
-      this.commonServices.presentToast("Result draft successfully",null,"success");
-      this.navCtrl.push("ResultEntiryViewComponent");
-    },error => {
-      console.error(error);
-      this.commonServices.onDismissAll();
-    });
 
+    if (this.validateMarks(this.resultDetails)) {
+      this.commonServices.onLoader();
+      this.resultDetails.resultStatus = "DRAFT";
+      console.log("Result onDraft===", JSON.stringify(this.resultDetails));
+      this.resultEntryService.draft(this.resultDetails).subscribe(data => {
+        console.log(data);
+        this.commonServices.onDismissAll();
+        this.commonServices.presentToast("Result draft successfully", null, "success");
+        this.navCtrl.setRoot("ResultEntiryViewComponent");
+      }, error => {
+        console.error(error);
+        this.commonServices.onDismissAll();
+      });
+    }
   }
 
   onPublish() {
 
-    this.commonServices.onLoader();
-    this.resultDetails.resultStatus = "PUBLISHED";
-    console.log("Result Pubblish===", JSON.stringify(this.resultDetails));
-    this.resultEntryService.publish(this.resultDetails).subscribe(data => {
-      console.log(data);
-      this.commonServices.onDismissAll();
-      this.commonServices.presentToast("Result publish successfully",null,"success");
-      this.navCtrl.push("ResultEntiryViewComponent");
-    },error => {
-      console.error(error);
-      this.commonServices.onDismissAll();
-    });
+    if (this.validateMarks(this.resultDetails)) {
+      this.commonServices.onLoader();
+      this.resultDetails.resultStatus = "PUBLISHED";
+      console.log("Result Pubblish===", JSON.stringify(this.resultDetails));
+      this.resultEntryService.publish(this.resultDetails).subscribe(data => {
+        console.log(data);
+        this.commonServices.onDismissAll();
+        this.commonServices.presentToast("Result publish successfully", null, "success");
+        this.navCtrl.setRoot("ResultEntiryViewComponent");
+      }, error => {
+        console.error(error);
+        this.commonServices.onDismissAll();
+      });
+    }
+
   }
+
+  onMarksValidate(marks: number, indexNo: number) {
+    if (marks > this.resultDetails.marks) {
+      this.resultDetails.studentResults[indexNo].error = "you can not enter marks out of " + this.resultDetails.marks;
+    } else {
+      this.resultDetails.studentResults[indexNo].error = null;
+    }
+  }
+
+  public validateMarks(resultDetails: ResultDetails): boolean {
+    let isValidate = true;
+    for (let studentResult of resultDetails.studentResults) {
+      if (studentResult.error) {
+        isValidate = false;
+        break;
+      }
+    }
+    return isValidate;
+  }
+
 
 }
