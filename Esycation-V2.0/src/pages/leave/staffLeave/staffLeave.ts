@@ -21,6 +21,7 @@ export class StaffLeaveComponent extends BaseComponent {
   leaveType: StaffLeaveDefinition = new StaffLeaveDefinition();
   error: ErrorValidate = new ErrorValidate();
   mySelectOptions: any = {};
+  formSubmitAttempt: boolean;
   constructor(
     protected navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -61,7 +62,7 @@ export class StaffLeaveComponent extends BaseComponent {
   onApply({ value, valid }: { value: StaffLeaveDetailsInterface, valid: boolean }) {
 
     this.commonServices.onLoader();
-
+    this.formSubmitAttempt=true;
     if (this.validate(valid, value)) {
       this.leaveService.saveStaffLeave(this.PrepareData(value)).subscribe(data => {
         this.commonServices.presentToast("Data saved successfully", null, "success");

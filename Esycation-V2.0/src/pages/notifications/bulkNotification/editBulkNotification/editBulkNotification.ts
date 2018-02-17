@@ -43,7 +43,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
     selectOptionStyle: any = {};
     mode: string = null;
     bulkForm:BulkNotificationForm=new BulkNotificationForm();
-
+    formSubmitAttempt:boolean;
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
         private bulkNotificationService: BulkNotificationService,
@@ -231,6 +231,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     onUpdate({ value, valid }: { value: BulkNotificationForm, valid: boolean }) {
 
+        this.formSubmitAttempt=true;
         this.commonServices.onLoader("Updating..");
         let isValid = this.bulkForm.validate(value,valid);
         if (isValid) {

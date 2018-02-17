@@ -16,7 +16,7 @@
             <ion-list no-liness class="bulk-notification-list" no-padding>
                 <ion-item>
                     <ion-label color="darkGray" >Receiver Type *
-                    <p class="error" *ngIf="!bulkNotificationForm.controls['receiverType'].value">This field is required *</p>    
+                    <p class="error" *ngIf="!bulkNotificationForm.controls['receiverType'].value ">This field is required *</p>    
                     </ion-label>
                     <ion-select formControlName="receiverType" 
                             (ngModelChange)="onReceiverType($event)" 
@@ -28,7 +28,7 @@
                 </ion-item> 
                 <ion-item>
                     <ion-label color="darkGray">Communication Mode *
-                    <p class="error" *ngIf="!bulkNotificationForm.controls['mode'].value">This field is required *</p>        
+                    <p class="error" *ngIf="!bulkNotificationForm.controls['mode'].value && formSubmitAttempt">This field is required *</p>        
                     </ion-label>
                     <ion-select formControlName="mode" 
                             (ngModelChange)="onCommunication($event)" 
@@ -40,7 +40,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label color="darkGray">Notification Type * 
-                    <p class="error" *ngIf="!bulkNotificationForm.controls['type'].value">This field is required *</p>      
+                    <p class="error" *ngIf="!bulkNotificationForm.controls['type'].value && formSubmitAttempt">This field is required *</p>      
                     </ion-label>
                     <ion-select formControlName="type" 
                                 [selectOptions]="selectOptionStyle">
@@ -51,7 +51,7 @@
                 </ion-item>
                 <ion-item >
                     <ion-label color="darkGray">Date*
-                    <p class="error" *ngIf="!bulkNotificationForm.controls['date'].value">This field is required *</p>     
+                    <p class="error" *ngIf="!bulkNotificationForm.controls['date'].value && formSubmitAttempt">This field is required *</p>     
                     </ion-label>
                     <ion-datetime formControlName="date" pickerFormat="DD/MM/YYYY" 
                     displayFormat="DD/MM/YYYY">
@@ -59,7 +59,7 @@
                 </ion-item>
                 <ion-item >
                 <ion-label color="darkGray">Time* 
-                <p class="error" *ngIf="!bulkNotificationForm.controls['time'].value">This field is required *</p>    
+                <p class="error" *ngIf="!bulkNotificationForm.controls['time'].value && formSubmitAttempt">This field is required *</p>    
                 </ion-label>
                 <ion-datetime formControlName="time" pickerFormat="HH:mm" displayFormat="HH:mm">
                 </ion-datetime>
@@ -78,7 +78,7 @@
                     </ion-list-header>
                 <ion-item  *ngIf="comMode=='STUDENT'">
                     <ion-label color="darkGray">Class*
-                    <p class="error" *ngIf="!bulkNotificationForm.controls['courses'].value">This field is required *</p>       
+                    <p class="error" *ngIf="!bulkNotificationForm.controls['courses'].value && formSubmitAttempt">This field is required *</p>       
                     </ion-label>
                     <ion-select formControlName="courses" multiple="true" 
                             (ngModelChange)="findBatchByCourseIds($event)" 
@@ -88,7 +88,7 @@
                 </ion-item>
                 <ion-item  *ngIf="comMode=='STUDENT'">
                         <ion-label color="darkGray">Section* 
-                        <p class="error" *ngIf="!bulkNotificationForm.controls['batches'].value">This field is required *</p>      
+                        <p class="error" *ngIf="!bulkNotificationForm.controls['batches'].value && formSubmitAttempt">This field is required *</p>      
                         </ion-label>
                         <ion-select formControlName="batches" multiple="true" 
                                     (ngModelChange)="findStudentByBatchId($event)" 
@@ -99,7 +99,7 @@
     
                 <ion-item *ngIf="comMode=='STUDENT'">
                 <ion-label color="darkGray">Student*
-                <p class="error" *ngIf="!bulkNotificationForm.controls['students'].value">This field is required *</p>        
+                <p class="error" *ngIf="!bulkNotificationForm.controls['students'].value && formSubmitAttempt">This field is required *</p>        
                 </ion-label>
                 <ion-select formControlName="students" multiple="true" 
                 [selectOptions]="selectOptionStyle">
@@ -112,7 +112,7 @@
                     </ion-list-header>
                 <ion-item  *ngIf="comMode=='STAFF'">
                 <ion-label color="darkGray">Department*
-                <p class="error" *ngIf="!bulkNotificationForm.controls['departments'].value">This field is required *</p>    
+                <p class="error" *ngIf="!bulkNotificationForm.controls['departments'].value && formSubmitAttempt">This field is required *</p>    
                 </ion-label>
                 <ion-select formControlName="departments" (ngModelChange)="onStaff($event)" 
                 [selectOptions]="selectOptionStyle">
@@ -121,7 +121,7 @@
                 </ion-item>
                 <ion-item  *ngIf="comMode=='STAFF'">
                 <ion-label color="darkGray">Staff*
-                <p class="error" *ngIf="!bulkNotificationForm.controls['staffs'].value">This field is required *</p>    
+                <p class="error" *ngIf="!bulkNotificationForm.controls['staffs'].value && formSubmitAttempt">This field is required *</p>    
                 </ion-label>
                 <ion-select formControlName="staffs" multiple="true" 
                 [selectOptions]="selectOptionStyle">
@@ -146,13 +146,13 @@
                 </ion-list-header>
                 <ion-item *ngIf="mode!=null && mode!='SMS' ">
                     <ion-label color="darkGray" stacked>Subject*
-                    <p class="error" *ngIf="!bulkNotificationForm.controls['subject'].value">This field is required *</p>      
+                    <p class="error" *ngIf="!bulkNotificationForm.controls['subject'].value && formSubmitAttempt">This field is required *</p>      
                     </ion-label>
                     <ion-input formControlName="subject" type="text"></ion-input>
                 </ion-item>
                 <ion-item >
                 <ion-label color="darkGray" stacked>Message*
-                    <p class="error" *ngIf="!bulkNotificationForm.controls['content'].value">This field is required *</p>   
+                    <p class="error" *ngIf="!bulkNotificationForm.controls['content'].value && formSubmitAttempt">This field is required *</p>   
                 </ion-label>
                 <ion-textarea elastic name="content" rows="6" cols="40" formControlName="content"></ion-textarea>
                 </ion-item>

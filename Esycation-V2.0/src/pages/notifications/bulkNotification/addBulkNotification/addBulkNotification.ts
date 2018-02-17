@@ -42,6 +42,7 @@ export class AddBulkNotificationComponent extends BaseComponent {
     mode: string = null;
     selectOptionStyle: any = {};
     bulkForm:BulkNotificationForm=new BulkNotificationForm();
+    formSubmitAttempt: boolean;
 
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
@@ -206,6 +207,7 @@ export class AddBulkNotificationComponent extends BaseComponent {
 
         this.commonServices.onLoader("saving..");
         let isValid = this.bulkForm.validate(value,valid);
+        this.formSubmitAttempt=true;
         if (isValid) {
             let data = this.prepareData(value);
             console.log(JSON.stringify(data));

@@ -42,14 +42,14 @@
                     </ion-list-header>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Name *
-                            <p class="error" *ngIf="!profileForm.controls['name'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['name'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-input formControlName="name" type="text">
                         </ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Gender *
-                            <p class="error" *ngIf="!profileForm.controls['gender'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['gender'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
 
                         <ion-select formControlName="gender" [selectOptions]="mySelectOptions">
@@ -59,7 +59,7 @@
                     </ion-item>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Date Of Birth *
-                            <p class="error" *ngIf="!profileForm.controls['dob'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['dob'].value && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-datetime formControlName="dob" 
                         pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
@@ -67,7 +67,7 @@
                     </ion-item>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Blood Group *
-                            <p class="error" *ngIf="!profileForm.controls['bloodGroup'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['bloodGroup'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-select [selectOptions]="mySelectOptions" formControlName="bloodGroup">
                             <ion-option value="A+">A+</ion-option>
@@ -82,13 +82,13 @@
                     </ion-item>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Mobile Number *
-                            <p class="error" *ngIf="!profileForm.controls['mobile'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['mobile'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-input formControlName="mobile" type="text"></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Email *
-                            <p class="error" *ngIf="!profileForm.controls['email'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['email'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-input formControlName="email" type="text"></ion-input>
                     </ion-item>
@@ -103,7 +103,7 @@
                     </ion-list-header>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Address 1 *
-                            <p class="error" *ngIf="!profileForm.controls['address1'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['address1'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-input formControlName="address1" type="text"></ion-input>
                     </ion-item>
@@ -114,19 +114,19 @@
                     
                     <ion-item>
                         <ion-label color="darkGray" stacked>City *
-                            <p class="error" *ngIf="!profileForm.controls['city'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['city'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-input formControlName="city" type="text"></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label color="darkGray" stacked>State *
-                            <p class="error" *ngIf="!profileForm.controls['state'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['state'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-input formControlName="state" type="text"></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Pin Code *
-                            <p class="error" *ngIf="!profileForm.controls['pinCode'].valid">This field is required *</p>
+                            <p class="error" *ngIf="!profileForm.controls['pinCode'].valid && formSubmitAttempt">This field is required *</p>
                         </ion-label>
                         <ion-input formControlName="pinCode" type="text"></ion-input>
                     </ion-item>

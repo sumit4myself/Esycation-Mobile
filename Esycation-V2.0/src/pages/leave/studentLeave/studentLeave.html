@@ -16,7 +16,7 @@
     <ion-list no-line class="student-leave-list" no-padding>
       <ion-item>
             <ion-label color="darkGray" stacked>Student* 
-            <p class="error" *ngIf="!leaveForm.controls['studentId'].valid">This field is required *</p>
+            <p class="error" *ngIf="!leaveForm.controls['studentId'].valid && formSubmitAttempt">This field is required *</p>
             </ion-label>
             <ion-select formControlName="studentId" [selectOptions]="mySelectOptions">
               <ion-option *ngFor="let student of students.contents" 
@@ -26,7 +26,7 @@
       </ion-item>
       <ion-item>
           <ion-label color="darkGray" stacked>From *
-            <p class="error" *ngIf="!leaveForm.controls['fromDate'].valid">This field is required *</p>
+            <p class="error" *ngIf="!leaveForm.controls['fromDate'].valid && formSubmitAttempt">This field is required *</p>
             <p class="error" *ngIf="totalLeaveError!=null">{{totalLeaveError}}</p>
           </ion-label>
           <ion-datetime formControlName="fromDate" pickerFormat="DD/MM/YYYY" 
@@ -35,7 +35,7 @@
       </ion-item>
       <ion-item>
           <ion-label color="darkGray" stacked> To *
-            <p class="error" *ngIf="!leaveForm.controls['toDate'].valid">This field is required *</p>
+            <p class="error" *ngIf="!leaveForm.controls['toDate'].valid && formSubmitAttempt">This field is required *</p>
             <p class="error" *ngIf="totalLeaveError!=null">{{totalLeaveError}}</p>
           </ion-label>
           <ion-datetime pickerFormat="DD/MM/YYYY" 
@@ -44,7 +44,7 @@
       </ion-item>
       <ion-item>
           <ion-label color="darkGray" stacked>Comment * 
-          <p class="error" *ngIf="!leaveForm.controls['comment'].valid">This field is required *</p>
+          <p class="error" *ngIf="!leaveForm.controls['comment'].valid && formSubmitAttempt">This field is required *</p>
           </ion-label>
           <ion-textarea formControlName="comment" type="text" rows="8"></ion-textarea>
         </ion-item>

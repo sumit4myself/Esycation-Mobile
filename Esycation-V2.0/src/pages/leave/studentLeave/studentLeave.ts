@@ -20,6 +20,7 @@ export class StudentLeaveComponent extends BaseComponent {
   mySelectOptions: any = {};
   students: PagedResponse = PagedResponse.getInstance();
   totalLeaveError: string = null;
+  formSubmitAttempt: boolean;
   constructor(
     protected navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -64,6 +65,7 @@ export class StudentLeaveComponent extends BaseComponent {
 
   onApply({ value, valid }: { value: Leave, valid: boolean }) {
 
+    this.formSubmitAttempt=true;
     let leaveDetails = this.preapreData(value);
     this.commonServices.onLoader();
     if (this.validate(valid, leaveDetails)) {

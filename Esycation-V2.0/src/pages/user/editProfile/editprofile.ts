@@ -22,6 +22,7 @@ export class EditProfileComponent {
  imageId:string=null;
  mySelectOptions : any={};  
  imagePath:String;
+ formSubmitAttempt: boolean=false;
 
  constructor(
     private formBuilder:FormBuilder,
@@ -87,6 +88,7 @@ export class EditProfileComponent {
 
   onUpdate({value,valid}:{value:ProfileInterface,valid:boolean}){
 
+      this.formSubmitAttempt=true;
       value.dob=moment(value.dob).format("MM/DD/YYYY");
       value.imageId = this.profile.imageId;
       console.log("Edit Profile==",JSON.stringify(value),valid);
@@ -113,7 +115,7 @@ export class EditProfileComponent {
         name:profile.name,
         bloodGroup: profile.bloodGroup,
         gender: profile.gender,
-        dob: moment(profile.dob).format("YYYY-MM-DD"),
+        dob: '',
         mobile: profile.mobile,
         email:profile.email,
         adharNumber:profile.adharNumber,
@@ -130,6 +132,9 @@ export class EditProfileComponent {
         motherTongue:profile.motherTongue,
         annualIncome:profile.annualIncome,
         occupation:profile.occupation,
+      }
+      if(profile.dob){
+        data.dob=moment(profile.dob).format("YYYY-MM-DD")
       }
      
       return data;
