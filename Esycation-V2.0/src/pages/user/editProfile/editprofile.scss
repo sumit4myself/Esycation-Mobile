@@ -1,16 +1,6 @@
 edit-profile-page{
 
-  
-    .scroll-content{
-        margin-top: 0 !important;
-        padding-top: 44px;
-      }
-    
-      .toolbar-title {
-          color:#FFFFFF;
-      }
-    
-      .profile-header{
+  .profile-header{
           position: relative;
           height: 120px;
           background-color: rgb(26, 177, 241);
@@ -18,16 +8,12 @@ edit-profile-page{
           -moz-background-size: cover;
           -o-background-size: cover;
           background-size: cover;
-      }
-      .profile{
+    }
+    .profile{
         position: relative;
       }
-
-     
-
       .profile-box{
           position: absolute;
-          // padding:30px !important;
           top: -95px;
           width: 100%;
           z-index: 2;
@@ -37,59 +23,24 @@ edit-profile-page{
           width: 115px;
           height: 115px;
           margin: 0 auto 0;
-              border-width: 3px;
+          border-width: 3px;
           border-style: solid;
           border-color: rgb(255, 255, 255);
           border-image: initial;
+      }   
+    
+      ion-list > .item:first-child, 
+      ion-list > .item-block:first-child .item {
+            border-bottom: none;
       }
-        #profile2-info {
-        // position: absolute;
-        //   top: 95px;
-        //   z-index: 2;
-          width: 100%;
-          text-align: center;
-        }
-        #profile2-image {
-          position: absolute;
-          top: -10px;
-          z-index: 2;
-          // display: block;
-          // border-radius: 50%;
-          width: 115px;
-          height: 115px;
-          margin: 0 auto 0;
-              border-width: 3px;
-          border-style: solid;
-          border-color: rgb(255, 255, 255);
-          border-image: initial;
-          // box-shadow: 0px 11px 20px -3px rgba(142, 136, 146, 0.75);
-        }
-    
-        .icon-align {
-            -webkit-align-items:  flex-start !important;
-            -ms-flex-align:  flex-start !important;
-            align-items:  flex-start !important;
-        }
-        .opening-time ul{
-           padding-left: 1.2em;
-        }
-    
-        ion-list > .item:first-child, 
-        ion-list > .item-block:first-child .item {
+        
+      ion-list > .item:last-child, 
+      ion-list > .item-block:last-child .item {
             border-bottom: none;
-        }
-        .list-ios > .item-block:first-child {
-            /* border-top: 0.55px solid #c8c7cc; */
-        }
-        ion-list > .item:last-child, 
-        ion-list > .item-block:last-child .item {
-            border-bottom: none;
-        }
-    
-        ion-title {
+      }
+      ion-title {
           color:#fff
-        }
-    
+      }
     
         button,
         ion-button,
@@ -100,94 +51,9 @@ edit-profile-page{
         p {
           color: #444;
         }
-        // Cover image
-        #profile2-bg {
-          position: absolute;
-          left: 0;
-          width: 100%;
-          margin-top: -16px;
-          height: 240px;
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-position: center;
-          text-align: center;
-        }
-        // Profile content
-        #content.profile2{
-          position: relative;
-          margin-top: 250px;
-          padding-top: 200px;
-          text-align: center;
-        }
-    
-        #profile2-name {
-          color: #444;
-          font-size: 17px;
-        }
-        .profile2-description {
-          font-size: 15px;
-          color: #888;
-        }
-        .follow-button {
-          text-transform: none;
-          border-radius: 3px !important;
-          ion-icon {
-            font-weight: bold;
-            padding-left: 5px;
-            font-size: 2.5rem;
-          }
-        }
-        // Following, Followers and all..
-        .profile2-numbers {
-          p {
-            color: #444;
-            font-size: 18px;
-            margin-bottom: 3px;
-          }
-          span {
-            font-weight: bold;
-            font-size: 18px;
-            color: #34354c;
-          }
-        }
-        hr {
-          border: 0;
-          height: 1px;
-          background: #444;
-          background: -webkit-linear-gradient(left, hsla(0, 0%, 0%, 0) 0%, rgb(188, 198, 214) 50%, hsla(0, 0%, 0%, 0) 100%);
-        }
-        // Posts feed
-        #posts {
-          text-align: justify;
-        }
-    
-      //************ Fading header  **********//
-      .show-background{
-        border-style: none;
-        background : color($colors, green);
-        height: 10px;
-      }
-      .transition{
-         transition: font-size .3s ease-in;
-      }
-      .error{
-        color: red !important;
-        font-size: 10px;
-      }
-
-
-      .edit-profile-list ion-item{
-        // margin-bottom: 10px;
-        // box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-        // -moz-border-radius: 5px;
-        // -webkit-border-radius: 5px;
-        // border-radius: 5px; 
-        // -khtml-border-radius: 5px; 
-      }
 
       .edit-profile-list ion-label{
         font-size:12px !important;
-        // font-weight: bold;
         color: gray;
       }
 
@@ -195,7 +61,6 @@ edit-profile-page{
         font-size:16px !important;
         color: black;
       }
-
 
       .update-button{
         width: 180px;
@@ -224,21 +89,23 @@ edit-profile-page{
         }
     }
 
-      // @media screen and (min-width: 1025px) {
-        
-      //     .picker-wrapper {
-      //       bottom: 70%;
-      //     }
-        
-      //   }
 }
 .remove-ok {
-  // .alert-button:nth-child(2) {
-  //     display: none;
-  // }
+
   .alert-button:nth-child(1) {
     display: none;
 }
+}
+.edidImage{
+  
+  
+  bottom: 20px !important;
+  right: 20px !important;
+  background-color: black !important;
+  color: white !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+
 }
 @media screen and (min-width: 1025px) {
   
@@ -247,9 +114,9 @@ edit-profile-page{
     }
   
   }
-
   .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
     border-bottom-color: #32db64;
     -webkit-box-shadow: inset 0 1px 0 0 #32db64 !important;
     box-shadow: inset 0 1px 0 0 #32db64 !important;
+
 }

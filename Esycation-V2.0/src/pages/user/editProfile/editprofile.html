@@ -4,7 +4,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-buttons end>
-            <button icon-only ion-button  (click)="onNotification()" >
+            <button icon-only ion-button (click)="onNotification()">
                 <notification-counter></notification-counter>
             </button>
         </ion-buttons>
@@ -16,29 +16,17 @@
     <div class="profile-header" color="lightblue"></div>
     <div class="profile">
         <div class="profile-box">
-            <p *ngIf="imageId==null">
-                <ion-img class="profile-image" src="assets/img/default.png"></ion-img>
-            </p>
-            <p *ngIf="imageId!=null">
-                <ion-img class="profile-image" src="{{imagePath}}/{{imageId}}"></ion-img>
-            </p>
-            <!-- <ion-segment mode="md" [(ngModel)]="segmentView" color="blue2">
-                <ion-segment-button value="one">
-                    <ion-icon class="segment-font" name="ios-contact">&nbsp;&nbsp;About</ion-icon>
-                </ion-segment-button>
-                <ion-segment-button value="two">
-                    <ion-icon class="segment-font" name="home">&nbsp;&nbsp;Address</ion-icon>
-                </ion-segment-button>
-                <ion-segment-button value="three">
-                    <ion-icon class="segment-font" name="settings">&nbsp;&nbsp;Settings</ion-icon>
-                </ion-segment-button>
-            </ion-segment> -->
-
+            <ion-img class="profile-image" (click)="onClickPicture()" *ngIf="!picture"
+                [src]="imageId==null? 'assets/img/default.png' : imagePath+'/'+ imageId">
+            </ion-img>
+            <ion-img class="profile-image" (click)="onClickPicture()" *ngIf="picture"
+                [src]="picture">
+            </ion-img>
             <form [formGroup]="profileForm">
                 <ion-list no-liness class="edit-profile-list" no-padding>
                     <!-- <div *ngIf="segmentView==='one'"> -->
                     <ion-list-header color="ios-light-gray" class="list-item-header">
-                        <p>About</p>
+                        <p>About = {{picture}}</p>
                     </ion-list-header>
                     <ion-item>
                         <ion-label color="darkGray" stacked>Name *
@@ -61,8 +49,7 @@
                         <ion-label color="darkGray" stacked>Date Of Birth *
                             <p class="error" *ngIf="!profileForm.controls['dob'].value && formSubmitAttempt">This field is required *</p>
                         </ion-label>
-                        <ion-datetime formControlName="dob" 
-                        pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY" >
+                        <ion-datetime formControlName="dob" pickerFormat="DD/MM/YYYY" displayFormat="DD/MM/YYYY">
                         </ion-datetime>
                     </ion-item>
                     <ion-item>
@@ -111,7 +98,7 @@
                         <ion-label color="darkGray" stacked>Address 2</ion-label>
                         <ion-input formControlName="address2" type="text"></ion-input>
                     </ion-item>
-                    
+
                     <ion-item>
                         <ion-label color="darkGray" stacked>City *
                             <p class="error" *ngIf="!profileForm.controls['city'].valid && formSubmitAttempt">This field is required *</p>
@@ -177,9 +164,7 @@
                     </span>
                     <!-- </div> -->
                 </ion-list>
-                    <button padding color="stable" 
-                    class="form-item-rounder-items update-button" (click)="onUpdate(profileForm)" 
-                    ion-button  text-uppercase>Update</button>
+                <button padding color="stable" class="form-item-rounder-items update-button" (click)="onUpdate(profileForm)" ion-button text-uppercase>Update</button>
             </form>
         </div>
     </div>

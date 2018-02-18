@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { EditProfileComponent } from '../editProfile/editprofile';
 import { ProfileService } from '../../../providers/service/profile/profile.service';
+import { FileService } from '../../../providers/service/file/file.service';
 import { PushCounterModule } from '../../notifications/pushcounter/pushcounter.module';
+import { Camera } from '@ionic-native/camera';
 @NgModule({
     imports: [
         IonicPageModule.forChild(EditProfileComponent),
@@ -11,6 +13,6 @@ import { PushCounterModule } from '../../notifications/pushcounter/pushcounter.m
     ],
     exports: [EditProfileComponent],
     declarations: [EditProfileComponent],
-    providers: [ProfileService],
+    providers: [ProfileService, Camera, FileService],
 })
 export class EditProfileModule { }
