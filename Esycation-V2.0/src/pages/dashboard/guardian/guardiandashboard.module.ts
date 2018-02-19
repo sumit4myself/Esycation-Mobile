@@ -13,7 +13,7 @@ import { PushCounterModule } from '../../notifications/pushcounter/pushcounter.m
 @NgModule({
   imports: [
     IonicPageModule.forChild(GuardianDashboardComponent),
-    NgxEchartsModule, NgCalendarModule, LoaderModule,PushCounterModule
+    PushCounterModule,NgxEchartsModule, NgCalendarModule,LoaderModule,
   ],
   exports: [GuardianDashboardComponent],
   declarations: [GuardianDashboardComponent],

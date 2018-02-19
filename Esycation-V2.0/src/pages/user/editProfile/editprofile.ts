@@ -158,9 +158,6 @@ export class EditProfileComponent implements OnInit {
 
   onClickPicture() {
 
-    console.log("onClickPicture.....!", this.cameraOptions);
-
-
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Save Image from',
       buttons: [
@@ -191,6 +188,7 @@ export class EditProfileComponent implements OnInit {
   setProfilePicture(cameraOptions: CameraOptions) {
     this.camera.getPicture(cameraOptions).then((imageData) => {
       this.picture = 'data:image/jpeg;base64,' + imageData;
+      this.commonServices.presentToast(this.picture, null, "info")
       this.fileService.uploadFile(this.picture).subscribe(data => {
         if (data) {
           //this.imageId
