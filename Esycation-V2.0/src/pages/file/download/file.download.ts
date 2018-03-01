@@ -45,13 +45,14 @@ export class FileDownlaodComponent {
     downloadFile() {
 
         this.platform.ready().then(() => {
-
             const fileTransfer: TransferObject = this.transfer.create();
             const dwonLoadPath = this.dwonLoadPath + "" + this.fileId;
             fileTransfer.download(dwonLoadPath, this.storageDirectory + this.fname).then((entry) => {
-                if (entry)
+                if (entry){
+                   // this.commonServices.showAlert("File",JSON.stringify(entry));
                     this.commonServices.presentToast("File dwonload successfully", null, "success");
-
+                   // entry.getFile(this.storageDirectory, this.fname, false);
+                }
             }, (error) => {
                 console.error("Error :", error)
                 this.commonServices.presentToast("Something went wrong.", null, "error");
@@ -59,5 +60,5 @@ export class FileDownlaodComponent {
 
         });
     }
-
+    
 }

@@ -15,11 +15,10 @@ export class FileService extends BaseService<FileDetails>{
         super(http, errorHandler);
     }
 
-    uploadFile(data: any): Observable<any> {
+    uploadFile(data: any, folder: string): Observable<any> {
 
-        let url: string = ServerConfig.getPath()
-        //return this.save(url, data);
-        console.log(data, url)
-        return null;
+        let url: string = ServerConfig.getPath() + "files/upload/" + folder + "/base64?overwrite=true"
+        return this.save(url, data);
+
     }
 }

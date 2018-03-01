@@ -9,6 +9,7 @@ import { CommonServices } from '../../../providers/service/common/common.service
 import { ServerConfig } from '../../../providers/config';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileService } from '../../../providers/service/file/file.service';
+import { File } from '../../../providers/model/file/model.file';
 
 @IonicPage()
 @Component({
@@ -187,17 +188,30 @@ export class EditProfileComponent implements OnInit {
   }
   setProfilePicture(cameraOptions: CameraOptions) {
     this.camera.getPicture(cameraOptions).then((imageData) => {
+     
       this.picture = 'data:image/jpeg;base64,' + imageData;
-      this.commonServices.presentToast(this.picture, null, "info")
-      this.fileService.uploadFile(this.picture).subscribe(data => {
-        if (data) {
-          //this.imageId
-        }
-      }, error => {
-        this.commonServices.presentToast(error, null, "error")
-      });
+      this.fileService.uploadFile(this.prepareImageFile(imageData),
+        this.session.findModule()).subscribe(data => {
+          if (data) {
+            this.imageId = data;
+            this.profile.imageId = data;
+          }
+        }, error => {
+          this.commonServices.presentToast(error, null, "error")
+        });
     }, (error) => {
-      this.commonServices.showAlert('Error', error.message, 'CLOSE');
+      console.error(error);
     });
+  }
+
+  prepareImageFile(imageData: any): File {
+
+    let file = new File();
+    file.data = imageData;
+    file.name = this.profile.name + "_" + this.session.findRemote() + ".jpeg";
+    file.contentType = "image/jpeg";
+
+    return file;
+
   }
 }
