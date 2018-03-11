@@ -33,6 +33,14 @@ export class BatchService extends BaseService<Batch>{
         return this.findAll(url);
     }
 
+    public findBatchAllowedByCourseIds(courseId:number,viewName:string):Observable<any>{
+        
+        let url: string = ServerConfig.getPath() 
+        +"/batches/findByCourseIds/"+courseId+"?RESPONSE_VIEW="+viewName+"&page=1&&size=1000&restricted=true"; 
+        return this.findAll(url);
+    }
+
+
     public findBatchTimetablesByStudentId(studentId:number):Observable<any>{
         
         let url: string = ServerConfig.getPath() 

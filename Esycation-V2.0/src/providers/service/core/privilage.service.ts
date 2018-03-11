@@ -37,6 +37,10 @@ export class PrivilageService {
           {
             name: "Leave",
             component: "StaffLeaveComponent"
+          },
+          {
+            name: "View Student",
+            component: "ViewStudentComponent"
           }
         ]
       },

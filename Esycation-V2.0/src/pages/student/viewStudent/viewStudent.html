@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="ios-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button icon-only ion-button (click)="onNotification()">
+        <notification-counter></notification-counter>
+      </button>
+    </ion-buttons>
+    <ion-title>Students</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label color="darkGray">Class*</ion-label>
+      <ion-select [ngModel]="courseId" (ngModelChange)="onChangeByCourse($event)" [selectOptions]="selectOptionStyle">
+        <ion-option *ngFor="let crs of cources" value="{{crs.id}}">{{crs.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="darkGray">Section*</ion-label>
+      <ion-select [ngModel]="batchId" (ngModelChange)="onChangeByBatch($event)" [selectOptions]="selectOptionStyle">
+        <ion-option *ngFor="let b of batchs" value="{{b.id}}">{{b.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-grid class="padding-vertical-remove">
+      <ion-item *ngIf="dataLength==0">
+          <p text-center class="app-error"><ion-icon ios="ios-sad" md="md-sad"></ion-icon> Student not found<p>
+      </ion-item>
+      <ion-scroll scrollY="true" class="height-600x">
+        <ion-item *ngFor="let student of students; let count = index">
+          <ion-avatar item-left *ngIf="student.imageId==null">
+            <img *ngIf="student.gender==null || student.gender=='Male' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
+            <img *ngIf="student.gender=='Female' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
+          </ion-avatar>
+          <ion-avatar item-left *ngIf="student.imageId!=null">
+            <img class="profile-image" src="{{imagePath}}/{{student.imageId}}">
+          </ion-avatar>
+          {{student.name}}
+          <p>
+              <span class="small">
+                  <small>RollNumber :</small> {{student.admissionId.registrations[0].rollNumber}}
+              </span>
+          </p>
+        </ion-item>
+      </ion-scroll>
+    </ion-grid>
+
+
+  </ion-list>
+
+</ion-content>
