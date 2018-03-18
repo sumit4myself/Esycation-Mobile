@@ -8,11 +8,11 @@ import { StudentService } from '../../../../providers/service/student/student.se
 import { DepartmentService } from '../../../../providers/service/department/department.service';
 import { StaffService } from '../../../../providers/service/staff/staff.service';
 import { PushCounterModule } from '../../pushcounter/pushcounter.module';
+import {FileUploadModule} from '../../../file/upload/file.upload.module';
 @NgModule({
     imports: [
         IonicPageModule.forChild(AddBulkNotificationComponent),
-
-        PushCounterModule
+        PushCounterModule,FileUploadModule
     ],
     exports: [AddBulkNotificationComponent],
     declarations: [AddBulkNotificationComponent],

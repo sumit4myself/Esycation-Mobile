@@ -20,7 +20,7 @@ import { Notification } from '../../../../providers/model/notification/notificat
 import { Group } from '../../../../providers/model/group/model.group';
 import { BaseComponent } from '../../../baseComponent/base.component';
 import * as moment from 'moment';
-
+import { ServerConfig } from '../../../../providers/config';
 import { CommonServices } from '../../../../providers/service/common/common.service';
 
 @IonicPage()
@@ -43,6 +43,9 @@ export class AddBulkNotificationComponent extends BaseComponent {
     selectOptionStyle: any = {};
     bulkForm:BulkNotificationForm=new BulkNotificationForm();
     formSubmitAttempt: boolean;
+    attachedFiles:Array<number> = new Array<number>();
+    imagePath: String = ServerConfig.imagePath();
+
 
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
@@ -57,6 +60,8 @@ export class AddBulkNotificationComponent extends BaseComponent {
 
         super(session, navControl)
         // console.log(this.session);
+        this.attachedFiles.push(1);
+        this.attachedFiles.push(2);
 
         this.selectOptionStyle = {
             mode: 'ios',

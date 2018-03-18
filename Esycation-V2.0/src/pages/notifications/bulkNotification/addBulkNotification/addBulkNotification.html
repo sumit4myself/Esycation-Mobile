@@ -158,6 +158,20 @@
             </ion-item>
         </ion-list>
     </form>
+    <ion-list>
+    <ion-item>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-2 *ngFor="let attached of attachedFile">
+                <ion-avatar>
+                        <img class="profile-image" src="assets/img/student-f.png">
+                </ion-avatar>  
+                </ion-col>
+                <ion-col><file-upload></file-upload></ion-col>
+            </ion-row>
+        </ion-grid>    
+    </ion-item>
+   </ion-list>
 </ion-content>
 <ion-footer no-border>
     <ion-toolbar transparent>
