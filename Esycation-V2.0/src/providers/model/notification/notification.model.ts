@@ -38,7 +38,7 @@ export class Notification {
 
   id: number = null;
   pushTime: string = null;
-  resources: any = null
+  resources:Array<any> = null
   template: Template = new Template();
   type: string = "INFORMATIVE";
   expiryTime: string = null;
@@ -48,6 +48,7 @@ export class Notification {
   receivers: Receivers = new Receivers();
   styleColor: string = null;
   typeInfo: string = null;
+  
 
 
 }

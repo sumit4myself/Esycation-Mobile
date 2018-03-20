@@ -41,11 +41,11 @@ export class AddBulkNotificationComponent extends BaseComponent {
     comMode: any;
     mode: string = null;
     selectOptionStyle: any = {};
-    bulkForm:BulkNotificationForm=new BulkNotificationForm();
+    bulkForm: BulkNotificationForm = new BulkNotificationForm();
     formSubmitAttempt: boolean;
-    attachedFiles:Array<number> = new Array<number>();
+    attachedFiles: Array<number> = null;
     imagePath: String = ServerConfig.imagePath();
-
+    files: Array<any> = null;
 
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
@@ -58,11 +58,10 @@ export class AddBulkNotificationComponent extends BaseComponent {
         protected navControl: NavController,
         private commonServices: CommonServices) {
 
-        super(session, navControl)
+        super(session, navControl);
+        this.attachedFiles = new Array<number>();
+        this.files = new Array<any>();
         // console.log(this.session);
-        this.attachedFiles.push(1);
-        this.attachedFiles.push(2);
-
         this.selectOptionStyle = {
             mode: 'ios',
             cssClass: 'remove-ok'
@@ -75,7 +74,7 @@ export class AddBulkNotificationComponent extends BaseComponent {
 
         let currentTime = moment(new Date()).format("HH:mm");
         let currentDate = moment(new Date()).format("YYYY-MM-DD");
-        
+
 
         this.bulkNotificationForm = this.formBuilder.group({
             receiverType: ['', [<any>Validators.required]],
@@ -211,8 +210,8 @@ export class AddBulkNotificationComponent extends BaseComponent {
     onSave({ value, valid }: { value: BulkNotificationForm, valid: boolean }) {
 
         this.commonServices.onLoader("saving..");
-        let isValid = this.bulkForm.validate(value,valid);
-        this.formSubmitAttempt=true;
+        let isValid = this.bulkForm.validate(value, valid);
+        this.formSubmitAttempt = true;
         if (isValid) {
             let data = this.prepareData(value);
             console.log(JSON.stringify(data));
@@ -276,9 +275,10 @@ export class AddBulkNotificationComponent extends BaseComponent {
         notification.template = template;
         notification.type = form.type;
 
-
+        if (this.files != null && this.files.length > 0) {
+            notification.resources = this.files;
+        }
         return notification;
-
     }
 
     selectionValue(form): any {
@@ -294,6 +294,16 @@ export class AddBulkNotificationComponent extends BaseComponent {
             staffs: form.staffs
         }
         return data;
+    }
+
+    onUploadFileEvent(uploadFileDetails) {
+
+        this.commonServices.showAlert("File Id", JSON.stringify(uploadFileDetails));
+
+        let map = new Object();
+        map[uploadFileDetails.id] = uploadFileDetails.name;
+        this.files.push(map);
+        this.attachedFiles.push(uploadFileDetails.id);
     }
 
 }

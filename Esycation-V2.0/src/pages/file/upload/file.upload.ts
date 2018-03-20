@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IonicPage, ActionSheetController } from 'ionic-angular';
 import { ServerConfig } from "../../../providers/config";
 import { CommonServices } from '../../../providers/service/common/common.service';
@@ -8,25 +8,27 @@ import { FileService } from '../../../providers/service/file/file.service';
 import { UserSessionService } from "../../../providers/service/core/user.session.service";
 import { File } from '../../../providers/model/file/model.file';
 //import { Observable } from 'rxjs/Rx';
+import * as moment from 'moment';
+
 @IonicPage()
 @Component({
     selector: 'file-upload',
-    template: '<span (click)="onClickUploadFile()">Upload</span>',
+    template: ' <ion-avatar><span (click)="onClickUploadFile()"> ' +
+        '<img class="profile-image" src="assets/img/attachFile.jpg"></span></ion-avatar>',
 })
 export class FileUploadComponent implements OnInit {
 
 
     storageDirectory: string = '';
     filePath: string = ServerConfig.imagePath();
-
     cameraOptions: CameraOptions;
+    @Output() uploadFileDetails = new EventEmitter();
+
     constructor(private commonServices: CommonServices,
         private camera: Camera,
         private fileService: FileService,
         private actionSheetCtrl: ActionSheetController,
         private session: UserSessionService) {
-
-        console.log(this.fileService);
     }
 
     ngOnInit() {
@@ -41,7 +43,14 @@ export class FileUploadComponent implements OnInit {
     }
 
     onClickUploadFile() {
-
+        
+        /*
+        let d=this.fileDetails();
+        d.id=15;
+        d.name="sss";
+        this.uploadFileDetails.emit(d);
+        */
+        
         let actionSheet = this.actionSheetCtrl.create({
             title: 'Upload File from',
             buttons: [
@@ -73,11 +82,15 @@ export class FileUploadComponent implements OnInit {
 
     uploadFile(cameraOptions: CameraOptions) {
 
+        let fileDetails = this.fileDetails();
         this.camera.getPicture(cameraOptions).then((imageData) => {
-
-            this.fileService.uploadFile(this.prepareImageFile(imageData),
-                this.session.findModule()).subscribe(data => {
-                    this.commonServices.presentToast(data, null, "info");
+            let file = this.prepareImageFile(imageData);
+            this.fileService.uploadFile(file,
+                this.session.findModule()).subscribe(id => {
+                    fileDetails.id = id;
+                    fileDetails.name = file.name;
+                    this.uploadFileDetails.emit(fileDetails);
+                    this.commonServices.presentToast(id, null, "info");
                 }, error => {
                     this.commonServices.presentToast(error, null, "error")
                 });
@@ -91,13 +104,28 @@ export class FileUploadComponent implements OnInit {
 
         let file = new File();
         file.data = imageData;
-        file.name = "test_" + this.session.findRemote() + ".jpeg";
+        file.name = this.getFileName() + ".jpeg";
         file.contentType = "image/jpeg";
 
         return file;
 
     }
 
+    getFileName(): string {
+
+        let timeStamp = moment(new Date()).format("DD-MM-YYYY-HH-mm-ss");
+        let random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+        return random + "_" + timeStamp;
+    }
+
+    fileDetails(): any {
+
+        let file = {
+            id: '',
+            name: ''
+        }
+        return file;
+    }
 
     /*
     fileTransfer(file: File, folder: string): Observable<any> {
