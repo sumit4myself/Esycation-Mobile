@@ -43,11 +43,11 @@ export class FileUploadComponent implements OnInit {
     }
 
     onClickUploadFile() {
-        
+
         /*
         let d=this.fileDetails();
-        d.id=15;
-        d.name="sss";
+        d.id=35;
+        d.name="sss.jpg";
         this.uploadFileDetails.emit(d);
         */
         
@@ -56,6 +56,7 @@ export class FileUploadComponent implements OnInit {
             buttons: [
                 {
                     text: 'Camera',
+                    icon: 'camera',
                     handler: () => {
                         this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA
                         this.uploadFile(this.cameraOptions);
@@ -63,6 +64,7 @@ export class FileUploadComponent implements OnInit {
                 },
                 {
                     text: 'Photo Library',
+                    icon: 'folder-open',
                     handler: () => {
                         this.cameraOptions.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY
                         this.uploadFile(this.cameraOptions);
@@ -70,6 +72,7 @@ export class FileUploadComponent implements OnInit {
                 },
                 {
                     text: 'Cancel',
+                    icon: 'alert',
                     role: 'cancel',
                     handler: () => {
                     }
@@ -90,7 +93,7 @@ export class FileUploadComponent implements OnInit {
                     fileDetails.id = id;
                     fileDetails.name = file.name;
                     this.uploadFileDetails.emit(fileDetails);
-                    this.commonServices.presentToast(id, null, "info");
+                   // this.commonServices.presentToast(id, null, "info");
                 }, error => {
                     this.commonServices.presentToast(error, null, "error")
                 });

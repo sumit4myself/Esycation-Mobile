@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ActionSheetController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserSessionService } from '../../../../providers/service/core/user.session.service';
 import { BulkNotificationService } from '../../../../providers/service/notification/bulk.notification.service';
@@ -22,6 +22,7 @@ import { BaseComponent } from '../../../baseComponent/base.component';
 import * as moment from 'moment';
 import { ServerConfig } from '../../../../providers/config';
 import { CommonServices } from '../../../../providers/service/common/common.service';
+import { FileService } from '../../../../providers/service/file/file.service';
 
 @IonicPage()
 @Component({
@@ -45,7 +46,7 @@ export class AddBulkNotificationComponent extends BaseComponent {
     formSubmitAttempt: boolean;
     attachedFiles: Array<number> = null;
     imagePath: String = ServerConfig.imagePath();
-    files: Array<any> = null;
+    resources: any = null;
 
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
@@ -56,11 +57,12 @@ export class AddBulkNotificationComponent extends BaseComponent {
         private departmentService: DepartmentService,
         private staffService: StaffService,
         protected navControl: NavController,
-        private commonServices: CommonServices) {
+        private commonServices: CommonServices,
+        private actionSheetCtrl: ActionSheetController,
+        private fileService: FileService) {
 
         super(session, navControl);
         this.attachedFiles = new Array<number>();
-        this.files = new Array<any>();
         // console.log(this.session);
         this.selectOptionStyle = {
             mode: 'ios',
@@ -275,8 +277,8 @@ export class AddBulkNotificationComponent extends BaseComponent {
         notification.template = template;
         notification.type = form.type;
 
-        if (this.files != null && this.files.length > 0) {
-            notification.resources = this.files;
+        if (this.resources != null) {
+            notification.resources = this.resources;
         }
         return notification;
     }
@@ -298,12 +300,63 @@ export class AddBulkNotificationComponent extends BaseComponent {
 
     onUploadFileEvent(uploadFileDetails) {
 
-        this.commonServices.showAlert("File Id", JSON.stringify(uploadFileDetails));
-
-        let map = new Object();
-        map[uploadFileDetails.id] = uploadFileDetails.name;
-        this.files.push(map);
+        //this.commonServices.showAlert("File Id", JSON.stringify(uploadFileDetails));
+        if (this.resources == null) {
+            this.resources = new Object();
+          }
+        this.resources[uploadFileDetails.id] = uploadFileDetails.name;
         this.attachedFiles.push(uploadFileDetails.id);
+    }
+
+
+    onClickFile(id: number) {
+
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Action',
+            buttons: [
+                {
+                    text: 'View',
+                    icon: 'eye',
+                    handler: () => {
+                        this.onViewFile(id);
+                    }
+                },
+                {
+                    text: 'Remove',
+                    icon: 'trash',
+                    cssClass: 'app-error',
+                    handler: () => {
+                        this.onRemove(id);
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    icon: 'alert',
+                    role: 'cancel',
+                    handler: () => {
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    }
+
+    onViewFile(id: number) {
+        this.navControl.push("FileViewComponent", { id: id });
+    }
+
+    onRemove(id: number) {
+
+        const index: number = this.attachedFiles.indexOf(id);
+        this.commonServices.onLoader();
+        this.fileService.remove(id).subscribe(data => {
+            console.log(data);
+            this.attachedFiles.splice(index, 1);
+            this.commonServices.onDismissAll();
+        }, error => {
+            console.error(error)
+            this.commonServices.onDismissAll();
+        });
     }
 
 }

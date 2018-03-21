@@ -24,6 +24,13 @@ export class FileService extends BaseService<FileDetails>{
         return this.save(url, data);
     }
 
+    remove(id: number): Observable<any> {
+
+        let url: string = ServerConfig.getPath() + "/zuul/files/delete/"+id;
+      
+        return this.delete(url,null);
+    }
+
     fileTransfer(file: File, folder: string): Observable<any> {
 
         const fileTransfer: FileTransferObject = this.transfer.create();
