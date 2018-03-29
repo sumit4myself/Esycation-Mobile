@@ -34,7 +34,26 @@
           <p *ngIf="notification.template.mode=='SMS'">{{notification.template.content}}</p> 
         </ion-card-content>
       </ion-card>
-
+    <!--************* Attached File ************* -->
+      <ion-card *ngIf="attachedFiles!=null && attachedFiles.length>0">
+        <ion-card-header>
+            Attache Files
+        </ion-card-header>
+        <ion-list>
+            <ion-item>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-2 *ngFor="let attached of attachedFiles">
+                            <ion-avatar (click)="onViewFile(attached)">
+                                <img class="profile-image" src="{{imagePath}}/{{attached}}">
+                            </ion-avatar>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      <!--*************End Attached File ************* -->
       <!--************* Staff Details ************* -->
       <ion-card class="card card-md" *ngIf="comMode=='STAFF'">
         <ion-card-content>

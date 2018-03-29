@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserSessionService } from '../../../../providers/service/core/user.session.service';
 import { BulkNotificationService } from '../../../../providers/service/notification/bulk.notification.service';
@@ -22,7 +22,8 @@ import { BaseComponent } from '../../../baseComponent/base.component';
 import * as moment from 'moment';
 import { BulkNotificationView } from '../../../../providers/model/notification/bulk.notification.view.model'
 import { CommonServices } from '../../../../providers/service/common/common.service';
-
+import { FileService } from '../../../../providers/service/file/file.service';
+import { ServerConfig } from '../../../../providers/config';
 @IonicPage()
 @Component({
     selector: 'edit-bulk-notification',
@@ -30,6 +31,7 @@ import { CommonServices } from '../../../../providers/service/common/common.serv
 })
 export class EditBulkNotificationComponent extends BaseComponent {
 
+    imagePath: String = ServerConfig.imagePath();
     bulkNotificationForm: FormGroup;
     batchs: Array<Batch> = new Array<Batch>();
     cources: Array<Cource> = new Array<Cource>();
@@ -42,8 +44,10 @@ export class EditBulkNotificationComponent extends BaseComponent {
     notification: BulkNotificationView = new BulkNotificationView();
     selectOptionStyle: any = {};
     mode: string = null;
-    bulkForm:BulkNotificationForm=new BulkNotificationForm();
-    formSubmitAttempt:boolean;
+    bulkForm: BulkNotificationForm = new BulkNotificationForm();
+    formSubmitAttempt: boolean;
+    attachedFiles: Array<any> = null;
+    resources: any = null;
     constructor(private session: UserSessionService,
         private formBuilder: FormBuilder,
         private bulkNotificationService: BulkNotificationService,
@@ -54,9 +58,13 @@ export class EditBulkNotificationComponent extends BaseComponent {
         private staffService: StaffService,
         protected navControl: NavController,
         private navParams: NavParams,
-        private commonServices: CommonServices) {
+        private commonServices: CommonServices,
+        private fileService: FileService,
+        private actionSheetCtrl: ActionSheetController) {
 
-        super(session, navControl)
+        super(session, navControl);
+        this.attachedFiles = new Array<number>();
+
         console.log(this.session);
         this.selectOptionStyle = {
             mode: 'ios',
@@ -107,7 +115,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     onCommunication(mode: string) {
         console.log("onCommunication....!");
-       // this.commonServices.onLoader();
+        // this.commonServices.onLoader();
         this.bulkNotificationService.findTemplateByMode(mode).subscribe(data => {
 
             for (let template of data.contents) {
@@ -136,7 +144,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     findAllCources() {
         console.log("findAllCources....!");
-       // this.commonServices.onLoader();
+        // this.commonServices.onLoader();
         this.cources = [];
         this.courceService.findAllcourses("Course.NameId").subscribe(data => {
             for (let cource of data.contents) {
@@ -153,7 +161,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
     findBatchByCourseIds(id: number) {
 
         console.log("findBatchByCourseIds....!");
-       // this.commonServices.onLoader();
+        // this.commonServices.onLoader();
         this.batchService.findBatchByCourseIds(id, "Batch.NameId").subscribe(data => {
             for (let batch of data.contents) {
                 let obj = Object.assign({}, batch);
@@ -168,7 +176,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
     findStudentByBatchId(batchId: number) {
 
         console.log("findStudentByBatchId....!");
-      //  this.commonServices.onLoader();
+        //  this.commonServices.onLoader();
         this.studentService.findByBatchIds(batchId, "Student.MinDetails").subscribe(data => {
             for (let student of data.contents) {
                 let obj = Object.assign({}, student);
@@ -231,9 +239,9 @@ export class EditBulkNotificationComponent extends BaseComponent {
 
     onUpdate({ value, valid }: { value: BulkNotificationForm, valid: boolean }) {
 
-        this.formSubmitAttempt=true;
+        this.formSubmitAttempt = true;
         this.commonServices.onLoader("Updating..");
-        let isValid = this.bulkForm.validate(value,valid);
+        let isValid = this.bulkForm.validate(value, valid);
         if (isValid) {
             let data = this.prepareData(value);
             console.log("data==", JSON.stringify(data));
@@ -244,7 +252,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
             }, error => {
                 console.error("ERROR :", error);
             });
-        } 
+        }
     }
 
     private prepareData(form: BulkNotificationForm): Notification {
@@ -273,6 +281,9 @@ export class EditBulkNotificationComponent extends BaseComponent {
         notification.receivers = null;
         notification.template = template;
         notification.type = form.type;
+        if (this.resources != null) {
+            notification.resources = this.resources;
+        }
 
         return notification;
 
@@ -308,7 +319,7 @@ export class EditBulkNotificationComponent extends BaseComponent {
                 let stu = Object.assign({}, student);
                 this.students.push(stu);
             }
-            
+
         }
         if (this.notification.selectionValues.batches) {
             for (let batche of this.notification.selectionValues.batches) {
@@ -380,7 +391,80 @@ export class EditBulkNotificationComponent extends BaseComponent {
         } else {
             model.content = this.notification.template.htmlContent;
         }
+
+        this.initFile(this.notification.resources);
+
         return model;
+    }
+
+    initFile(resources: any) {
+
+        if (resources) {
+            for (let key of Object.keys(resources)) {
+                this.attachedFiles.push(key);
+            }
+            this.resources = resources;
+        }
+    }
+
+    onUploadFileEvent(uploadFileDetails) {
+
+        if (this.resources == null) {
+            this.resources = new Object();
+        }
+        this.resources[uploadFileDetails.id] = uploadFileDetails.name;
+        this.attachedFiles.push(uploadFileDetails.id);
+    }
+
+
+    onClickFile(id: number) {
+
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Action',
+            buttons: [
+                {
+                    text: 'View',
+                    icon: 'eye',
+                    handler: () => {
+                        this.onViewFile(id);
+                    }
+                },
+                {
+                    text: 'Remove',
+                    icon: 'trash',
+                    cssClass: 'app-error',
+                    handler: () => {
+                        this.onRemove(id);
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    icon: 'alert',
+                    role: 'cancel',
+                    handler: () => {
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    }
+onViewFile(id: number) {
+        this.navControl.push("FileViewComponent", { id: id });
+    }
+    
+
+    onRemove(id: number) {
+
+        const index: number = this.attachedFiles.indexOf(id);
+        this.commonServices.onLoader();
+        this.fileService.remove(id).subscribe(data => {
+            console.log(data);
+            this.attachedFiles.splice(index, 1);
+            this.commonServices.onDismissAll();
+        }, error => {
+            console.error(error)
+            this.commonServices.onDismissAll();
+        });
     }
 
 }
