@@ -16,6 +16,7 @@ export class ManageNotificationComponent {
     remoteId: number;
     module: string;
     shownDetail = null;
+    dataNotFound:Boolean=false;
     constructor(
         private session: UserSessionService,
         private notificationService: NotificationService,
@@ -40,6 +41,11 @@ export class ManageNotificationComponent {
                 b.typeInfo = this.findInfo(b.notificationId.type);
                 this.notifications.push(b);
 
+            }
+            if(this.notifications.length==0){
+                this.dataNotFound=true;
+            }else{
+                this.dataNotFound=false;
             }
             this.commonServices.onDismissAll();
 

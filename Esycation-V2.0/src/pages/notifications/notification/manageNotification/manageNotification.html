@@ -26,5 +26,13 @@
         </span>
       </p> 
     </ion-item>
+    <ion-item *ngIf="dataNotFound">
+      <br><br>
+      <p><img class="profile-image" src="assets/img/notify.gif"></p>
+      <br>
+      <p text-center class="app-error blink"> <ion-icon ios="ios-sad" md="md-sad"></ion-icon> 
+        There is no notification.
+        </p>
+    </ion-item>
   </ion-list>
 </ion-content>

@@ -4,6 +4,7 @@ import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { ServerConfig } from "../../../providers/config";
 import { CommonServices } from '../../../providers/service/common/common.service';
+import { FileOpener } from '@ionic-native/file-opener';
 declare var cordova: any;
 @IonicPage()
 @Component({
@@ -23,7 +24,9 @@ export class FileDownlaodComponent {
     @Input("fileName")
     public fname: any = null;
 
-    constructor(public platform: Platform, private transfer: Transfer, public commonServices: CommonServices) {
+    constructor(public platform: Platform, private transfer: Transfer,
+        public commonServices: CommonServices,
+        private fileOpener: FileOpener) {
         this.platform.ready().then(() => {
 
             if (!this.platform.is('cordova')) {
@@ -47,11 +50,15 @@ export class FileDownlaodComponent {
         this.platform.ready().then(() => {
             const fileTransfer: TransferObject = this.transfer.create();
             const dwonLoadPath = this.dwonLoadPath + "" + this.fileId;
-            fileTransfer.download(dwonLoadPath, this.storageDirectory + this.fname).then((entry) => {
-                if (entry){
-                   // this.commonServices.showAlert("File",JSON.stringify(entry));
-                    this.commonServices.presentToast("File dwonload successfully", null, "success");
-                   // entry.getFile(this.storageDirectory, this.fname, false);
+            let destinationPath = this.storageDirectory + this.fname;
+            fileTransfer.download(dwonLoadPath, destinationPath).then((entry) => {
+                if (entry) {
+                    // this.commonServices.showAlert("File",JSON.stringify(entry));
+                    // entry.getFile(this.storageDirectory, this.fname, false);
+                    this.fileOpener.open(destinationPath, 'image/jpeg')
+                        .then(() => console.log('File is opened'))
+                        .catch(e => console.log('Error openening file', e));
+                    //this.commonServices.presentToast("File dwonload successfully", null, "success");
                 }
             }, (error) => {
                 console.error("Error :", error)
@@ -60,5 +67,5 @@ export class FileDownlaodComponent {
 
         });
     }
-    
+
 }

@@ -50,7 +50,7 @@ export class FileUploadComponent implements OnInit {
         d.name="sss.jpg";
         this.uploadFileDetails.emit(d);
         */
-        
+
         let actionSheet = this.actionSheetCtrl.create({
             title: 'Upload File from',
             buttons: [
@@ -93,7 +93,7 @@ export class FileUploadComponent implements OnInit {
                     fileDetails.id = id;
                     fileDetails.name = file.name;
                     this.uploadFileDetails.emit(fileDetails);
-                   // this.commonServices.presentToast(id, null, "info");
+                    // this.commonServices.presentToast(id, null, "info");
                 }, error => {
                     this.commonServices.presentToast(error, null, "error")
                 });

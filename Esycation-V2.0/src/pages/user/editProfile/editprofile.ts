@@ -160,10 +160,11 @@ export class EditProfileComponent implements OnInit {
   onClickPicture() {
 
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Save Image from',
+      title: 'Change profile picture',
       buttons: [
         {
           text: 'Camera',
+          icon: 'camera',
           handler: () => {
             this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA
             this.setProfilePicture(this.cameraOptions);
@@ -171,6 +172,7 @@ export class EditProfileComponent implements OnInit {
         },
         {
           text: 'Photo Library',
+          icon: 'folder-open',
           handler: () => {
             this.cameraOptions.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY
             this.setProfilePicture(this.cameraOptions);
@@ -178,6 +180,7 @@ export class EditProfileComponent implements OnInit {
         },
         {
           text: 'Cancel',
+          icon: 'alert',
           role: 'cancel',
           handler: () => {
           }

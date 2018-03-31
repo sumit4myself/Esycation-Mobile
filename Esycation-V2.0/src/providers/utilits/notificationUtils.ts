@@ -2,8 +2,10 @@ export class NotificationUtils {
 
     public static findColor(title: string): string {
 
-        let type = title.substring(0, 1);
-        
+        let type = "";
+        if (title)
+            type = title.substring(0, 1);
+
         if (type == 'I')
             return "#488aff";
         else if (type == 'U')
@@ -19,13 +21,18 @@ export class NotificationUtils {
         else if (type == 'ACTIONABLE')
             return "#ffeb3b";
         else if (type == 'HOMEWORK')
-            return "#ff5722";    
+            return "#ff5722";
         else
             return "#9e9e9e";
     }
 
     public static findFirstLatter(title: string): string {
 
-        return title.substring(0, 1);
+        let type = null;
+        if (title)
+            type = title.substring(0, 1);
+        else
+            type = "?";
+        return type;
     }
 }

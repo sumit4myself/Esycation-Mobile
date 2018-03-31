@@ -9,7 +9,7 @@ import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
     exports: [FileUploadComponent],
     declarations: [FileUploadComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [FileService, Camera,FileTransfer,FileTransferObject],
+    providers: [FileService, Camera, FileTransfer, FileTransferObject],
 
 })
 export class FileUploadModule {

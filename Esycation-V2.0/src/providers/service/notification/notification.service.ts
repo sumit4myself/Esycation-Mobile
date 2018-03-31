@@ -25,9 +25,9 @@ export class NotificationService extends BaseService<PagedResponse> {
 
     public findAllByRemoteIdAndModule(remoteId: number, module: string): Observable<PagedResponse> {
 
-        this.notifications = new Array<NotificationDetails>();
+        //"/notificationReceivers/" + remoteId + "/" + module+ "?mode=PUSH_MESSAGE&RESPONSE_VIEW=NotificationReceiver.Details";
         let url: string = ServerConfig.getPath() +
-            "/notificationReceivers/" + remoteId + "/" + module+ "?mode=PUSH_MESSAGE&RESPONSE_VIEW=NotificationReceiver.Details";
+            "/notificationReceivers/" + remoteId + "/" + module+ "?RESPONSE_VIEW=NotificationReceiver.Details";
         return this.findAll(url);
     }
 

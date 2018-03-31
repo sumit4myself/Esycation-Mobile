@@ -5,7 +5,7 @@
         </button>
         <ion-buttons end>
           <button icon-only ion-button (click)="onNotification()">
-            
+            <notification-counter></notification-counter>
           </button>
         </ion-buttons>
         <ion-title>
@@ -37,7 +37,7 @@
         </ion-card-content>
     </ion-card>
     <!--**************** Teacher Card ***************************** -->
-    <ion-card>
+    <ion-card [hidden]="teacher.name==null">
         <ion-card-content>
             <observable-loader [observable]="reportingTeacherObservable"></observable-loader>
             <ion-row>
@@ -193,10 +193,10 @@
         <ion-card-content>
           <ion-segment [(ngModel)]="approvalSegement" color="dark">
             <ion-segment-button value="myRequests" (click)="onMyRequestClicked()">
-              My Requests
+              My Request
             </ion-segment-button>
             <ion-segment-button value="studentRequests" (click)="onStudentRequestClicked()">
-                {{studentName}} Requests
+                {{studentName}} Request
             </ion-segment-button>
           </ion-segment>
           <observable-loader [observable]="requestObservable"></observable-loader>
@@ -206,7 +206,7 @@
               <ion-grid>
                 <ion-row>
                   <ion-col align="center">
-                    Requests not found! </ion-col>
+                    Request not found! </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-item>
@@ -240,7 +240,7 @@
               <ion-grid>
                 <ion-row>
                   <ion-col align="center">
-                    Requests not found! </ion-col>
+                    Request not found! </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-item>

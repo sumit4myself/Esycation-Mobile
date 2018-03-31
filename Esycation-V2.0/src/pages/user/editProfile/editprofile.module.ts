@@ -5,6 +5,7 @@ import { ProfileService } from '../../../providers/service/profile/profile.servi
 import { FileService } from '../../../providers/service/file/file.service';
 import { PushCounterModule } from '../../notifications/pushcounter/pushcounter.module';
 import { Camera } from '@ionic-native/camera';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 @NgModule({
     imports: [
         IonicPageModule.forChild(EditProfileComponent),
@@ -13,6 +14,6 @@ import { Camera } from '@ionic-native/camera';
     ],
     exports: [EditProfileComponent],
     declarations: [EditProfileComponent],
-    providers: [ProfileService, Camera, FileService],
+    providers: [ProfileService, Camera, FileService,FileTransfer,FileTransferObject],
 })
 export class EditProfileModule { }
