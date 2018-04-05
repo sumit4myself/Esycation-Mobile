@@ -198,6 +198,7 @@ export class EditProfileComponent implements OnInit {
           if (data) {
             this.imageId = data;
             this.profile.imageId = data;
+            
           }
         }, error => {
           this.commonServices.presentToast(error, null, "error")

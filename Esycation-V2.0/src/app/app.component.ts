@@ -4,7 +4,8 @@ import {
   Platform,
   Events,
   AlertController,
-  ToastController
+  ToastController,
+  MenuController
 } from "ionic-angular";
 
 //***********  ionic-native **************/
@@ -64,7 +65,8 @@ export class MyApp {
     public alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private deviceService: DeviceService,
-    public fcm: FCM
+    public fcm: FCM,
+    private menuController:MenuController
   ) {
     this.initializeApp();
 
@@ -114,6 +116,7 @@ export class MyApp {
             });
             toast.present();
             lastTimeBackPress = new Date().getTime();
+            this.menuController.close();
           }
         } else {
           this.nav.pop({});

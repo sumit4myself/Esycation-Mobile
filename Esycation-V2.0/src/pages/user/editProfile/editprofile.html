@@ -16,12 +16,13 @@
     <div class="profile-header" color="lightblue"></div>
     <div class="profile">
         <div class="profile-box">
-            <ion-img class="profile-image" (click)="onClickPicture()" *ngIf="!picture"
+            <ion-img class="profile-image" (click)="onClickPicture()" 
                 [src]="imageId==null? 'assets/img/default.png' : imagePath+'/'+ imageId">
             </ion-img>
+            <!--
             <ion-img class="profile-image" (click)="onClickPicture()" *ngIf="picture"
                 [src]="picture">
-            </ion-img>
+            </ion-img> -->
             <form [formGroup]="profileForm">
                 <ion-list no-liness class="edit-profile-list" no-padding>
                     <!-- <div *ngIf="segmentView==='one'"> -->

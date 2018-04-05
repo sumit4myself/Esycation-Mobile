@@ -27,7 +27,7 @@ export class NotificationService extends BaseService<PagedResponse> {
 
         //"/notificationReceivers/" + remoteId + "/" + module+ "?mode=PUSH_MESSAGE&RESPONSE_VIEW=NotificationReceiver.Details";
         let url: string = ServerConfig.getPath() +
-            "/notificationReceivers/" + remoteId + "/" + module+ "?RESPONSE_VIEW=NotificationReceiver.Details";
+        "/notificationReceivers/" + remoteId + "/" + module+ "?mode=PUSH_MESSAGE&RESPONSE_VIEW=NotificationReceiver.Details";
         return this.findAll(url);
     }
 
