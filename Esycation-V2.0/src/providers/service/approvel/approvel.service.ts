@@ -17,14 +17,14 @@ export class ApprovalService extends BaseService<any> {
   public findStudentResultStatistic(studentId: number): Observable<any> {
     let url: string =
       ServerConfig.getPath() + "/results/report/statistics/exam/" + studentId;
-    return this.findAll(url);
+    return this.get(url);
   }
 
 
   public findTermWiseResultStatistics(studentId: number): Observable<any> {
     let url: string =
       ServerConfig.getPath() + "/results/report/statistics/term/" + studentId;
-    return this.findAll(url);
+    return this.get(url);
   }
   public approve(taskId: number, comment: string): Observable<any> {
     let url: string =
@@ -34,7 +34,7 @@ export class ApprovalService extends BaseService<any> {
       "/approve?comment=" +
       comment;
 
-    return this.find(url);
+    return this.get(url);
   }
 
   public reject(taskId: number, comment: string): Observable<any> {
@@ -45,7 +45,7 @@ export class ApprovalService extends BaseService<any> {
       "/reject?comment=" +
       comment;
 
-    return this.find(url);
+    return this.get(url);
   }
 
   public cancel(processInstanceId: number, comment: string): Observable<any> {
@@ -56,7 +56,7 @@ export class ApprovalService extends BaseService<any> {
       "/cancel?comment=" +
       comment;
 
-    return this.find(url);
+    return this.get(url);
   }
 
 
@@ -66,7 +66,7 @@ export class ApprovalService extends BaseService<any> {
       "/approvals/requests/" +
       userId +
       "?suppressError=true&page=1&size=50";
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findMyRequests(userId: number): Observable<any> {
@@ -75,7 +75,7 @@ export class ApprovalService extends BaseService<any> {
       "/approvals/myRequests/" +
       userId +
       "?suppressError=true&page=1&size=50";
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findStudentApprovalRequests(studentId: number): Observable<any> {
@@ -84,13 +84,13 @@ export class ApprovalService extends BaseService<any> {
       "/approvals/myRequests/" +
       studentId +
       "/STUDENT?suppressError=true&page=1&size=50";
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findRequest(taskId: number): Observable<any> {
     let url: string =
       ServerConfig.getPath() + "/approvals/requests/" + taskId + "/task";
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findMyRequest(request:any): Observable<any>{
@@ -116,6 +116,6 @@ export class ApprovalService extends BaseService<any> {
       myRequesturl = "/"+request.api+"/"+request.targetId;
     }
     url=url+myRequesturl;
-    return this.findAll(url);
+    return this.get(url);
   }
 }

@@ -24,6 +24,7 @@ export class AuthService extends BaseService<UserPrefernce> {
     this.userPrefernce.branchId = this.load("branchId");
     this.userPrefernce.deviceId = this.load("deviceId");
     this.userPrefernce.module = this.load("module");
+    this.userPrefernce.service = this.load("service");
     this.userPrefernce.remoteId = this.load("remoteId");
     this.userPrefernce.user = this.load("user");
     this.userPrefernce.level = this.load("level");
@@ -82,7 +83,6 @@ export class AuthService extends BaseService<UserPrefernce> {
       userDetails.loginUsers = users;
       Object.assign(this.userPrefernce, userDetails);
       this.savetoStorage();
-
       return Observable.of(true);
     } else {
       this.clearStorage();
@@ -109,6 +109,7 @@ export class AuthService extends BaseService<UserPrefernce> {
     this.persist("userId", this.userPrefernce.userId);
     this.persist("tokenId", this.userPrefernce.tokenId);
     this.persist("deviceId", this.userPrefernce.deviceId);
+    this.persist("service", this.userPrefernce.service);
     this.persist("module", this.userPrefernce.module);
     this.persist("remoteId", this.userPrefernce.remoteId);
     this.persist("user", this.userPrefernce.user);
@@ -150,6 +151,7 @@ export class AuthService extends BaseService<UserPrefernce> {
       branchId: userDetails.branchId,
       userId: userDetails.id,
       deviceId: userDetails.deviceId,
+      service: userDetails.usersServiceMap.service,
       module: userDetails.usersServiceMap.module,
       remoteId: userDetails.usersServiceMap.remoteId,
       tokenId: userDetails.tokenId,
@@ -169,6 +171,7 @@ export class AuthService extends BaseService<UserPrefernce> {
       userId: null,
       deviceId: null,
       module: null,
+      service: null,
       remoteId: null,
       tokenId: null,
       level: null,

@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, Nav, ActionSheetController } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { IonicPage, Nav, ActionSheetController } from "ionic-angular";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { UserSessionService } from "../../../providers/service/core/user.session.service";
-import { ProfileService } from '../../../providers/service/profile/profile.service';
-import { Profile, ProfileInterface } from '../../../providers/model/profile/model.profile';
-import * as moment from 'moment';
-import { CommonServices } from '../../../providers/service/common/common.service';
-import { ServerConfig } from '../../../providers/config';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileService } from '../../../providers/service/file/file.service';
-import { File } from '../../../providers/model/file/model.file';
+import { ProfileService } from "../../../providers/service/profile/profile.service";
+import {
+  Profile,
+  ProfileInterface
+} from "../../../providers/model/profile/model.profile";
+import * as moment from "moment";
+import { CommonServices } from "../../../providers/service/common/common.service";
+import { ServerConfig } from "../../../providers/config";
+import { Camera, CameraOptions } from "@ionic-native/camera";
+import { FileService } from "../../../providers/service/file/file.service";
+import { File } from "../../../providers/model/file/model.file";
 
 @IonicPage()
 @Component({
-  selector: 'edit-profile-page',
-  templateUrl: 'editprofile.html'
+  selector: "edit-profile-page",
+  templateUrl: "editprofile.html"
 })
 export class EditProfileComponent implements OnInit {
-
   profileForm: FormGroup;
   profile: Profile = Profile.getInstance();
   segmentView: string;
@@ -36,16 +38,15 @@ export class EditProfileComponent implements OnInit {
     private profileService: ProfileService,
     private commonServices: CommonServices,
     private camera: Camera,
-    private fileService: FileService) {
-
+    private fileService: FileService
+  ) {
     this.segmentView = "one";
-    this.imagePath = ServerConfig.imagePath();
+    this.imagePath = ServerConfig.browseFilePath();
     this.moduleType = this.session.findModule();
     this.mySelectOptions = {
-      mode: 'ios',
-      cssClass: 'remove-ok'
-    }
-
+      mode: "ios",
+      cssClass: "remove-ok"
+    };
   }
 
   ngOnInit() {
@@ -60,78 +61,87 @@ export class EditProfileComponent implements OnInit {
     this.buildForm();
   }
 
-
   buildForm() {
-
     this.profileForm = this.formBuilder.group({
-      id: ['', [<any>Validators.required]],
-      name: ['', [<any>Validators.required]],
-      bloodGroup: ['', [<any>Validators.required]],
-      gender: ['', [<any>Validators.required]],
-      dob: ['', [<any>Validators.required]],
-      mobile: ['', [<any>Validators.required, Validators.maxLength(10)]],
-      email: ['', [<any>Validators.required]],
-      adharNumber: '',
-      address1: ['', [<any>Validators.required]],
-      address2: '',
-      city: ['', [<any>Validators.required]],
-      state: ['', [<any>Validators.required]],
-      pinCode: ['', [<any>Validators.required]],
-      inTime: '',
-      outTime: '',
-      module: ['', [<any>Validators.required]],
-      identificationMarks: '',
-      nationality: '',
-      religion: '',
-      motherTongue: '',
-      annualIncome: '',
-      occupation: '',
-      picture: '',
+      id: ["", [<any>Validators.required]],
+      name: ["", [<any>Validators.required]],
+      bloodGroup: ["", [<any>Validators.required]],
+      gender: ["", [<any>Validators.required]],
+      dob: ["", [<any>Validators.required]],
+      mobile: ["", [<any>Validators.required, Validators.maxLength(10)]],
+      email: ["", [<any>Validators.required]],
+      adharNumber: "",
+      address1: ["", [<any>Validators.required]],
+      address2: "",
+      city: ["", [<any>Validators.required]],
+      state: ["", [<any>Validators.required]],
+      pinCode: ["", [<any>Validators.required]],
+      inTime: "",
+      outTime: "",
+      module: ["", [<any>Validators.required]],
+      identificationMarks: "",
+      nationality: "",
+      religion: "",
+      motherTongue: "",
+      annualIncome: "",
+      occupation: "",
+      picture: ""
     });
 
     this.commonServices.onLoader();
-    this.profileService.findProfileDetails(this.session.findRemote(), this.session.findModule())
-      .subscribe(data => {
-        this.commonServices.onDismissAll();
-        this.profile = Object.assign(this.profile, data);
-        this.profileForm.setValue(this.prepareData(this.profile));
-        this.imageId = this.profile.imageId;
-      }, error => {
-        console.log("Error: ", error);
-        this.commonServices.onDismissAll();
-      });
+    this.profileService
+      .findProfileDetails(this.session.findRemote(), this.session.findModule())
+      .subscribe(
+        data => {
+          this.commonServices.onDismissAll();
+          this.profile = Object.assign(this.profile, data);
+          this.profileForm.setValue(this.prepareData(this.profile));
+          this.imageId = this.profile.imageId;
+        },
+        error => {
+          console.log("Error: ", error);
+          this.commonServices.onDismissAll();
+        }
+      );
   }
 
-  onUpdate({ value, valid }: { value: ProfileInterface, valid: boolean }) {
-
+  onUpdate({ value, valid }: { value: ProfileInterface; valid: boolean }) {
     this.formSubmitAttempt = true;
     value.dob = moment(value.dob).format("MM/DD/YYYY");
     value.imageId = this.profile.imageId;
     // console.log("Edit Profile==",JSON.stringify(value),valid);
     this.commonServices.onLoader();
     if (valid) {
-      this.profileService.editProfile(value).subscribe(data => {
-        console.log(data);
-        this.commonServices.onDismissAll();
-        this.commonServices.presentToast("Data update successfully", null, "success");
-        this.nav.setRoot(UserSessionService.findDashBoardByModule(this.session.findModule()));
-      }, error => {
-        console.log("Error: ", error);
-        this.commonServices.onDismissAll();
-      });
+      this.profileService.editProfile(value).subscribe(
+        data => {
+          console.log(data);
+          this.commonServices.onDismissAll();
+          this.commonServices.presentToast(
+            "Data update successfully",
+            null,
+            "success"
+          );
+          this.nav.setRoot(
+            UserSessionService.findDashBoardByModule(this.session.findModule())
+          );
+        },
+        error => {
+          console.log("Error: ", error);
+          this.commonServices.onDismissAll();
+        }
+      );
     } else {
       this.commonServices.onDismissAll();
     }
   }
   prepareData(profile: Profile): any {
-
     let data = {
       id: profile.id,
       module: profile.module,
       name: profile.name,
       bloodGroup: profile.bloodGroup,
       gender: profile.gender,
-      dob: '',
+      dob: "",
       mobile: profile.mobile,
       email: profile.email,
       adharNumber: profile.adharNumber,
@@ -148,74 +158,77 @@ export class EditProfileComponent implements OnInit {
       motherTongue: profile.motherTongue,
       annualIncome: profile.annualIncome,
       occupation: profile.occupation,
-      picture: '',
-    }
+      picture: ""
+    };
     if (profile.dob) {
-      data.dob = moment(profile.dob).format("YYYY-MM-DD")
+      data.dob = moment(profile.dob).format("YYYY-MM-DD");
     }
 
     return data;
   }
 
   onClickPicture() {
-
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Change profile picture',
+      title: "Change profile picture",
       buttons: [
         {
-          text: 'Camera',
-          icon: 'camera',
+          text: "Camera",
+          icon: "camera",
           handler: () => {
-            this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA
+            this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA;
             this.setProfilePicture(this.cameraOptions);
           }
         },
         {
-          text: 'Photo Library',
-          icon: 'folder-open',
+          text: "Photo Library",
+          icon: "folder-open",
           handler: () => {
-            this.cameraOptions.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY
+            this.cameraOptions.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
             this.setProfilePicture(this.cameraOptions);
           }
         },
         {
-          text: 'Cancel',
-          icon: 'alert',
-          role: 'cancel',
-          handler: () => {
-          }
+          text: "Cancel",
+          icon: "alert",
+          role: "cancel",
+          handler: () => {}
         }
       ]
     });
     actionSheet.present();
   }
   setProfilePicture(cameraOptions: CameraOptions) {
-    this.camera.getPicture(cameraOptions).then((imageData) => {
-     
-      this.picture = 'data:image/jpeg;base64,' + imageData;
-      this.fileService.uploadFile(this.prepareImageFile(imageData),
-        this.session.findModule()).subscribe(data => {
-          if (data) {
-            this.imageId = data;
-            this.profile.imageId = data;
-            
-          }
-        }, error => {
-          this.commonServices.presentToast(error, null, "error")
-        });
-    }, (error) => {
-      console.error(error);
-    });
+    this.camera.getPicture(cameraOptions).then(
+      imageData => {
+        this.picture = "data:image/jpeg;base64," + imageData;
+        this.fileService
+          .uploadFile(
+            this.prepareImageFile(imageData),
+            this.session.findModule()
+          )
+          .subscribe(
+            data => {
+              if (data) {
+                this.imageId = data;
+                this.profile.imageId = data;
+              }
+            },
+            error => {
+              this.commonServices.presentToast(error, null, "error");
+            }
+          );
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
   prepareImageFile(imageData: any): File {
-
     let file = new File();
     file.data = imageData;
     file.name = this.profile.name + "_" + this.session.findRemote() + ".jpeg";
     file.contentType = "image/jpeg";
-
     return file;
-
   }
 }

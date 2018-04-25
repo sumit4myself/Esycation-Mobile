@@ -1,3 +1,7 @@
+import { Batch } from "../batch/batch.model";
+import { Course } from "../course/course.model";
+import { Subject } from "../subject/subject.model";
+
 export class Timetable {
   id: number = null;
   status: string = "A";
@@ -24,24 +28,6 @@ export class Period {
   subjectName: string = null;
   isRepeatable: boolean = false;
   isBreak: boolean = false;
-}
-
-export class Subject {
-  id: number = null;
-  name: string = null;
-  code: string = null;
-}
-
-export class Course {
-  id: number = null;
-  name: string = null;
-  code: string = null;
-}
-
-export class Batch {
-  id: number = null;
-  name: string = null;
-  code: string = null;
 }
 
 export class TimetableDetails {
@@ -108,7 +94,7 @@ export class TimetableTransormer {
             dayTimetable = _dayTimetable;
           }
         });
-        if(dayTimetable == null){
+        if (dayTimetable == null) {
           dayTimetable = new DayTimetable();
           dayTimetables.push(dayTimetable);
         }

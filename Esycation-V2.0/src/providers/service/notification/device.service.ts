@@ -15,9 +15,6 @@ export class DeviceService extends BaseService<Device> {
         @Inject(Events) private events: Events
     ) {
         super(http, errorHandler);
-
-
-
     }
 
     public initSubscribers(): void {
@@ -38,7 +35,7 @@ export class DeviceService extends BaseService<Device> {
         device.receiverType = object.module;
         device.registrationId = object.registrationId;
         let url: string = ServerConfig.getPath() + "/devices";
-        this.save(url, device).subscribe(data => {
+        this.post(url, device).subscribe(data => {
             this.events.publish("device:registered", data);
         });
     }

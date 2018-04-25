@@ -1,11 +1,11 @@
 {
-  "name": "demo-3",
-  "version": "0.0.1",
-  "description": "An Ionic project",
+  "name": "Educore Systems",
+  "version": "1.0.4",
+  "description": "EducoreSystems ERP.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/ionic-conference-app.git"
+    "url": "https://github.com/sumit4myself/Esycation-Mobile.git"
   },
   "scripts": {
     "build": "ionic-app-scripts build",

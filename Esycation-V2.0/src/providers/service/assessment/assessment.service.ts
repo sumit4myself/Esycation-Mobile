@@ -21,19 +21,19 @@ export class AssessmentService extends BaseService<StudentAssessmentDetails>{
         let url: string = ServerConfig.getPath() +
             "/studentAssessments/findByBatchAssessementId/" + assessmentId + "?RESPONSE_VIEW=StudentAssessment.Details";
 
-        return this.findAll(url);
+        return this.get(url);
     }
 
     draftAssessment(assessmentDetails: StudentAssessmentDetails): Observable<any> {
 
         let url: string = ServerConfig.getPath() + "/studentAssessments/batchAssessment/"+assessmentDetails.batchAssessementId;
-        return this.update(url, assessmentDetails);
+        return this.put(url, assessmentDetails);
     }
 
     publishAssessment(assessmentDetails: StudentAssessmentDetails): Observable<any> {
 
         let url: string = ServerConfig.getPath() + "/studentAssessments/batchAssessment/"+assessmentDetails.batchAssessementId;;
-        return this.update(url, assessmentDetails);
+        return this.put(url, assessmentDetails);
     }
 
     findPendingStudentAssessment(remotId: number): Observable<any> {
@@ -41,7 +41,7 @@ export class AssessmentService extends BaseService<StudentAssessmentDetails>{
         let url: string = ServerConfig.getPath() + "/studentAssessments/" +
             "findPendingStudentAssessment/" + remotId + "?page=1&size=100&RESPONSE_VIEW=StudentAssessment.Summary";
 
-        return this.findAll(url)
+        return this.get(url)
     }
 
     findCompletedStudentAssessment(remotId: number): Observable<any> {
@@ -49,6 +49,6 @@ export class AssessmentService extends BaseService<StudentAssessmentDetails>{
         let url: string = ServerConfig.getPath() + "/studentAssessments/" +
             "findCompletedStudentAssessment/" + remotId + "?page=1&size=100&RESPONSE_VIEW=StudentAssessment.Summary";
 
-        return this.findAll(url)
+        return this.get(url)
     }
 }

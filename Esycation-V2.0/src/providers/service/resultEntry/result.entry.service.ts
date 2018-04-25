@@ -22,32 +22,32 @@ export class ResultEntryService extends BaseService<ResultDetails>{
         let url: string = ServerConfig.getPath() +
             "results/findByBatchResultId/" + batchResultId + "";
 
-        return this.findAll(url);
+        return this.get(url);
     }
 
     findPendingMarksEntry(remotId: number): Observable<any> {
 
         let url: string = ServerConfig.getPath() +
             "/results/findPendingMarksEntry/" + remotId + "?RESPONSE_VIEW=Result.Details";
-        return this.findAll(url);
+        return this.get(url);
     }
 
     findMarksEntry(remotId: number): Observable<any> {
 
         let url: string = ServerConfig.getPath() +
             "results/findMarksEntry/" + remotId + "?RESPONSE_VIEW=Result.Details";
-        return this.findAll(url);
+        return this.get(url);
     }
     draft(resultDetails: ResultDetails): Observable<any> {
 
         let url: string = ServerConfig.getPath() + "/results/batchResult/"+resultDetails.batchResultId;
-        return this.update(url, resultDetails);
+        return this.put(url, resultDetails);
     }
 
     publish(resultDetails: ResultDetails): Observable<any> {
 
         let url: string = ServerConfig.getPath() + "/results/batchResult/"+resultDetails.batchResultId;
-        return this.update(url, resultDetails);
+        return this.put(url, resultDetails);
     }
 
 }

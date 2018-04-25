@@ -4,41 +4,44 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-        <button icon-only ion-button (click)="onNotification()">
-          <notification-counter></notification-counter>
-        </button>
+      <button icon-only ion-button (click)="onNotification()">
+        <notification-counter></notification-counter>
+      </button>
     </ion-buttons>
     <ion-title>Attendance</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-list >
-    <ion-item *ngFor="let student of students; let count = index" 
-    [ngClass]="{'persent': student.present==true, 'absent': student.absent==true}" (click)="onTouch(count)">
+  <ion-list>
+    <ion-item *ngFor="let student of students; let count = index" [ngClass]="{'persent': student.present==true, 'absent': student.absent==true}"
+      (click)="onTouch(count)">
       <ion-avatar item-left *ngIf="student.imageId==null">
         <img *ngIf="student.gender==null || student.gender=='Male' || student.gender=='M'" class="profile-image" src="assets/img/student-m.png">
         <img *ngIf="student.gender=='Female' || student.gender=='F'" class="profile-image" src="assets/img/student-f.png">
       </ion-avatar>
       <ion-avatar item-left *ngIf="student.imageId!=null">
-        <img  class="profile-image" src="{{imagePath}}/{{student.imageId}}">
+        <img class="profile-image" src="{{imagePath}}/{{student.imageId}}">
       </ion-avatar>
-            {{student.name}}
-        <p>
-            #{{student.admissionId.registrations[0].rollNumber}}
-        </p>  
-        <ion-note item-right ion-text color="stable">
-            <p *ngIf="student.present==true">
-              <ion-icon color="ios-green" name="done-all"></ion-icon>              
-            </p>
-            <p *ngIf="student.absent==true"><ion-icon color="ios-red" name="close"></ion-icon></p>
-        </ion-note>
+      {{student.name}}
+      <p>
+        #{{student.admissionId.registrations[0].rollNumber}}
+      </p>
+      <ion-note item-right ion-text color="stable">
+        <p *ngIf="student.present==true">
+          <ion-icon color="ios-green" name="done-all"></ion-icon>
+        </p>
+        <p *ngIf="student.absent==true">
+          <ion-icon color="ios-red" name="close"></ion-icon>
+        </p>
+      </ion-note>
     </ion-item>
-    <p *ngIf="dataNotfound!=null" text-center class="app-error"> <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
+    <p *ngIf="dataNotfound!=null" text-center class="app-error">
+      <ion-icon name="ios-alert-outline"></ion-icon> {{dataNotfound}}</p>
   </ion-list>
 </ion-content>
 <ion-footer *ngIf="students.length!=0">
   <ion-item>
-  <ion-row class="social" *ngIf="students.length!=counter && mode=='create'">
+    <ion-row class="social" *ngIf="students.length!=counter && mode=='create'">
       <ion-col>
         <button ion-button color="danger" block block (click)="onAbsent()">
           Absent
@@ -49,16 +52,16 @@
           Persent
         </button>
       </ion-col>
-  </ion-row>
-  <ion-row *ngIf="students.length==counter && mode=='create'">
+    </ion-row>
+    <ion-row *ngIf="students.length==counter && mode=='create'">
       <ion-col>
-          <button ion-button block color="secondary" (click)="onSave()">Save</button>
-      </ion-col>  
-  </ion-row>
-  <ion-row *ngIf="mode=='update'">
-    <ion-col>
+        <button ion-button block color="secondary" (click)="onSave()">Save</button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="mode=='update'">
+      <ion-col>
         <button ion-button block color="secondary" (click)="onUpdate()">Update</button>
-    </ion-col>  
-</ion-row>   
-</ion-item> 
+      </ion-col>
+    </ion-row>
+  </ion-item>
 </ion-footer>

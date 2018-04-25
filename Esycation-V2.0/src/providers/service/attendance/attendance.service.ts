@@ -23,7 +23,7 @@ export class AttendanceService extends BaseService<StudentAttendanceDetails>{
     let url: string = ServerConfig.getPath() +
       "/students/findByBatchIds/" + batchId + "/?RESPONSE_VIEW=Student.Details&page=1&&size=1000";
 
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findBatchByRemoteId(remoteId: number): Observable<PagedResponse> {
@@ -32,7 +32,7 @@ export class AttendanceService extends BaseService<StudentAttendanceDetails>{
     let url: string = ServerConfig.getPath() +
       "/batches/findByClassTeacherIds/" + remoteId + "/?RESPONSE_VIEW=Batch.Details&page=1&&size=1000";
 
-    return this.findAll(url);
+    return this.get(url);
   }
 
 
@@ -40,20 +40,20 @@ export class AttendanceService extends BaseService<StudentAttendanceDetails>{
 
     let url: string = ServerConfig.getPath() +
       "/studentAttendances/today/" + id + "/?RESPONSE_VIEW=StudentAttendance.Details";
-    return this.findAll(url);
+    return this.get(url);
 
   }
 
   public saveAttendance(data: any): Observable<any> {
 
     let url: string = ServerConfig.getPath() + "/studentAttendances";
-    return this.save(url, data);
+    return this.post(url, data);
   }
 
   public updateAttendance(id: number, data: any): Observable<any> {
 
     let url: string = ServerConfig.getPath() + "/studentAttendances/" + id + "";
-    return this.update(url, data);
+    return this.put(url, data);
   }
 
 
@@ -61,14 +61,14 @@ export class AttendanceService extends BaseService<StudentAttendanceDetails>{
 
     let url: string = ServerConfig.getPath()
       + "/attendances/report/statistics/" + remoteId + "/" + module + "?fromDate=" + fromDate + "&toDate=" + toDate + "";
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public attendanceReportDateWise(remoteId: number, module: string, fromDate: string, toDate: string): Observable<any> {
 
     let url: string = ServerConfig.getPath()
       + "/attendances/report/" + remoteId + "/" + module + "?fromDate=" + fromDate + "&toDate=" + toDate + "";
-    return this.findAll(url);
+    return this.get(url);
 
   }
 }      

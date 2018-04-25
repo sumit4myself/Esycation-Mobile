@@ -20,12 +20,12 @@ export class StaffLeaveService extends BaseService<StaffLeaveDetails> {
 
         let url: string = ServerConfig.getPath() + "/staffLeaves";
 
-        return this.save(url, data);
+        return this.post(url, data);
     }
 
     public findRemaining(remoteId: number): Observable<any> {
         let url: string = ServerConfig.getPath() + "/staffLeaveDefinitions//remaining/" + remoteId + "?RESPONSE_VIEW=StaffLeaveDefinition.Remaining";
-        return this.findAll(url);
+        return this.get(url);
     }
 
 

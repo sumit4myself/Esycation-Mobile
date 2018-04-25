@@ -5,7 +5,7 @@ import { Branch } from "../../../providers/model/common/model.branch";
 import { AuthService } from "../../../providers/service/core/auth.service";
 import { CommonServices } from "../../../providers/service/common/common.service";
 import { PagedResponse } from "../../../providers/model/common/PaggedResponse";
-import { BreanchService } from "../../../providers/service/branch/breanch.service";
+import { BranchService } from "../../../providers/service/schools/branch/branch.service";
 import { UserSessionService } from "../../../providers/service/core/user.session.service";
 
 @IonicPage()
@@ -30,7 +30,7 @@ export class LoginComponent {
     private events: Events,
     private authService: AuthService,
     private commonServices: CommonServices,
-    private breanchService: BreanchService,
+    private branchService: BranchService,
     private session: UserSessionService
   ) {
     this.selectStyle = {
@@ -52,7 +52,7 @@ export class LoginComponent {
 
   ionViewDidLoad() {
     this.commonServices.onLoader();
-    this.breanchService.findBranch().subscribe(
+    this.branchService.findAll().subscribe(
       data => {
         this.commonServices.onDismissAll();
         for (let branchDetails of data.contents) {

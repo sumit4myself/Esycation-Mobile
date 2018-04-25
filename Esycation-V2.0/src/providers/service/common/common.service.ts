@@ -91,11 +91,9 @@ export class CommonServices {
     setTimeout(() => {
       this.loading.dismissAll();
     }, 100);
-    
   }
 
   onDismissAll(): void {
-
     //this.loading.dismissAll();
   }
 

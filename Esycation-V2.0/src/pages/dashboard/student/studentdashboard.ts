@@ -13,7 +13,7 @@ import { ApprovalService } from "../../../providers/service/approvel/approvel.se
 })
 export class StudentDashboardComponent {
   profile: Profile = Profile.getInstance();
-  imagePath: String = ServerConfig.imagePath();
+  imagePath: String = ServerConfig.browseFilePath();
 
   isLoaded: boolean = false;
   isMyRequestLoaded: boolean = false;

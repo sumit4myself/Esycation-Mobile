@@ -20,14 +20,14 @@ export class StudentLeaveService extends BaseService<LeaveModel> {
 
     let url: string = ServerConfig.getPath() + "/studentLeaves";
 
-    return this.save(url, data);
+    return this.post(url, data);
   }
 
   public findStudentByGuardianIds(remoteId: number): Observable<any> {
 
     let url: string = ServerConfig.getPath() + "/students/findByGuardianIds/" + remoteId;
 
-    return this.findAll(url);
+    return this.get(url);
   }
 
 
@@ -35,12 +35,12 @@ export class StudentLeaveService extends BaseService<LeaveModel> {
 
     let url: string = ServerConfig.getPath() + "/students/findByGuardianIdsWithCourseAndBatch/" + remoteId + "?RESPONSE_VIEW=Student.MinDetails";
 
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findTeacherDetailsByStudentId(studentId: number): Observable<any> {
     let url: string = ServerConfig.getPath() + "/staffs/findClassTeacherByStudentId/" + studentId + "?RESPONSE_VIEW=Staff.MinDetails";
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findTimeTableByStudentId(studentId: number): Observable<any> {
@@ -48,24 +48,24 @@ export class StudentLeaveService extends BaseService<LeaveModel> {
     // /staffs/findClassTeacherByStudentId/{studentId}/?RESPONSE_VIEW=Staff.MinDetails
     let url: string = ServerConfig.getPath() + "/batchTimetables/findByStudentId/" + studentId + "?RESPONSE_VIEW=BatchTimetable.Details";
 
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public saveStaffLeave(data: any): Observable<any> {
 
     let url: string = ServerConfig.getPath() + "/staffLeaves";
 
-    return this.save(url, data);
+    return this.post(url, data);
   }
 
   public findRemaining(remoteId: number): Observable<any> {
     let url: string = ServerConfig.getPath() + "/staffLeaveDefinitions//remaining/" + remoteId + "?RESPONSE_VIEW=StaffLeaveDefinition.Remaining";
-    return this.findAll(url);
+    return this.get(url);
   }
 
   public findRequest(taskId: number): Observable<any> {
     let url: string = ServerConfig.getPath() + "/approvals/requests/" + taskId + "/task";
-    return this.findAll(url);
+    return this.get(url);
   }
 
 }
